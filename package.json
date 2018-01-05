@@ -20,5 +20,9 @@
   "bugs": {
     "url": "https://github.com/chharvey/schemaorg-jsd/issues"
   },
-  "homepage": "https://github.com/chharvey/schemaorg-jsd#readme"
+  "homepage": "https://github.com/chharvey/schemaorg-jsd#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^1.0.1"
+  }
 }
