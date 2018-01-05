@@ -12,7 +12,7 @@
         "value": {
           "description": "The value of the quantitative value or property value node.",
           "oneOf": [
-            { "type": ["boolean", "number"] },
+            { "type": ["boolean", "number", "string"] },
             { "$ref": "http://schema.org/StructuredValue" }
           ]
         }

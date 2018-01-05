@@ -6,7 +6,7 @@
   "allOf": [
     {
       "$comment": "Must first validate against JSON-LD.",
-      "$ref": "https://raw.githubusercontent.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json"
+      "$ref": "https://cdn.rawgit.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json"
     },
     {
       "type": "object",
