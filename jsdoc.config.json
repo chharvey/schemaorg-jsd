@@ -1,0 +1,26 @@
+{
+  "sourceType": "module",
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc", "closure"]
+  },
+  "opts": {
+    "destination": "./docs/api"
+  },
+  "plugins": [
+    "plugins/markdown"
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true,
+      "includeDate": false
+    },
+    "path": "ink-docstrap",
+    "theme": "flatly",
+    "navType": "vertical",
+    "linenums": false,
+    "dateFormat": "MMMM Do YYYY, h:mm:ss a"
+  }
+}

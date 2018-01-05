@@ -1,0 +1,28 @@
+{
+  "name": "schemaorg-jsd",
+  "version": "0.1.0",
+  "description": "JSON Schema validation for JSON-LD files using Schema.org vocabulary.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chharvey/schemaorg-jsd.git"
+  },
+  "keywords": [
+    "json-schema",
+    "schema-org",
+    "json-ld"
+  ],
+  "author": "Chris Harvey <chrisharvey2pi@gmail.com> (https://chharvey.github.io/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chharvey/schemaorg-jsd/issues"
+  },
+  "homepage": "https://github.com/chharvey/schemaorg-jsd#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-jsdoc3": "^1.0.1"
+  }
+}
