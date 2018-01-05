@@ -24,6 +24,14 @@
           "type": "string",
           "description": "URL of the item.",
           "format": "uri"
+        },
+        "identifier": {
+          "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
+          "oneOf": [
+            { "type": "string" },
+            { "type": "string", "format": "uri" },
+            { "$ref": "http://schema.org/PropertyValue.jsd" }
+          ]
         }
       }
     }
