@@ -27,7 +27,7 @@
         },
         "identifier": {
           "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
-          "oneOf": [
+          "anyOf": [
             { "type": "string" },
             { "type": "string", "format": "uri" },
             { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PropertyValue.jsd" }

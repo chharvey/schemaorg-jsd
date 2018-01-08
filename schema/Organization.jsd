@@ -8,13 +8,13 @@
     {
       "properties": {
         "address": {
-          "oneOf": [
+          "anyOf": [
             { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" },
             { "type": "string" }
           ]
         },
         "location": {
-          "oneOf": [
+          "anyOf": [
             { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd" },
             { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" },
             { "type": "string" }
