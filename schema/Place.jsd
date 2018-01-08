@@ -1,0 +1,19 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd",
+  "title": "Place",
+  "description": "Entities that have a somewhat fixed, physical extension.",
+  "allOf": [
+    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    {
+      "properties": {
+        "address": {
+          "oneOf": [
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" },
+            { "type": "string" }
+          ]
+        }
+      }
+    }
+  ]
+}

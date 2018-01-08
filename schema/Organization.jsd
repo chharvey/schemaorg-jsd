@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Organization.jsd",
+  "title": "Organization",
+  "description": "An organization such as a school, NGO, corporation, club, etc.",
+  "allOf": [
+    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    {
+      "properties": {
+        "address": {
+          "oneOf": [
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" },
+            { "type": "string" }
+          ]
+        },
+        "location": {
+          "oneOf": [
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd" },
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" },
+            { "type": "string" }
+          ]
+        }
+      }
+    }
+  ]
+}
