@@ -1,6 +1,6 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://schema.org/Thing.jsd",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd",
   "title": "Thing",
   "description": "The most generic type of item.",
   "allOf": [
@@ -30,7 +30,7 @@
           "oneOf": [
             { "type": "string" },
             { "type": "string", "format": "uri" },
-            { "$ref": "http://schema.org/PropertyValue.jsd" }
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PropertyValue.jsd" }
           ]
         }
       }
