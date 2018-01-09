@@ -1,10 +1,10 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "http://schema.org/StructuredValue.jsd",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/StructuredValue.jsd",
   "title": "StructuredValue",
   "description": "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.",
   "allOf": [
-    { "$ref": "http://schema.org/Thing.jsd" },
+    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
     {
       "type": "object",
       "additionalProperties": true,
