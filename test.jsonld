@@ -16,6 +16,15 @@
     "@id": "https://www.vt.edu/",
     "name": "Virginia Polytechnic Institute and State University",
     "alternateName": "Virginia Tech",
-    "url": "https://www.vt.edu/"
+    "url": "https://www.vt.edu/",
+    "location": {
+      "@type": "Place",
+      "url": "http://www.blacksburg.gov/",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Blacksburg",
+        "addressRegion": "VA"
+      }
+    }
   }
 }

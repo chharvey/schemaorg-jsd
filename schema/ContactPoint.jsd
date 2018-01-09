@@ -9,13 +9,13 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "telephone": {
-          "type": "string",
-          "description": "The telephone number.",
-        },
         "email": {
           "type": "string",
           "description": "Email address.",
+        },
+        "telephone": {
+          "type": "string",
+          "description": "The telephone number.",
         }
       }
     }
