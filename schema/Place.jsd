@@ -8,9 +8,10 @@
     {
       "properties": {
         "address": {
+          "description": "Physical address of the item.",
           "anyOf": [
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" },
-            { "type": "string" }
+            { "type": "string" },
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" }
           ]
         }
       }

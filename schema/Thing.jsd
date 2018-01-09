@@ -13,16 +13,16 @@
       "additionalProperties": true,
       "properties": {
         "name": {
-          "type": "string",
-          "description": "The name of the item."
+          "description": "The name of the item.",
+          "type": "string"
         },
         "description": {
-          "type": "string",
-          "description": "A description of the item."
+          "description": "A description of the item.",
+          "type": "string"
         },
         "url": {
-          "type": "string",
           "description": "URL of the item.",
+          "type": "string",
           "format": "uri"
         },
         "identifier": {
