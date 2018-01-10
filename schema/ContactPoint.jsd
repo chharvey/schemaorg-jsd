@@ -10,12 +10,12 @@
       "additionalProperties": true,
       "properties": {
         "email": {
-          "type": "string",
           "description": "Email address.",
+          "type": "string"
         },
         "telephone": {
-          "type": "string",
           "description": "The telephone number.",
+          "type": "string"
         }
       }
     }
