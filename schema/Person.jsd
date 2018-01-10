@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Person.jsd",
+  "title": "Person",
+  "description": "A person (alive, dead, undead, or fictional).",
+  "allOf": [
+    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "contactPoint": {
+          "description": "A contact point for a person or organization.",
+          "anyOf": [
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" },
+            {
+              "type": "array",
+              "items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" }
+            }
+          ]
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "telephone": {
+          "description": "The telephone number.",
+          "type": "string"
+        }
+      }
+    }
+  ]
+}

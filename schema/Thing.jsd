@@ -12,26 +12,42 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the item."
-        },
         "description": {
-          "type": "string",
-          "description": "A description of the item."
-        },
-        "url": {
-          "type": "string",
-          "description": "URL of the item.",
-          "format": "uri"
+          "description": "A description of the item.",
+          "type": "string"
         },
         "identifier": {
           "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
-          "oneOf": [
+          "anyOf": [
             { "type": "string" },
             { "type": "string", "format": "uri" },
             { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PropertyValue.jsd" }
           ]
+        },
+        "image": {
+          "description": "An image of the item. This can be a URL or a fully described ImageObject.",
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ImageObject.jsd" },
+            {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string", "format": "uri" },
+                  { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ImageObject.jsd" }
+                ]
+              }
+            }
+          ]
+        },
+        "name": {
+          "description": "The name of the item.",
+          "type": "string"
+        },
+        "url": {
+          "description": "URL of the item.",
+          "type": "string",
+          "format": "uri"
         }
       }
     }
