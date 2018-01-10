@@ -3,21 +3,8 @@ const path = require('path')
 
 const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
-const Ajv = require('ajv')
+const Ajv   = require('ajv')
 
-
-function metaschema() {
-  const http = require('http')
-  return http.get('http://json-schema.org/draft-07/schema', function (res) {
-    var data = []
-    res.on('data', function (chunk) {
-      data.push(chunk)
-    })
-    res.on('end', function () {
-      fs.writeFile('meta.schema.json', data.join(''), 'utf8', function (err) {})
-    })
-  })
-}
 
 gulp.task('validate', function (callback) {
   fs.readdir('./schema/', 'utf8', function (err, files) {
@@ -49,6 +36,7 @@ gulp.task('validate', function (callback) {
     return callback.call(null)
   })
 })
+
 
 gulp.task('validateSync', function () {
   let files = fs.readdirSync('./schema/', 'utf8')
@@ -82,5 +70,6 @@ gulp.task('docs:api', function () {
   return gulp.src(['./README.md', './docs/src/*.js'], {read:false})
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
+
 
 gulp.task('build', ['validateSync', 'docs:api'])
