@@ -2,6 +2,90 @@
 JSON Schema validation for JSON-LD files using Schema.org vocabulary.
 
 
+# Usage
+
+## Install
+```
+$ npm install schemaorg-jsd
+```
+
+## Validate
+
+### Synchronously
+```js
+const sdoValidate = require('schemaorg-jsd')
+
+// use any javascript object
+let school = {
+  '@context': 'http://schema.org/',
+  '@type': 'Place',
+  name: `Blacksburg, ${usState('Virginia').code}`,
+}
+school['@id'] = 'http://www.blacksburg.gov/'
+try {
+  let is_valid_place = sdoValidate(school, 'Place') // validate against the Place schema
+  console.log(is_valid_place) // return `true` if the document passes validation
+} catch (e) { // throw an `Error` if the document fails validation
+  console.error(e)
+  console.error(e.filename) // file where the invalidation occurred
+  console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
+}
+
+// require a package
+let me = require('./me.json')
+sdoValidate(me, 'Person')
+
+// use a string (relative path) of the filename
+let org = './my-org.jsonld'
+sdoValidate(org, 'Organization')
+```
+
+### Asynchronously
+All of the above is the same, but you may additionally pass a callback for the asynchronous version.
+The callback is the standard `node.js`-style callback.
+```js
+const sdoValidate = require('schemaorg-jsd')
+
+let school = {
+  "@context": "http://schema.org/",
+  "@type": "Place",
+  "@id": "http://www.blacksburg.gov/",
+  "name": "Blacksburg, VA"
+}
+sdoValidate(school, 'Place', function (err, is_valid) {
+  if (err) { // `Error` if the document fails
+    console.error(err)
+  }
+  else console.log(is_valid) // `true` (pass) or `false` (fail)
+})
+```
+
+## View the “API”
+It’s not really an “API”, but a set of [JSDoc](http://usejsdoc.org/) typedefs describing types and their properties.
+They are identical to the specs at [schema.org](https://schema.org/),
+but you can import the source code in your own project for JSDoc compilation.
+```
+$ cd node_modules/schemaorg-jsd
+$ npm run build
+$ cd -
+$ # open ./docs/api/index.html in your browser
+```
+```js
+class Person {
+  /**
+   * Construct a new Person object.
+   * @param {sdo.Person} jsondata an object validating against the schemaorg-jsd `Person` schema
+   * @param {string} jsondata.name The name of the item.
+   */
+  constructor(jsondata) {
+    this.name = jsondata.name
+  }
+}
+```
+
+
+# Background Info
+
 ## JSON Schema
 [JSON Schema](http://json-schema.org/) is a vocabulary, in JSON format, that allows you to validate JSON documents.
 In other words, a particular JSON schema tells you whether your JSON instance file is written correctly, if you choose to validate your instance against that schema.
