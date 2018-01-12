@@ -22,8 +22,10 @@
     "url": "https://github.com/chharvey/schemaorg-jsd/issues"
   },
   "homepage": "https://github.com/chharvey/schemaorg-jsd#readme",
+  "dependencies": {
+    "ajv": "^6.0.0"
+  },
   "devDependencies": {
-    "ajv": "^6.0.0",
     "gulp": "^3.9.1",
     "gulp-jsdoc3": "^1.0.1"
   }
