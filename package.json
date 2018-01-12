@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "unbuild": "rm -r docs/api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
