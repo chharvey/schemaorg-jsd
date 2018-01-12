@@ -8,8 +8,10 @@ const requireOther = require('./lib/requireOther.js')
 
 /**
  * @summary An array of schemata that you can add to an {@link https://www.npmjs.com/package/ajv|Ajv} object.
- * @description You can call `ajv.addSchema()` with this array as an argument.
- * @type {Array<(!Object|boolean)>}
+ * @description This array contains all Schema.org schemata in this project.
+ * Example: `ajv.addSchema(SCHEMATA)`
+ * @alias module:index.SCHEMATA
+ * @const {Array<(!Object|boolean)>}
  */
 const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8').map((filename) =>
   requireOther(path.join(__dirname, './schema/', filename))
@@ -24,11 +26,12 @@ let ajv = new Ajv().addSchema(SCHEMATA)
  * @summary Validate a JSON document against a Schema.org JSON schema.
  * @description This function can be either synchronous or asynchronous, depending on whether
  * a callback function is provided as the third parameter.
+ * @alias module:index.sdoValidate
  * @param   {(!Object|string)} document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
  * @param   {string} type the name of the Type to test against; should be a Class in http://schema.org/
- *                        ; see {@link ./docs/api/} for supported Types
+ *                        ; see the API for supported Types
  * @param   {Function=} callback standard callback with `(err, data)` as the params
- *                               ; this function is asynchronous if and only if the callback is provided
+ *                               ; this method is asynchronous if and only if the callback is provided
  * @returns {boolean} `true` if the document passes validation
  * @throws  {TypeError} if the document fails validation
  */
@@ -49,4 +52,8 @@ function sdoValidate(document, type, callback = null) {
 }
 
 
+/**
+ * Use this module to validate your JSON-LD document against a Schema.org JSON schema.
+ * @module index
+ */
 module.exports = { SCHEMATA, sdoValidate }

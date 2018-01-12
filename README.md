@@ -9,11 +9,11 @@ JSON Schema validation for JSON-LD files using Schema.org vocabulary.
 $ npm install schemaorg-jsd
 ```
 
-## Validate
+## Validate Against Schema.org JSON Schema
 
 ### Synchronously
 ```js
-const sdoValidate = require('schemaorg-jsd')
+const { sdoValidate } = require('schemaorg-jsd')
 
 // use any javascript object
 let school = {
@@ -44,7 +44,7 @@ sdoValidate(org, 'Organization')
 All of the above is the same, but you may additionally pass a callback for the asynchronous version.
 The callback is the standard `node.js`-style callback.
 ```js
-const sdoValidate = require('schemaorg-jsd')
+const { sdoValidate } = require('schemaorg-jsd')
 
 let school = {
   "@context": "http://schema.org/",
@@ -58,6 +58,39 @@ sdoValidate(school, 'Place', function (err, is_valid) {
   }
   else console.log(is_valid) // `true` (pass) or `false` (fail)
 })
+```
+
+## Validate Against Your Own JSON Schema
+You can use [ajv](https://www.npmjs.com/package/ajv) to validate any document against any JSON schema.
+Normally you would do this by adding the schema to the ajv instance, and then checking the document.
+However, if you write a schema that references one of this project’s Schema.org schema (via `$ref`),
+you must add them both to the ajv instance.
+
+Due to the interconnectedness of all Schema.org schemata, it’s faster to add them all at once.
+This project’s exported `SCHEMATA` object is an array of Schema.org JSON schema,
+pre-packaged and ready to add.
+```js
+const Ajv = require('ajv')
+const { SCHEMATA } = require('schemaorg-jsd')
+
+let my_schema = {
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/example.jsd",
+  "title": "Array<Thing>",
+  "description": "An array of Schema.org Things.",
+  "type": "array",
+  "items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" }
+}
+let my_data = [
+  { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 1" },
+  { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
+]
+
+let ajv = new Ajv().addSchema(SCHEMATA)
+ajv.validate(my_schema, my_data)
+// NOTE that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+// `Ajv#validate(schema, data)`
+// `sdoValidate(data, schemaTitle)`
 ```
 
 ## View the “API”
