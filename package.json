@@ -1,10 +1,11 @@
 {
   "name": "schemaorg-jsd",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "JSON Schema validation for JSON-LD files using Schema.org vocabulary.",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
+    "unbuild": "rm -r docs/api",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -22,8 +23,10 @@
     "url": "https://github.com/chharvey/schemaorg-jsd/issues"
   },
   "homepage": "https://github.com/chharvey/schemaorg-jsd#readme",
+  "dependencies": {
+    "ajv": "^6.0.0"
+  },
   "devDependencies": {
-    "ajv": "^6.0.0",
     "gulp": "^3.9.1",
     "gulp-jsdoc3": "^1.0.1"
   }
