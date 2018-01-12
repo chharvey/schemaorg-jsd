@@ -5,9 +5,12 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const validateSchemata = require('./lib/validateSchemata.js')
+const { SCHEMATA } = require('./index.js')
 
-gulp.task('validate', validateSchemata)
+
+gulp.task('validate', function () {
+  new Ajv().addSchema(SCHEMATA)
+})
 
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage

@@ -3,15 +3,25 @@ const path = require('path')
 
 const Ajv = require('ajv')
 
-const requireOther     = require('./lib/requireOther.js')
-const validateSchemata = require('./lib/validateSchemata.js')
+const requireOther = require('./lib/requireOther.js')
+
+
+/**
+ * @summary An array of schemata that you can add to an {@link https://www.npmjs.com/package/ajv|Ajv} object.
+ * @description You can call `ajv.addSchema()` with this array as an argument.
+ * @type {Array<(!Object|boolean)>}
+ */
+const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8').map((filename) =>
+  requireOther(path.join(__dirname, './schema/', filename))
+)
 
 
 // set up and validate all the schemata. done only once.
-let ajv = validateSchemata()
+let ajv = new Ajv().addSchema(SCHEMATA)
+
 
 /**
- * @summary Validate a JSON document against a Schema.org JSON schema file.
+ * @summary Validate a JSON document against a Schema.org JSON schema.
  * @description This function can be either synchronous or asynchronous, depending on whether
  * a callback function is provided as the third parameter.
  * @param   {(!Object|string)} document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
@@ -23,9 +33,8 @@ let ajv = validateSchemata()
  * @throws  {TypeError} if the document fails validation
  */
 function sdoValidate(document, type, callback = null) {
-  let schema = ajv.getSchema(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`).schema
   let doc = (typeof document === 'string') ? requireOther(document) : document
-  let is_data_valid = ajv.validate(schema, doc)
+  let is_data_valid = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, doc)
   if (!is_data_valid) {
     let e = new TypeError(`Document ${document['@id'] || document.identifier || document} does not valiate against schema ${type}.jsd!`)
     if (typeof document === 'string') e.filename = document
@@ -39,4 +48,5 @@ function sdoValidate(document, type, callback = null) {
   return (callback) ? setTimeout(callback, 100, null, true) : true
 }
 
-module.exports = sdoValidate
+
+module.exports = { SCHEMATA, sdoValidate }
