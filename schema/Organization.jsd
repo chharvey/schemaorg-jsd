@@ -19,10 +19,15 @@
           "$id": "#contactPoint",
           "description": "A contact point for a person or organization.",
           "anyOf": [
-            { "$ref": "ContactPoint.jsd" },
+            {
+              "$id": "#contactPoint-type",
+              "anyOf": [
+                { "$ref": "ContactPoint.jsd" }
+              ]
+            },
             {
               "type": "array",
-              "items": { "$ref": "ContactPoint.jsd" }
+              "items": { "$ref": "#contactPoint-type" }
             }
           ]
         },

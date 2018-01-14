@@ -30,16 +30,16 @@
           "$id": "#image",
           "description": "An image of the item. This can be a URL or a fully described ImageObject.",
           "anyOf": [
-            { "type": "string", "format": "uri" },
-            { "$ref": "ImageObject.jsd" },
+            {
+              "$id": "#image-type",
+              "anyOf": [
+                { "type": "string", "format": "uri" },
+                { "$ref": "ImageObject.jsd" }
+              ]
+            },
             {
               "type": "array",
-              "items": {
-                "anyOf": [
-                  { "type": "string", "format": "uri" },
-                  { "$ref": "ImageObject.jsd" }
-                ]
-              }
+              "items": { "$ref": "#image-type" }
             }
           ]
         },

@@ -11,9 +11,18 @@
           "$id": "#itemListElement",
           "description": "For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\", \"Mary\"), existing entities, or use ListItem.",
           "anyOf": [
-            { "type": "string" },
-            { "$ref": "Thing.jsd" },
-            { "$ref": "ListItem.jsd" }
+            {
+              "$id": "#itemListElement-type",
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "Thing.jsd" },
+                { "$ref": "ListItem.jsd" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": { "$ref": "#itemListElement-type" }
+            }
           ]
         },
         "numberOfItems": {
