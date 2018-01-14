@@ -8,6 +8,7 @@
     {
       "properties": {
         "address": {
+          "$id": "#address",
           "description": "Physical address of the item.",
           "anyOf": [
             { "type": "string" },

@@ -8,10 +8,12 @@
     {
       "properties": {
         "additionalName": {
+          "$id": "#additionalName",
           "description": "An additional name for a Person, can be used for a middle name.",
           "type": "string"
         },
         "contactPoint": {
+          "$id": "#contactPoint",
           "description": "A contact point for a person or organization.",
           "anyOf": [
             { "$ref": "ContactPoint.jsd" },
@@ -22,26 +24,32 @@
           ]
         },
         "email": {
+          "$id": "#email",
           "description": "Email address.",
           "type": "string"
         },
         "familyName": {
+          "$id": "#familyName",
           "description": "Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.",
           "type": "string"
         },
         "givenName": {
+          "$id": "#givenName",
           "description": "Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.",
           "type": "string"
         },
         "honorificPrefix": {
+          "$id": "#honorificPrefix",
           "description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
           "type": "string"
         },
         "honorificSuffix": {
+          "$id": "#honorificSuffix",
           "description": "An honorific suffix preceding a Person’s name such as M.D. /PhD/MSCSW.",
           "type": "string"
         },
         "telephone": {
+          "$id": "#telephone",
           "description": "The telephone number.",
           "type": "string"
         }

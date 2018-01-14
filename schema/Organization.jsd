@@ -8,6 +8,7 @@
     {
       "properties": {
         "address": {
+          "$id": "#address",
           "description": "Physical address of the item.",
           "anyOf": [
             { "type": "string" },
@@ -15,6 +16,7 @@
           ]
         },
         "contactPoint": {
+          "$id": "#contactPoint",
           "description": "A contact point for a person or organization.",
           "anyOf": [
             { "$ref": "ContactPoint.jsd" },
@@ -25,6 +27,7 @@
           ]
         },
         "location": {
+          "$id": "#location",
           "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
           "anyOf": [
             { "type": "string" },

@@ -8,10 +8,12 @@
     {
       "properties": {
         "email": {
+          "$id": "#email",
           "description": "Email address.",
           "type": "string"
         },
         "telephone": {
+          "$id": "#telephone",
           "description": "The telephone number.",
           "type": "string"
         }

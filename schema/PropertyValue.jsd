@@ -8,6 +8,7 @@
     {
       "properties": {
         "value": {
+          "$id": "#value",
           "description": "The value of the quantitative value or property value node.",
           "anyOf": [
             { "type": ["boolean", "number", "string"] },
