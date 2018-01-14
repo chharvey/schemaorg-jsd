@@ -4,14 +4,14 @@
   "title": "Place",
   "description": "Entities that have a somewhat fixed, physical extension.",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    { "$ref": "Thing.jsd" },
     {
       "properties": {
         "address": {
           "description": "Physical address of the item.",
           "anyOf": [
             { "type": "string" },
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" }
+            { "$ref": "PostalAddress.jsd" }
           ]
         }
       }

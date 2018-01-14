@@ -4,23 +4,23 @@
   "title": "Organization",
   "description": "An organization such as a school, NGO, corporation, club, etc.",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    { "$ref": "Thing.jsd" },
     {
       "properties": {
         "address": {
           "description": "Physical address of the item.",
           "anyOf": [
             { "type": "string" },
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" }
+            { "$ref": "PostalAddress.jsd" }
           ]
         },
         "contactPoint": {
           "description": "A contact point for a person or organization.",
           "anyOf": [
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" },
+            { "$ref": "ContactPoint.jsd" },
             {
               "type": "array",
-              "items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" }
+              "items": { "$ref": "ContactPoint.jsd" }
             }
           ]
         },
@@ -28,8 +28,8 @@
           "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
           "anyOf": [
             { "type": "string" },
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd" },
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd" }
+            { "$ref": "Place.jsd" },
+            { "$ref": "PostalAddress.jsd" }
           ]
         }
       }

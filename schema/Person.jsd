@@ -4,7 +4,7 @@
   "title": "Person",
   "description": "A person (alive, dead, undead, or fictional).",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    { "$ref": "Thing.jsd" },
     {
       "properties": {
         "additionalName": {
@@ -14,10 +14,10 @@
         "contactPoint": {
           "description": "A contact point for a person or organization.",
           "anyOf": [
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" },
+            { "$ref": "ContactPoint.jsd" },
             {
               "type": "array",
-              "items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" }
+              "items": { "$ref": "ContactPoint.jsd" }
             }
           ]
         },
@@ -34,11 +34,11 @@
           "type": "string"
         },
         "honorificPrefix": {
-          "description": "An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.",
+          "description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
           "type": "string"
         },
         "honorificSuffix": {
-          "description": "An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.",
+          "description": "An honorific suffix preceding a Person’s name such as M.D. /PhD/MSCSW.",
           "type": "string"
         },
         "telephone": {

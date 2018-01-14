@@ -4,7 +4,7 @@
   "title": "ContactPoint",
   "description": "A contact point—for example, a Customer Complaints department.",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/StructuredValue.jsd" },
+    { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
         "email": {

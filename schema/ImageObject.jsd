@@ -4,7 +4,7 @@
   "title": "ImageObject",
   "description": "''",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
+    { "$ref": "Thing.jsd" },
     {
       "properties": {
       }

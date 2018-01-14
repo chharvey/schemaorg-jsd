@@ -21,20 +21,20 @@
           "anyOf": [
             { "type": "string" },
             { "type": "string", "format": "uri" },
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/PropertyValue.jsd" }
+            { "$ref": "PropertyValue.jsd" }
           ]
         },
         "image": {
           "description": "An image of the item. This can be a URL or a fully described ImageObject.",
           "anyOf": [
             { "type": "string", "format": "uri" },
-            { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ImageObject.jsd" },
+            { "$ref": "ImageObject.jsd" },
             {
               "type": "array",
               "items": {
                 "anyOf": [
                   { "type": "string", "format": "uri" },
-                  { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ImageObject.jsd" }
+                  { "$ref": "ImageObject.jsd" }
                 ]
               }
             }
