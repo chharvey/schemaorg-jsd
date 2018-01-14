@@ -5,11 +5,15 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const { SCHEMATA } = require('./index.js')
+const { SCHEMATA, sdoValidate } = require('./index.js')
 
 
 gulp.task('validate', function () {
   new Ajv().addSchema(SCHEMATA)
+})
+
+gulp.task('test', function () {
+  console.log(sdoValidate('./test.jsonld', 'Person'))
 })
 
 
