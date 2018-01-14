@@ -6,8 +6,6 @@
   "allOf": [
     { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/StructuredValue.jsd" },
     {
-      "type": "object",
-      "additionalProperties": true,
       "properties": {
         "value": {
           "description": "The value of the quantitative value or property value node.",

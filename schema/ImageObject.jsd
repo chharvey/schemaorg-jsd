@@ -6,8 +6,6 @@
   "allOf": [
     { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" },
     {
-      "type": "object",
-      "additionalProperties": true,
       "properties": {
       }
     }
