@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ListItem.jsd",
+  "title": "ListItem",
+  "description": "A list item.",
+  "allOf": [
+    { "$ref": "Thing.jsd" },
+    {
+      "properties": {
+        "item": {
+          "$id": "#item",
+          "description": "An entity represented by an entry in a list or data feed.",
+          "$ref": "Thing.jsd"
+        },
+        "nextItem": {
+          "$id": "#nextItem",
+          "description": "A link to the ListItem that follows the current one.",
+          "$ref": "#"
+        },
+        "position": {
+          "$id": "#position",
+          "description": "The position of an item in a series or sequence of items.",
+          "type": ["integer", "string"]
+        },
+        "previousItem": {
+          "$id": "#previousItem",
+          "description": "A link to the ListItem that preceeds the current one.",
+          "$ref": "#"
+        }
+      }
+    }
+  ]
+}
