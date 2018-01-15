@@ -1,5 +1,5 @@
 /**
- * @summary Entities that have a somewhat fixed, physical extension.
+ * @summary The geographic coordinates of a place or event.
  * @see http://schema.org/GeoCoordinates
  * @typedef {StructuredValue} GeoCoordinates
  * @property {(string|number)=} elevation The elevation of a location (WGS 84).
