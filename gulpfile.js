@@ -7,6 +7,7 @@ const Ajv   = require('ajv')
 
 const { SCHEMATA, sdoValidate } = require('./index.js')
 
+const requireOther = require('./lib/requireOther.js')
 
 gulp.task('validate', function () {
   new Ajv().addSchema(SCHEMATA)
@@ -14,6 +15,7 @@ gulp.task('validate', function () {
 
 gulp.task('test', function () {
   console.log(sdoValidate('./test.jsonld', 'Person'))
+  console.log(sdoValidate(requireOther('./test.jsonld').alumniOf.location.address, 'PostalAddress'))
 })
 
 
@@ -24,4 +26,4 @@ gulp.task('docs:api', function () {
 })
 
 
-gulp.task('build', ['validate', 'docs:api'])
+gulp.task('build', ['validate', 'test', 'docs:api'])
