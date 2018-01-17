@@ -31,6 +31,12 @@
             }
           ]
         },
+        "email": {
+          "$id": "#email",
+          "description": "Email address.",
+          "type": "string",
+          "format": "email"
+        },
         "location": {
           "$id": "#location",
           "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
@@ -39,6 +45,11 @@
             { "$ref": "Place.jsd" },
             { "$ref": "PostalAddress.jsd" }
           ]
+        },
+        "telephone": {
+          "$id": "#telephone",
+          "description": "The telephone number.",
+          "type": "string"
         }
       }
     }
