@@ -4,7 +4,7 @@
   "title": "ListItem",
   "description": "A list item.",
   "allOf": [
-    { "$ref": "Thing.jsd" },
+    { "$ref": "Intangible.jsd" },
     {
       "properties": {
         "item": {
