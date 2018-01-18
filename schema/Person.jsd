@@ -31,7 +31,8 @@
         "email": {
           "$id": "#email",
           "description": "Email address.",
-          "type": "string"
+          "type": "string",
+          "format": "email"
         },
         "familyName": {
           "$id": "#familyName",
