@@ -1,0 +1,36 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ItemList.jsd",
+  "title": "ItemList",
+  "description": "A list of items of any sort.",
+  "allOf": [
+    { "$ref": "Intangible.jsd" },
+    {
+      "properties": {
+        "itemListElement": {
+          "$id": "#itemListElement",
+          "description": "For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\", \"Mary\"), existing entities, or use ListItem.",
+          "anyOf": [
+            {
+              "$id": "#itemListElement-type",
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "Thing.jsd" },
+                { "$ref": "ListItem.jsd" }
+              ]
+            },
+            {
+              "type": "array",
+              "items": { "$ref": "#itemListElement-type" }
+            }
+          ]
+        },
+        "numberOfItems": {
+          "$id": "#numberOfItems",
+          "description": "The number of items in an ItemList. Note that some descriptions might not fully describe all items in a list (e.g., multi-page pagination); in such cases, the numberOfItems would be for the entire list.",
+          "type": "integer"
+        }
+      }
+    }
+  ]
+}

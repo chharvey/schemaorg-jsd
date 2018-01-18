@@ -4,16 +4,17 @@
   "title": "ContactPoint",
   "description": "A contact point—for example, a Customer Complaints department.",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/StructuredValue.jsd" },
+    { "$ref": "StructuredValue.jsd" },
     {
-      "type": "object",
-      "additionalProperties": true,
       "properties": {
         "email": {
+          "$id": "#email",
           "description": "Email address.",
-          "type": "string"
+          "type": "string",
+          "format": "email"
         },
         "telephone": {
+          "$id": "#telephone",
           "description": "The telephone number.",
           "type": "string"
         }

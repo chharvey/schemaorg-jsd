@@ -3,4 +3,5 @@
  * @see http://schema.org/Place
  * @typedef {Thing} Place
  * @property {(string|PostalAddress)=} address Physical address of the item.
+ * @property {GeoCoordinates=} geo The geo coordinates of the place.
  */

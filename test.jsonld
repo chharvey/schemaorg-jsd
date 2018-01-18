@@ -23,7 +23,8 @@
       "address": {
         "@type": "PostalAddress",
         "addressLocality": "Blacksburg",
-        "addressRegion": "VA"
+        "addressRegion": "VA",
+        "postalCode": "20191"
       }
     }
   }

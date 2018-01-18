@@ -4,9 +4,41 @@
   "title": "PostalAddress",
   "description": "The mailing address.",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd" },
+    { "$ref": "ContactPoint.jsd" },
     {
       "properties": {
+        "addressCountry": {
+          "$id": "#addressCountry",
+          "description": "The country.",
+          "anyOf": [
+            { "type": "string" }
+          ]
+        },
+        "addressLocality": {
+          "$id": "#addressLocality",
+          "description": "The locality.",
+          "type": "string"
+        },
+        "addressRegion": {
+          "$id": "#addressRegion",
+          "description": "The region.",
+          "type": "string"
+        },
+        "postOfficeBoxNumber": {
+          "$id": "#postOfficeBoxNumber",
+          "description": "The post office box number for PO box addresses.",
+          "type": "string"
+        },
+        "postalCode": {
+          "$id": "#postalCode",
+          "description": "The postal code.",
+          "type": "string"
+        },
+        "streetAddress": {
+          "$id": "#streetAddress",
+          "description": "The street address.",
+          "type": "string"
+        }
       }
     }
   ]

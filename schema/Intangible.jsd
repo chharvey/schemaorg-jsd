@@ -1,0 +1,13 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Intangible.jsd",
+  "title": "Intangible",
+  "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+  "allOf": [
+    { "$ref": "Thing.jsd" },
+    {
+      "properties": {
+      }
+    }
+  ]
+}
