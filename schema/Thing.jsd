@@ -34,6 +34,7 @@
               "$id": "#image-type",
               "anyOf": [
                 { "type": "string", "format": "uri" },
+                { "type": "string", "format": "uri-reference" },
                 { "$ref": "ImageObject.jsd" }
               ]
             },
@@ -51,8 +52,10 @@
         "url": {
           "$id": "#url",
           "description": "URL of the item.",
-          "type": "string",
-          "format": "uri"
+          "anyOf": [
+            { "type": "string", "format": "uri" },
+            { "type": "string", "format": "uri-reference" }
+          ]
         }
       }
     }
