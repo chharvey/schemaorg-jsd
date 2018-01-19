@@ -12,6 +12,12 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
+        "additionalType": {
+          "$id": "#additionalType",
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
+          "type": "string",
+          "format": "uri"
+        },
         "description": {
           "$id": "#description",
           "description": "A description of the item.",
