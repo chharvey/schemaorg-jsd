@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/contactPoint.prop.jsd",
+  "title": "http://schema.org/contactPoint",
+  "description": "A contact point for a person or organization.",
+  "anyOf": [
+    {
+      "$id": "#contactPoint-type",
+      "anyOf": [
+        { "$ref": "ContactPoint.jsd" }
+      ]
+    },
+    {
+      "type": "array",
+      "items": { "$ref": "#contactPoint-type" }
+    }
+  ]
+}

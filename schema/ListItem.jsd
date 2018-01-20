@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ListItem.jsd",
-  "title": "ListItem",
+  "title": "http://schema.org/ListItem",
   "description": "A list item.",
   "allOf": [
     { "$ref": "Intangible.jsd" },
