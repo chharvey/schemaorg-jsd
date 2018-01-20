@@ -12,27 +12,17 @@
           "description": "An additional name for a Person, can be used for a middle name.",
           "type": "string"
         },
+        "address": {
+          "$id": "#address",
+          "allOf": [{ "$ref": "address.prop.jsd" }]
+        },
         "contactPoint": {
           "$id": "#contactPoint",
-          "description": "A contact point for a person or organization.",
-          "anyOf": [
-            {
-              "$id": "#contactPoint-type",
-              "anyOf": [
-                { "$ref": "ContactPoint.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#contactPoint-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
         },
         "email": {
           "$id": "#email",
-          "description": "Email address.",
-          "type": "string",
-          "format": "email"
+          "allOf": [{ "$ref": "email.prop.jsd" }]
         },
         "familyName": {
           "$id": "#familyName",
@@ -56,8 +46,7 @@
         },
         "telephone": {
           "$id": "#telephone",
-          "description": "The telephone number.",
-          "type": "string"
+          "allOf": [{ "$ref": "telephone.prop.jsd" }]
         }
       }
     }

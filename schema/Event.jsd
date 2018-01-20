@@ -19,21 +19,7 @@
         },
         "location": {
           "$id": "#location",
-          "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
-          "anyOf": [
-            {
-              "$id": "#location-type",
-              "anyOf": [
-                { "type": "string" },
-                { "$ref": "Place.jsd" },
-                { "$ref": "PostalAddress.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#location-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "location.prop.jsd" }]
         },
         "startDate": {
           "$id": "#startDate",

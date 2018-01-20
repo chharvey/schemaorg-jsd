@@ -13,9 +13,9 @@ const requireOther = require('./lib/requireOther.js')
  * @alias module:index.SCHEMATA
  * @const {Array<(!Object|boolean)>}
  */
-const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8').map((filename) =>
-  requireOther(path.join(__dirname, './schema/', filename))
-)
+const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8')
+  .filter((filename) => path.parse(filename).ext === '.jsd')
+  .map((filename) => requireOther(path.join(__dirname, './schema/', filename)))
 
 
 // set up and validate all the schemata. done only once.

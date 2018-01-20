@@ -9,11 +9,7 @@
       "properties": {
         "address": {
           "$id": "#address",
-          "description": "Physical address of the item.",
-          "anyOf": [
-            { "type": "string" },
-            { "$ref": "PostalAddress.jsd" }
-          ]
+          "allOf": [{ "$ref": "address.prop.jsd" }]
         },
         "geo": {
           "$id": "#geo",
@@ -21,6 +17,10 @@
           "anyOf": [
             { "$ref": "GeoCoordinates.jsd" }
           ]
+        },
+        "telephone": {
+          "$id": "#telephone",
+          "allOf": [{ "$ref": "telephone.prop.jsd" }]
         }
       }
     }

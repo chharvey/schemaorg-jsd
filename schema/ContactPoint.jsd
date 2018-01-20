@@ -9,14 +9,11 @@
       "properties": {
         "email": {
           "$id": "#email",
-          "description": "Email address.",
-          "type": "string",
-          "format": "email"
+          "allOf": [{ "$ref": "email.prop.jsd" }]
         },
         "telephone": {
           "$id": "#telephone",
-          "description": "The telephone number.",
-          "type": "string"
+          "allOf": [{ "$ref": "telephone.prop.jsd" }]
         }
       }
     }
