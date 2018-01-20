@@ -10,12 +10,16 @@
         "hiringOrganization": {
           "$id": "#hiringOrganization",
           "description": "Organization offering the job position.",
-          "$ref": "Organization.jsd"
+          "anyOf": [
+            { "$ref": "Organization.jsd" }
+          ]
         },
         "jobLocation": {
           "$id": "#jobLocation",
           "description": "A (typically single) geographic location associated with the job position.",
-          "$ref": "Place.jsd"
+          "anyOf": [
+            { "$ref": "Place.jsd" }
+          ]
         },
         "responsibilities": {
           "$id": "#responsibilities",
