@@ -1,0 +1,10 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/address.prop.jsd",
+  "title": "http://schema.org/address",
+  "description": "Physical address of the item.",
+  "anyOf": [
+    { "type": "string" },
+    { "$ref": "PostalAddress.jsd" }
+  ]
+}

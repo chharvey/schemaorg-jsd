@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Organization.jsd",
-  "title": "Organization",
+  "title": "http://schema.org/Organization",
   "description": "An organization such as a school, NGO, corporation, club, etc.",
   "allOf": [
     { "$ref": "Thing.jsd" },
@@ -9,56 +9,23 @@
       "properties": {
         "address": {
           "$id": "#address",
-          "description": "Physical address of the item.",
-          "anyOf": [
-            { "type": "string" },
-            { "$ref": "PostalAddress.jsd" }
-          ]
+          "allOf": [{ "$ref": "address.prop.jsd" }]
         },
         "contactPoint": {
           "$id": "#contactPoint",
-          "description": "A contact point for a person or organization.",
-          "anyOf": [
-            {
-              "$id": "#contactPoint-type",
-              "anyOf": [
-                { "$ref": "ContactPoint.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#contactPoint-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
         },
         "email": {
           "$id": "#email",
-          "description": "Email address.",
-          "type": "string",
-          "format": "email"
+          "allOf": [{ "$ref": "email.prop.jsd" }]
         },
         "location": {
           "$id": "#location",
-          "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
-          "anyOf": [
-            {
-              "$id": "#location-type",
-              "anyOf": [
-                { "type": "string" },
-                { "$ref": "Place.jsd" },
-                { "$ref": "PostalAddress.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#location-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "location.prop.jsd" }]
         },
         "telephone": {
           "$id": "#telephone",
-          "description": "The telephone number.",
-          "type": "string"
+          "allOf": [{ "$ref": "telephone.prop.jsd" }]
         }
       }
     }

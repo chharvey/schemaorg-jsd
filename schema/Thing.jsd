@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd",
-  "title": "Thing",
+  "title": "http://schema.org/Thing",
   "description": "The most generic type of item.",
   "allOf": [
     {
@@ -12,6 +12,13 @@
       "type": "object",
       "additionalProperties": true,
       "properties": {
+        "additionalType": {
+          "$id": "#additionalType",
+          "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
+          "anyOf": [
+            { "$ref": "URL.jsd" }
+          ]
+        },
         "description": {
           "$id": "#description",
           "description": "A description of the item.",
@@ -22,7 +29,7 @@
           "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
           "anyOf": [
             { "type": "string" },
-            { "type": "string", "format": "uri" },
+            { "$ref": "URL.jsd" },
             { "$ref": "PropertyValue.jsd" }
           ]
         },
@@ -33,7 +40,7 @@
             {
               "$id": "#image-type",
               "anyOf": [
-                { "type": "string", "format": "uri" },
+                { "$ref": "URL.jsd" },
                 { "$ref": "ImageObject.jsd" }
               ]
             },
@@ -51,8 +58,9 @@
         "url": {
           "$id": "#url",
           "description": "URL of the item.",
-          "type": "string",
-          "format": "uri"
+          "anyOf": [
+            { "$ref": "URL.jsd" }
+          ]
         }
       }
     }

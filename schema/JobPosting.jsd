@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/JobPosting.jsd",
-  "title": "JobPosting",
+  "title": "http://schema.org/JobPosting",
   "description": "A listing that describes a job opening in a certain organization.",
   "allOf": [
     { "$ref": "Intangible.jsd" },
@@ -10,12 +10,16 @@
         "hiringOrganization": {
           "$id": "#hiringOrganization",
           "description": "Organization offering the job position.",
-          "$ref": "Organization.jsd"
+          "anyOf": [
+            { "$ref": "Organization.jsd" }
+          ]
         },
         "jobLocation": {
           "$id": "#jobLocation",
           "description": "A (typically single) geographic location associated with the job position.",
-          "$ref": "Place.jsd"
+          "anyOf": [
+            { "$ref": "Place.jsd" }
+          ]
         },
         "responsibilities": {
           "$id": "#responsibilities",

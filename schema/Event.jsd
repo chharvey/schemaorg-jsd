@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Event.jsd",
-  "title": "Event",
+  "title": "http://schema.org/Event",
   "description": "An event happening at a certain time and location, such as a concert, lecture, or festival.",
   "allOf": [
     { "$ref": "Thing.jsd" },
@@ -12,37 +12,21 @@
           "description": "The end date and time of the item (in ISO 8601 date format).",
           "type": "string",
           "anyOf": [
-            { "format": "date" },
-            { "format": "time" },
-            { "format": "date-time" }
+            { "$ref": "Date.jsd" },
+            { "$ref": "DateTime.jsd" }
           ]
         },
         "location": {
           "$id": "#location",
-          "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
-          "anyOf": [
-            {
-              "$id": "#location-type",
-              "anyOf": [
-                { "type": "string" },
-                { "$ref": "Place.jsd" },
-                { "$ref": "PostalAddress.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#location-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "location.prop.jsd" }]
         },
         "startDate": {
           "$id": "#startDate",
           "description": "The start date and time of the item (in ISO 8601 date format).",
           "type": "string",
           "anyOf": [
-            { "format": "date" },
-            { "format": "time" },
-            { "format": "date-time" }
+            { "$ref": "Date.jsd" },
+            { "$ref": "DateTime.jsd" }
           ]
         }
       }
