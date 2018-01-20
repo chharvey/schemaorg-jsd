@@ -21,6 +21,10 @@
           "anyOf": [
             { "$ref": "GeoCoordinates.jsd" }
           ]
+        },
+        "telephone": {
+          "$id": "#telephone",
+          "allOf": [{ "$ref": "telephone.prop.jsd" }]
         }
       }
     }

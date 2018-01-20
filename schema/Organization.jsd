@@ -57,8 +57,7 @@
         },
         "telephone": {
           "$id": "#telephone",
-          "description": "The telephone number.",
-          "type": "string"
+          "allOf": [{ "$ref": "telephone.prop.jsd" }]
         }
       }
     }
