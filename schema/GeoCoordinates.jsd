@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/GeoCoordinates.jsd",
-  "title": "GeoCoordinates",
+  "title": "http://schema.org/GeoCoordinates",
   "description": "The geographic coordinates of a place or event.",
   "allOf": [
     { "$ref": "StructuredValue.jsd" },

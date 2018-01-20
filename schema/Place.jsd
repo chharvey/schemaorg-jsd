@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd",
-  "title": "Place",
+  "title": "http://schema.org/Place",
   "description": "Entities that have a somewhat fixed, physical extension.",
   "allOf": [
     { "$ref": "Thing.jsd" },
