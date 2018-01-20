@@ -33,9 +33,7 @@
         },
         "email": {
           "$id": "#email",
-          "description": "Email address.",
-          "type": "string",
-          "format": "email"
+          "allOf": [{ "$ref": "email.prop.jsd" }]
         },
         "location": {
           "$id": "#location",
