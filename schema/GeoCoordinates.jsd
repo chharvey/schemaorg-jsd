@@ -7,6 +7,10 @@
     { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
+        "address": {
+          "$id": "#address",
+          "allOf": [{ "$ref": "address.prop.jsd" }]
+        },
         "elevation": {
           "$id": "#elevation",
           "description": "The elevation of a location (WGS 84).",

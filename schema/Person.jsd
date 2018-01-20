@@ -12,6 +12,10 @@
           "description": "An additional name for a Person, can be used for a middle name.",
           "type": "string"
         },
+        "address": {
+          "$id": "#address",
+          "allOf": [{ "$ref": "address.prop.jsd" }]
+        },
         "contactPoint": {
           "$id": "#contactPoint",
           "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
