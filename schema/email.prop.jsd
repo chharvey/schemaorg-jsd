@@ -3,7 +3,7 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/email.prop.jsd",
   "title": "http://schema.org/email",
   "description": "Email address.",
-  "allOf": [
+  "anyOf": [
     {
       "type": "string",
       "format": "email"

@@ -14,19 +14,7 @@
         },
         "contactPoint": {
           "$id": "#contactPoint",
-          "description": "A contact point for a person or organization.",
-          "anyOf": [
-            {
-              "$id": "#contactPoint-type",
-              "anyOf": [
-                { "$ref": "ContactPoint.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#contactPoint-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
         },
         "email": {
           "$id": "#email",

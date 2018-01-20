@@ -3,7 +3,7 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/telephone.prop.jsd",
   "title": "http://schema.org/telephone",
   "description": "The telephone number.",
-  "allOf": [
+  "anyOf": [
     { "type": "string" }
   ]
 }
