@@ -1,0 +1,8 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/DateTime.jsd",
+  "title": "http://schema.org/DateTime",
+  "description": "A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601).",
+  "type": "string",
+  "format": "date-time"
+}

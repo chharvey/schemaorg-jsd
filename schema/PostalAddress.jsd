@@ -17,12 +17,16 @@
         "addressLocality": {
           "$id": "#addressLocality",
           "description": "The locality.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         },
         "addressRegion": {
           "$id": "#addressRegion",
           "description": "The region.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         },
         "postOfficeBoxNumber": {
           "$id": "#postOfficeBoxNumber",

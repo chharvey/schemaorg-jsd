@@ -12,9 +12,8 @@
           "description": "The end date and time of the item (in ISO 8601 date format).",
           "type": "string",
           "anyOf": [
-            { "format": "date" },
-            { "format": "time" },
-            { "format": "date-time" }
+            { "$ref": "Date.jsd" },
+            { "$ref": "DateTime.jsd" }
           ]
         },
         "location": {
@@ -26,9 +25,8 @@
           "description": "The start date and time of the item (in ISO 8601 date format).",
           "type": "string",
           "anyOf": [
-            { "format": "date" },
-            { "format": "time" },
-            { "format": "date-time" }
+            { "$ref": "Date.jsd" },
+            { "$ref": "DateTime.jsd" }
           ]
         }
       }

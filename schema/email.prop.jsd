@@ -4,9 +4,6 @@
   "title": "http://schema.org/email",
   "description": "Email address.",
   "anyOf": [
-    {
-      "type": "string",
-      "format": "email"
-    }
+    { "type": "string", "format": "email" }
   ]
 }

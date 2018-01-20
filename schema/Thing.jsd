@@ -15,8 +15,9 @@
         "additionalType": {
           "$id": "#additionalType",
           "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
-          "type": "string",
-          "format": "uri"
+          "anyOf": [
+            { "$ref": "URL.jsd" }
+          ]
         },
         "description": {
           "$id": "#description",
@@ -28,7 +29,7 @@
           "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
           "anyOf": [
             { "type": "string" },
-            { "type": "string", "format": "uri" },
+            { "$ref": "URL.jsd" },
             { "$ref": "PropertyValue.jsd" }
           ]
         },
@@ -39,8 +40,7 @@
             {
               "$id": "#image-type",
               "anyOf": [
-                { "type": "string", "format": "uri" },
-                { "type": "string", "format": "uri-reference" },
+                { "$ref": "URL.jsd" },
                 { "$ref": "ImageObject.jsd" }
               ]
             },
@@ -59,8 +59,7 @@
           "$id": "#url",
           "description": "URL of the item.",
           "anyOf": [
-            { "type": "string", "format": "uri" },
-            { "type": "string", "format": "uri-reference" }
+            { "$ref": "URL.jsd" }
           ]
         }
       }
