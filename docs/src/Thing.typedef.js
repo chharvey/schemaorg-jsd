@@ -1,5 +1,9 @@
 /**
  * @summary The most generic type of item.
+ * @description
+ * Value Of:
+ * - {@link item}
+ * - {@link itemListElement}
  * @see http://schema.org/Thing
  * @typedef {!Object} Thing
  * @property {URL=} additionalType An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.

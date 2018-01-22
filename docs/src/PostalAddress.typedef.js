@@ -1,5 +1,9 @@
 /**
  * @summary The mailing address.
+ * @description
+ * Value Of:
+ * - {@link address}
+ * - {@link location}
  * @see http://schema.org/PostalAddress
  * @typedef {ContactPoint} PostalAddress
  * @property {string=} addressCountry The country.
