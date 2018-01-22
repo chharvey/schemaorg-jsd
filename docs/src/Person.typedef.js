@@ -6,7 +6,7 @@
  * @property {address=} address Physical address of the item.
  * @property {award=} award An award won by or for this item.
  * @property {contactPoint=} contactPoint A contact point for a person or organization.
- * @property {string=} email Email address.
+ * @property {email=} email Email address.
  * @property {string=} familyName Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.
  * @property {string=} givenName Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.
  * @property {string=} honorificPrefix An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.

@@ -17,6 +17,12 @@
  */
 
 /**
+ * @summary Email address.
+ * @see http://schema.org/email
+ * @typedef {string} email
+ */
+
+/**
  * @summary An associated logo.
  * @see http://schema.org/logo
  * @typedef {(URL|ImageObject|Array<(URL|ImageObject)>)} logo
