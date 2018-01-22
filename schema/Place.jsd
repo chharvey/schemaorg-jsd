@@ -7,6 +7,10 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
+        "additionalProperty": {
+          "$id": "#additionalProperty",
+          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
+        },
         "address": {
           "$id": "#address",
           "allOf": [{ "$ref": "address.prop.jsd" }]

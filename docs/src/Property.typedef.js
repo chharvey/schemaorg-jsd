@@ -1,4 +1,10 @@
 /**
+ * @summary A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.
+ * @see http://schema.org/additionalProperty
+ * @typedef {PropertyValue} additionalProperty
+ */
+
+/**
  * @summary Physical address of the item.
  * @see http://schema.org/address
  * @typedef {(string|PostalAddress)} address

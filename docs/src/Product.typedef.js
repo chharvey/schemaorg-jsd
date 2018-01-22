@@ -2,7 +2,7 @@
  * @summary Any offered product or service.
  * @see http://schema.org/Product
  * @typedef {Thing} Product
- * @property {PropertyValue=} additionalProperty A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.
+ * @property {additionalProperty=} additionalProperty A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.
  * @property {award=} award An award won by or for this item.
  * @property {Organization=} brand The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
  * @property {string=} color The color of the product.
