@@ -20,6 +20,10 @@
           "$id": "#award",
           "allOf": [{ "$ref": "award.prop.jsd" }]
         },
+        "brand": {
+          "$id": "#brand",
+          "allOf": [{ "$ref": "brand.prop.jsd" }]
+        },
         "contactPoint": {
           "$id": "#contactPoint",
           "allOf": [{ "$ref": "contactPoint.prop.jsd" }]

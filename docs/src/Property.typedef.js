@@ -11,6 +11,12 @@
  */
 
 /**
+ * @summary The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+ * @see http://schema.org/brand
+ * @typedef {Organization} brand
+ */
+
+/**
  * @summary An associated logo.
  * @see http://schema.org/logo
  * @typedef {(URL|ImageObject|Array<(URL|ImageObject)>)} logo

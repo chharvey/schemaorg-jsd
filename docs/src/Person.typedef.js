@@ -5,6 +5,7 @@
  * @property {string=} additionalName An additional name for a Person, can be used for a middle name.
  * @property {(string|PostalAddress)=} address Physical address of the item.
  * @property {award=} award An award won by or for this item.
+ * @property {brand=} brand The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
  * @property {(ContactPoint|Array<ContactPoint>)=} contactPoint A contact point for a person or organization.
  * @property {string=} email Email address.
  * @property {string=} familyName Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.

@@ -17,10 +17,7 @@
         },
         "brand": {
           "$id": "#brand",
-          "description": "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.",
-          "anyOf": [
-            { "$ref": "Organization.jsd" }
-          ]
+          "allOf": [{ "$ref": "brand.prop.jsd" }]
         },
         "color": {
           "$id": "#color",
