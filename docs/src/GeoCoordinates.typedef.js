@@ -1,5 +1,8 @@
 /**
  * @summary The geographic coordinates of a place or event.
+ * @description
+ * Value Of:
+ * - {@link geo}
  * @see http://schema.org/GeoCoordinates
  * @typedef {StructuredValue} GeoCoordinates
  * @property {address=} address Physical address of the item.

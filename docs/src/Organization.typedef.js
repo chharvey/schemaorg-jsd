@@ -1,5 +1,10 @@
 /**
  * @summary An organization such as a school, NGO, corporation, club, etc.
+ * @description
+ * Value Of:
+ * - {@link brand}
+ * - {@link hiringOrganization}
+ * - {@link manufacturer}
  * @see http://schema.org/Organization
  * @typedef {Thing} Organization
  * @property {address=} address Physical address of the item.

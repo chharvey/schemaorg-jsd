@@ -1,5 +1,10 @@
 /**
  * @summary A list item.
+ * @description
+ * Value Of:
+ * - {@link itemListElement}
+ * - {@link nextItem}
+ * - {@link previousItem}
  * @see http://schema.org/ListItem
  * @typedef {Intangible} ListItem
  * @property {Thing=} item An entity represented by an entry in a list or data feed.
