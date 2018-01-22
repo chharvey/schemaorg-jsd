@@ -2,7 +2,7 @@
  * @summary An organization such as a school, NGO, corporation, club, etc.
  * @see http://schema.org/Organization
  * @typedef {Thing} Organization
- * @property {(string|PostalAddress)=} address Physical address of the item.
+ * @property {address=} address Physical address of the item.
  * @property {award=} award An award won by or for this item.
  * @property {(ContactPoint|Array<ContactPoint>)=} contactPoint A contact point for a person or organization.
  * @property {string=} email Email address.
