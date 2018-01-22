@@ -33,6 +33,11 @@
 
 /**
  * @summary The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.
+ * @description
+ * Property Of:
+ * - {@link Organization}
+ * - {@link Product}
+ * - {@link Person}
  * @see http://schema.org/brand
  * @typedef {Organization} brand
  */
