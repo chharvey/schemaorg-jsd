@@ -18,6 +18,10 @@
             { "$ref": "GeoCoordinates.jsd" }
           ]
         },
+        "logo": {
+          "$id": "#logo",
+          "allOf": [{ "$ref": "logo.prop.jsd" }]
+        },
         "telephone": {
           "$id": "#telephone",
           "allOf": [{ "$ref": "telephone.prop.jsd" }]

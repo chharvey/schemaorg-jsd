@@ -34,20 +34,7 @@
         },
         "logo": {
           "$id": "#logo",
-          "description": "An associated logo.",
-          "anyOf": [
-            {
-              "$id": "#logo-type",
-              "anyOf": [
-                { "$ref": "URL.jsd" },
-                { "$ref": "ImageObject.jsd" }
-              ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#logo-type" }
-            }
-          ]
+          "allOf": [{ "$ref": "logo.prop.jsd" }]
         },
         "manufacturer": {
           "$id": "#manufacturer",
