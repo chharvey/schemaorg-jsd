@@ -11,6 +11,10 @@
           "$id": "#address",
           "allOf": [{ "$ref": "address.prop.jsd" }]
         },
+        "award": {
+          "$id": "#award",
+          "allOf": [{ "$ref": "award.prop.jsd" }]
+        },
         "contactPoint": {
           "$id": "#contactPoint",
           "allOf": [{ "$ref": "contactPoint.prop.jsd" }]

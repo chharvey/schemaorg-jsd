@@ -4,6 +4,7 @@
  * @typedef {Thing} Person
  * @property {string=} additionalName An additional name for a Person, can be used for a middle name.
  * @property {(string|PostalAddress)=} address Physical address of the item.
+ * @property {award=} award An award won by or for this item.
  * @property {(ContactPoint|Array<ContactPoint>)=} contactPoint A contact point for a person or organization.
  * @property {string=} email Email address.
  * @property {string=} familyName Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.

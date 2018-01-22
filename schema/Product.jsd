@@ -16,10 +16,7 @@
         },
         "award": {
           "$id": "#award",
-          "description": "An award won by or for this item.",
-          "anyOf": [
-            { "type": "string" }
-          ]
+          "allOf": [{ "$ref": "award.prop.jsd" }]
         },
         "brand": {
           "$id": "#brand",
