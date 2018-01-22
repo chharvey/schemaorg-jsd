@@ -11,6 +11,12 @@
  */
 
 /**
+ * @summary A contact point for a person or organization.
+ * @see http://schema.org/contactPoint
+ * @typedef {(ContactPoint|Array<ContactPoint>)} contactPoint
+ */
+
+/**
  * @summary An associated logo.
  * @see http://schema.org/logo
  * @typedef {(URL|ImageObject|Array<(URL|ImageObject)>)} logo
