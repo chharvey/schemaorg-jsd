@@ -5,5 +5,5 @@
  * @property {address=} address Physical address of the item.
  * @property {GeoCoordinates=} geo The geo coordinates of the place.
  * @property {logo=} logo An associated logo.
- * @property {string=} telephone The telephone number.
+ * @property {telephone=} telephone The telephone number.
  */

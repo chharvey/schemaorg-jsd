@@ -11,5 +11,5 @@
  * @property {string=} givenName Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.
  * @property {string=} honorificPrefix An honorific prefix preceding a Person's name such as Dr/Mrs/Mr.
  * @property {string=} honorificSuffix An honorific suffix preceding a Person's name such as M.D. /PhD/MSCSW.
- * @property {string=} telephone The telephone number.
+ * @property {telephone=} telephone The telephone number.
  */

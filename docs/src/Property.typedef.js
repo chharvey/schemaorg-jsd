@@ -33,3 +33,9 @@
  * @see http://schema.org/logo
  * @typedef {(URL|ImageObject|Array<(URL|ImageObject)>)} logo
  */
+
+/**
+ * @summary The telephone number.
+ * @see http://schema.org/telephone
+ * @typedef {string} telephone
+ */

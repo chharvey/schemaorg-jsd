@@ -3,5 +3,5 @@
  * @see http://schema.org/ContactPoint
  * @typedef {StructuredValue} ContactPoint
  * @property {email=} email Email address.
- * @property {string=} telephone The telephone number.
+ * @property {telephone=} telephone The telephone number.
  */
