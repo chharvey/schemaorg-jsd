@@ -6,7 +6,7 @@
  * @property {award=} award An award won by or for this item.
  * @property {contactPoint=} contactPoint A contact point for a person or organization.
  * @property {email=} email Email address.
- * @property {(string|Place|PostalAddress|Array<(string|Place|PostalAddress)>)=} location The location of for example where the event is happening, an organization is located, or where an action takes place.
+ * @property {location=} location The location of for example where the event is happening, an organization is located, or where an action takes place.
  * @property {logo=} logo An associated logo.
  * @property {string=} telephone The telephone number.
  */

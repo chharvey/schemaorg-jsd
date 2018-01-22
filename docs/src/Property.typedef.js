@@ -23,6 +23,12 @@
  */
 
 /**
+ * @summary The location of for example where the event is happening, an organization is located, or where an action takes place.
+ * @see http://schema.org/location
+ * @typedef {(string|Place|PostalAddress|Array<(string|Place|PostalAddress)>)} location
+ */
+
+/**
  * @summary An associated logo.
  * @see http://schema.org/logo
  * @typedef {(URL|ImageObject|Array<(URL|ImageObject)>)} logo
