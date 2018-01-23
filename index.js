@@ -11,6 +11,7 @@ const requireOther = require('./lib/requireOther.js')
  * @description This array contains all Schema.org schemata in this project.
  * Example: `ajv.addSchema(SCHEMATA)`
  * @alias module:index.SCHEMATA
+ * @todo TODO: reference json-ld.jsd externally
  * @const {Array<(!Object|boolean)>}
  */
 const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8')

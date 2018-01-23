@@ -10,7 +10,6 @@
         "endDate": {
           "$id": "#endDate",
           "description": "The end date and time of the item (in ISO 8601 date format).",
-          "type": "string",
           "anyOf": [
             { "$ref": "Date.jsd" },
             { "$ref": "DateTime.jsd" }
@@ -23,7 +22,6 @@
         "startDate": {
           "$id": "#startDate",
           "description": "The start date and time of the item (in ISO 8601 date format).",
-          "type": "string",
           "anyOf": [
             { "$ref": "Date.jsd" },
             { "$ref": "DateTime.jsd" }
