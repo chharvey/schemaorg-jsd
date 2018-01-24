@@ -9,6 +9,7 @@ const Ajv   = require('ajv')
 const { SCHEMATA, sdoValidate } = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
+const JSONSchema   = require('./lib/JSONSchema.class.js')
 
 gulp.task('validate', function () {
   new Ajv().addSchema(SCHEMATA)
@@ -54,54 +55,19 @@ gulp.task('docs:api:compile', function (callback) {
     SCHEMATA.filter(function (jsd) {
       let name = path.parse(new url.URL(jsd['$id']).pathname).name
       return datatype_names.includes(name)
-    }).map(function (jsd) {
-      let name = path.parse(new url.URL(jsd.title).pathname).name
-      return `
-/**
- * @summary ${jsd.description}
- * @see ${jsd.title}
- * @typedef {${jsDocType(jsd)}} ${name}
- */
-      `
-    }).join(''),
+    }).map((jsd) => new JSONSchema(jsd).jsdocDataDef).join(''),
 
     // classes
     SCHEMATA.filter(function (jsd) {
       let name = path.parse(new url.URL(jsd['$id']).pathname).name
       return name[0] === name[0].toUpperCase() && !datatype_names.includes(name)
-    }).map(function (jsd) {
-      let name = path.parse(new url.URL(jsd.title).pathname).name
-      let superclass = (name === 'Thing') ? `!Object` : path.parse(jsd.allOf[0]['$ref']).name
-      let properties = Object.entries(jsd.allOf[1].properties).map(function (entry) {
-        // Try finding the `*.prop.jsd` file first, else use the `entry[1]` object.
-        let propSchema = SCHEMATA.find((jsd) => jsd.title===`http://schema.org/${entry[0]}`) || entry[1]
-        let type = jsDocType(propSchema)
-        return ` * @property {${type.replace(/#/g, name)}=} ${entry[0]} ${propSchema.description}`
-      })
-      return `
-/**
- * @summary ${jsd.description}
- * @see ${jsd.title}
- * @typedef {${superclass}} ${name}
-${properties.join('\n')}
- */
-      `
-    }).join(''),
+    }).map((jsd) => new JSONSchema(jsd).jsdocTypeDef).join(''),
 
     // properties
     SCHEMATA.filter(function (jsd) {
       let name = path.parse(new url.URL(jsd['$id']).pathname).name
       return name[0] === name[0].toLowerCase() && name !== 'json-ld' // TODO: reference json-ld.jsd externally
-    }).map(function (jsd) {
-      let name = path.parse(new url.URL(jsd.title).pathname).name
-      return `
-/**
- * @summary ${jsd.description}
- * @see ${jsd.title}
- * @typedef {${jsDocType(jsd)}} ${name}
- */
-      `
-    }).join(''),
+    }).map((jsd) => new JSONSchema(jsd).jsdocPropertyDef).join(''),
   ].join('')
 
   return fs.mkdir('./docs/build/', function (err) {
