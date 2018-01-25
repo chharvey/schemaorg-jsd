@@ -9,6 +9,7 @@
       "properties": {
         "hiringOrganization": {
           "$id": "#hiringOrganization",
+          "title": "http://schema.org/hiringOrganization",
           "description": "Organization offering the job position.",
           "anyOf": [
             { "$ref": "Organization.jsd" }
@@ -16,6 +17,7 @@
         },
         "jobLocation": {
           "$id": "#jobLocation",
+          "title": "http://schema.org/jobLocation",
           "description": "A (typically single) geographic location associated with the job position.",
           "anyOf": [
             { "$ref": "Place.jsd" }
@@ -23,6 +25,7 @@
         },
         "responsibilities": {
           "$id": "#responsibilities",
+          "title": "http://schema.org/responsibilities",
           "description": "Responsibilities associated with this role or Occupation.",
           "anyOf": [
             {
@@ -37,6 +40,7 @@
         },
         "title": {
           "$id": "#title",
+          "title": "http://schema.org/title",
           "description": "The title of the job.",
           "type": "string"
         }

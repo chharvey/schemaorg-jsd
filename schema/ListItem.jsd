@@ -9,6 +9,7 @@
       "properties": {
         "item": {
           "$id": "#item",
+          "title": "http://schema.org/item",
           "description": "An entity represented by an entry in a list or data feed.",
           "anyOf": [
             { "$ref": "Thing.jsd" }
@@ -16,6 +17,7 @@
         },
         "nextItem": {
           "$id": "#nextItem",
+          "title": "http://schema.org/nextItem",
           "description": "A link to the ListItem that follows the current one.",
           "anyOf": [
             { "$ref": "#" }
@@ -23,11 +25,13 @@
         },
         "position": {
           "$id": "#position",
+          "title": "http://schema.org/position",
           "description": "The position of an item in a series or sequence of items.",
           "type": ["integer", "string"]
         },
         "previousItem": {
           "$id": "#previousItem",
+          "title": "http://schema.org/previousItem",
           "description": "A link to the ListItem that preceeds the current one.",
           "anyOf": [
             { "$ref": "#" }

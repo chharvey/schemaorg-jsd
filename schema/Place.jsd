@@ -17,6 +17,7 @@
         },
         "geo": {
           "$id": "#geo",
+          "title": "http://schema.org/geo",
           "description": "The geo coordinates of the place.",
           "anyOf": [
             { "$ref": "GeoCoordinates.jsd" }

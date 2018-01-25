@@ -9,6 +9,7 @@
       "properties": {
         "endDate": {
           "$id": "#endDate",
+          "title": "http://schema.org/endDate",
           "description": "The end date and time of the item (in ISO 8601 date format).",
           "anyOf": [
             { "$ref": "Date.jsd" },
@@ -21,6 +22,7 @@
         },
         "startDate": {
           "$id": "#startDate",
+          "title": "http://schema.org/startDate",
           "description": "The start date and time of the item (in ISO 8601 date format).",
           "anyOf": [
             { "$ref": "Date.jsd" },

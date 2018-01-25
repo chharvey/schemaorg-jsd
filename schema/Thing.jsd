@@ -13,6 +13,7 @@
       "properties": {
         "additionalType": {
           "$id": "#additionalType",
+          "title": "http://schema.org/additionalType",
           "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
           "anyOf": [
             { "$ref": "URL.jsd" }
@@ -20,11 +21,13 @@
         },
         "description": {
           "$id": "#description",
+          "title": "http://schema.org/description",
           "description": "A description of the item.",
           "type": "string"
         },
         "identifier": {
           "$id": "#identifier",
+          "title": "http://schema.org/identifier",
           "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
           "anyOf": [
             { "type": "string" },
@@ -34,6 +37,7 @@
         },
         "image": {
           "$id": "#image",
+          "title": "http://schema.org/image",
           "description": "An image of the item. This can be a URL or a fully described ImageObject.",
           "anyOf": [
             {
@@ -51,11 +55,13 @@
         },
         "name": {
           "$id": "#name",
+          "title": "http://schema.org/name",
           "description": "The name of the item.",
           "type": "string"
         },
         "url": {
           "$id": "#url",
+          "title": "http://schema.org/url",
           "description": "URL of the item.",
           "anyOf": [
             { "$ref": "URL.jsd" }

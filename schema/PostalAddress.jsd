@@ -9,6 +9,7 @@
       "properties": {
         "addressCountry": {
           "$id": "#addressCountry",
+          "title": "http://schema.org/addressCountry",
           "description": "The country.",
           "anyOf": [
             { "type": "string" }
@@ -16,6 +17,7 @@
         },
         "addressLocality": {
           "$id": "#addressLocality",
+          "title": "http://schema.org/addressLocality",
           "description": "The locality.",
           "anyOf": [
             { "type": "string" }
@@ -23,6 +25,7 @@
         },
         "addressRegion": {
           "$id": "#addressRegion",
+          "title": "http://schema.org/addressRegion",
           "description": "The region.",
           "anyOf": [
             { "type": "string" }
@@ -30,16 +33,19 @@
         },
         "postOfficeBoxNumber": {
           "$id": "#postOfficeBoxNumber",
+          "title": "http://schema.org/postOfficeBoxNumber",
           "description": "The post office box number for PO box addresses.",
           "type": "string"
         },
         "postalCode": {
           "$id": "#postalCode",
+          "title": "http://schema.org/postalCode",
           "description": "The postal code.",
           "type": "string"
         },
         "streetAddress": {
           "$id": "#streetAddress",
+          "title": "http://schema.org/streetAddress",
           "description": "The street address.",
           "type": "string"
         }

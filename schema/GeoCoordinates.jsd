@@ -13,16 +13,19 @@
         },
         "elevation": {
           "$id": "#elevation",
+          "title": "http://schema.org/elevation",
           "description": "The elevation of a location (WGS 84).",
           "type": ["string", "number"]
         },
         "latitude": {
           "$id": "#latitude",
+          "title": "http://schema.org/latitude",
           "description": "The latitude of a location (WGS 84).",
           "type": ["string", "number"]
         },
         "longitude": {
           "$id": "#longitude",
+          "title": "http://schema.org/longitude",
           "description": "The longitude of a location (WGS 84).",
           "type": ["string", "number"]
         }

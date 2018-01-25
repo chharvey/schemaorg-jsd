@@ -9,16 +9,19 @@
       "properties": {
         "bestRating": {
           "$id": "#bestRating",
+          "title": "http://schema.org/bestRating",
           "description": "The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.",
           "type": ["number", "string"]
         },
         "ratingValue": {
           "$id": "#ratingValue",
+          "title": "http://schema.org/ratingValue",
           "description": "The rating for the content.",
           "type": ["number", "string"]
         },
         "worstRating": {
           "$id": "#worstRating",
+          "title": "http://schema.org/worstRating",
           "description": "The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.",
           "type": ["number", "string"]
         }
