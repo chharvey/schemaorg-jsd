@@ -20,9 +20,26 @@ gulp.task('test', function () {
   console.log(sdoValidate(requireOther('./test.jsonld').alumniOf.location.address, 'PostalAddress'))
 })
 
+gulp.task('docs:jsonld', function (callback) {
+  const contents = `
+{
+  "@context": {
+    "sdo": "http://schema.org/"
+  },
+  "@graph": [${SCHEMATA
+    .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
+    .map((jsd) => JSON.stringify(new JSONSchema(jsd).jsonld))
+    .join()}]
+}
+  `
+
+  return fs.mkdir('./docs/build/', function (err) {
+    fs.writeFile('./docs/build/schemaorg.jsonld', contents, 'utf8', callback) // send cb here to maintain dependency
+  })
+})
 
 gulp.task('docs:api:compile', function (callback) {
-  let contents = [
+  const contents = [
     { type: 'DataType', getter: 'jsdocDataDef'     },
     { type: 'Class'   , getter: 'jsdocTypeDef'     },
     { type: 'Property', getter: 'jsdocPropertyDef' },
