@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/GeoCoordinates.jsd",
   "title": "http://schema.org/GeoCoordinates",
   "description": "The geographic coordinates of a place or event.",

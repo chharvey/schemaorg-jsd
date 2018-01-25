@@ -7,20 +7,32 @@ const requireOther = require('./lib/requireOther.js')
 
 
 /**
+ * @summary An array of meta-schemata against which the content schemata validate.
+ * @description This is for internal use only. Users should not be expected to use these meta-schemata.
+ * @private
+ * @alias module:index.META_SCHEMATA
+ * @const {Array<!Object>}
+ */
+const META_SCHEMATA = fs.readdirSync(path.join(__dirname, './meta/'), 'utf8')
+  .filter((filename) => path.parse(filename).ext === '.jsd')
+  .map((filename) => requireOther(path.join(__dirname, './meta/', filename)))
+
+/**
  * @summary An array of schemata that you can add to an {@link https://www.npmjs.com/package/ajv|Ajv} object.
  * @description This array contains all Schema.org schemata in this project.
- * Example: `ajv.addSchema(SCHEMATA)`
+ * That is, schemata against which your JSON-LD documents should validate.
+ * @example
+ * ajv.addSchema(SCHEMATA)
  * @alias module:index.SCHEMATA
  * @todo TODO: reference json-ld.jsd externally
- * @const {Array<(!Object|boolean)>}
+ * @const {Array<!Object>}
  */
 const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8')
   .filter((filename) => path.parse(filename).ext === '.jsd')
   .map((filename) => requireOther(path.join(__dirname, './schema/', filename)))
 
-
 // set up and validate all the schemata. done only once.
-let ajv = new Ajv().addSchema(SCHEMATA)
+let ajv = new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 
 
 /**
@@ -57,4 +69,4 @@ function sdoValidate(document, type, callback = null) {
  * Use this module to validate your JSON-LD document against a Schema.org JSON schema.
  * @module index
  */
-module.exports = { SCHEMATA, sdoValidate }
+module.exports = {META_SCHEMATA, SCHEMATA, sdoValidate}

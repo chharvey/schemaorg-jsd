@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/brand.prop.jsd",
   "title": "http://schema.org/brand",
   "description": "The brand(s) associated with a product or service, or the brand(s) maintained by an organization or business person.",

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/additionalProperty.prop.jsd",
   "title": "http://schema.org/additionalProperty",
   "description": "A property-value pair representing an additional characteristics of the entitity, e.g. a product feature or another characteristic for which there is no matching property in schema.org.",

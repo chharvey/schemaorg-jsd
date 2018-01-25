@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/location.prop.jsd",
   "title": "http://schema.org/location",
   "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",

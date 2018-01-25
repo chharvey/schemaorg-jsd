@@ -6,13 +6,13 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const { SCHEMATA, sdoValidate } = require('./index.js')
+const {META_SCHEMATA, SCHEMATA, sdoValidate} = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
 const JSONSchema   = require('./lib/JSONSchema.class.js')
 
 gulp.task('validate', function () {
-  new Ajv().addSchema(SCHEMATA)
+  new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
 gulp.task('test', function () {

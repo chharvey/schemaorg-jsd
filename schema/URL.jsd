@@ -3,8 +3,6 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/URL.jsd",
   "title": "http://schema.org/URL",
   "description": "Data type: URL.",
-  "anyOf": [
-    { "type": "string", "format": "uri" },
-    { "type": "string", "format": "uri-reference" }
-  ]
+  "type": "string",
+  "format": "uri-reference"
 }

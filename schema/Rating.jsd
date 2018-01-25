@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Rating.jsd",
   "title": "http://schema.org/Rating",
   "description": "A rating is an evaluation on a numeric scale, such as 1 to 5 stars.",

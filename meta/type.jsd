@@ -1,0 +1,21 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd",
+  "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Class.",
+  "description": "JSON Schema for a Schema.org Class.",
+  "allOf": [
+    { "$ref": "http://json-schema.org/draft-07/schema#" },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "$id", "title", "description", "allOf"],
+      "properties": {
+        "$schema"    : true,
+        "$id"        : { "type": "string", "format": "uri" },
+        "title"      : { "type": "string", "format": "uri" },
+        "description": true,
+        "allOf"      : { "minItems": 2, "maxItems": 2 }
+      }
+    }
+  ]
+}
