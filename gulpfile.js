@@ -43,32 +43,23 @@ gulp.task('docs:api:compile', function (callback) {
     }
   }
 
-  const datatype_names = [
-    'Date',
-    'DateTime',
-    'Time',
-    'URL',
-  ]
+  const schema_type = {
+    "http://json-schema.org/draft-07/schema#"                     : "DataType",
+    "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#"     : "Class",
+    "https://chharvey.github.io/schemaorg-jsd/meta/type-root.jsd#": "Class",
+    "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#"   : "Property",
+  }
 
   let contents = [
-    // datatypes
-    SCHEMATA.filter(function (jsd) {
-      let name = path.parse(new url.URL(jsd['$id']).pathname).name
-      return datatype_names.includes(name)
-    }).map((jsd) => new JSONSchema(jsd).jsdocDataDef).join(''),
-
-    // classes
-    SCHEMATA.filter(function (jsd) {
-      let name = path.parse(new url.URL(jsd['$id']).pathname).name
-      return name[0] === name[0].toUpperCase() && !datatype_names.includes(name)
-    }).map((jsd) => new JSONSchema(jsd).jsdocTypeDef).join(''),
-
-    // properties
-    SCHEMATA.filter(function (jsd) {
-      let name = path.parse(new url.URL(jsd['$id']).pathname).name
-      return name[0] === name[0].toLowerCase() && name !== 'json-ld' // TODO: reference json-ld.jsd externally
-    }).map((jsd) => new JSONSchema(jsd).jsdocPropertyDef).join(''),
-  ].join('')
+    { type: 'DataType', getter: 'jsdocDataDef'     },
+    { type: 'Class'   , getter: 'jsdocTypeDef'     },
+    { type: 'Property', getter: 'jsdocPropertyDef' },
+  ].map((specs) => SCHEMATA
+    .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
+    .filter((jsd) => schema_type[jsd.$schema] === specs.type)
+    .map((jsd) => new JSONSchema(jsd)[specs.getter])
+    .join('')
+  ).join('')
 
   return fs.mkdir('./docs/build/', function (err) {
     fs.writeFile('./docs/build/typedef.js', contents, 'utf8', callback) // send cb here to maintain dependency
