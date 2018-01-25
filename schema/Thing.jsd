@@ -1,5 +1,5 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type-root.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd",
   "title": "http://schema.org/Thing",
   "description": "The most generic type of item.",
@@ -10,7 +10,6 @@
     },
     {
       "type": "object",
-      "additionalProperties": true,
       "properties": {
         "additionalType": {
           "$id": "#additionalType",

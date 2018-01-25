@@ -1,8 +1,8 @@
 {
   "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd",
-  "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Class.",
-  "description": "JSON Schema for a Schema.org Class.",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/meta/type-root.jsd",
+  "$comment": "This file is a meta-schema for validating the JSON Schema for the Schema.org root Class, `Thing`.",
+  "description": "JSON Schema for Schema.org `Thing`.",
   "allOf": [
     { "$ref": "http://json-schema.org/draft-07/schema#" },
     {
@@ -22,6 +22,7 @@
               "additionalProperties": false,
               "required": ["$ref"],
               "properties": {
+                "$comment": true,
                 "$ref": true
               }
             },
@@ -29,6 +30,7 @@
               "additionalProperties": false,
               "required": ["properties"],
               "properties": {
+                "type": { "const": "object" },
                 "properties": true
               }
             }
