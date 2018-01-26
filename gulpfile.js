@@ -24,17 +24,19 @@ gulp.task('test', function () {
 })
 
 gulp.task('docs:jsonld', function (callback) {
-  const contents = `
-{
-  "@context": {
-    "sdo": "http://schema.org/"
-  },
-  "@graph": [${SCHEMATA
-    .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
-    .map((jsd) => JSON.stringify(new JSONSchema(jsd).jsonld))
-    .join()}]
-}
-  `
+  let datatypes = SCHEMATA.DATATYPES.map((jsd) => new JSONSchemaDataType(jsd))
+  let types     = SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd))
+  let members   = SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd))
+
+  let contents = JSON.stringify({
+    '@context': {
+      sdo : 'http://schema.org/',
+      rdfs: 'http://www.w3.org/2000/01/rdf-schema',
+    },
+    '@graph': [
+      ...types.map((type) => type.jsonld),
+    ],
+  })
 
   return fs.mkdir('./docs/build/', function (err) {
     fs.writeFile('./docs/build/schemaorg.jsonld', contents, 'utf8', callback) // send cb here to maintain dependency
