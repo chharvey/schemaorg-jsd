@@ -15,19 +15,25 @@
           "$id": "#elevation",
           "title": "http://schema.org/elevation",
           "description": "The elevation of a location (WGS 84).",
-          "type": ["string", "number"]
+          "anyOf": [
+            { "type": ["number", "string"] }
+          ]
         },
         "latitude": {
           "$id": "#latitude",
           "title": "http://schema.org/latitude",
           "description": "The latitude of a location (WGS 84).",
-          "type": ["string", "number"]
+          "anyOf": [
+            { "type": ["number", "string"] }
+          ]
         },
         "longitude": {
           "$id": "#longitude",
           "title": "http://schema.org/longitude",
           "description": "The longitude of a location (WGS 84).",
-          "type": ["string", "number"]
+          "anyOf": [
+            { "type": ["number", "string"] }
+          ]
         }
       }
     }

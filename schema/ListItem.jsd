@@ -27,7 +27,9 @@
           "$id": "#position",
           "title": "http://schema.org/position",
           "description": "The position of an item in a series or sequence of items.",
-          "type": ["integer", "string"]
+          "anyOf": [
+            { "type": ["integer", "string"] }
+          ]
         },
         "previousItem": {
           "$id": "#previousItem",

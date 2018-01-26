@@ -19,7 +19,6 @@
           "maxItems": 2,
           "items": [
             {
-              "additionalProperties": false,
               "required": ["$ref"],
               "properties": {
                 "$ref": true
@@ -29,7 +28,10 @@
               "additionalProperties": false,
               "required": ["properties"],
               "properties": {
-                "properties": true
+                "type": { "const": "object" },
+                "properties": {
+                  "additionalProperties": { "$ref": "https://chharvey.github.io/schemaorg-jsd/meta/member-subschema.jsd" }
+                }
               }
             }
           ]

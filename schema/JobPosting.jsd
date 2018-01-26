@@ -42,7 +42,9 @@
           "$id": "#title",
           "title": "http://schema.org/title",
           "description": "The title of the job.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         }
       }
     }

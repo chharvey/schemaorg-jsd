@@ -1,5 +1,5 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type-root.jsd#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd",
   "title": "http://schema.org/Thing",
   "description": "The most generic type of item.",
@@ -23,7 +23,9 @@
           "$id": "#description",
           "title": "http://schema.org/description",
           "description": "A description of the item.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         },
         "identifier": {
           "$id": "#identifier",
@@ -57,7 +59,9 @@
           "$id": "#name",
           "title": "http://schema.org/name",
           "description": "The name of the item.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         },
         "url": {
           "$id": "#url",

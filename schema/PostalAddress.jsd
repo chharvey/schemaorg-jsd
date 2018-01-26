@@ -35,19 +35,25 @@
           "$id": "#postOfficeBoxNumber",
           "title": "http://schema.org/postOfficeBoxNumber",
           "description": "The post office box number for PO box addresses.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         },
         "postalCode": {
           "$id": "#postalCode",
           "title": "http://schema.org/postalCode",
           "description": "The postal code.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         },
         "streetAddress": {
           "$id": "#streetAddress",
           "title": "http://schema.org/streetAddress",
           "description": "The street address.",
-          "type": "string"
+          "anyOf": [
+            { "type": "string" }
+          ]
         }
       }
     }
