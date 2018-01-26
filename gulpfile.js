@@ -9,7 +9,10 @@ const Ajv   = require('ajv')
 const {META_SCHEMATA, SCHEMATA, sdoValidate} = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
-const JSONSchema   = require('./lib/JSONSchema.class.js')
+
+const JSONSchemaDataType = require('./lib/JSONSchemaDataType.class.js')
+const JSONSchemaType     = require('./lib/JSONSchemaType.class.js')
+const JSONSchemaMember   = require('./lib/JSONSchemaMember.class.js')
 
 gulp.task('validate', function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
@@ -39,16 +42,11 @@ gulp.task('docs:jsonld', function (callback) {
 })
 
 gulp.task('docs:api:compile', function (callback) {
-  const contents = [
-    { type: 'DataType', getter: 'jsdocDataDef'     },
-    { type: 'Class'   , getter: 'jsdocTypeDef'     },
-    { type: 'Property', getter: 'jsdocPropertyDef' },
-  ].map((specs) => SCHEMATA
-    .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
-    .filter((jsd) => JSONSchema.SCHEMA_TYPE[jsd.$schema] === specs.type)
-    .map((jsd) => new JSONSchema(jsd)[specs.getter])
-    .join('')
-  ).join('')
+  let contents = [
+    SCHEMATA.DATATYPES.map((jsd) => new JSONSchemaDataType(jsd).jsdocTypedefTag).join(''),
+    SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd).jsdocTypedefTag).join(''),
+    SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd).jsdocTypedefTag).join(''),
+  ].join('')
 
   return fs.mkdir('./docs/build/', function (err) {
     fs.writeFile('./docs/build/typedef.js', contents, 'utf8', callback) // send cb here to maintain dependency
