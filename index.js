@@ -37,15 +37,17 @@ const META_SCHEMATA = fs.readdirSync(path.join(__dirname, './meta/'), 'utf8')
  * @description This array contains all Schema.org schemata in this project.
  * That is, schemata against which your JSON-LD documents should validate.
  * @alias module:index.SCHEMATA
- * @todo TODO: reference json-ld.jsd externally
  * @const {Array<!Object>}
+ * @property {Array<!Object>} DATATYPES All JSON Schemata validating Schema.org DataTypes.
+ * @property {Array<!Object>} TYPES All JSON Schemata validating Schema.org Types.
+ * @property {Array<!Object>} MEMBERS All JSON Schemata validating Schema.org Members.
  */
 const SCHEMATA = fs.readdirSync(path.join(__dirname, './schema/'), 'utf8')
   .filter((filename) => path.parse(filename).ext === '.jsd')
   .map((filename) => requireOther(path.join(__dirname, './schema/', filename)))
 
 /**
- * @summary All JSON Schemata validating Schema.org Classes.
+ * @summary All JSON Schemata validating Schema.org DataTypes.
  * @alias module:index.SCHEMATA.DATATYPES
  * @const {Array<!Object>}
  */

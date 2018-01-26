@@ -59,5 +59,16 @@ gulp.task('docs:api', ['docs:api:compile'], function () {
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
 
+gulp.task('docs:api:private', function () {
+  return gulp.src(['./lib/'], {read:false})
+    .pipe(jsdoc(Object.assign({}, require('./jsdoc.config.json'), {
+      "opts": {
+        "destination": "./docs/api/private"
+      },
+      "templates": {
+        "theme": "darkly"
+      }
+    })))
+})
 
-gulp.task('build', ['validate', 'test', 'docs:api'])
+gulp.task('build', ['validate', 'test', 'docs:api', 'docs:api:private'])
