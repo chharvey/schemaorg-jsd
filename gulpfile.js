@@ -14,6 +14,24 @@ const JSONSchemaDataType = require('./lib/JSONSchemaDataType.class.js')
 const JSONSchemaType     = require('./lib/JSONSchemaType.class.js')
 const JSONSchemaMember   = require('./lib/JSONSchemaMember.class.js')
 
+
+/**
+ * @summary Process non-normative schemata data.
+ * @param   {Array<JSONSchemaDataType>} datatypes_array array of datatypes to process together
+ * @param   {Array<JSONSchemaType>}     types_array     array of types     to process together
+ * @param   {Array<JSONSchemaMember>}   members_array   array of members   to process together
+ */
+function processSchemata(datatypes_array, types_array, members_array) {
+  /*
+   * Process non-normative subtypes.
+   * Subtypes are non-normative because this information can be processed from each type’s supertype.
+   */
+  types_array.forEach(function (obj) {
+    let supertype_obj = types_array.find((t) => t.label===obj.supertype) || null
+    return supertype_obj && supertype_obj.addSubtype(obj.label)
+  })
+}
+
 gulp.task('validate', function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
@@ -28,10 +46,13 @@ gulp.task('docs:jsonld', function (callback) {
   let types     = SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd))
   let members   = SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd))
 
+  processSchemata(datatypes, types, members)
+
   let contents = JSON.stringify({
     '@context': {
       sdo : 'http://schema.org/',
       rdfs: 'http://www.w3.org/2000/01/rdf-schema',
+      superClassOf: { '@reverse': 'rdfs:subClassOf' },
     },
     '@graph': [
       ...types.map((type) => type.jsonld),
@@ -43,11 +64,17 @@ gulp.task('docs:jsonld', function (callback) {
   })
 })
 
-gulp.task('docs:api:compile', function (callback) {
+gulp.task('docs:typedef', function (callback) {
+  let datatypes = SCHEMATA.DATATYPES.map((jsd) => new JSONSchemaDataType(jsd))
+  let types     = SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd))
+  let members   = SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd))
+
+  processSchemata(datatypes, types, members)
+
   let contents = [
-    SCHEMATA.DATATYPES.map((jsd) => new JSONSchemaDataType(jsd).jsdocTypedefTag).join(''),
-    SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd).jsdocTypedefTag).join(''),
-    SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd).jsdocTypedefTag).join(''),
+    datatypes.map((obj) => obj.jsdocTypedefTag).join(''),
+    types    .map((obj) => obj.jsdocTypedefTag).join(''),
+    members  .map((obj) => obj.jsdocTypedefTag).join(''),
   ].join('')
 
   return fs.mkdir('./docs/build/', function (err) {
@@ -56,7 +83,7 @@ gulp.task('docs:api:compile', function (callback) {
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs:api', ['docs:api:compile'], function () {
+gulp.task('docs:api', ['docs:typedef'], function () {
   return gulp.src(['./README.md', './index.js', './docs/build/typedef.js'], {read:false})
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
