@@ -42,12 +42,46 @@ gulp.task('test', function () {
 })
 
 gulp.task('docs:jsonld', function (callback) {
-  let datatypes = SCHEMATA.DATATYPES.map((jsd) => new JSONSchemaDataType(jsd))
-  let types     = SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd))
-  let members   = SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd))
+  // ++++ LOCAL VARIABLES ++++
+  let label     = (jsd) => path.parse(new url.URL(jsd.title).pathname).name
+  let comment   = (jsd) => jsd.description
+  let supertype = (jsd) => (label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null
 
-  processSchemata(datatypes, types, members)
+  // ++++ MAP TO JSON-LD ++++
+  let datatypes = SCHEMATA.DATATYPES.map((jsd) => ({
+    '@type'           : 'sdo:DataType',
+    '@id'             : `sdo:${label(jsd)}`,
+    'sdo:name'        : label(jsd),
+    'sdo:description' : comment(jsd),
+  }))
+  let types = SCHEMATA.TYPES.map((jsd) => ({
+    '@type'           : 'sdo:Class',
+    '@id'             : `sdo:${label(jsd)}`,
+    'sdo:name'        : label(jsd),
+    'sdo:description' : comment(jsd),
+    'rdfs:subClassOf' : (supertype(jsd)) ? { '@id': `sdo:${supertype(jsd)}` } : null,
+    'superClassOf'    : [],
+  }))
+  let members = SCHEMATA.MEMBERS.map((jsd) => ({
+    '@type'           : 'sdo:Property',
+    '@id'             : `sdo:${label(jsd)}`,
+    'sdo:name'        : label(jsd),
+    'sdo:description' : comment(jsd),
+  }))
 
+  // ++++ PROCESS NON-NORMATIVE SCHEMA DATA ++++
+  /*
+   * Process non-normative subtypes.
+   * Subtypes are non-normative because this information can be processed from each type’s supertype.
+   */
+  types.forEach(function (jsonld) {
+    let supertype_obj = (jsonld['rdfs:subClassOf']) ? types.find((t) => t['@id'] === jsonld['rdfs:subClassOf']['@id']) || null : null
+    if (supertype_obj) {
+      supertype_obj['superClassOf'].push({ '@id': jsonld['@id'] })
+    }
+  })
+
+  // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({
     '@context': {
       sdo : 'http://schema.org/',
@@ -55,10 +89,13 @@ gulp.task('docs:jsonld', function (callback) {
       superClassOf: { '@reverse': 'rdfs:subClassOf' },
     },
     '@graph': [
-      ...types.map((type) => type.jsonld),
+      ...datatypes,
+      ...types,
+      ...members,
     ],
   })
 
+  // ++++ WRITE TO FILE ++++
   return fs.mkdir('./docs/build/', function (err) {
     fs.writeFile('./docs/build/schemaorg.jsonld', contents, 'utf8', callback) // send cb here to maintain dependency
   })
