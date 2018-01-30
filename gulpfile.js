@@ -60,13 +60,27 @@ gulp.task('docs:jsonld', function (callback) {
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
     'rdfs:subClassOf' : (supertype(jsd)) ? { '@id': `sdo:${supertype(jsd)}` } : null,
-    'superClassOf'    : [],
+    'superClassOf'    : [], // non-normative
+    'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map(function (entry) {
+      let [key, value] = entry
+      // Try finding the `*.prop.jsd` file first, else use the subschema in the `properties` object.
+      let memberjsd = SCHEMATA.MEMBERS.find((j) => j.title===`http://schema.org/${key}`) || null
+      let member = jsd.allOf[1].properties[key]
+      if (memberjsd) return { '@id': `sdo:${key}` }
+      return {
+        '@type'           : 'sdo:Property',
+        '@id'             : `sdo:${key}`,
+        'sdo:name'        : key,
+        'sdo:description' : value.description,
+      }
+    }),
   }))
   let members = SCHEMATA.MEMBERS.map((jsd) => ({
     '@type'           : 'sdo:Property',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
+    'propertyOf'      : [], // non-normative
   }))
 
   // ++++ PROCESS NON-NORMATIVE SCHEMA DATA ++++
@@ -80,13 +94,26 @@ gulp.task('docs:jsonld', function (callback) {
       supertype_obj['superClassOf'].push({ '@id': jsonld['@id'] })
     }
   })
+  /*
+   * Process non-normative `propertyof`.
+   * A property’s `propertyOf` is non-normative because this information can be processed from each type’s members.
+   */
+  types.forEach(function (jsonld) {
+    jsonld['rdfs:member'].forEach(function (member) {
+      let member_obj = members.find((m) => m['@id'] === member['@id']) || null
+      if (member_obj) {
+        member_obj['propertyOf'].push({ '@id': jsonld['@id'] })
+      }
+    })
+  })
 
   // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({
     '@context': {
       sdo : 'http://schema.org/',
-      rdfs: 'http://www.w3.org/2000/01/rdf-schema',
+      rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
       superClassOf: { '@reverse': 'rdfs:subClassOf' },
+      propertyOf  : { '@reverse': 'rdfs:member' },
     },
     '@graph': [
       ...datatypes,
