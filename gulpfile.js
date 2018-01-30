@@ -65,7 +65,6 @@ gulp.task('docs:jsonld', function (callback) {
       let [key, value] = entry
       // Try finding the `*.prop.jsd` file first, else use the subschema in the `properties` object.
       let memberjsd = SCHEMATA.MEMBERS.find((j) => j.title===`http://schema.org/${key}`) || null
-      let member = jsd.allOf[1].properties[key]
       if (memberjsd) return { '@id': `sdo:${key}` }
       return {
         '@type'           : 'sdo:Property',
@@ -89,9 +88,10 @@ gulp.task('docs:jsonld', function (callback) {
    * Subtypes are non-normative because this information can be processed from each type’s supertype.
    */
   types.forEach(function (jsonld) {
-    let supertype_obj = (jsonld['rdfs:subClassOf']) ? types.find((t) => t['@id'] === jsonld['rdfs:subClassOf']['@id']) || null : null
-    if (supertype_obj) {
-      supertype_obj['superClassOf'].push({ '@id': jsonld['@id'] })
+    let supertype = jsonld['rdfs:subClassOf']
+    let referenced = (supertype) ? types.find((t) => t['@id'] === supertype['@id']) || null : null
+    if (referenced) {
+      referenced['superClassOf'].push({ '@id': jsonld['@id'] })
     }
   })
   /*
@@ -100,9 +100,9 @@ gulp.task('docs:jsonld', function (callback) {
    */
   types.forEach(function (jsonld) {
     jsonld['rdfs:member'].forEach(function (member) {
-      let member_obj = members.find((m) => m['@id'] === member['@id']) || null
-      if (member_obj) {
-        member_obj['propertyOf'].push({ '@id': jsonld['@id'] })
+      let referenced = members.find((m) => m['@id'] === member['@id']) || null
+      if (referenced) {
+        referenced['propertyOf'].push({ '@id': jsonld['@id'] })
       }
     })
   })
@@ -128,20 +128,54 @@ gulp.task('docs:jsonld', function (callback) {
   })
 })
 
-gulp.task('docs:typedef', function (callback) {
-  let datatypes = SCHEMATA.DATATYPES.map((jsd) => new JSONSchemaDataType(jsd))
-  let types     = SCHEMATA.TYPES    .map((jsd) => new JSONSchemaType    (jsd))
-  let members   = SCHEMATA.MEMBERS  .map((jsd) => new JSONSchemaMember  (jsd))
+gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
+  return fs.readFile('./docs/build/schemaorg.jsonld', 'utf8', function (err, data) {
+    if (err) throw err
+    data = JSON.parse(data)
 
-  processSchemata(datatypes, types, members)
+    const JSONLD = {
+      DATATYPES: data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:DataType'),
+      TYPES    : data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:Class'   ),
+      MEMBERS  : data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:Property'),
+    }
 
-  let contents = [
-    datatypes.map((obj) => obj.jsdocTypedefTag).join(''),
-    types    .map((obj) => obj.jsdocTypedefTag).join(''),
-    members  .map((obj) => obj.jsdocTypedefTag).join(''),
-  ].join('')
+    let datatypes = JSONLD.DATATYPES.map((jsonld) => `
+/**
+ * @summary ${jsonld['sdo:description']}
+ * @see http://schema.org/${jsonld['sdo:name']}
+ * @typedef {*} ${jsonld['sdo:name']}
+ */
+    `)
+    let types = JSONLD.TYPES.map((jsonld) => `
+/**
+ * @summary ${jsonld['sdo:description']}
+${(jsonld['superClassOf'].length || false) ? ' * @description' : ''}
+${(jsonld['superClassOf'].length) ? ' * Known subtypes:' : ''}
+${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}
+ * @see http://schema.org/${jsonld['sdo:name']}
+ * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
+${jsonld['rdfs:member'].map(function (member) {
+  let referenced = JSONLD.MEMBERS.find((m) => m['@id'] === member['@id']) || null
+  let name = (referenced || member)['sdo:name']
+  let description = (referenced || member)['sdo:description']
+  return ` * @property {${(referenced) ? name : '*'}=} ${name} ${description}` // TEMP until `rdfs:domain` and `rdfs:range` are encoded
+}).join('\n')}
+ */
+    `)
+    let members = JSONLD.MEMBERS.map((jsonld) => `
+/**
+ * @summary ${jsonld['sdo:description']}
+ * @see http://schema.org/${jsonld['sdo:name']}
+ * @typedef {*} ${jsonld['sdo:name']}
+ */
+    `) // TEMP until `rdfs:domain` and `rdfs:range` are encoded
 
-  return fs.mkdir('./docs/build/', function (err) {
+    let contents = [
+      ...datatypes,
+      ...types,
+      ...members,
+    ].join('')
+
     fs.writeFile('./docs/build/typedef.js', contents, 'utf8', callback) // send cb here to maintain dependency
   })
 })
