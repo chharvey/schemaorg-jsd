@@ -215,9 +215,11 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
     let types = JSONLD.TYPES.map((jsonld) => `
 /**
  * @summary ${jsonld['sdo:description']}
-${(jsonld['superClassOf'].length || false) ? ' * @description' : ''}
+${(jsonld['superClassOf'].length || jsonld['valueOf'].length || false) ? ' * @description' : ''}
 ${(jsonld['superClassOf'].length) ? ' * Known subtypes:' : ''}
 ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}
+${(jsonld['valueOf'].length) ? ' * May appear as values of:' : ''}
+${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}
  * @see http://schema.org/${jsonld['sdo:name']}
  * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
 ${jsonld['rdfs:member'].map(function (member) {
