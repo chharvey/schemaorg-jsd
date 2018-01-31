@@ -1,0 +1,57 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Product.jsd",
+  "title": "http://schema.org/Product",
+  "description": "Any offered product or service.",
+  "allOf": [
+    { "$ref": "Thing.jsd" },
+    {
+      "properties": {
+        "additionalProperty": {
+          "$id": "#additionalProperty",
+          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
+        },
+        "award": {
+          "$id": "#award",
+          "allOf": [{ "$ref": "award.prop.jsd" }]
+        },
+        "brand": {
+          "$id": "#brand",
+          "allOf": [{ "$ref": "brand.prop.jsd" }]
+        },
+        "color": {
+          "$id": "#color",
+          "description": "The color of the product.",
+          "anyOf": [
+            { "type": "string" }
+          ]
+        },
+        "logo": {
+          "$id": "#logo",
+          "allOf": [{ "$ref": "logo.prop.jsd" }]
+        },
+        "manufacturer": {
+          "$id": "#manufacturer",
+          "description": "The manufacturer of the product.",
+          "anyOf": [
+            { "$ref": "Organization.jsd" }
+          ]
+        },
+        "productID": {
+          "$id": "#productID",
+          "description": "The product identifier, such as ISBN.",
+          "anyOf": [
+            { "type": "string" }
+          ]
+        },
+        "sku": {
+          "$id": "#sku",
+          "description": "The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.",
+          "anyOf": [
+            { "type": "string" }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,11 +1,19 @@
 /**
  * @summary A date value in ISO 8601 date format.
+ * @description
+ * Value Of:
+ * - {@link endDate}
+ * - {@link startDate}
  * @see http://schema.org/Date
  * @typedef {string} Date
  */
 
 /**
  * @summary A combination of date and time of day in the form [-]CCYY-MM-DDThh:mm:ss[Z|(+|-)hh:mm] (see Chapter 5.4 of ISO 8601).
+ * @description
+ * Value Of:
+ * - {@link endDate}
+ * - {@link startDate}
  * @see http://schema.org/DateTime
  * @typedef {string} DateTime
  */
@@ -18,6 +26,13 @@
 
 /**
  * @summary Data type: URL.
+ * @description
+ * Value Of:
+ * - {@link additionalType}
+ * - {@link identifier}
+ * - {@link image}
+ * - {@link logo}
+ * - {@link url}
  * @see http://schema.org/URL
  * @typedef {string} URL
  */
