@@ -79,7 +79,7 @@ gulp.task('docs:jsonld', function (callback) {
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
-    'propertyOf'      : [], // non-normative
+    'sdo:domainIncludes': [], // non-normative
   }))
 
   // ++++ PROCESS NON-NORMATIVE SCHEMA DATA ++++
@@ -95,14 +95,14 @@ gulp.task('docs:jsonld', function (callback) {
     }
   })
   /*
-   * Process non-normative `propertyof`.
-   * A property’s `propertyOf` is non-normative because this information can be processed from each type’s members.
+   * Process non-normative `sdo:domainIncludes`.
+   * A member’s `sdo:domainIncludes` is non-normative because this information can be processed from each type’s members.
    */
   types.forEach(function (jsonld) {
     jsonld['rdfs:member'].forEach(function (member) {
       let referenced = members.find((m) => m['@id'] === member['@id']) || null
       if (referenced) {
-        referenced['propertyOf'].push({ '@id': jsonld['@id'] })
+        referenced['sdo:domainIncludes'].push({ '@id': jsonld['@id'] })
       }
     })
   })
@@ -113,7 +113,6 @@ gulp.task('docs:jsonld', function (callback) {
       sdo : 'http://schema.org/',
       rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
       superClassOf: { '@reverse': 'rdfs:subClassOf' },
-      propertyOf  : { '@reverse': 'rdfs:member' },
     },
     '@graph': [
       ...datatypes,
