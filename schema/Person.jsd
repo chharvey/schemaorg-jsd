@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Person.jsd",
   "title": "http://schema.org/Person",
   "description": "A person (alive, dead, undead, or fictional).",
@@ -9,8 +9,19 @@
       "properties": {
         "additionalName": {
           "$id": "#additionalName",
+          "title": "http://schema.org/additionalName",
           "description": "An additional name for a Person, can be used for a middle name.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#additionalName-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#additionalName-ExpectedType" }
+          ]
         },
         "address": {
           "$id": "#address",
@@ -34,23 +45,67 @@
         },
         "familyName": {
           "$id": "#familyName",
+          "title": "http://schema.org/familyName",
           "description": "Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#familyName-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#familyName-ExpectedType" }
+          ]
         },
         "givenName": {
           "$id": "#givenName",
+          "title": "http://schema.org/givenName",
           "description": "Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#givenName-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#givenName-ExpectedType" }
+          ]
         },
         "honorificPrefix": {
           "$id": "#honorificPrefix",
+          "title": "http://schema.org/honorificPrefix",
           "description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#honorificPrefix-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#honorificPrefix-ExpectedType" }
+          ]
         },
         "honorificSuffix": {
           "$id": "#honorificSuffix",
+          "title": "http://schema.org/honorificSuffix",
           "description": "An honorific suffix preceding a Person’s name such as M.D. /PhD/MSCSW.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#honorificSuffix-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#honorificSuffix-ExpectedType" }
+          ]
         },
         "telephone": {
           "$id": "#telephone",

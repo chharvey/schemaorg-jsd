@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Event.jsd",
   "title": "http://schema.org/Event",
   "description": "An event happening at a certain time and location, such as a concert, lecture, or festival.",
@@ -9,11 +9,19 @@
       "properties": {
         "endDate": {
           "$id": "#endDate",
+          "title": "http://schema.org/endDate",
           "description": "The end date and time of the item (in ISO 8601 date format).",
-          "type": "string",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#endDate-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" },
+                { "$ref": "DateTime.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Date.jsd" },
-            { "$ref": "DateTime.jsd" }
+            { "$ref": "#endDate-ExpectedType" }
           ]
         },
         "location": {
@@ -22,11 +30,19 @@
         },
         "startDate": {
           "$id": "#startDate",
+          "title": "http://schema.org/startDate",
           "description": "The start date and time of the item (in ISO 8601 date format).",
-          "type": "string",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#startDate-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" },
+                { "$ref": "DateTime.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Date.jsd" },
-            { "$ref": "DateTime.jsd" }
+            { "$ref": "#startDate-ExpectedType" }
           ]
         }
       }

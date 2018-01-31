@@ -13,7 +13,7 @@ $ npm install schemaorg-jsd
 
 ### Synchronously
 ```js
-const { sdoValidate } = require('schemaorg-jsd')
+const {sdoValidate} = require('schemaorg-jsd')
 
 // use any javascript object
 let school = {
@@ -44,7 +44,7 @@ sdoValidate(org, 'Organization')
 All of the above is the same, but you may additionally pass a callback for the asynchronous version.
 The callback is the standard `node.js`-style callback.
 ```js
-const { sdoValidate } = require('schemaorg-jsd')
+const {sdoValidate} = require('schemaorg-jsd')
 
 let school = {
   "@context": "http://schema.org/",
@@ -71,7 +71,7 @@ This project’s exported `SCHEMATA` object is an array of Schema.org JSON schem
 pre-packaged and ready to add.
 ```js
 const Ajv = require('ajv')
-const { SCHEMATA } = require('schemaorg-jsd')
+const {SCHEMATA} = require('schemaorg-jsd')
 
 let my_schema = {
   "$schema": "http://json-schema.org/draft-07/schema#",
