@@ -199,6 +199,22 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
     if (err) throw err
     data = JSON.parse(data)
 
+    function jsdocTypeDeclaration(member) {
+      let union = `(${member['sdo:rangeIncludes'].map(function (ld) {
+        let classname = ld['@id'].split(':')[1]
+        function jsdType(sdoType) {
+          return ({
+            "Boolean": "boolean",
+            "Integer": "integer",
+            "Number" : "number" ,
+            "Text"   : "string" ,
+          })[sdoType]
+        }
+        return jsdType(classname) || classname
+      }).join('|')})`
+      return (member['$rangeIncludesArray']) ? `(${union}|Array<${union}>)` : union
+    }
+
     const JSONLD = {
       DATATYPES: data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:DataType'),
       TYPES    : data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:Class'   ),
@@ -215,26 +231,35 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
     let types = JSONLD.TYPES.map((jsonld) => `
 /**
  * @summary ${jsonld['sdo:description']}
-${(jsonld['superClassOf'].length || jsonld['valueOf'].length || false) ? ' * @description' : ''}
-${(jsonld['superClassOf'].length) ? ' * Known subtypes:' : ''}
+${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? ' * @description' : ''}
+${(jsonld['superClassOf'].length) ? `
+ * Known subtypes:
 ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}
-${(jsonld['valueOf'].length) ? ' * May appear as values of:' : ''}
+` : ''}
+${(jsonld['valueOf'].length) ? `
+ * May appear as values of:
 ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}
+` : ''}
  * @see http://schema.org/${jsonld['sdo:name']}
  * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
 ${jsonld['rdfs:member'].map(function (member) {
   let referenced = JSONLD.MEMBERS.find((m) => m['@id'] === member['@id']) || null
-  let name = (referenced || member)['sdo:name']
+  let name        = (referenced || member)['sdo:name']
   let description = (referenced || member)['sdo:description']
-  return ` * @property {${(referenced) ? name : '*'}=} ${name} ${description}` // TEMP until `rdfs:domain` and `rdfs:range` are encoded
+  return ` * @property {${(referenced) ? name : jsdocTypeDeclaration(member)}=} ${name} ${description}`
 }).join('\n')}
  */
     `)
     let members = JSONLD.MEMBERS.map((jsonld) => `
 /**
  * @summary ${jsonld['sdo:description']}
+${(jsonld['sdo:domainIncludes'] || false) ? ' * @description' : ''}
+${(jsonld['sdo:domainIncludes'].length) ? `
+ * Property of:
+${jsonld['sdo:domainIncludes'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}
+` : ''}
  * @see http://schema.org/${jsonld['sdo:name']}
- * @typedef {*} ${jsonld['sdo:name']}
+ * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['sdo:name']}
  */
     `) // TEMP until `rdfs:domain` and `rdfs:range` are encoded
 
