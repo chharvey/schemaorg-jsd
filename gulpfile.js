@@ -73,6 +73,7 @@ gulp.task('docs:jsonld', function (callback) {
         'sdo:description' : value.description,
       }
     }),
+    'valueOf': [], // non-normative
   }))
   let members = SCHEMATA.MEMBERS.map((jsd) => ({
     '@type'           : 'sdo:Property',
@@ -80,6 +81,26 @@ gulp.task('docs:jsonld', function (callback) {
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
     'sdo:domainIncludes': [], // non-normative
+    '$rangeIncludesArray': jsd.anyOf.length >= 2, // non-standard
+    'sdo:rangeIncludes': (function () {
+      const returned = []
+      jsd.definitions.ExpectedType.anyOf.forEach(function (schema) {
+        if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}` })
+        else if (schema.type) {
+          function sdoType(jsdType) {
+            return ({
+              "boolean": "Boolean",
+              "integer": "Integer",
+              "number" : "Number" ,
+              "string" : "Text"   ,
+            })[jsdType]
+          }
+          if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdoType(t)}` })))
+          else returned.push({ '@id': `sdo:${sdoType(schema.type)}` })
+        }
+      })
+      return returned
+    })(),
   }))
 
   // ++++ PROCESS NON-NORMATIVE SCHEMA DATA ++++
@@ -106,6 +127,18 @@ gulp.task('docs:jsonld', function (callback) {
       }
     })
   })
+  /*
+   * Process non-normative `valueOf`.
+   * A type’s `valueOf` is non-normative because this information can be processed from each member’s `sdo:rangeIncludes`.
+   */
+  members.forEach(function (jsonld) {
+    jsonld['sdo:rangeIncludes'].forEach(function (type) {
+      let referenced = types.find((t) => t['@id'] === type['@id']) || null
+      if (referenced) {
+        referenced['valueOf'].push({ '@id': jsonld['@id'] })
+      }
+    })
+  })
 
   // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({
@@ -113,6 +146,7 @@ gulp.task('docs:jsonld', function (callback) {
       sdo : 'http://schema.org/',
       rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
       superClassOf: { '@reverse': 'rdfs:subClassOf' },
+      valueOf     : { '@reverse': 'sdo:rangeIncludes' },
     },
     '@graph': [
       ...datatypes,
