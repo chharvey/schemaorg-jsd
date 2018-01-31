@@ -71,6 +71,27 @@ gulp.task('docs:jsonld', function (callback) {
         '@id'             : `sdo:${key}`,
         'sdo:name'        : key,
         'sdo:description' : value.description,
+        // 'sdo:domainIncludes': [{ '@id': `sdo:${label(jsd)}` }], // non-normative // commenting out because nested inside
+        '$rangeIncludesArray': value.anyOf.length >= 2, // non-standard
+        'sdo:rangeIncludes': (function () {
+          const returned = []
+          value.definitions.ExpectedType.anyOf.forEach(function (schema) {
+            if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}`.replace(/#/g, label(jsd)) })
+            else if (schema.type) {
+              function sdoType(jsdType) {
+                return ({
+                  "boolean": "Boolean",
+                  "integer": "Integer",
+                  "number" : "Number" ,
+                  "string" : "Text"   ,
+                })[jsdType]
+              }
+              if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdoType(t)}` })))
+              else returned.push({ '@id': `sdo:${sdoType(schema.type)}` })
+            }
+          })
+          return returned
+        })(),
       }
     }),
     'valueOf': [], // non-normative
@@ -139,6 +160,18 @@ gulp.task('docs:jsonld', function (callback) {
       }
     })
   })
+  // types.forEach(function (jsonld) {
+  //   jsonld['rdfs:member'].forEach(function (member) {
+  //     if (member['sdo:rangeIncludes']) { // if the member is nested in the class
+  //       member['sdo:rangeIncludes'].forEach(function (type) {
+  //         let referenced = types.find((t) => t['@id'] === type['@id']) || null
+  //         if (referenced) {
+  //           referenced['valueOf'].push({ '@id': member['@id'] })
+  //         }
+  //       })
+  //     }
+  //   })
+  // })
 
   // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({
