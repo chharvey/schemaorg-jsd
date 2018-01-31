@@ -10,10 +10,6 @@ const {META_SCHEMATA, SCHEMATA, sdoValidate} = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
 
-const JSONSchemaDataType = require('./lib/JSONSchemaDataType.class.js')
-const JSONSchemaType     = require('./lib/JSONSchemaType.class.js')
-const JSONSchemaMember   = require('./lib/JSONSchemaMember.class.js')
-
 
 /**
  * @summary Process non-normative schemata data.
@@ -279,16 +275,4 @@ gulp.task('docs:api', ['docs:typedef'], function () {
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
 
-gulp.task('docs:api:private', function () {
-  return gulp.src(['./lib/'], {read:false})
-    .pipe(jsdoc(Object.assign({}, require('./jsdoc.config.json'), {
-      "opts": {
-        "destination": "./docs/api/private"
-      },
-      "templates": {
-        "theme": "darkly"
-      }
-    })))
-})
-
-gulp.task('build', ['validate', 'test', 'docs:api', 'docs:api:private'])
+gulp.task('build', ['validate', 'test', 'docs:api'])
