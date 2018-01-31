@@ -11,23 +11,6 @@ const {META_SCHEMATA, SCHEMATA, sdoValidate} = require('./index.js')
 const requireOther = require('./lib/requireOther.js')
 
 
-/**
- * @summary Process non-normative schemata data.
- * @param   {Array<JSONSchemaDataType>} datatypes_array array of datatypes to process together
- * @param   {Array<JSONSchemaType>}     types_array     array of types     to process together
- * @param   {Array<JSONSchemaMember>}   members_array   array of members   to process together
- */
-function processSchemata(datatypes_array, types_array, members_array) {
-  /*
-   * Process non-normative subtypes.
-   * Subtypes are non-normative because this information can be processed from each type’s supertype.
-   */
-  types_array.forEach(function (obj) {
-    let supertype_obj = types_array.find((t) => t.label===obj.supertype) || null
-    return supertype_obj && supertype_obj.addSubtype(obj.label)
-  })
-}
-
 gulp.task('validate', function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
