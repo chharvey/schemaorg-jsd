@@ -11,27 +11,35 @@
           "$id": "#itemListElement",
           "title": "http://schema.org/itemListElement",
           "description": "For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\", \"Mary\"), existing entities, or use ListItem.",
-          "anyOf": [
-            {
-              "$id": "#itemListElement-type",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#itemListElement-ExpectedType",
               "anyOf": [
                 { "type": "string" },
                 { "$ref": "Thing.jsd" },
                 { "$ref": "ListItem.jsd" }
               ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#itemListElement-type" }
             }
+          },
+          "anyOf": [
+            { "$ref": "#itemListElement-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#itemListElement-ExpectedType" } }
           ]
         },
         "numberOfItems": {
           "$id": "#numberOfItems",
           "title": "http://schema.org/numberOfItems",
           "description": "The number of items in an ItemList. Note that some descriptions might not fully describe all items in a list (e.g., multi-page pagination); in such cases, the numberOfItems would be for the entire list.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#numberOfItems-ExpectedType",
+              "anyOf": [
+                { "type": "integer" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "integer" }
+            { "$ref": "#numberOfItems-ExpectedType" }
           ]
         }
       }

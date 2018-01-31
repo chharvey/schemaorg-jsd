@@ -11,39 +11,65 @@
           "$id": "#hiringOrganization",
           "title": "http://schema.org/hiringOrganization",
           "description": "Organization offering the job position.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#hiringOrganization-ExpectedType",
+              "anyOf": [
+                { "$ref": "Organization.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Organization.jsd" }
+            { "$ref": "#hiringOrganization-ExpectedType" }
           ]
         },
         "jobLocation": {
           "$id": "#jobLocation",
           "title": "http://schema.org/jobLocation",
           "description": "A (typically single) geographic location associated with the job position.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#jobLocation-ExpectedType",
+              "anyOf": [
+                { "$ref": "Place.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Place.jsd" }
+            { "$ref": "#jobLocation-ExpectedType" }
           ]
         },
         "responsibilities": {
           "$id": "#responsibilities",
           "title": "http://schema.org/responsibilities",
           "description": "Responsibilities associated with this role or Occupation.",
-          "anyOf": [
-            {
-              "$id": "#responsibilities-type",
-              "type": "string"
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#responsibilities-type" }
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#responsibilities-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
             }
+          },
+          "anyOf": [
+            { "$ref": "#responsibilities-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#responsibilities-ExpectedType" } }
           ]
         },
         "title": {
           "$id": "#title",
           "title": "http://schema.org/title",
           "description": "The title of the job.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#title-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#title-ExpectedType" }
           ]
         }
       }

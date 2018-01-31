@@ -15,60 +15,100 @@
           "$id": "#additionalType",
           "title": "http://schema.org/additionalType",
           "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#additionalType-ExpectedType",
+              "anyOf": [
+                { "$ref": "URL.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "URL.jsd" }
+            { "$ref": "#additionalType-ExpectedType" }
           ]
         },
         "description": {
           "$id": "#description",
           "title": "http://schema.org/description",
           "description": "A description of the item.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#description-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#description-ExpectedType" }
           ]
         },
         "identifier": {
           "$id": "#identifier",
           "title": "http://schema.org/identifier",
           "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#identifier-ExpectedType",
+              "anyOf": [
+                { "type": "string" },
+                { "$ref": "URL.jsd" },
+                { "$ref": "PropertyValue.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" },
-            { "$ref": "URL.jsd" },
-            { "$ref": "PropertyValue.jsd" }
+            { "$ref": "#identifier-ExpectedType" }
           ]
         },
         "image": {
           "$id": "#image",
           "title": "http://schema.org/image",
           "description": "An image of the item. This can be a URL or a fully described ImageObject.",
-          "anyOf": [
-            {
-              "$id": "#image-type",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#image-ExpectedType",
               "anyOf": [
                 { "$ref": "URL.jsd" },
                 { "$ref": "ImageObject.jsd" }
               ]
-            },
-            {
-              "type": "array",
-              "items": { "$ref": "#image-type" }
             }
+          },
+          "anyOf": [
+            { "$ref": "#image-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#image-ExpectedType" } }
           ]
         },
         "name": {
           "$id": "#name",
           "title": "http://schema.org/name",
           "description": "The name of the item.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#name-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#name-ExpectedType" }
           ]
         },
         "url": {
           "$id": "#url",
           "title": "http://schema.org/url",
           "description": "URL of the item.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#url-ExpectedType",
+              "anyOf": [
+                { "$ref": "URL.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "URL.jsd" }
+            { "$ref": "#url-ExpectedType" }
           ]
         }
       }

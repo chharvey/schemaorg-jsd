@@ -3,7 +3,14 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/telephone.prop.jsd",
   "title": "http://schema.org/telephone",
   "description": "The telephone number.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" }
+      ]
+    }
+  },
   "anyOf": [
-    { "type": "string" }
+    { "$ref": "#/definitions/ExpectedType" }
   ]
 }

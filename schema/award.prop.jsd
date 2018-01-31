@@ -3,16 +3,15 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/award.prop.jsd",
   "title": "http://schema.org/award",
   "description": "An award won by or for this item.",
-  "anyOf": [
-    {
-      "$id": "#award-type",
+  "definitions": {
+    "ExpectedType": {
       "anyOf": [
         { "type": "string" }
       ]
-    },
-    {
-      "type": "array",
-      "items": { "$ref": "#award-type" }
     }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
   ]
 }

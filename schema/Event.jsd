@@ -11,9 +11,17 @@
           "$id": "#endDate",
           "title": "http://schema.org/endDate",
           "description": "The end date and time of the item (in ISO 8601 date format).",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#endDate-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" },
+                { "$ref": "DateTime.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Date.jsd" },
-            { "$ref": "DateTime.jsd" }
+            { "$ref": "#endDate-ExpectedType" }
           ]
         },
         "location": {
@@ -24,9 +32,17 @@
           "$id": "#startDate",
           "title": "http://schema.org/startDate",
           "description": "The start date and time of the item (in ISO 8601 date format).",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#startDate-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" },
+                { "$ref": "DateTime.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Date.jsd" },
-            { "$ref": "DateTime.jsd" }
+            { "$ref": "#startDate-ExpectedType" }
           ]
         }
       }

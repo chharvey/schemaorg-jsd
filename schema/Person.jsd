@@ -11,8 +11,16 @@
           "$id": "#additionalName",
           "title": "http://schema.org/additionalName",
           "description": "An additional name for a Person, can be used for a middle name.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#additionalName-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#additionalName-ExpectedType" }
           ]
         },
         "address": {
@@ -39,32 +47,64 @@
           "$id": "#familyName",
           "title": "http://schema.org/familyName",
           "description": "Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#familyName-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#familyName-ExpectedType" }
           ]
         },
         "givenName": {
           "$id": "#givenName",
           "title": "http://schema.org/givenName",
           "description": "Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#givenName-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#givenName-ExpectedType" }
           ]
         },
         "honorificPrefix": {
           "$id": "#honorificPrefix",
           "title": "http://schema.org/honorificPrefix",
           "description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#honorificPrefix-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#honorificPrefix-ExpectedType" }
           ]
         },
         "honorificSuffix": {
           "$id": "#honorificSuffix",
           "title": "http://schema.org/honorificSuffix",
           "description": "An honorific suffix preceding a Person’s name such as M.D. /PhD/MSCSW.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#honorificSuffix-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#honorificSuffix-ExpectedType" }
           ]
         },
         "telephone": {

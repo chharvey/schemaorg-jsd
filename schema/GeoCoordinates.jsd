@@ -15,24 +15,48 @@
           "$id": "#elevation",
           "title": "http://schema.org/elevation",
           "description": "The elevation of a location (WGS 84).",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#elevation-ExpectedType",
+              "anyOf": [
+                { "type": ["number", "string"] }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": ["number", "string"] }
+            { "$ref": "#elevation-ExpectedType" }
           ]
         },
         "latitude": {
           "$id": "#latitude",
           "title": "http://schema.org/latitude",
           "description": "The latitude of a location (WGS 84).",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#latitude-ExpectedType",
+              "anyOf": [
+                { "type": ["number", "string"] }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": ["number", "string"] }
+            { "$ref": "#latitude-ExpectedType" }
           ]
         },
         "longitude": {
           "$id": "#longitude",
           "title": "http://schema.org/longitude",
           "description": "The longitude of a location (WGS 84).",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#longitude-ExpectedType",
+              "anyOf": [
+                { "type": ["number", "string"] }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": ["number", "string"] }
+            { "$ref": "#longitude-ExpectedType" }
           ]
         }
       }

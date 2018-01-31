@@ -3,16 +3,15 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/contactPoint.prop.jsd",
   "title": "http://schema.org/contactPoint",
   "description": "A contact point for a person or organization.",
-  "anyOf": [
-    {
-      "$id": "#contactPoint-type",
+  "definitions": {
+    "ExpectedType": {
       "anyOf": [
         { "$ref": "ContactPoint.jsd" }
       ]
-    },
-    {
-      "type": "array",
-      "items": { "$ref": "#contactPoint-type" }
     }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
   ]
 }

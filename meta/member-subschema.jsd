@@ -6,7 +6,7 @@
   "type": "object",
   "anyOf": [
     {
-      "$comment": "The SDO property definition references an external JSON schema file.",
+      "description": "The SDO property definition references an external JSON schema file.",
       "additionalProperties": false,
       "required": ["$id", "allOf"],
       "properties": {
@@ -23,14 +23,15 @@
       }
     },
     {
-      "$comment": "The SDO property definition is self-contained in the SDO class.",
+      "description": "The SDO property definition is self-contained in the SDO class.",
       "additionalProperties": false,
-      "required": ["$id", "title", "description", "anyOf"],
+      "required": ["$id", "title", "description", "definitions", "anyOf"],
       "properties": {
         "$id"        : true,
         "title"      : { "type": "string", "format": "uri" },
         "description": true,
-        "anyOf"      : true
+        "definitions": { "$ref": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#member-definitions" },
+        "anyOf"      : { "$ref": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#member-anyOf" }
       }
     }
   ]

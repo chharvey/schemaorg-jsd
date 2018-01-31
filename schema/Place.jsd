@@ -19,8 +19,16 @@
           "$id": "#geo",
           "title": "http://schema.org/geo",
           "description": "The geo coordinates of the place.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#geo-ExpectedType",
+              "anyOf": [
+                { "$ref": "GeoCoordinates.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "GeoCoordinates.jsd" }
+            { "$ref": "#geo-ExpectedType" }
           ]
         },
         "logo": {
