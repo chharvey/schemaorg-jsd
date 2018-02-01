@@ -32,7 +32,8 @@
             }
           },
           "anyOf": [
-            { "$ref": "#color-ExpectedType" }
+            { "$ref": "#color-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#color-ExpectedType" } }
           ]
         },
         "logo": {

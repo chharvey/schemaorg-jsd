@@ -11,6 +11,7 @@
     }
   },
   "anyOf": [
-    { "$ref": "#/definitions/ExpectedType" }
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
   ]
 }
