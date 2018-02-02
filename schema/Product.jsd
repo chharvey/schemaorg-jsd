@@ -36,6 +36,22 @@
             { "type": "array", "items": { "$ref": "#color-ExpectedType" } }
           ]
         },
+        "depth": {
+          "$id": "#depth",
+          "title": "http://schema.org/depth",
+          "description": "The depth of the item.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#depth-ExpectedType",
+              "anyOf": [
+                { "$ref": "QuantitativeValue.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#depth-ExpectedType" }
+          ]
+        },
         "logo": {
           "$id": "#logo",
           "allOf": [{ "$ref": "logo.prop.jsd" }]
