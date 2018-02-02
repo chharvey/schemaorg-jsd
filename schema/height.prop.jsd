@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/height.prop.jsd",
+  "title": "http://schema.org/height",
+  "description": "The height of the item.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "QuantitativeValue.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

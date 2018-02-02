@@ -52,6 +52,10 @@
             { "$ref": "#depth-ExpectedType" }
           ]
         },
+        "height": {
+          "$id": "#height",
+          "allOf": [{ "$ref": "height.prop.jsd" }]
+        },
         "logo": {
           "$id": "#logo",
           "allOf": [{ "$ref": "logo.prop.jsd" }]
