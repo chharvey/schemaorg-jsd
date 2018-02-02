@@ -107,6 +107,10 @@
           "anyOf": [
             { "$ref": "#sku-ExpectedType" }
           ]
+        },
+        "width": {
+          "$id": "#width",
+          "allOf": [{ "$ref": "width.prop.jsd" }]
         }
       }
     }
