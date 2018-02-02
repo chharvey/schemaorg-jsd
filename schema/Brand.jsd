@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Brand.jsd",
+  "title": "http://schema.org/Brand",
+  "description": "A brand is a name used by an organization or business person for labeling a product, product group, or similar.",
+  "allOf": [
+    { "$ref": "Intangible.jsd" },
+    {
+      "properties": {
+        "logo": {
+          "$id": "#logo",
+          "allOf": [{ "$ref": "logo.prop.jsd" }]
+        }
+      }
+    }
+  ]
+}
