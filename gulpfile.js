@@ -45,6 +45,7 @@ gulp.task('docs:jsonld', function (callback) {
       // Try finding the `*.prop.jsd` file first, else use the subschema in the `properties` object.
       let memberjsd = SCHEMATA.MEMBERS.find((j) => j.title===`http://schema.org/${key}`) || null
       if (memberjsd) return { '@id': `sdo:${key}` }
+      else if (value.allOf) throw new ReferenceError(`Member subschema \`${label(jsd)}#${key}\` contains \`allOf\`, but no corresponding jsd file was found.`)
       return {
         '@type'           : 'sdo:Property',
         '@id'             : `sdo:${key}`,
