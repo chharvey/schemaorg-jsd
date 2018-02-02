@@ -114,6 +114,10 @@
         "telephone": {
           "$id": "#telephone",
           "allOf": [{ "$ref": "telephone.prop.jsd" }]
+        },
+        "weight": {
+          "$id": "#weight",
+          "allOf": [{ "$ref": "weight.prop.jsd" }]
         }
       }
     }

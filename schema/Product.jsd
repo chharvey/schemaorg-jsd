@@ -108,6 +108,10 @@
             { "$ref": "#sku-ExpectedType" }
           ]
         },
+        "weight": {
+          "$id": "#weight",
+          "allOf": [{ "$ref": "weight.prop.jsd" }]
+        },
         "width": {
           "$id": "#width",
           "allOf": [{ "$ref": "width.prop.jsd" }]
