@@ -15,9 +15,17 @@ gulp.task('validate', function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
-gulp.task('test', function () {
-  console.log(sdoValidate('./test.jsonld', 'Person'))
-  console.log(sdoValidate(requireOther('./test.jsonld').alumniOf.location.address, 'PostalAddress'))
+gulp.task('test', function (callback) {
+  return fs.readdir('./test', function (err, filenames) {
+    filenames.forEach(function (file) {
+      let filepath = path.join(__dirname, './test/', file)
+      let classname = path.parse(filepath).name[0].toUpperCase() + path.parse(filepath).name.slice(1)
+      sdoValidate(filepath, classname, function (err, passed) {
+        if (err) console.error(`The example ${classname} failed!`, err.details)
+        else console.log(`The example ${classname} is valid.`)
+      })
+    })
+  })
 })
 
 gulp.task('docs:jsonld', function (callback) {
