@@ -9,7 +9,7 @@
       "properties": {
         "additionalProperty": {
           "$id": "#additionalProperty",
-          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
+          "allOf": [{ "$ref": "additionalProperty.prop.jsd" }]
         },
         "award": {
           "$id": "#award",
