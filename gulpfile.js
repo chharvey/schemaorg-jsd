@@ -1,12 +1,13 @@
 const fs   = require('fs')
 const path = require('path')
 const url  = require('url')
+const util = require('util')
 
 const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const {META_SCHEMATA, SCHEMATA, sdoValidate} = require('./index.js')
+const {META_SCHEMATA, SCHEMATA, sdoValidatePromise} = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
 
@@ -16,14 +17,13 @@ gulp.task('validate', function () {
 })
 
 gulp.task('test', function (callback) {
-  return fs.readdir('./test', function (err, filenames) {
+  return util.promisify(fs.readdir)('./test')
+  .then(function (filenames) {
     filenames.forEach(function (file) {
       let filepath = path.join(__dirname, './test/', file)
-      let classname = path.parse(filepath).name[0].toUpperCase() + path.parse(filepath).name.slice(1)
-      sdoValidate(filepath, classname, function (err, passed) {
-        if (err) console.error(`The example ${classname} failed!`, err.details)
-        else console.log(`The example ${classname} is valid.`)
-      })
+      sdoValidatePromise(filepath)
+        .then(function (passed) { console.log(`The example ${file} is valid.`) })
+        .catch(function (err) { console.error(`The example ${file} failed!`, err.details) })
     })
   })
 })
