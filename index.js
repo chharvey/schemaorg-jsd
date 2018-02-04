@@ -78,27 +78,31 @@ let ajv = new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 
 
 /**
+ * @summary A callback returned after validation.
+ * @callback module:index.ValidationCallback
+ * @param    {TypeError} err if the document fails validation; has a `.details` property for validation details
+ * @param    {boolean} passed `true` if the document passes validation
+ */
+/**
  * @summary Validate a JSON document against a Schema.org JSON schema.
  * @description This function can be either synchronous or asynchronous, depending on whether
  * a callback function is provided as the third parameter.
+ * @deprecated YES. Recommend using {@link module:index.sdoValidatePromise|sdoValidatePromise} or {@link module:index.sdoValidateSync|sdoValidateSync} instead.
  * @alias module:index.sdoValidate
  * @param   {(!Object|string)} document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
  * @param   {string} type the name of the Type to test against; should be a Class in http://schema.org/
  *                        ; see the API for supported Types
- * @param   {Function=} callback standard callback with `(err, data)` as the params
+ * @param   {module:index.ValidationCallback=} callback standard callback with `(err, data)` as the params
  *                               ; this method is asynchronous if and only if the callback is provided
- * @returns {boolean} `true` if the document passes validation
- * @throws  {TypeError} if the document fails validation
  */
 function sdoValidate(document, type, callback = null) {
   let doc = (typeof document === 'string') ? requireOther(document) : document
   let is_data_valid = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, doc)
   if (!is_data_valid) {
-    let e = new TypeError(`Document ${document['@id'] || document.identifier || document} does not valiate against schema ${type}.jsd!`)
+    let e = new TypeError(`Document ${doc['@id'] || doc.identifier || doc} does not valiate against schema ${type}.jsd!`)
     if (typeof document === 'string') e.filename = document
     e.details = ajv.errors
     if (!callback) {
-      console.error(e)
       throw e
     }
     return (callback) ? setTimeout(callback, 100, e, false) : false
@@ -106,9 +110,90 @@ function sdoValidate(document, type, callback = null) {
   return (callback) ? setTimeout(callback, 100, null, true) : true
 }
 
+/**
+ * @summary A Promise returned after validation.
+ * @promise module:index.ValidationPromise
+ * @resolve {boolean} `true` if the document passes validation
+ * @reject  {TypeError} if the document fails validation; has a `.details` property for validation details
+ */
+/**
+ * @summary Promis-ified version of {@link module:index.sdoValidate|sdoValidate}
+ * @alias module:index.sdoValidatePromise
+ * @param   {(!Object|string)} document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
+ * @param   {string=} type the name of the Type to test against; should be a Class in http://schema.org/
+ *                         ; see the API for supported Types
+ *                         ; if omitted, will test against the JSON document’s `@type` property (if it has one)
+ *                         ; if the `@type` is not supported or cannot be found, defaults to `'Thing'`
+ * @returns {module:index.ValidationPromise} the promise returned after validation
+ * @retur ns {Promise<boolean, TypeError>} `true` if the document passes validation; TypeError if the document fails validation
+ */
+function sdoValidatePromise(document, type = null) {
+  return new Promise(function (resolve, reject) {
+    let doc = (typeof document === 'string') ? requireOther(document) : document
+    let name;
+    if (type === null) {
+      let doctype = doc['@type']
+      if (SCHEMATA.find((jsd) => jsd.title === `http://schema.org/${doctype}`)) {
+        name = doctype
+      } else {
+        if (doctype) console.warn(`Class \`${doctype}\` is not yet supported. Validating against \`Thing.jsd\` instead.`)
+        else console.warn(`JSON-LD \`@type\` property was not found. Validating against \`Thing.jsd\`.`)
+        name = 'Thing'
+      }
+    } else {
+      name = type
+    }
+    let is_data_valid = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${name}.jsd`, doc)
+    if (!is_data_valid) {
+      let e = new TypeError(`Document ${doc['@id'] || doc.identifier || doc} does not valiate against schema ${name}.jsd!`)
+      if (typeof document === 'string') e.filename = document
+      e.details = ajv.errors
+      return reject.call(null, e)
+    }
+    return resolve.call(null, true)
+  })
+}
+
+/**
+ * @summary Synchronous version of {@link module:index.sdoValidate|sdoValidate}
+ * @alias module:index.sdoValidateSync
+ * @param   {(!Object|string)} document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
+ * @param   {string=} type the name of the Type to test against; should be a Class in http://schema.org/
+ *                         ; see the API for supported Types
+ *                         ; if omitted, will test against the JSON document’s `@type` property (if it has one)
+ *                         ; if the `@type` is not supported or cannot be found, defaults to `'Thing'`
+ * @returns {boolean} `true` if the document passes validation
+ * @throws  {TypeError} if the document fails validation
+ */
+function sdoValidateSync(document, type = null) {
+  let doc = (typeof document === 'string') ? requireOther(document) : document
+  let name;
+  if (type === null) {
+    let doctype = doc['@type']
+    if (doctype) {}
+    if (SCHEMATA.find((jsd) => jsd.title === `http://schema.org/${doctype}`)) {
+      name = doctype
+    } else {
+      if (doctype) console.warn(`Class \`${doctype}\` is not yet supported. Validating against \`Thing.jsd\` instead.`)
+      else console.warn(`JSON-LD \`@type\` property was not found. Validating against \`Thing.jsd\`.`)
+      name = 'Thing'
+    }
+  } else {
+    name = type
+  }
+  let is_data_valid = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${name}.jsd`, doc)
+  if (!is_data_valid) {
+    let e = new TypeError(`Document ${doc['@id'] || doc.identifier || doc} does not valiate against schema ${name}.jsd!`)
+    if (typeof document === 'string') e.filename = document
+    e.details = ajv.errors
+    throw e
+  }
+  return true
+}
+
 
 /**
  * Use this module to validate your JSON-LD document against a Schema.org JSON schema.
  * @module index
  */
-module.exports = {META_SCHEMATA, SCHEMATA, sdoValidate}
+module.exports = {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidatePromise, sdoValidateSync}
