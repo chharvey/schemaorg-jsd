@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/GeoCoordinates.jsd",
   "title": "http://schema.org/GeoCoordinates",
   "description": "The geographic coordinates of a place or event.",
@@ -13,18 +13,51 @@
         },
         "elevation": {
           "$id": "#elevation",
+          "title": "http://schema.org/elevation",
           "description": "The elevation of a location (WGS 84).",
-          "type": ["string", "number"]
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#elevation-ExpectedType",
+              "anyOf": [
+                { "type": ["number", "string"] }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#elevation-ExpectedType" }
+          ]
         },
         "latitude": {
           "$id": "#latitude",
+          "title": "http://schema.org/latitude",
           "description": "The latitude of a location (WGS 84).",
-          "type": ["string", "number"]
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#latitude-ExpectedType",
+              "anyOf": [
+                { "type": ["number", "string"] }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#latitude-ExpectedType" }
+          ]
         },
         "longitude": {
           "$id": "#longitude",
+          "title": "http://schema.org/longitude",
           "description": "The longitude of a location (WGS 84).",
-          "type": ["string", "number"]
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#longitude-ExpectedType",
+              "anyOf": [
+                { "type": ["number", "string"] }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#longitude-ExpectedType" }
+          ]
         }
       }
     }

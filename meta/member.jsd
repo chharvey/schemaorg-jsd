@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd",
+  "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Property.",
+  "description": "JSON Schema for a Schema.org Property.",
+  "allOf": [
+    { "$ref": "http://json-schema.org/draft-07/schema#" },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["$schema", "$id", "title", "description", "definitions", "anyOf"],
+      "properties": {
+        "$schema"    : true,
+        "$id"        : { "type": "string", "format": "uri" },
+        "title"      : { "type": "string", "format": "uri" },
+        "description": true,
+        "definitions": {
+          "$id": "#member-definitions",
+          "propertyNames": { "const": "ExpectedType" },
+          "additionalProperties": {
+            "description": "The expected type(s) of the property.",
+            "additionalProperties": false,
+            "required": ["anyOf"],
+            "properties": {
+              "$id": true,
+              "anyOf": {
+                "items": {
+                  "anyOf": [
+                    {
+                      "required": ["$ref"],
+                      "properties": {
+                        "$ref": { "description": "Must point to an existing Schema.org Class jsd file." }
+                      }
+                    },
+                    {
+                      "additionalProperties": false,
+                      "required": ["type"],
+                      "definitions": {
+                        "primitives": {
+                          "$id": "#primitives",
+                          "description": "Further restriction on `http://json-schema.org/draft-07/schema#/definitions/simpleTypes`.",
+                          "enum": [
+                            "boolean",
+                            "integer",
+                            "number",
+                            "string"
+                          ]
+                        }
+                      },
+                      "properties": {
+                        "type": {
+                          "anyOf": [
+                            { "$ref": "#primitives" },
+                            { "items": { "$ref": "#primitives" } }
+                          ]
+                        },
+                        "format": true
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "anyOf": {
+          "$id": "#member-anyOf",
+          "maxItems": 2,
+          "items": [
+            {
+              "$id": "#expected-type",
+              "required": ["$ref"],
+              "properties": {
+                "$ref": { "description": "Must point to the “Expected Type” definition." }
+              }
+            },
+            {
+              "additionalProperties": false,
+              "required": ["type", "items"],
+              "properties": {
+                "type": { "const": "array" },
+                "items": { "$ref": "#expected-type" }
+              }
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

@@ -1,19 +1,18 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/logo.prop.jsd",
   "title": "http://schema.org/logo",
   "description": "An associated logo.",
-  "anyOf": [
-    {
-      "$id": "#logo-type",
+  "definitions": {
+    "ExpectedType": {
       "anyOf": [
         { "$ref": "URL.jsd" },
         { "$ref": "ImageObject.jsd" }
       ]
-    },
-    {
-      "type": "array",
-      "items": { "$ref": "#logo-type" }
     }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
   ]
 }

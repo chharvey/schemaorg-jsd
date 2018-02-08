@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd",
   "title": "http://schema.org/PostalAddress",
   "description": "The mailing address.",
@@ -9,39 +9,99 @@
       "properties": {
         "addressCountry": {
           "$id": "#addressCountry",
+          "title": "http://schema.org/addressCountry",
           "description": "The country.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#addressCountry-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#addressCountry-ExpectedType" }
           ]
         },
         "addressLocality": {
           "$id": "#addressLocality",
+          "title": "http://schema.org/addressLocality",
           "description": "The locality.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#addressLocality-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#addressLocality-ExpectedType" }
           ]
         },
         "addressRegion": {
           "$id": "#addressRegion",
+          "title": "http://schema.org/addressRegion",
           "description": "The region.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#addressRegion-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#addressRegion-ExpectedType" }
           ]
         },
         "postOfficeBoxNumber": {
           "$id": "#postOfficeBoxNumber",
+          "title": "http://schema.org/postOfficeBoxNumber",
           "description": "The post office box number for PO box addresses.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#postOfficeBoxNumber-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#postOfficeBoxNumber-ExpectedType" }
+          ]
         },
         "postalCode": {
           "$id": "#postalCode",
+          "title": "http://schema.org/postalCode",
           "description": "The postal code.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#postalCode-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#postalCode-ExpectedType" }
+          ]
         },
         "streetAddress": {
           "$id": "#streetAddress",
+          "title": "http://schema.org/streetAddress",
           "description": "The street address.",
-          "type": "string"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#streetAddress-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#streetAddress-ExpectedType" }
+          ]
         }
       }
     }

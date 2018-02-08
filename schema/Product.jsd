@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Product.jsd",
   "title": "http://schema.org/Product",
   "description": "Any offered product or service.",
@@ -21,9 +21,18 @@
         },
         "color": {
           "$id": "#color",
+          "title": "http://schema.org/color",
           "description": "The color of the product.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#color-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#color-ExpectedType" }
           ]
         },
         "logo": {
@@ -32,23 +41,50 @@
         },
         "manufacturer": {
           "$id": "#manufacturer",
+          "title": "http://schema.org/manufacturer",
           "description": "The manufacturer of the product.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#manufacturer-ExpectedType",
+              "anyOf": [
+                { "$ref": "Organization.jsd" }
+              ]
+            }
+          },
           "anyOf": [
-            { "$ref": "Organization.jsd" }
+            { "$ref": "#manufacturer-ExpectedType" }
           ]
         },
         "productID": {
           "$id": "#productID",
+          "title": "http://schema.org/productID",
           "description": "The product identifier, such as ISBN.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#productID-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#productID-ExpectedType" }
           ]
         },
         "sku": {
           "$id": "#sku",
+          "title": "http://schema.org/sku",
           "description": "The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#sku-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
           "anyOf": [
-            { "type": "string" }
+            { "$ref": "#sku-ExpectedType" }
           ]
         }
       }

@@ -1,5 +1,5 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ListItem.jsd",
   "title": "http://schema.org/ListItem",
   "description": "A list item.",
@@ -9,23 +9,67 @@
       "properties": {
         "item": {
           "$id": "#item",
+          "title": "http://schema.org/item",
           "description": "An entity represented by an entry in a list or data feed.",
-          "$ref": "Thing.jsd"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#item-ExpectedType",
+              "anyOf": [
+                { "$ref": "Thing.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#item-ExpectedType" }
+          ]
         },
         "nextItem": {
           "$id": "#nextItem",
+          "title": "http://schema.org/nextItem",
           "description": "A link to the ListItem that follows the current one.",
-          "$ref": "#"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#nextItem-ExpectedType",
+              "anyOf": [
+                { "$ref": "#" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#nextItem-ExpectedType" }
+          ]
         },
         "position": {
           "$id": "#position",
+          "title": "http://schema.org/position",
           "description": "The position of an item in a series or sequence of items.",
-          "type": ["integer", "string"]
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#position-ExpectedType",
+              "anyOf": [
+                { "type": ["integer", "string"] }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#position-ExpectedType" }
+          ]
         },
         "previousItem": {
           "$id": "#previousItem",
+          "title": "http://schema.org/previousItem",
           "description": "A link to the ListItem that preceeds the current one.",
-          "$ref": "#"
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#previousItem-ExpectedType",
+              "anyOf": [
+                { "$ref": "#" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#previousItem-ExpectedType" }
+          ]
         }
       }
     }

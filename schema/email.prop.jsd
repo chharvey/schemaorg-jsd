@@ -1,9 +1,16 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/schema/email.prop.jsd",
   "title": "http://schema.org/email",
   "description": "Email address.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string", "format": "email" }
+      ]
+    }
+  },
   "anyOf": [
-    { "type": "string", "format": "email" }
+    { "$ref": "#/definitions/ExpectedType" }
   ]
 }
