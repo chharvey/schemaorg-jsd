@@ -18,14 +18,14 @@ gulp.task('validate', function () {
 
 gulp.task('test', function (callback) {
   return util.promisify(fs.readdir)('./test')
-  .then(function (filenames) {
-    filenames.forEach(function (file) {
-      let filepath = path.join(__dirname, './test/', file)
-      sdoValidatePromise(filepath)
-        .then(function (passed) { console.log(`The example ${file} is valid.`) })
-        .catch(function (err) { console.error(`The example ${file} failed!`, err.details) })
+    .then(function (filenames) {
+      filenames.forEach(function (file) {
+        let filepath = path.join(__dirname, './test/', file)
+        sdoValidatePromise(filepath)
+          .then(function (passed) { console.log(`The example ${file} is valid.`) })
+          .catch(function (err) { console.error(`The example ${file} failed!`, err.details) })
+      })
     })
-  })
 })
 
 gulp.task('docs:jsonld', function (callback) {
@@ -67,10 +67,10 @@ gulp.task('docs:jsonld', function (callback) {
             else if (schema.type) {
               function sdoType(jsdType) {
                 return ({
-                  "boolean": "Boolean",
-                  "integer": "Integer",
-                  "number" : "Number" ,
-                  "string" : "Text"   ,
+                  'boolean': 'Boolean',
+                  'integer': 'Integer',
+                  'number' : 'Number' ,
+                  'string' : 'Text'   ,
                 })[jsdType]
               }
               if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdoType(t)}` })))
@@ -97,10 +97,10 @@ gulp.task('docs:jsonld', function (callback) {
         else if (schema.type) {
           function sdoType(jsdType) {
             return ({
-              "boolean": "Boolean",
-              "integer": "Integer",
-              "number" : "Number" ,
-              "string" : "Text"   ,
+              'boolean': 'Boolean',
+              'integer': 'Integer',
+              'number' : 'Number' ,
+              'string' : 'Text'   ,
             })[jsdType]
           }
           if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdoType(t)}` })))
@@ -162,11 +162,11 @@ gulp.task('docs:jsonld', function (callback) {
 
   // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({
-    '@context': {
-      sdo : 'http://schema.org/',
-      rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
-      superClassOf: { '@reverse': 'rdfs:subClassOf' },
-      valueOf     : { '@reverse': 'sdo:rangeIncludes' },
+    "@context": {
+      "sdo" : "http://schema.org/",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "superClassOf": { "@reverse": "rdfs:subClassOf" },
+      "valueOf"     : { "@reverse": "sdo:rangeIncludes" }
     },
     '@graph': [
       ...datatypes,
@@ -191,10 +191,10 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
         let classname = ld['@id'].split(':')[1]
         function jsdType(sdoType) {
           return ({
-            "Boolean": "boolean",
-            "Integer": "integer",
-            "Number" : "number" ,
-            "Text"   : "string" ,
+            'Boolean': 'boolean',
+            'Integer': 'integer',
+            'Number' : 'number' ,
+            'Text'   : 'string' ,
           })[sdoType]
         }
         return jsdType(classname) || classname

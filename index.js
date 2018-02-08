@@ -118,6 +118,17 @@ function sdoValidate(document, type, callback = null) {
  */
 /**
  * @summary Promis-ified version of {@link module:index.sdoValidate|sdoValidate}
+ * @description
+ * NOTE: Since JSDoc doesn’t mark up Promises, the jsdoc comment defining the
+ * {@link module:index.ValidationPromise} type is repeated below for your convenience:
+ * ```js
+ * /**
+ *  * @summary A Promise returned after validation.
+ *  * @promise module:index.ValidationPromise
+ *  * @resolve {boolean} `true` if the document passes validation
+ *  * @reject  {TypeError} if the document fails validation; has a `.details` property for validation details
+ *  *&#x002f;
+ * ```
  * @alias module:index.sdoValidatePromise
  * @param   {(!Object|string)} document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
  * @param   {string=} type the name of the Type to test against; should be a Class in http://schema.org/
