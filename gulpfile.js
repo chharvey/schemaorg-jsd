@@ -7,7 +7,7 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const {META_SCHEMATA, SCHEMATA, sdoValidatePromise} = require('./index.js')
+const {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidateSync} = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
 
@@ -16,16 +16,19 @@ gulp.task('validate', function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
-gulp.task('test', function (callback) {
-  return util.promisify(fs.readdir)('./test')
-    .then(function (filenames) {
+gulp.task('test', function () {
+  let filenames = fs.readdirSync('./test')
       filenames.forEach(function (file) {
         let filepath = path.join(__dirname, './test/', file)
-        sdoValidatePromise(filepath)
-          .then(function (passed) { console.log(`The example ${file} is valid.`) })
-          .catch(function (err) { console.error(`The example ${file} failed!`, err.details) })
+        try {
+          let passed = sdoValidateSync(filepath)
+          console.log(`The example ${file} is valid.`)
+        } catch (e) {
+          console.error(`The example ${file} failed!`, e.details)
+        }
       })
-    })
+  // for (let file of filenames) {
+  // }
 })
 
 gulp.task('docs:jsonld', function (callback) {
