@@ -1,12 +1,13 @@
 const fs   = require('fs')
 const path = require('path')
 const url  = require('url')
+const util = require('util')
 
 const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const {META_SCHEMATA, SCHEMATA, sdoValidate} = require('./index.js')
+const {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidateSync} = require('./index.js')
 
 const requireOther = require('./lib/requireOther.js')
 
@@ -16,8 +17,18 @@ gulp.task('validate', function () {
 })
 
 gulp.task('test', function () {
-  console.log(sdoValidate('./test.jsonld', 'Person'))
-  console.log(sdoValidate(requireOther('./test.jsonld').alumniOf.location.address, 'PostalAddress'))
+  let filenames = fs.readdirSync('./test')
+      filenames.forEach(function (file) {
+        let filepath = path.join(__dirname, './test/', file)
+        try {
+          let passed = sdoValidateSync(filepath)
+          console.log(`The example ${file} is valid.`)
+        } catch (e) {
+          console.error(`The example ${file} failed!`, e.details)
+        }
+      })
+  // for (let file of filenames) {
+  // }
 })
 
 gulp.task('docs:jsonld', function (callback) {
@@ -34,10 +45,10 @@ gulp.task('docs:jsonld', function (callback) {
    */
   function rangeIncludesCalculator(propertyschema, classname = '!Object') {
     const sdo_type = {
-      "boolean": "Boolean",
-      "integer": "Integer",
-      "number" : "Number" ,
-      "string" : "Text"   ,
+      'boolean': 'Boolean',
+      'integer': 'Integer',
+      'number' : 'Number' ,
+      'string' : 'Text'   ,
     }
     // NOTE Cannot use `Array#map` here because there is not a 1-to-1 correspondance
     // between the schemata in `anyOf` and the pushed jsonld objects.
@@ -149,11 +160,11 @@ gulp.task('docs:jsonld', function (callback) {
 
   // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({
-    '@context': {
-      sdo : 'http://schema.org/',
-      rdfs: 'http://www.w3.org/2000/01/rdf-schema#',
-      superClassOf: { '@reverse': 'rdfs:subClassOf' },
-      valueOf     : { '@reverse': 'sdo:rangeIncludes' },
+    "@context": {
+      "sdo" : "http://schema.org/",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
+      "superClassOf": { "@reverse": "rdfs:subClassOf" },
+      "valueOf"     : { "@reverse": "sdo:rangeIncludes" }
     },
     '@graph': [
       ...datatypes,
@@ -178,10 +189,10 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
         let classname = ld['@id'].split(':')[1]
         function jsdType(sdoType) {
           return ({
-            "Boolean": "boolean",
-            "Integer": "integer",
-            "Number" : "number" ,
-            "Text"   : "string" ,
+            'Boolean': 'boolean',
+            'Integer': 'integer',
+            'Number' : 'number' ,
+            'Text'   : 'string' ,
           })[sdoType]
         }
         return jsdType(classname) || classname
