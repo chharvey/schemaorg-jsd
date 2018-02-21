@@ -9,7 +9,7 @@
       "properties": {
         "additionalProperty": {
           "$id": "#additionalProperty",
-          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
+          "allOf": [{ "$ref": "additionalProperty.prop.jsd" }]
         },
         "award": {
           "$id": "#award",
@@ -32,8 +32,29 @@
             }
           },
           "anyOf": [
-            { "$ref": "#color-ExpectedType" }
+            { "$ref": "#color-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#color-ExpectedType" } }
           ]
+        },
+        "depth": {
+          "$id": "#depth",
+          "title": "http://schema.org/depth",
+          "description": "The depth of the item.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#depth-ExpectedType",
+              "anyOf": [
+                { "$ref": "QuantitativeValue.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#depth-ExpectedType" }
+          ]
+        },
+        "height": {
+          "$id": "#height",
+          "allOf": [{ "$ref": "height.prop.jsd" }]
         },
         "logo": {
           "$id": "#logo",
@@ -86,6 +107,14 @@
           "anyOf": [
             { "$ref": "#sku-ExpectedType" }
           ]
+        },
+        "weight": {
+          "$id": "#weight",
+          "allOf": [{ "$ref": "weight.prop.jsd" }]
+        },
+        "width": {
+          "$id": "#width",
+          "allOf": [{ "$ref": "width.prop.jsd" }]
         }
       }
     }

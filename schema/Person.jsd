@@ -75,6 +75,10 @@
             { "$ref": "#givenName-ExpectedType" }
           ]
         },
+        "height": {
+          "$id": "#height",
+          "allOf": [{ "$ref": "height.prop.jsd" }]
+        },
         "honorificPrefix": {
           "$id": "#honorificPrefix",
           "title": "http://schema.org/honorificPrefix",
@@ -110,6 +114,10 @@
         "telephone": {
           "$id": "#telephone",
           "allOf": [{ "$ref": "telephone.prop.jsd" }]
+        },
+        "weight": {
+          "$id": "#weight",
+          "allOf": [{ "$ref": "weight.prop.jsd" }]
         }
       }
     }
