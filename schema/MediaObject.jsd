@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/MediaObject.jsd",
+  "title": "http://schema.org/MediaObject",
+  "description": "A media object, such as an image, video, or audio object embedded in a web page or a downloadable dataset i.e. DataDownload.",
+  "allOf": [
+    { "$ref": "Thing.jsd" },
+    {
+      "properties": {
+        "height": {
+          "$id": "#height",
+          "allOf": [{ "$ref": "height.prop.jsd" }]
+        },
+        "width": {
+          "$id": "#width",
+          "allOf": [{ "$ref": "width.prop.jsd" }]
+        }
+      }
+    }
+  ]
+}

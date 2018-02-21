@@ -9,20 +9,7 @@
       "properties": {
         "value": {
           "$id": "#value",
-          "title": "http://schema.org/value",
-          "description": "The value of the quantitative value or property value node.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#value-ExpectedType",
-              "anyOf": [
-                { "type": ["boolean", "number", "string"] },
-                { "$ref": "StructuredValue.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#value-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "value.prop.jsd" }]
         }
       }
     }
