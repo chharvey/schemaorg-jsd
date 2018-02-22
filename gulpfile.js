@@ -207,43 +207,43 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
     }
 
     let datatypes = JSONLD.DATATYPES.map((jsonld) => `
-/**
- * @summary ${jsonld['sdo:description']}
- * @see http://schema.org/${jsonld['sdo:name']}
- * @typedef {*} ${jsonld['sdo:name']}
- */
+      /**
+       * @summary ${jsonld['sdo:description']}
+       * @see http://schema.org/${jsonld['sdo:name']}
+       * @typedef {*} ${jsonld['sdo:name']}
+       */
     `)
     let classes = JSONLD.CLASSES.map((jsonld) => `
-/**
- * @summary ${jsonld['sdo:description']}
- * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
- * ${(jsonld['superClassOf'].length) ? `Known subtypes:
-${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
- *
- * ${(jsonld['valueOf'].length) ? `May appear as values of:
-${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
- *
- * @see http://schema.org/${jsonld['sdo:name']}
- * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
-${jsonld['rdfs:member'].map(function (member) {
-  let referenced = JSONLD.PROPERTIES.find((m) => m['@id'] === member['@id']) || null
-  let name        = (referenced || member)['sdo:name']
-  let description = (referenced || member)['sdo:description']
-  return ` * @property {${(referenced) ? name : jsdocTypeDeclaration(member)}=} ${name} ${description}`
-}).join('\n')}
- */
+      /**
+       * @summary ${jsonld['sdo:description']}
+       * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
+       * ${(jsonld['superClassOf'].length) ? `Known subtypes:
+      ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+       *
+       * ${(jsonld['valueOf'].length) ? `May appear as values of:
+      ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+       *
+       * @see http://schema.org/${jsonld['sdo:name']}
+       * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
+      ${jsonld['rdfs:member'].map(function (member) {
+        let referenced = JSONLD.PROPERTIES.find((m) => m['@id'] === member['@id']) || null
+        let name        = (referenced || member)['sdo:name']
+        let description = (referenced || member)['sdo:description']
+        return ` * @property {${(referenced) ? name : jsdocTypeDeclaration(member)}=} ${name} ${description}`
+      }).join('\n')}
+       */
     `)
     let properties = JSONLD.PROPERTIES.map((jsonld) => `
-/**
- * @summary ${jsonld['sdo:description']}
- * ${(jsonld['sdo:domainIncludes'] || false) ? '@description' : ''}
- *
- * ${(jsonld['sdo:domainIncludes'].length) ? `Property of:
-${jsonld['sdo:domainIncludes'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
- *
- * @see http://schema.org/${jsonld['sdo:name']}
- * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['sdo:name']}
- */
+      /**
+       * @summary ${jsonld['sdo:description']}
+       * ${(jsonld['sdo:domainIncludes'] || false) ? '@description' : ''}
+       *
+       * ${(jsonld['sdo:domainIncludes'].length) ? `Property of:
+      ${jsonld['sdo:domainIncludes'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+       *
+       * @see http://schema.org/${jsonld['sdo:name']}
+       * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['sdo:name']}
+       */
     `)
 
     let contents = [
