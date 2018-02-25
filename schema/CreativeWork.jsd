@@ -1,0 +1,79 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/CreativeWork.jsd",
+  "title": "http://schema.org/CreativeWork",
+  "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+  "allOf": [
+    { "$ref": "Thing.jsd" },
+    {
+      "properties": {
+        "hasPart": {
+          "$id": "#hasPart",
+          "title": "http://schema.org/hasPart",
+          "description": "Indicates a CreativeWork that is (in some sense) a part of this CreativeWork.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#hasPart-ExpectedType",
+              "anyOf": [
+                { "$ref": "#" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#hasPart-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#hasPart-ExpectedType" } }
+          ]
+        },
+        "isPartOf": {
+          "$id": "#isPartOf",
+          "title": "http://schema.org/isPartOf",
+          "description": "Indicates a CreativeWork that this CreativeWork is (in some sense) part of.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#isPartOf-ExpectedType",
+              "anyOf": [
+                { "$ref": "#" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#isPartOf-ExpectedType" }
+          ]
+        },
+        "keywords": {
+          "$id": "#keywords",
+          "title": "http://schema.org/keywords",
+          "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#keywords-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#keywords-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#keywords-ExpectedType" } }
+          ]
+        },
+        "thumbnailUrl": {
+          "$id": "#thumbnailUrl",
+          "title": "http://schema.org/thumbnailUrl",
+          "description": "A thumbnail image relevant to the Thing.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#thumbnailUrl-ExpectedType",
+              "anyOf": [
+                { "$ref": "URL.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#thumbnailUrl-ExpectedType" }
+          ]
+        }
+      }
+    }
+  ]
+}
