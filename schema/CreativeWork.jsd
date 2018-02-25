@@ -57,6 +57,22 @@
             { "type": "array", "items": { "$ref": "#keywords-ExpectedType" } }
           ]
         },
+        "mainEntity": {
+          "$id": "#mainEntity",
+          "title": "http://schema.org/mainEntity",
+          "description": "Indicates the primary entity described in some page or other CreativeWork.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#mainEntity-ExpectedType",
+              "anyOf": [
+                { "$ref": "Thing.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#mainEntity-ExpectedType" }
+          ]
+        },
         "thumbnailUrl": {
           "$id": "#thumbnailUrl",
           "title": "http://schema.org/thumbnailUrl",

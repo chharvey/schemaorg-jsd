@@ -79,6 +79,24 @@
             { "type": "array", "items": { "$ref": "#image-ExpectedType" } }
           ]
         },
+        "mainEntityOfPage": {
+          "$id": "#mainEntityOfPage",
+          "title": "http://schema.org/mainEntityOfPage",
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#mainEntityOfPage-ExpectedType",
+              "anyOf": [
+                { "$ref": "URL.jsd" },
+                { "$ref": "CreativeWork.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#mainEntityOfPage-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#mainEntityOfPage-ExpectedType" } }
+          ]
+        },
         "name": {
           "$id": "#name",
           "title": "http://schema.org/name",
