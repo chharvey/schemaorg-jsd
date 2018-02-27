@@ -7,6 +7,56 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
+        "dateCreated": {
+          "$id": "#dateCreated",
+          "title": "http://schema.org/dateCreated",
+          "description": "The date on which the CreativeWork was created or the item was added to a DataFeed.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#dateCreated-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#dateCreated-ExpectedType" }
+          ]
+        },
+        "dateModified": {
+          "$id": "#dateModified",
+          "title": "http://schema.org/dateModified",
+          "description": "The date on which the CreativeWork was most recently modified or when the item’s entry was modified within a DataFeed.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#dateModified-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" },
+                { "$ref": "DateTime.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#dateModified-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#dateModified-ExpectedType" } }
+          ]
+        },
+        "datePublished": {
+          "$id": "#datePublished",
+          "title": "http://schema.org/datePublished",
+          "description": "Date of first broadcast/publication.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#datePublished-ExpectedType",
+              "anyOf": [
+                { "$ref": "Date.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#datePublished-ExpectedType" }
+          ]
+        },
         "hasPart": {
           "$id": "#hasPart",
           "title": "http://schema.org/hasPart",
@@ -22,6 +72,22 @@
           "anyOf": [
             { "$ref": "#hasPart-ExpectedType" },
             { "type": "array", "items": { "$ref": "#hasPart-ExpectedType" } }
+          ]
+        },
+        "headline": {
+          "$id": "#headline",
+          "title": "http://schema.org/headline",
+          "description": "Headline of the article.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#headline-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#headline-ExpectedType" }
           ]
         },
         "isPartOf": {
