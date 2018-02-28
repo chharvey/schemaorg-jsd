@@ -135,7 +135,7 @@ async function sdoValidate(document, type = null) {
 /**
  * @summary Synchronous version of {@link module:index.sdoValidate|sdoValidate}
  * @example
- * async function compileSync(jsdoc) {
+ * function compileSync(jsdoc) {
  *   let is_valid;
  *   try {
  *     is_valid = sdoValidateSync(jsdoc)

@@ -52,8 +52,8 @@
               "$id": "#identifier-ExpectedType",
               "anyOf": [
                 { "type": "string" },
-                { "$ref": "URL.jsd" },
-                { "$ref": "PropertyValue.jsd" }
+                { "$ref": "PropertyValue.jsd" },
+                { "$ref": "URL.jsd" }
               ]
             }
           },
@@ -69,8 +69,8 @@
             "ExpectedType": {
               "$id": "#image-ExpectedType",
               "anyOf": [
-                { "$ref": "URL.jsd" },
-                { "$ref": "ImageObject.jsd" }
+                { "$ref": "ImageObject.jsd" },
+                { "$ref": "URL.jsd" }
               ]
             }
           },
@@ -87,8 +87,8 @@
             "ExpectedType": {
               "$id": "#mainEntityOfPage-ExpectedType",
               "anyOf": [
-                { "$ref": "URL.jsd" },
-                { "$ref": "CreativeWork.jsd" }
+                { "$ref": "CreativeWork.jsd" },
+                { "$ref": "URL.jsd" }
               ]
             }
           },

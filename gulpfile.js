@@ -38,7 +38,8 @@ gulp.task('docs:jsonld', function (callback) {
   let supertype = (jsd) => (label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null
 
   /**
-   * Calculate the `sdo:rangeIncludes` attribute of a `Property` object.
+   * @summary Calculate the `sdo:rangeIncludes` attribute of a `Property` object.
+   * @private
    * @param   {!Object} propertyschema a JSON schema validating the Property; must be valid against `member.jsd` or `member-subschema.jsd`
    * @param   {string=} classname name of the owner Class, if the Property is nested and any `$ref`s have local URIs
    * @returns {Array<'@id':string>} the Classes in this Property’s range---the possible types this property’s values may take
@@ -52,6 +53,7 @@ gulp.task('docs:jsonld', function (callback) {
     }
     // NOTE Cannot use `Array#map` here because there is not a 1-to-1 correspondance
     // between the schemata in `anyOf` and the pushed jsonld objects.
+    // (Namely, if the jsd `"type"` property is an array, e.g. `["number", "string"]`.)
     const returned = []
     propertyschema.definitions['ExpectedType'].anyOf.forEach(function (schema) {
       if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}`.replace(/#/g, classname) })
@@ -217,10 +219,10 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
 /**
  * @summary ${jsonld['sdo:description']}
  * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
- * ${(jsonld['superClassOf'].length) ? `Known subtypes:
+ * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:
 ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
  *
- * ${(jsonld['valueOf'].length) ? `May appear as values of:
+ * ${(jsonld['valueOf'].length) ? `*(Non-Normative):* May appear as values of:
 ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
  *
  * @see http://schema.org/${jsonld['sdo:name']}
@@ -236,9 +238,9 @@ ${jsonld['rdfs:member'].map(function (member) {
     let properties = JSONLD.PROPERTIES.map((jsonld) => `
 /**
  * @summary ${jsonld['sdo:description']}
- * ${(jsonld['sdo:domainIncludes'] || false) ? '@description' : ''}
+ * ${(jsonld['sdo:domainIncludes'].length || false) ? '@description' : ''}
  *
- * ${(jsonld['sdo:domainIncludes'].length) ? `Property of:
+ * ${(jsonld['sdo:domainIncludes'].length) ? `*(Non-Normative):* Property of:
 ${jsonld['sdo:domainIncludes'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
  *
  * @see http://schema.org/${jsonld['sdo:name']}

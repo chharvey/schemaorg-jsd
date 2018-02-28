@@ -16,8 +16,8 @@
               "$id": "#itemListElement-ExpectedType",
               "anyOf": [
                 { "type": "string" },
-                { "$ref": "Thing.jsd" },
-                { "$ref": "ListItem.jsd" }
+                { "$ref": "ListItem.jsd" },
+                { "$ref": "Thing.jsd" }
               ]
             }
           },
