@@ -1,0 +1,30 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Offer.jsd",
+  "title": "http://schema.org/Offer",
+  "description": "An offer to transfer some rights to an item or to provide a service—for example, an offer to sell tickets to an event, to rent the DVD of a movie, to stream a TV show over the internet, to repair a motorcycle, or to loan a book.",
+  "allOf": [
+    { "$ref": "Intangile.jsd" },
+    {
+      "properties": {
+        "offeredBy": {
+          "$id": "#offeredBy",
+          "title": "http://schema.org/offeredBy",
+          "description": "A pointer to the organization or person making the offer.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#offeredBy-ExpectedType",
+              "anyOf": [
+                { "$ref": "Organization.jsd" },
+                { "$ref": "Person.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#offeredBy-ExpectedType" }
+          ]
+        }
+      }
+    }
+  ]
+}
