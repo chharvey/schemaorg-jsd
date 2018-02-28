@@ -113,6 +113,22 @@
             { "$ref": "#name-ExpectedType" }
           ]
         },
+        "potentialAction": {
+          "$id": "#potentialAction",
+          "title": "http://schema.org/potentialAction",
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an ‘object’ role.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#potentialAction-ExpectedType",
+              "anyOf": [
+                { "$ref": "Action.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#potentialAction-ExpectedType" }
+          ]
+        },
         "url": {
           "$id": "#url",
           "title": "http://schema.org/url",
