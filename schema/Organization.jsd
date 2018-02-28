@@ -35,6 +35,10 @@
           "$id": "#logo",
           "allOf": [{ "$ref": "logo.prop.jsd" }]
         },
+        "makesOffer": {
+          "$id": "#makesOffer",
+          "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
+        },
         "telephone": {
           "$id": "#telephone",
           "allOf": [{ "$ref": "telephone.prop.jsd" }]

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/WebPage.jsd",
+  "title": "http://schema.org/WebPage",
+  "description": "A web page. Every web page is implicitly assumed to be declared to be of type WebPage, so the various properties about that webpage, such as breadcrumb may be used. We recommend explicit declaration if these properties are specified, but if they are found outside of an itemscope, they will be assumed to be about the page.",
+  "allOf": [
+    { "$ref": "CreativeWork.jsd" },
+    {
+      "properties": {
+        "significantLink": {
+          "$id": "#significantLink",
+          "title": "http://schema.org/significantLink",
+          "description": "One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#significantLink-ExpectedType",
+              "anyOf": [
+                { "$ref": "URL.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#significantLink-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#significantLink-ExpectedType" } }
+          ]
+        }
+      }
+    }
+  ]
+}

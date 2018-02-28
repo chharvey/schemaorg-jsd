@@ -52,8 +52,8 @@
               "$id": "#identifier-ExpectedType",
               "anyOf": [
                 { "type": "string" },
-                { "$ref": "URL.jsd" },
-                { "$ref": "PropertyValue.jsd" }
+                { "$ref": "PropertyValue.jsd" },
+                { "$ref": "URL.jsd" }
               ]
             }
           },
@@ -69,14 +69,32 @@
             "ExpectedType": {
               "$id": "#image-ExpectedType",
               "anyOf": [
-                { "$ref": "URL.jsd" },
-                { "$ref": "ImageObject.jsd" }
+                { "$ref": "ImageObject.jsd" },
+                { "$ref": "URL.jsd" }
               ]
             }
           },
           "anyOf": [
             { "$ref": "#image-ExpectedType" },
             { "type": "array", "items": { "$ref": "#image-ExpectedType" } }
+          ]
+        },
+        "mainEntityOfPage": {
+          "$id": "#mainEntityOfPage",
+          "title": "http://schema.org/mainEntityOfPage",
+          "description": "Indicates a page (or other CreativeWork) for which this thing is the main entity being described.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#mainEntityOfPage-ExpectedType",
+              "anyOf": [
+                { "$ref": "CreativeWork.jsd" },
+                { "$ref": "URL.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#mainEntityOfPage-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#mainEntityOfPage-ExpectedType" } }
           ]
         },
         "name": {
@@ -93,6 +111,22 @@
           },
           "anyOf": [
             { "$ref": "#name-ExpectedType" }
+          ]
+        },
+        "potentialAction": {
+          "$id": "#potentialAction",
+          "title": "http://schema.org/potentialAction",
+          "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an ‘object’ role.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#potentialAction-ExpectedType",
+              "anyOf": [
+                { "$ref": "Action.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#potentialAction-ExpectedType" }
           ]
         },
         "url": {

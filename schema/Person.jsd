@@ -111,6 +111,10 @@
             { "$ref": "#honorificSuffix-ExpectedType" }
           ]
         },
+        "makesOffer": {
+          "$id": "#makesOffer",
+          "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
+        },
         "telephone": {
           "$id": "#telephone",
           "allOf": [{ "$ref": "telephone.prop.jsd" }]

@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/makesOffer.prop.jsd",
+  "title": "http://schema.org/makesOffer",
+  "description": "A pointer to products or services offered by the organization or person.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Offer.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}
