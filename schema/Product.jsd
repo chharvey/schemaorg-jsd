@@ -76,6 +76,10 @@
             { "$ref": "#manufacturer-ExpectedType" }
           ]
         },
+        "offers": {
+          "$id": "#offers",
+          "allOf": [{ "$ref": "offers.prop.jsd" }]
+        },
         "productID": {
           "$id": "#productID",
           "title": "http://schema.org/productID",

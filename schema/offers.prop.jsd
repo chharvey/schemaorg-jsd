@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/offers.prop.jsd",
+  "title": "http://schema.org/offers",
+  "description": "An offer to provide this item—for example, an offer to sell a product, rent the DVD of a movie, perform a service, or give away tickets to an event.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Offer.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}

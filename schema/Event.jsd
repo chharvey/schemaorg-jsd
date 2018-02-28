@@ -28,6 +28,10 @@
           "$id": "#location",
           "allOf": [{ "$ref": "location.prop.jsd" }]
         },
+        "offers": {
+          "$id": "#offers",
+          "allOf": [{ "$ref": "offers.prop.jsd" }]
+        },
         "startDate": {
           "$id": "#startDate",
           "title": "http://schema.org/startDate",
