@@ -24,7 +24,7 @@ gulp.task('test', function () {
           let passed = sdoValidateSync(filepath)
           console.log(`The example ${file} is valid.`)
         } catch (e) {
-          console.error(`The example ${file} failed!`, e.details)
+          console.error(`The example ${file} failed!`, e.details || e)
         }
       })
   // for (let file of filenames) {
