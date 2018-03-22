@@ -50,6 +50,10 @@
             { "type": "array", "items": { "$ref": "#performer-ExpectedType" } }
           ]
         },
+        "sponsor": {
+          "$id": "#sponsor",
+          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
+        },
         "startDate": {
           "$id": "#startDate",
           "title": "http://schema.org/startDate",

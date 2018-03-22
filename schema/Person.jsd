@@ -115,6 +115,10 @@
           "$id": "#makesOffer",
           "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
         },
+        "sponsor": {
+          "$id": "#sponsor",
+          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
+        },
         "telephone": {
           "$id": "#telephone",
           "allOf": [{ "$ref": "telephone.prop.jsd" }]
