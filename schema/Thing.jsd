@@ -43,6 +43,22 @@
             { "$ref": "#description-ExpectedType" }
           ]
         },
+        "disambiguatingDescription": {
+          "$id": "#disambiguatingDescription",
+          "title": "http://schema.org/disambiguatingDescription",
+          "description": "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#disambiguatingDescription-ExpectedType",
+              "anyOf": [
+                { "type": "string" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#disambiguatingDescription-ExpectedType" }
+          ]
+        },
         "identifier": {
           "$id": "#identifier",
           "title": "http://schema.org/identifier",
