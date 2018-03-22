@@ -32,6 +32,24 @@
           "$id": "#offers",
           "allOf": [{ "$ref": "offers.prop.jsd" }]
         },
+        "performer": {
+          "$id": "#performer",
+          "title": "http://schema.org/performer",
+          "description": "A performer at the event—for example, a presenter, musician, musical group or actor.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#performer-ExpectedType",
+              "anyOf": [
+                { "$ref": "Organization.jsd" },
+                { "$ref": "Person.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#performer-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#performer-ExpectedType" } }
+          ]
+        },
         "startDate": {
           "$id": "#startDate",
           "title": "http://schema.org/startDate",
