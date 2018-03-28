@@ -9,6 +9,7 @@ const Ajv   = require('ajv')
 
 const {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidateSync} = require('./index.js')
 
+const createDir = require('./lib/createDir.js')
 const requireOther = require('./lib/requireOther.js')
 
 
@@ -16,22 +17,20 @@ gulp.task('validate', function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
-gulp.task('test', function () {
+gulp.task('test', async function () {
   let filenames = fs.readdirSync('./test')
-      filenames.forEach(function (file) {
-        let filepath = path.join(__dirname, './test/', file)
-        try {
-          let passed = sdoValidateSync(filepath)
-          console.log(`The example ${file} is valid.`)
-        } catch (e) {
-          console.error(`The example ${file} failed!`, e.details || e)
-        }
-      })
-  // for (let file of filenames) {
-  // }
+  await Promise.all(filenames.map(async function (file) {
+    let filepath = path.resolve(__dirname, './test/', file)
+      try {
+        let passed = await sdoValidate(filepath)
+        console.log(`The example ${file} is valid.`)
+      } catch (e) {
+        console.error(`The example ${file} failed!`, e.details || e)
+      }
+  }))
 })
 
-gulp.task('docs:jsonld', function (callback) {
+gulp.task('docs:jsonld', async function () {
   // ++++ LOCAL VARIABLES ++++
   let label     = (jsd) => path.parse(new url.URL(jsd.title).pathname).name
   let comment   = (jsd) => jsd.description
@@ -176,28 +175,24 @@ gulp.task('docs:jsonld', function (callback) {
   })
 
   // ++++ WRITE TO FILE ++++
-  return fs.mkdir('./docs/build/', function (err) {
-    fs.writeFile('./docs/build/schemaorg.jsonld', contents, 'utf8', callback) // send cb here to maintain dependency
-  })
+  await createDir('./docs/build/')
+  await util.promisify(fs.writeFile)('./docs/build/schemaorg.jsonld', contents, 'utf8')
 })
 
-gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
-  return fs.readFile('./docs/build/schemaorg.jsonld', 'utf8', function (err, data) {
-    if (err) throw err
-    data = JSON.parse(data)
+gulp.task('docs:typedef', ['docs:jsonld'], async function () {
+  let data = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))
 
+  // REVIEW:INDENTATION
     function jsdocTypeDeclaration(member) {
+      const jsd_type = {
+        'Boolean': 'boolean',
+        'Integer': 'integer',
+        'Number' : 'number' ,
+        'Text'   : 'string' ,
+      }
       let union = `(${member['sdo:rangeIncludes'].map(function (ld) {
         let classname = ld['@id'].split(':')[1]
-        function jsdType(sdoType) {
-          return ({
-            'Boolean': 'boolean',
-            'Integer': 'integer',
-            'Number' : 'number' ,
-            'Text'   : 'string' ,
-          })[sdoType]
-        }
-        return jsdType(classname) || classname
+        return jsd_type[classname] || classname
       }).join('|')})`
       return (member['$rangeIncludesArray']) ? `(${union}|Array<${union}>)` : union
     }
@@ -254,8 +249,7 @@ gulp.task('docs:typedef', ['docs:jsonld'], function (callback) {
       ...properties,
     ].join('')
 
-    fs.writeFile('./docs/build/typedef.js', contents, 'utf8', callback) // send cb here to maintain dependency
-  })
+  await util.promisify(fs.writeFile)('./docs/build/typedef.js', contents, 'utf8')
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
