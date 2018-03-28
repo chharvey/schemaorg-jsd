@@ -27,6 +27,10 @@
           "$id": "#email",
           "allOf": [{ "$ref": "email.prop.jsd" }]
         },
+        "event": {
+          "$id": "#event",
+          "allOf": [{ "$ref": "event.prop.jsd" }]
+        },
         "location": {
           "$id": "#location",
           "allOf": [{ "$ref": "location.prop.jsd" }]
@@ -38,6 +42,10 @@
         "makesOffer": {
           "$id": "#makesOffer",
           "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
+        },
+        "sponsor": {
+          "$id": "#sponsor",
+          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
         },
         "telephone": {
           "$id": "#telephone",
