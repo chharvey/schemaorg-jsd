@@ -27,6 +27,10 @@
           "$id": "#email",
           "allOf": [{ "$ref": "email.prop.jsd" }]
         },
+        "event": {
+          "$id": "#event",
+          "allOf": [{ "$ref": "event.prop.jsd" }]
+        },
         "location": {
           "$id": "#location",
           "allOf": [{ "$ref": "location.prop.jsd" }]
