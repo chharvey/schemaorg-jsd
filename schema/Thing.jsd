@@ -145,6 +145,23 @@
             { "$ref": "#potentialAction-ExpectedType" }
           ]
         },
+        "sameAs": {
+          "$id": "#sameAs",
+          "title": "http://schema.org/sameAs",
+          "description": "URL of a reference Web page that unambiguously indicates the item’s identity. E.g. the URL of the item’s Wikipedia page, Wikidata entry, or official website.",
+          "definitions": {
+            "ExpectedType": {
+              "$id": "#sameAs-ExpectedType",
+              "anyOf": [
+                { "$ref": "URL.jsd" }
+              ]
+            }
+          },
+          "anyOf": [
+            { "$ref": "#sameAs-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#sameAs-ExpectedType" } }
+          ]
+        },
         "url": {
           "$id": "#url",
           "title": "http://schema.org/url",
