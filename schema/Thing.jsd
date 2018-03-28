@@ -142,7 +142,8 @@
             }
           },
           "anyOf": [
-            { "$ref": "#potentialAction-ExpectedType" }
+            { "$ref": "#potentialAction-ExpectedType" },
+            { "type": "array", "items": { "$ref": "#potentialAction-ExpectedType" } }
           ]
         },
         "sameAs": {
