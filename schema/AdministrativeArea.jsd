@@ -1,0 +1,13 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/AdministrativeArea.jsd",
+  "title": "http://schema.org/AdministrativeArea",
+  "description": "A geographical region, typically under the jurisdiction of a particular government.",
+  "allOf": [
+    { "$ref": "Place.jsd" },
+    {
+      "properties": {
+      }
+    }
+  ]
+}
