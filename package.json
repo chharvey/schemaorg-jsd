@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-jsdoc3": "^1.0.1"
+    "gulp-jsdoc3": "^2.0.0"
   }
 }
