@@ -1,0 +1,13 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Accommodation.jsd",
+  "title": "http://schema.org/Accommodation",
+  "description": "An accommodation is a place that can accommodate human beings, e.g. a hotel room, a camping pitch, or a meeting room.",
+  "allOf": [
+    { "$ref": "Place.jsd" },
+    {
+      "properties": {
+      }
+    }
+  ]
+}

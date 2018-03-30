@@ -1,0 +1,13 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/City.jsd",
+  "title": "http://schema.org/City",
+  "description": "A city or town.",
+  "allOf": [
+    { "$ref": "AdministrativeArea.jsd" },
+    {
+      "properties": {
+      }
+    }
+  ]
+}

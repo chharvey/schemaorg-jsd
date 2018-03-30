@@ -143,6 +143,10 @@
           "$id": "#offers",
           "allOf": [{ "$ref": "offers.prop.jsd" }]
         },
+        "sponsor": {
+          "$id": "#sponsor",
+          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
+        },
         "thumbnailUrl": {
           "$id": "#thumbnailUrl",
           "title": "http://schema.org/thumbnailUrl",

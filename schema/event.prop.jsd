@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/event.prop.jsd",
+  "title": "http://schema.org/event",
+  "description": "Upcoming or past event associated with this place, organization, or action.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Event.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}

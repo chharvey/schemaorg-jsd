@@ -15,6 +15,10 @@
           "$id": "#address",
           "allOf": [{ "$ref": "address.prop.jsd" }]
         },
+        "event": {
+          "$id": "#event",
+          "allOf": [{ "$ref": "event.prop.jsd" }]
+        },
         "geo": {
           "$id": "#geo",
           "title": "http://schema.org/geo",
