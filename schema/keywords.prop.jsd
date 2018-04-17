@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/keywords.prop.jsd",
+  "title": "http://schema.org/keywords",
+  "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}

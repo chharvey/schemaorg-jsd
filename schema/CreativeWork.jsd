@@ -9,135 +9,35 @@
       "properties": {
         "dateCreated": {
           "$id": "#dateCreated",
-          "title": "http://schema.org/dateCreated",
-          "description": "The date on which the CreativeWork was created or the item was added to a DataFeed.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#dateCreated-ExpectedType",
-              "anyOf": [
-                { "$ref": "Date.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#dateCreated-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "dateCreated.prop.jsd" }]
         },
         "dateModified": {
           "$id": "#dateModified",
-          "title": "http://schema.org/dateModified",
-          "description": "The date on which the CreativeWork was most recently modified or when the item’s entry was modified within a DataFeed.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#dateModified-ExpectedType",
-              "anyOf": [
-                { "$ref": "Date.jsd" },
-                { "$ref": "DateTime.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#dateModified-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#dateModified-ExpectedType" } }
-          ]
+          "allOf": [{ "$ref": "dateModified.prop.jsd" }]
         },
         "datePublished": {
           "$id": "#datePublished",
-          "title": "http://schema.org/datePublished",
-          "description": "Date of first broadcast/publication.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#datePublished-ExpectedType",
-              "anyOf": [
-                { "$ref": "Date.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#datePublished-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "datePublished.prop.jsd" }]
         },
         "hasPart": {
           "$id": "#hasPart",
-          "title": "http://schema.org/hasPart",
-          "description": "Indicates a CreativeWork that is (in some sense) a part of this CreativeWork.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#hasPart-ExpectedType",
-              "anyOf": [
-                { "$ref": "#" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#hasPart-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#hasPart-ExpectedType" } }
-          ]
+          "allOf": [{ "$ref": "hasPart.prop.jsd" }]
         },
         "headline": {
           "$id": "#headline",
-          "title": "http://schema.org/headline",
-          "description": "Headline of the article.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#headline-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#headline-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "headline.prop.jsd" }]
         },
         "isPartOf": {
           "$id": "#isPartOf",
-          "title": "http://schema.org/isPartOf",
-          "description": "Indicates a CreativeWork that this CreativeWork is (in some sense) part of.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#isPartOf-ExpectedType",
-              "anyOf": [
-                { "$ref": "#" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#isPartOf-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "isPartOf.prop.jsd" }]
         },
         "keywords": {
           "$id": "#keywords",
-          "title": "http://schema.org/keywords",
-          "description": "Keywords or tags used to describe this content. Multiple entries in a keywords list are typically delimited by commas.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#keywords-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#keywords-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#keywords-ExpectedType" } }
-          ]
+          "allOf": [{ "$ref": "keywords.prop.jsd" }]
         },
         "mainEntity": {
           "$id": "#mainEntity",
-          "title": "http://schema.org/mainEntity",
-          "description": "Indicates the primary entity described in some page or other CreativeWork.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#mainEntity-ExpectedType",
-              "anyOf": [
-                { "$ref": "Thing.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#mainEntity-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "mainEntity.prop.jsd" }]
         },
         "offers": {
           "$id": "#offers",
@@ -149,19 +49,7 @@
         },
         "thumbnailUrl": {
           "$id": "#thumbnailUrl",
-          "title": "http://schema.org/thumbnailUrl",
-          "description": "A thumbnail image relevant to the Thing.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#thumbnailUrl-ExpectedType",
-              "anyOf": [
-                { "$ref": "URL.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#thumbnailUrl-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "thumbnailUrl.prop.jsd" }]
         }
       }
     }
