@@ -9,19 +9,7 @@
       "properties": {
         "endTime": {
           "$id": "#endTime",
-          "title": "http://schema.org/endTime",
-          "description": "The endTime of something.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#endTime-ExpectedType",
-              "anyOf": [
-                { "$ref": "DateTime.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#endTime-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "endTime.prop.jsd" }]
         },
         "location": {
           "$id": "#location",
@@ -29,19 +17,7 @@
         },
         "startTime": {
           "$id": "#startTime",
-          "title": "http://schema.org/startTime",
-          "description": "The startTime of something.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#startTime-ExpectedType",
-              "anyOf": [
-                { "$ref": "DateTime.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#startTime-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "startTime.prop.jsd" }]
         }
       }
     }
