@@ -9,20 +9,7 @@
       "properties": {
         "offeredBy": {
           "$id": "#offeredBy",
-          "title": "http://schema.org/offeredBy",
-          "description": "A pointer to the organization or person making the offer.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#offeredBy-ExpectedType",
-              "anyOf": [
-                { "$ref": "Organization.jsd" },
-                { "$ref": "Person.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#offeredBy-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "offeredBy.prop.jsd" }]
         }
       }
     }

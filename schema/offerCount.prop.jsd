@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/offerCount.prop.jsd",
+  "title": "http://schema.org/offerCount",
+  "description": "The number of offers for the product.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "integer" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}
