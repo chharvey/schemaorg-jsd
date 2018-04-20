@@ -13,68 +13,19 @@
         },
         "maxValue": {
           "$id": "#maxValue",
-          "title": "http://schema.org/maxValue",
-          "description": "The upper value of some characteristic or property.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#maxValue-ExpectedType",
-              "anyOf": [
-                { "type": "number" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#maxValue-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "maxValue.prop.jsd" }]
         },
         "minValue": {
           "$id": "#minValue",
-          "title": "http://schema.org/minValue",
-          "description": "The lower value of some characteristic or property.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#minValue-ExpectedType",
-              "anyOf": [
-                { "type": "number" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#minValue-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "minValue.prop.jsd" }]
         },
         "unitCode": {
           "$id": "#unitCode",
-          "title": "http://schema.org/unitCode",
-          "description": "The unit of measurement given using the UN/CEFACT Common Code (3 characters) or a URL. Other codes than the UN/CEFACT Common Code may be used with a prefix followed by a colon.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#unitCode-ExpectedType",
-              "anyOf": [
-                { "type": "string" },
-                { "$ref": "URL.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#unitCode-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "unitCode.prop.jsd" }]
         },
         "unitText": {
           "$id": "#unitText",
-          "title": "http://schema.org/unitText",
-          "description": "A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for unitCode.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#unitText-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#unitText-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "unitText.prop.jsd" }]
         },
         "value": {
           "$id": "#value",
