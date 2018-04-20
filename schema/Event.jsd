@@ -9,20 +9,7 @@
       "properties": {
         "endDate": {
           "$id": "#endDate",
-          "title": "http://schema.org/endDate",
-          "description": "The end date and time of the item (in ISO 8601 date format).",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#endDate-ExpectedType",
-              "anyOf": [
-                { "$ref": "Date.jsd" },
-                { "$ref": "DateTime.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#endDate-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "endDate.prop.jsd" }]
         },
         "location": {
           "$id": "#location",
@@ -34,21 +21,7 @@
         },
         "performer": {
           "$id": "#performer",
-          "title": "http://schema.org/performer",
-          "description": "A performer at the event—for example, a presenter, musician, musical group or actor.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#performer-ExpectedType",
-              "anyOf": [
-                { "$ref": "Organization.jsd" },
-                { "$ref": "Person.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#performer-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#performer-ExpectedType" } }
-          ]
+          "allOf": [{ "$ref": "performer.prop.jsd" }]
         },
         "sponsor": {
           "$id": "#sponsor",
@@ -56,54 +29,15 @@
         },
         "startDate": {
           "$id": "#startDate",
-          "title": "http://schema.org/startDate",
-          "description": "The start date and time of the item (in ISO 8601 date format).",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#startDate-ExpectedType",
-              "anyOf": [
-                { "$ref": "Date.jsd" },
-                { "$ref": "DateTime.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#startDate-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "startDate.prop.jsd" }]
         },
         "superEvent": {
           "$id": "#superEvent",
-          "title": "http://schema.org/superEvent",
-          "description": "An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#superEvent-ExpectedType",
-              "anyOf": [
-                { "$ref": "#" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#superEvent-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#superEvent-ExpectedType" } }
-          ]
+          "allOf": [{ "$ref": "superEvent.prop.jsd" }]
         },
         "subEvent": {
           "$id": "#subEvent",
-          "title": "http://schema.org/subEvent",
-          "description": "An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#subEvent-ExpectedType",
-              "anyOf": [
-                { "$ref": "#" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#subEvent-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#subEvent-ExpectedType" } }
-          ]
+          "allOf": [{ "$ref": "subEvent.prop.jsd" }]
         }
       }
     }
