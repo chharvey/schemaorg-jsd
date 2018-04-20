@@ -9,99 +9,27 @@
       "properties": {
         "addressCountry": {
           "$id": "#addressCountry",
-          "title": "http://schema.org/addressCountry",
-          "description": "The country.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#addressCountry-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#addressCountry-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "addressCountry.prop.jsd" }]
         },
         "addressLocality": {
           "$id": "#addressLocality",
-          "title": "http://schema.org/addressLocality",
-          "description": "The locality.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#addressLocality-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#addressLocality-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "addressLocality.prop.jsd" }]
         },
         "addressRegion": {
           "$id": "#addressRegion",
-          "title": "http://schema.org/addressRegion",
-          "description": "The region.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#addressRegion-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#addressRegion-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "addressRegion.prop.jsd" }]
         },
         "postOfficeBoxNumber": {
           "$id": "#postOfficeBoxNumber",
-          "title": "http://schema.org/postOfficeBoxNumber",
-          "description": "The post office box number for PO box addresses.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#postOfficeBoxNumber-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#postOfficeBoxNumber-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "postOfficeBoxNumber.prop.jsd" }]
         },
         "postalCode": {
           "$id": "#postalCode",
-          "title": "http://schema.org/postalCode",
-          "description": "The postal code.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#postalCode-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#postalCode-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "postalCode.prop.jsd" }]
         },
         "streetAddress": {
           "$id": "#streetAddress",
-          "title": "http://schema.org/streetAddress",
-          "description": "The street address.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#streetAddress-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#streetAddress-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "streetAddress.prop.jsd" }]
         }
       }
     }
