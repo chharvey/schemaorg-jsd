@@ -9,67 +9,19 @@
       "properties": {
         "item": {
           "$id": "#item",
-          "title": "http://schema.org/item",
-          "description": "An entity represented by an entry in a list or data feed.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#item-ExpectedType",
-              "anyOf": [
-                { "$ref": "Thing.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#item-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "item.prop.jsd" }]
         },
         "nextItem": {
           "$id": "#nextItem",
-          "title": "http://schema.org/nextItem",
-          "description": "A link to the ListItem that follows the current one.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#nextItem-ExpectedType",
-              "anyOf": [
-                { "$ref": "#" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#nextItem-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "nextItem.prop.jsd" }]
         },
         "position": {
           "$id": "#position",
-          "title": "http://schema.org/position",
-          "description": "The position of an item in a series or sequence of items.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#position-ExpectedType",
-              "anyOf": [
-                { "type": ["integer", "string"] }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#position-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "position.prop.jsd" }]
         },
         "previousItem": {
           "$id": "#previousItem",
-          "title": "http://schema.org/previousItem",
-          "description": "A link to the ListItem that preceeds the current one.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#previousItem-ExpectedType",
-              "anyOf": [
-                { "$ref": "#" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#previousItem-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "previousItem.prop.jsd" }]
         }
       }
     }

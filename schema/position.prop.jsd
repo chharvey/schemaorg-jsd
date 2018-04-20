@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/position.prop.jsd",
+  "title": "http://schema.org/position",
+  "description": "The position of an item in a series or sequence of items.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": ["integer", "string"] }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

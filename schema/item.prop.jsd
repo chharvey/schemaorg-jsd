@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/item.prop.jsd",
+  "title": "http://schema.org/item",
+  "description": "An entity represented by an entry in a list or data feed (e.g. an artist in a list of artists).",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Thing.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}
