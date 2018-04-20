@@ -21,19 +21,7 @@
         },
         "geo": {
           "$id": "#geo",
-          "title": "http://schema.org/geo",
-          "description": "The geo coordinates of the place.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#geo-ExpectedType",
-              "anyOf": [
-                { "$ref": "GeoCoordinates.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#geo-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "geo.prop.jsd" }]
         },
         "logo": {
           "$id": "#logo",
