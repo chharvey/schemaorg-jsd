@@ -5,7 +5,7 @@
   "description": "JSON Schema for a Schema.org Class.",
   "definitions": {
     "PropertyReference": {
-      "description": "The SDO property definition references an external JSON schema file.",
+      "description": "A reference to an external JSON schema for a Schema.org Property.",
       "additionalProperties": false,
       "required": ["$id", "allOf"],
       "properties": {
@@ -31,19 +31,21 @@
       "properties": {
         "$schema"    : true,
         "$id"        : { "type": "string", "format": "uri" },
-        "title"      : { "type": "string", "format": "uri" },
-        "description": true,
+        "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Class." },
+        "description": { "description": "Schema.org’s canonical description of the Class." },
         "allOf"      : {
           "minItems": 2,
           "maxItems": 2,
           "items": [
             {
+              "description": "The superclass of this class.",
               "required": ["$ref"],
               "properties": {
                 "$ref": true
               }
             },
             {
+              "description": "A list of further properties of this class.",
               "additionalProperties": false,
               "required": ["properties"],
               "properties": {
