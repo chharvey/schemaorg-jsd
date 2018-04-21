@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/color.prop.jsd",
+  "title": "http://schema.org/color",
+  "description": "The color of the product.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}

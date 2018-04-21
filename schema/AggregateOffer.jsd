@@ -7,26 +7,8 @@
     { "$ref": "Offer.jsd" },
     {
       "properties": {
-        "offerCount": {
-          "$id": "#offerCount",
-          "title": "http://schema.org/offerCount",
-          "description": "The number of offers for the product.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#offerCount-ExpectedType",
-              "anyOf": [
-                { "type": "integer" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#offerCount-ExpectedType" }
-          ]
-        },
-        "offers": {
-          "$id": "#offers",
-          "allOf": [{ "$ref": "offers.prop.jsd" }]
-        }
+        "offerCount": { "$ref": "offerCount.prop.jsd" },
+        "offers": { "$ref": "offers.prop.jsd" }
       }
     }
   ]

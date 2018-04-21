@@ -7,14 +7,8 @@
     { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
-        "email": {
-          "$id": "#email",
-          "allOf": [{ "$ref": "email.prop.jsd" }]
-        },
-        "telephone": {
-          "$id": "#telephone",
-          "allOf": [{ "$ref": "telephone.prop.jsd" }]
-        }
+        "email": { "$ref": "email.prop.jsd" },
+        "telephone": { "$ref": "telephone.prop.jsd" }
       }
     }
   ]

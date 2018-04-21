@@ -12,29 +12,28 @@
       "properties": {
         "$schema"    : true,
         "$id"        : { "type": "string", "format": "uri" },
-        "title"      : { "type": "string", "format": "uri" },
-        "description": true,
+        "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Property." },
+        "description": { "description": "Schema.org’s canonical description of the Property." },
         "definitions": {
-          "$id": "#member-definitions",
           "propertyNames": { "const": "ExpectedType" },
           "additionalProperties": {
             "description": "The expected type(s) of the property.",
             "additionalProperties": false,
             "required": ["anyOf"],
             "properties": {
-              "$id": true,
               "anyOf": {
+                "description": "Effectively the `sdo:rangeIncludes` of the Property.",
                 "items": {
                   "anyOf": [
                     {
+                      "description": "A reference to an external JSON schema for a Schema.org Class.",
                       "required": ["$ref"],
                       "properties": {
-                        "$ref": { "description": "Must point to an existing Schema.org Class jsd file." }
+                        "$ref": true
                       }
                     },
                     {
-                      "additionalProperties": false,
-                      "required": ["type"],
+                      "description": "A primitive type or an array of primitive types.",
                       "definitions": {
                         "primitives": {
                           "$id": "#primitives",
@@ -47,6 +46,8 @@
                           ]
                         }
                       },
+                      "additionalProperties": false,
+                      "required": ["type"],
                       "properties": {
                         "type": {
                           "anyOf": [
@@ -64,14 +65,13 @@
           }
         },
         "anyOf": {
-          "$id": "#member-anyOf",
           "maxItems": 2,
           "items": [
             {
               "$id": "#expected-type",
               "required": ["$ref"],
               "properties": {
-                "$ref": { "description": "Must point to the “Expected Type” definition." }
+                "$ref": { "const": "#/definitions/ExpectedType" }
               }
             },
             {

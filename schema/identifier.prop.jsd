@@ -1,0 +1,18 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/identifier.prop.jsd",
+  "title": "http://schema.org/identifier",
+  "description": "The identifier property represents any kind of identifier for any kind of Thing, such as ISBNs, GTIN codes, UUIDs etc.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" },
+        { "$ref": "PropertyValue.jsd" },
+        { "$ref": "URL.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

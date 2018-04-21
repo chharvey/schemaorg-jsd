@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/datePublished.prop.jsd",
+  "title": "http://schema.org/datePublished",
+  "description": "Date of first broadcast/publication.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Date.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

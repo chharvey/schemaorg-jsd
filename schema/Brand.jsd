@@ -7,10 +7,7 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "logo": {
-          "$id": "#logo",
-          "allOf": [{ "$ref": "logo.prop.jsd" }]
-        }
+        "logo": { "$ref": "logo.prop.jsd" }
       }
     }
   ]

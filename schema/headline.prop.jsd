@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/headline.prop.jsd",
+  "title": "http://schema.org/headline",
+  "description": "Headline of the article.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

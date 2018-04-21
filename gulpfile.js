@@ -40,10 +40,9 @@ gulp.task('docs:jsonld', async function () {
    * @summary Calculate the `sdo:rangeIncludes` attribute of a `Property` object.
    * @private
    * @param   {!Object} propertyschema a JSON schema validating the Property; must be valid against `member.jsd` or `member-subschema.jsd`
-   * @param   {string=} classname name of the owner Class, if the Property is nested and any `$ref`s have local URIs
    * @returns {Array<'@id':string>} the Classes in this Property’s range---the possible types this property’s values may take
    */
-  function rangeIncludesCalculator(propertyschema, classname = '!Object') {
+  function rangeIncludesCalculator(propertyschema) {
     const sdo_type = {
       'boolean': 'Boolean',
       'integer': 'Integer',
@@ -55,7 +54,7 @@ gulp.task('docs:jsonld', async function () {
     // (Namely, if the jsd `"type"` property is an array, e.g. `["number", "string"]`.)
     const returned = []
     propertyschema.definitions['ExpectedType'].anyOf.forEach(function (schema) {
-      if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}`.replace(/#/g, classname) })
+      if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}` })
       else {
         if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdo_type[t]}` })))
         else returned.push({ '@id': `sdo:${sdo_type[schema.type]}` })
@@ -80,19 +79,9 @@ gulp.task('docs:jsonld', async function () {
     'superClassOf'    : [], // non-normative
     'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map(function (entry) {
       let [key, value] = entry
-      // Try finding the `*.prop.jsd` file first, else use the subschema in the `properties` object.
       let memberjsd = SCHEMATA.MEMBERS.find((j) => j.title===`http://schema.org/${key}`) || null
       if (memberjsd) return { '@id': `sdo:${key}` }
-      else if (value.allOf) throw new ReferenceError(`Member subschema \`${label(jsd)}#${key}\` contains \`allOf\`, but no corresponding jsd file was found.`)
-      return {
-        '@type'           : 'sdo:Property',
-        '@id'             : `sdo:${key}`,
-        'sdo:name'        : key,
-        'sdo:description' : value.description,
-        // 'sdo:domainIncludes': [{ '@id': `sdo:${label(jsd)}` }], // non-normative // commenting out because nested inside
-        '$rangeIncludesArray': value.anyOf.length >= 2, // non-standard
-        'sdo:rangeIncludes'  : rangeIncludesCalculator(value, label(jsd)),
-      }
+      else throw new ReferenceError(`No corresponding jsd file was found for member subschema \`${label(jsd)}#${key}\`.`)
     }),
     'valueOf': [], // non-normative
   }))
@@ -142,22 +131,6 @@ gulp.task('docs:jsonld', async function () {
       }
     })
   })
-  // NOTE Commenting out because no jsdoc link would exist.
-  // For example, the `ListItem#item` property takes on a `Thing` value, but
-  // in the documentation for `Thing`, putting “May appear as values of: item” would be pointless
-  // as the link “item” would not have a target.
-  // classes.forEach(function (jsonld) {
-  //   jsonld['rdfs:member'].forEach(function (property) {
-  //     if (property['@type']) { // if the property is described within the class, and not referenced via `@id`
-  //       property['sdo:rangeIncludes'].forEach(function (class_) {
-  //         let referenced = classes.find((c) => c['@id'] === class_['@id']) || null
-  //         if (referenced) {
-  //           referenced['valueOf'].push({ '@id': property['@id'] })
-  //         }
-  //       })
-  //     }
-  //   })
-  // })
 
   // ++++ DEFINE THE CONTENT TO WRITE ++++
   let contents = JSON.stringify({

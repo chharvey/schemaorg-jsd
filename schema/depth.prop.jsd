@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/depth.prop.jsd",
+  "title": "http://schema.org/depth",
+  "description": "The depth of the item.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "QuantitativeValue.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

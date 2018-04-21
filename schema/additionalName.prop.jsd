@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/additionalName.prop.jsd",
+  "title": "http://schema.org/additionalName",
+  "description": "An additional name for a Person, can be used for a middle name.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}

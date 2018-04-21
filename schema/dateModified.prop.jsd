@@ -1,0 +1,18 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/dateModified.prop.jsd",
+  "title": "http://schema.org/dateModified",
+  "description": "The date on which the CreativeWork was most recently modified or when the item’s entry was modified within a DataFeed.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Date.jsd" },
+        { "$ref": "DateTime.jsd" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" },
+    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  ]
+}

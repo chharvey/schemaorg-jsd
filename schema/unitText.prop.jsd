@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/unitText.prop.jsd",
+  "title": "http://schema.org/unitText",
+  "description": "A string or text indicating the unit of measurement. Useful if you cannot provide a standard unit code for `unitCode`.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": "string" }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}
