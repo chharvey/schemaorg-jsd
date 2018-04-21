@@ -71,7 +71,7 @@
               "$id": "#expected-type",
               "required": ["$ref"],
               "properties": {
-                "$ref": { "description": "Must point to the “Expected Type” definition." }
+                "$ref": { "const": "#/definitions/ExpectedType" }
               }
             },
             {

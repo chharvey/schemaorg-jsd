@@ -3,6 +3,25 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd",
   "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Class.",
   "description": "JSON Schema for a Schema.org Class.",
+  "definitions": {
+    "PropertyReference": {
+      "description": "The SDO property definition references an external JSON schema file.",
+      "additionalProperties": false,
+      "required": ["$id", "allOf"],
+      "properties": {
+        "$id": true,
+        "allOf": {
+          "maxItems": 1,
+          "items": {
+            "required": ["$ref"],
+            "properties": {
+              "$ref": true
+            }
+          }
+        }
+      }
+    }
+  },
   "allOf": [
     { "$ref": "http://json-schema.org/draft-07/schema#" },
     {
@@ -30,7 +49,7 @@
               "properties": {
                 "type": { "const": "object" },
                 "properties": {
-                  "additionalProperties": { "$ref": "https://chharvey.github.io/schemaorg-jsd/meta/member-subschema.jsd" }
+                  "additionalProperties": { "$ref": "#/definitions/PropertyReference" }
                 }
               }
             }
