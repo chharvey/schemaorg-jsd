@@ -9,51 +9,15 @@
       "properties": {
         "bestRating": {
           "$id": "#bestRating",
-          "title": "http://schema.org/bestRating",
-          "description": "The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#bestRating-ExpectedType",
-              "anyOf": [
-                { "type": ["number", "string"] }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#bestRating-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "bestRating.prop.jsd" }]
         },
         "ratingValue": {
           "$id": "#ratingValue",
-          "title": "http://schema.org/ratingValue",
-          "description": "The rating for the content.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#ratingValue-ExpectedType",
-              "anyOf": [
-                { "type": ["number", "string"] }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#ratingValue-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "ratingValue.prop.jsd" }]
         },
         "worstRating": {
           "$id": "#worstRating",
-          "title": "http://schema.org/worstRating",
-          "description": "The lowest value allowed in this rating system. If worstRating is omitted, 1 is assumed.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#worstRating-ExpectedType",
-              "anyOf": [
-                { "type": ["number", "string"] }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#worstRating-ExpectedType" }
-          ]
+          "allOf": [{ "$ref": "worstRating.prop.jsd" }]
         }
       }
     }

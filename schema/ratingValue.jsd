@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ratingValue.prop.jsd",
+  "title": "http://schema.org/ratingValue",
+  "description": "The rating for the content.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": ["number", "string"] }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}

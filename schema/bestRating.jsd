@@ -1,0 +1,16 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/bestRating.prop.jsd",
+  "title": "http://schema.org/bestRating",
+  "description": "The highest value allowed in this rating system. If bestRating is omitted, 5 is assumed.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "type": ["number", "string"] }
+      ]
+    }
+  },
+  "anyOf": [
+    { "$ref": "#/definitions/ExpectedType" }
+  ]
+}
