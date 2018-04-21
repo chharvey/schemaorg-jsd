@@ -7,10 +7,7 @@
     { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
-        "value": {
-          "$id": "#value",
-          "allOf": [{ "$ref": "value.prop.jsd" }]
-        }
+        "value": { "$ref": "value.prop.jsd" }
       }
     }
   ]

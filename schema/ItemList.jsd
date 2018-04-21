@@ -7,14 +7,8 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "itemListElement": {
-          "$id": "#itemListElement",
-          "allOf": [{ "$ref": "itemListElement.prop.jsd" }]
-        },
-        "numberOfItems": {
-          "$id": "#numberOfItems",
-          "allOf": [{ "$ref": "numberOfItems.prop.jsd" }]
-        }
+        "itemListElement": { "$ref": "itemListElement.prop.jsd" },
+        "numberOfItems": { "$ref": "numberOfItems.prop.jsd" }
       }
     }
   ]

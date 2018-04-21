@@ -11,46 +11,16 @@
     {
       "type": "object",
       "properties": {
-        "additionalType": {
-          "$id": "#additionalType",
-          "allOf": [{ "$ref": "additionalType.prop.jsd" }]
-        },
-        "description": {
-          "$id": "#description",
-          "allOf": [{ "$ref": "description.prop.jsd" }]
-        },
-        "disambiguatingDescription": {
-          "$id": "#disambiguatingDescription",
-          "allOf": [{ "$ref": "disambiguatingDescription.prop.jsd" }]
-        },
-        "identifier": {
-          "$id": "#identifier",
-          "allOf": [{ "$ref": "identifier.prop.jsd" }]
-        },
-        "image": {
-          "$id": "#image",
-          "allOf": [{ "$ref": "image.prop.jsd" }]
-        },
-        "mainEntityOfPage": {
-          "$id": "#mainEntityOfPage",
-          "allOf": [{ "$ref": "mainEntityOfPage.prop.jsd" }]
-        },
-        "name": {
-          "$id": "#name",
-          "allOf": [{ "$ref": "name.prop.jsd" }]
-        },
-        "potentialAction": {
-          "$id": "#potentialAction",
-          "allOf": [{ "$ref": "potentialAction.prop.jsd" }]
-        },
-        "sameAs": {
-          "$id": "#sameAs",
-          "allOf": [{ "$ref": "sameAs.prop.jsd" }]
-        },
-        "url": {
-          "$id": "#url",
-          "allOf": [{ "$ref": "url.prop.jsd" }]
-        }
+        "additionalType": { "$ref": "additionalType.prop.jsd" },
+        "description": { "$ref": "description.prop.jsd" },
+        "disambiguatingDescription": { "$ref": "disambiguatingDescription.prop.jsd" },
+        "identifier": { "$ref": "identifier.prop.jsd" },
+        "image": { "$ref": "image.prop.jsd" },
+        "mainEntityOfPage": { "$ref": "mainEntityOfPage.prop.jsd" },
+        "name": { "$ref": "name.prop.jsd" },
+        "potentialAction": { "$ref": "potentialAction.prop.jsd" },
+        "sameAs": { "$ref": "sameAs.prop.jsd" },
+        "url": { "$ref": "url.prop.jsd" }
       }
     }
   ]

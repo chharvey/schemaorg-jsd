@@ -7,22 +7,10 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "item": {
-          "$id": "#item",
-          "allOf": [{ "$ref": "item.prop.jsd" }]
-        },
-        "nextItem": {
-          "$id": "#nextItem",
-          "allOf": [{ "$ref": "nextItem.prop.jsd" }]
-        },
-        "position": {
-          "$id": "#position",
-          "allOf": [{ "$ref": "position.prop.jsd" }]
-        },
-        "previousItem": {
-          "$id": "#previousItem",
-          "allOf": [{ "$ref": "previousItem.prop.jsd" }]
-        }
+        "item": { "$ref": "item.prop.jsd" },
+        "nextItem": { "$ref": "nextItem.prop.jsd" },
+        "position": { "$ref": "position.prop.jsd" },
+        "previousItem": { "$ref": "previousItem.prop.jsd" }
       }
     }
   ]

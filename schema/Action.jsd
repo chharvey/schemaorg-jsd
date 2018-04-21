@@ -7,18 +7,9 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "endTime": {
-          "$id": "#endTime",
-          "allOf": [{ "$ref": "endTime.prop.jsd" }]
-        },
-        "location": {
-          "$id": "#location",
-          "allOf": [{ "$ref": "location.prop.jsd" }]
-        },
-        "startTime": {
-          "$id": "#startTime",
-          "allOf": [{ "$ref": "startTime.prop.jsd" }]
-        }
+        "endTime": { "$ref": "endTime.prop.jsd" },
+        "location": { "$ref": "location.prop.jsd" },
+        "startTime": { "$ref": "startTime.prop.jsd" }
       }
     }
   ]

@@ -7,66 +7,21 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "additionalName": {
-          "$id": "#additionalName",
-          "allOf": [{ "$ref": "additionalName.prop.jsd" }]
-        },
-        "address": {
-          "$id": "#address",
-          "allOf": [{ "$ref": "address.prop.jsd" }]
-        },
-        "award": {
-          "$id": "#award",
-          "allOf": [{ "$ref": "award.prop.jsd" }]
-        },
-        "brand": {
-          "$id": "#brand",
-          "allOf": [{ "$ref": "brand.prop.jsd" }]
-        },
-        "contactPoint": {
-          "$id": "#contactPoint",
-          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
-        },
-        "email": {
-          "$id": "#email",
-          "allOf": [{ "$ref": "email.prop.jsd" }]
-        },
-        "familyName": {
-          "$id": "#familyName",
-          "allOf": [{ "$ref": "familyName.prop.jsd" }]
-        },
-        "givenName": {
-          "$id": "#givenName",
-          "allOf": [{ "$ref": "givenName.prop.jsd" }]
-        },
-        "height": {
-          "$id": "#height",
-          "allOf": [{ "$ref": "height.prop.jsd" }]
-        },
-        "honorificPrefix": {
-          "$id": "#honorificPrefix",
-          "allOf": [{ "$ref": "honorificPrefix.prop.jsd" }]
-        },
-        "honorificSuffix": {
-          "$id": "#honorificSuffix",
-          "allOf": [{ "$ref": "honorificSuffix.prop.jsd" }]
-        },
-        "makesOffer": {
-          "$id": "#makesOffer",
-          "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
-        },
-        "sponsor": {
-          "$id": "#sponsor",
-          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
-        },
-        "telephone": {
-          "$id": "#telephone",
-          "allOf": [{ "$ref": "telephone.prop.jsd" }]
-        },
-        "weight": {
-          "$id": "#weight",
-          "allOf": [{ "$ref": "weight.prop.jsd" }]
-        }
+        "additionalName": { "$ref": "additionalName.prop.jsd" },
+        "address": { "$ref": "address.prop.jsd" },
+        "award": { "$ref": "award.prop.jsd" },
+        "brand": { "$ref": "brand.prop.jsd" },
+        "contactPoint": { "$ref": "contactPoint.prop.jsd" },
+        "email": { "$ref": "email.prop.jsd" },
+        "familyName": { "$ref": "familyName.prop.jsd" },
+        "givenName": { "$ref": "givenName.prop.jsd" },
+        "height": { "$ref": "height.prop.jsd" },
+        "honorificPrefix": { "$ref": "honorificPrefix.prop.jsd" },
+        "honorificSuffix": { "$ref": "honorificSuffix.prop.jsd" },
+        "makesOffer": { "$ref": "makesOffer.prop.jsd" },
+        "sponsor": { "$ref": "sponsor.prop.jsd" },
+        "telephone": { "$ref": "telephone.prop.jsd" },
+        "weight": { "$ref": "weight.prop.jsd" }
       }
     }
   ]

@@ -7,18 +7,9 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "bestRating": {
-          "$id": "#bestRating",
-          "allOf": [{ "$ref": "bestRating.prop.jsd" }]
-        },
-        "ratingValue": {
-          "$id": "#ratingValue",
-          "allOf": [{ "$ref": "ratingValue.prop.jsd" }]
-        },
-        "worstRating": {
-          "$id": "#worstRating",
-          "allOf": [{ "$ref": "worstRating.prop.jsd" }]
-        }
+        "bestRating": { "$ref": "bestRating.prop.jsd" },
+        "ratingValue": { "$ref": "ratingValue.prop.jsd" },
+        "worstRating": { "$ref": "worstRating.prop.jsd" }
       }
     }
   ]

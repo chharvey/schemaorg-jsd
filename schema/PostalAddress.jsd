@@ -7,30 +7,12 @@
     { "$ref": "ContactPoint.jsd" },
     {
       "properties": {
-        "addressCountry": {
-          "$id": "#addressCountry",
-          "allOf": [{ "$ref": "addressCountry.prop.jsd" }]
-        },
-        "addressLocality": {
-          "$id": "#addressLocality",
-          "allOf": [{ "$ref": "addressLocality.prop.jsd" }]
-        },
-        "addressRegion": {
-          "$id": "#addressRegion",
-          "allOf": [{ "$ref": "addressRegion.prop.jsd" }]
-        },
-        "postOfficeBoxNumber": {
-          "$id": "#postOfficeBoxNumber",
-          "allOf": [{ "$ref": "postOfficeBoxNumber.prop.jsd" }]
-        },
-        "postalCode": {
-          "$id": "#postalCode",
-          "allOf": [{ "$ref": "postalCode.prop.jsd" }]
-        },
-        "streetAddress": {
-          "$id": "#streetAddress",
-          "allOf": [{ "$ref": "streetAddress.prop.jsd" }]
-        }
+        "addressCountry": { "$ref": "addressCountry.prop.jsd" },
+        "addressLocality": { "$ref": "addressLocality.prop.jsd" },
+        "addressRegion": { "$ref": "addressRegion.prop.jsd" },
+        "postOfficeBoxNumber": { "$ref": "postOfficeBoxNumber.prop.jsd" },
+        "postalCode": { "$ref": "postalCode.prop.jsd" },
+        "streetAddress": { "$ref": "streetAddress.prop.jsd" }
       }
     }
   ]

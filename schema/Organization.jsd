@@ -7,50 +7,17 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "address": {
-          "$id": "#address",
-          "allOf": [{ "$ref": "address.prop.jsd" }]
-        },
-        "award": {
-          "$id": "#award",
-          "allOf": [{ "$ref": "award.prop.jsd" }]
-        },
-        "brand": {
-          "$id": "#brand",
-          "allOf": [{ "$ref": "brand.prop.jsd" }]
-        },
-        "contactPoint": {
-          "$id": "#contactPoint",
-          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
-        },
-        "email": {
-          "$id": "#email",
-          "allOf": [{ "$ref": "email.prop.jsd" }]
-        },
-        "event": {
-          "$id": "#event",
-          "allOf": [{ "$ref": "event.prop.jsd" }]
-        },
-        "location": {
-          "$id": "#location",
-          "allOf": [{ "$ref": "location.prop.jsd" }]
-        },
-        "logo": {
-          "$id": "#logo",
-          "allOf": [{ "$ref": "logo.prop.jsd" }]
-        },
-        "makesOffer": {
-          "$id": "#makesOffer",
-          "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
-        },
-        "sponsor": {
-          "$id": "#sponsor",
-          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
-        },
-        "telephone": {
-          "$id": "#telephone",
-          "allOf": [{ "$ref": "telephone.prop.jsd" }]
-        }
+        "address": { "$ref": "address.prop.jsd" },
+        "award": { "$ref": "award.prop.jsd" },
+        "brand": { "$ref": "brand.prop.jsd" },
+        "contactPoint": { "$ref": "contactPoint.prop.jsd" },
+        "email": { "$ref": "email.prop.jsd" },
+        "event": { "$ref": "event.prop.jsd" },
+        "location": { "$ref": "location.prop.jsd" },
+        "logo": { "$ref": "logo.prop.jsd" },
+        "makesOffer": { "$ref": "makesOffer.prop.jsd" },
+        "sponsor": { "$ref": "sponsor.prop.jsd" },
+        "telephone": { "$ref": "telephone.prop.jsd" }
       }
     }
   ]

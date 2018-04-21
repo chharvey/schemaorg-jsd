@@ -7,38 +7,14 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "endDate": {
-          "$id": "#endDate",
-          "allOf": [{ "$ref": "endDate.prop.jsd" }]
-        },
-        "location": {
-          "$id": "#location",
-          "allOf": [{ "$ref": "location.prop.jsd" }]
-        },
-        "offers": {
-          "$id": "#offers",
-          "allOf": [{ "$ref": "offers.prop.jsd" }]
-        },
-        "performer": {
-          "$id": "#performer",
-          "allOf": [{ "$ref": "performer.prop.jsd" }]
-        },
-        "sponsor": {
-          "$id": "#sponsor",
-          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
-        },
-        "startDate": {
-          "$id": "#startDate",
-          "allOf": [{ "$ref": "startDate.prop.jsd" }]
-        },
-        "superEvent": {
-          "$id": "#superEvent",
-          "allOf": [{ "$ref": "superEvent.prop.jsd" }]
-        },
-        "subEvent": {
-          "$id": "#subEvent",
-          "allOf": [{ "$ref": "subEvent.prop.jsd" }]
-        }
+        "endDate": { "$ref": "endDate.prop.jsd" },
+        "location": { "$ref": "location.prop.jsd" },
+        "offers": { "$ref": "offers.prop.jsd" },
+        "performer": { "$ref": "performer.prop.jsd" },
+        "sponsor": { "$ref": "sponsor.prop.jsd" },
+        "startDate": { "$ref": "startDate.prop.jsd" },
+        "superEvent": { "$ref": "superEvent.prop.jsd" },
+        "subEvent": { "$ref": "subEvent.prop.jsd" }
       }
     }
   ]

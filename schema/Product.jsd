@@ -7,58 +7,19 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "additionalProperty": {
-          "$id": "#additionalProperty",
-          "allOf": [{ "$ref": "additionalProperty.prop.jsd" }]
-        },
-        "award": {
-          "$id": "#award",
-          "allOf": [{ "$ref": "award.prop.jsd" }]
-        },
-        "brand": {
-          "$id": "#brand",
-          "allOf": [{ "$ref": "brand.prop.jsd" }]
-        },
-        "color": {
-          "$id": "#color",
-          "allOf": [{ "$ref": "color.prop.jsd" }]
-        },
-        "depth": {
-          "$id": "#depth",
-          "allOf": [{ "$ref": "depth.prop.jsd" }]
-        },
-        "height": {
-          "$id": "#height",
-          "allOf": [{ "$ref": "height.prop.jsd" }]
-        },
-        "logo": {
-          "$id": "#logo",
-          "allOf": [{ "$ref": "logo.prop.jsd" }]
-        },
-        "manufacturer": {
-          "$id": "#manufacturer",
-          "allOf": [{ "$ref": "manufacturer.prop.jsd" }]
-        },
-        "offers": {
-          "$id": "#offers",
-          "allOf": [{ "$ref": "offers.prop.jsd" }]
-        },
-        "productID": {
-          "$id": "#productID",
-          "allOf": [{ "$ref": "productID.prop.jsd" }]
-        },
-        "sku": {
-          "$id": "#sku",
-          "allOf": [{ "$ref": "sku.prop.jsd" }]
-        },
-        "weight": {
-          "$id": "#weight",
-          "allOf": [{ "$ref": "weight.prop.jsd" }]
-        },
-        "width": {
-          "$id": "#width",
-          "allOf": [{ "$ref": "width.prop.jsd" }]
-        }
+        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+        "award": { "$ref": "award.prop.jsd" },
+        "brand": { "$ref": "brand.prop.jsd" },
+        "color": { "$ref": "color.prop.jsd" },
+        "depth": { "$ref": "depth.prop.jsd" },
+        "height": { "$ref": "height.prop.jsd" },
+        "logo": { "$ref": "logo.prop.jsd" },
+        "manufacturer": { "$ref": "manufacturer.prop.jsd" },
+        "offers": { "$ref": "offers.prop.jsd" },
+        "productID": { "$ref": "productID.prop.jsd" },
+        "sku": { "$ref": "sku.prop.jsd" },
+        "weight": { "$ref": "weight.prop.jsd" },
+        "width": { "$ref": "width.prop.jsd" }
       }
     }
   ]

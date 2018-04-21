@@ -7,14 +7,8 @@
     { "$ref": "Offer.jsd" },
     {
       "properties": {
-        "offerCount": {
-          "$id": "#offerCount",
-          "allOf": [{ "$ref": "offerCount.prop.jsd" }]
-        },
-        "offers": {
-          "$id": "#offers",
-          "allOf": [{ "$ref": "offers.prop.jsd" }]
-        }
+        "offerCount": { "$ref": "offerCount.prop.jsd" },
+        "offers": { "$ref": "offers.prop.jsd" }
       }
     }
   ]

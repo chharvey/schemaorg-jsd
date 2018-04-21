@@ -7,10 +7,7 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "offeredBy": {
-          "$id": "#offeredBy",
-          "allOf": [{ "$ref": "offeredBy.prop.jsd" }]
-        }
+        "offeredBy": { "$ref": "offeredBy.prop.jsd" }
       }
     }
   ]

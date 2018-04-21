@@ -7,22 +7,10 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "hiringOrganization": {
-          "$id": "#hiringOrganization",
-          "allOf": [{ "$ref": "hiringOrganization.prop.jsd" }]
-        },
-        "jobLocation": {
-          "$id": "#jobLocation",
-          "allOf": [{ "$ref": "jobLocation.prop.jsd" }]
-        },
-        "responsibilities": {
-          "$id": "#responsibilities",
-          "allOf": [{ "$ref": "responsibilities.prop.jsd" }]
-        },
-        "title": {
-          "$id": "#title",
-          "allOf": [{ "$ref": "title.prop.jsd" }]
-        }
+        "hiringOrganization": { "$ref": "hiringOrganization.prop.jsd" },
+        "jobLocation": { "$ref": "jobLocation.prop.jsd" },
+        "responsibilities": { "$ref": "responsibilities.prop.jsd" },
+        "title": { "$ref": "title.prop.jsd" }
       }
     }
   ]

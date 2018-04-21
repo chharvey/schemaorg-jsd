@@ -7,30 +7,12 @@
     { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
-        "additionalProperty": {
-          "$id": "#additionalProperty",
-          "allOf": [{ "$ref": "additionalProperty.prop.jsd" }]
-        },
-        "maxValue": {
-          "$id": "#maxValue",
-          "allOf": [{ "$ref": "maxValue.prop.jsd" }]
-        },
-        "minValue": {
-          "$id": "#minValue",
-          "allOf": [{ "$ref": "minValue.prop.jsd" }]
-        },
-        "unitCode": {
-          "$id": "#unitCode",
-          "allOf": [{ "$ref": "unitCode.prop.jsd" }]
-        },
-        "unitText": {
-          "$id": "#unitText",
-          "allOf": [{ "$ref": "unitText.prop.jsd" }]
-        },
-        "value": {
-          "$id": "#value",
-          "allOf": [{ "$ref": "value.prop.jsd" }]
-        }
+        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+        "maxValue": { "$ref": "maxValue.prop.jsd" },
+        "minValue": { "$ref": "minValue.prop.jsd" },
+        "unitCode": { "$ref": "unitCode.prop.jsd" },
+        "unitText": { "$ref": "unitText.prop.jsd" },
+        "value": { "$ref": "value.prop.jsd" }
       }
     }
   ]

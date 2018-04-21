@@ -7,30 +7,12 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "additionalProperty": {
-          "$id": "#additionalProperty",
-          "allOf": [{ "$ref": "additionalProperty.prop.jsd" }]
-        },
-        "address": {
-          "$id": "#address",
-          "allOf": [{ "$ref": "address.prop.jsd" }]
-        },
-        "event": {
-          "$id": "#event",
-          "allOf": [{ "$ref": "event.prop.jsd" }]
-        },
-        "geo": {
-          "$id": "#geo",
-          "allOf": [{ "$ref": "geo.prop.jsd" }]
-        },
-        "logo": {
-          "$id": "#logo",
-          "allOf": [{ "$ref": "logo.prop.jsd" }]
-        },
-        "telephone": {
-          "$id": "#telephone",
-          "allOf": [{ "$ref": "telephone.prop.jsd" }]
-        }
+        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+        "address": { "$ref": "address.prop.jsd" },
+        "event": { "$ref": "event.prop.jsd" },
+        "geo": { "$ref": "geo.prop.jsd" },
+        "logo": { "$ref": "logo.prop.jsd" },
+        "telephone": { "$ref": "telephone.prop.jsd" }
       }
     }
   ]

@@ -7,22 +7,10 @@
     { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
-        "address": {
-          "$id": "#address",
-          "allOf": [{ "$ref": "address.prop.jsd" }]
-        },
-        "elevation": {
-          "$id": "#elevation",
-          "allOf": [{ "$ref": "elevation.prop.jsd" }]
-        },
-        "latitude": {
-          "$id": "#latitude",
-          "allOf": [{ "$ref": "latitude.prop.jsd" }]
-        },
-        "longitude": {
-          "$id": "#longitude",
-          "allOf": [{ "$ref": "longitude.prop.jsd" }]
-        }
+        "address": { "$ref": "address.prop.jsd" },
+        "elevation": { "$ref": "elevation.prop.jsd" },
+        "latitude": { "$ref": "latitude.prop.jsd" },
+        "longitude": { "$ref": "longitude.prop.jsd" }
       }
     }
   ]
