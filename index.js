@@ -1,14 +1,47 @@
+const fs   = require('fs')
+const path = require('path')
+const url  = require('url')
+const util = require('util')
+
 const Ajv = require('ajv')
 
 const {requireOtherAsync} = require('./lib/requireOther.js')
-const schematas = require('./lib/schemata.js')
 
+
+/**
+ * @summary An array of meta-schemata against which the content schemata validate.
+ * @description This is for internal use only. Users should not be expected to use these meta-schemata.
+ * @alias module:index.getMetaSchemata
+ * @returns {Array<!Object>} an array of meta-schemata
+ */
+module.exports.getMetaSchemata = async function getMetaSchemata() {
+  return Promise.all(
+    (await util.promisify(fs.readdir)(path.resolve(__dirname, './meta/')))
+      .filter((filename) => path.parse(filename).ext === '.jsd')
+      .map((filename) => requireOtherAsync(path.resolve(__dirname, './meta/', filename)))
+  )
+}
+
+/**
+ * @summary An array of all JSON Schemata validating Schema.org vocabulary.
+ * @description This array contains all Schema.org schemata in this project.
+ * That is, schemata against which your JSON-LD documents should validate.
+ * @alias module:index.getSchemata
+ * @returns {Array<!Object>} an array of schemata
+ */
+module.exports.getSchemata = async function getSchemata() {
+  return Promise.all(
+    (await util.promisify(fs.readdir)(path.resolve(__dirname, './schema/')))
+      .filter((filename) => path.parse(filename).ext === '.jsd')
+      .map((filename) => requireOtherAsync(path.resolve(__dirname, './schema/', filename)))
+  )
+}
 
 /**
  * @module index
  * @summary Validate a JSON-LD document against a Schema.org JSON schema.
  * @example
- * const sdoValidate = require('schemaorg-jsd')
+ * const {sdoValidate} = require('schemaorg-jsd')
  * async function compile(jsdoc) {
  *   let is_valid;
  *   try {
@@ -33,9 +66,9 @@ const schematas = require('./lib/schemata.js')
  * @returns {boolean} `true` if the document passes validation
  * @throws  {TypeError} if the document fails validation; has a `.details` property for validation details
  */
-module.exports = async function sdoValidate(document, type = null) {
+module.exports.sdoValidate = async function sdoValidate(document, type = null) {
   let doc = (typeof document === 'string') ? await requireOtherAsync(document) : document
-  const [META_SCHEMATA, SCHEMATA] = await Promise.all([schematas.getMetaSchemata(), schematas.getSchemata()])
+  const [META_SCHEMATA, SCHEMATA] = await Promise.all([module.exports.getMetaSchemata(), module.exports.getSchemata()])
   if (type === null) {
     let doctype = doc['@type']
     if (SCHEMATA.find((jsd) => jsd.title === `http://schema.org/${doctype}`)) {

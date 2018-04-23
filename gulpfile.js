@@ -8,13 +8,12 @@ const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
 const createDir = require('./lib/createDir.js')
-const schematas = require('./lib/schemata.js')
 
-const sdoValidate = require('./index.js')
+const sdo_jsd = require('./index.js')
 
 
 gulp.task('validate', async function () {
-  const [META_SCHEMATA, SCHEMATA] = await Promise.all([schematas.getMetaSchemata(), schematas.getSchemata()])
+  const [META_SCHEMATA, SCHEMATA] = await Promise.all([sdo_jsd.getMetaSchemata(), sdo_jsd.getSchemata()])
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
@@ -23,7 +22,7 @@ gulp.task('test', async function () {
     let filepath = path.resolve(__dirname, './test/', file)
     let returned;
     try {
-      returned = await sdoValidate(filepath)
+      returned = await sdo_jsd.sdoValidate(filepath)
       console.log(`The example ${file} is valid.`)
     } catch (e) {
       console.error(`The example ${file} failed!`, e.details || e)
@@ -34,7 +33,7 @@ gulp.task('test', async function () {
 
 gulp.task('docs:jsonld', async function () {
   // ++++ LOCAL VARIABLES ++++
-  const SCHEMATA = (await schematas.getSchemata())
+  const SCHEMATA = (await sdo_jsd.getSchemata())
     .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
   let label     = (jsd) => path.parse(new url.URL(jsd.title).pathname).name
   let comment   = (jsd) => jsd.description

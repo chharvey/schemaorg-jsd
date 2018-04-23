@@ -16,7 +16,7 @@ It returns a Promise object, so you may use `await` or you may use standard `Pro
 Read the JSDoc in `./index.js` for further details.
 
 ```js
-const sdoValidate = require('schemaorg-jsd')
+const {sdoValidate} = require('schemaorg-jsd')
 
 async function run() {
 // use any javascript object
@@ -57,7 +57,7 @@ This project’s exported `SCHEMATA` object is an array of Schema.org JSON schem
 pre-packaged and ready to add.
 ```js
 const Ajv = require('ajv')
-const schematas = require('schemaorg-jsd/lib/schemata.js')
+const sdo_jsd = require('schemaorg-jsd')
 
 let my_schema = {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -73,7 +73,7 @@ let my_data = [
 ]
 
 async function run() {
-  const SCHEMATA = schematas.getSchemata()
+  const SCHEMATA = sdo_jsd.getSchemata()
 let ajv = new Ajv().addSchema(await SCHEMATA)
 ajv.validate(my_schema, my_data)
 // NOTE that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
