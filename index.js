@@ -4,7 +4,7 @@ const url  = require('url')
 
 const Ajv = require('ajv')
 
-const requireOther = require('./lib/requireOther.js')
+const {requireOther} = require('./lib/requireOther.js')
 
 /**
  * @summary the type of a schema.

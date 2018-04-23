@@ -10,7 +10,6 @@ const Ajv   = require('ajv')
 const {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidateSync} = require('./index.js')
 
 const createDir = require('./lib/createDir.js')
-const requireOther = require('./lib/requireOther.js')
 
 
 gulp.task('validate', function () {
