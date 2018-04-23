@@ -7,31 +7,34 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidateSync} = require('./index.js')
-
 const createDir = require('./lib/createDir.js')
-const requireOther = require('./lib/requireOther.js')
+
+const sdo_jsd = require('./index.js')
 
 
-gulp.task('validate', function () {
+gulp.task('validate', async function () {
+  const [META_SCHEMATA, SCHEMATA] = await Promise.all([sdo_jsd.getMetaSchemata(), sdo_jsd.getSchemata()])
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
 gulp.task('test', async function () {
-  let filenames = fs.readdirSync('./test')
-  await Promise.all(filenames.map(async function (file) {
+  return Promise.all((await util.promisify(fs.readdir)('./test')).map(async function (file) {
     let filepath = path.resolve(__dirname, './test/', file)
-      try {
-        let passed = await sdoValidate(filepath)
-        console.log(`The example ${file} is valid.`)
-      } catch (e) {
-        console.error(`The example ${file} failed!`, e.details || e)
-      }
+    let returned;
+    try {
+      returned = await sdo_jsd.sdoValidate(filepath)
+      console.log(`The example ${file} is valid.`)
+    } catch (e) {
+      console.error(`The example ${file} failed!`, e.details || e)
+    }
+    return returned
   }))
 })
 
 gulp.task('docs:jsonld', async function () {
   // ++++ LOCAL VARIABLES ++++
+  const SCHEMATA = (await sdo_jsd.getSchemata())
+    .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
   let label     = (jsd) => path.parse(new url.URL(jsd.title).pathname).name
   let comment   = (jsd) => jsd.description
   let supertype = (jsd) => (label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null
@@ -64,13 +67,13 @@ gulp.task('docs:jsonld', async function () {
   }
 
   // ++++ MAP TO JSON-LD ++++
-  let datatypes = SCHEMATA.DATATYPES.map((jsd) => ({
+  let datatypes = SCHEMATA.filter((jsd) => jsd.$schema === 'http://json-schema.org/draft-07/schema#').map((jsd) => ({
     '@type'           : 'sdo:DataType',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
   }))
-  let classes = SCHEMATA.TYPES.map((jsd) => ({
+  let classes = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#').map((jsd) => ({
     '@type'           : 'sdo:Class',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
@@ -79,13 +82,13 @@ gulp.task('docs:jsonld', async function () {
     'superClassOf'    : [], // non-normative
     'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map(function (entry) {
       let [key, value] = entry
-      let memberjsd = SCHEMATA.MEMBERS.find((j) => j.title===`http://schema.org/${key}`) || null
+      let memberjsd = SCHEMATA.find((j) => j.title===`http://schema.org/${key}`) || null
       if (memberjsd) return { '@id': `sdo:${key}` }
       else throw new ReferenceError(`No corresponding jsd file was found for member subschema \`${label(jsd)}#${key}\`.`)
     }),
     'valueOf': [], // non-normative
   }))
-  let properties = SCHEMATA.MEMBERS.map((jsd) => ({
+  let properties = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#').map((jsd) => ({
     '@type'           : 'sdo:Property',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
