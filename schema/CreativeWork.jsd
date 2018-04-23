@@ -16,6 +16,7 @@
         "keywords": { "$ref": "keywords.prop.jsd" },
         "mainEntity": { "$ref": "mainEntity.prop.jsd" },
         "offers": { "$ref": "offers.prop.jsd" },
+        "position": { "$ref": "position.prop.jsd" },
         "sponsor": { "$ref": "sponsor.prop.jsd" },
         "thumbnailUrl": { "$ref": "thumbnailUrl.prop.jsd" }
       }
