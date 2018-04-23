@@ -7,7 +7,8 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const Ajv   = require('ajv')
 
-const {META_SCHEMATA, SCHEMATA, sdoValidate, sdoValidateSync} = require('./index.js')
+const {META_SCHEMATA, SCHEMATA} = require('./lib/schemata.js')
+const {sdoValidate, sdoValidateSync} = require('./index.js')
 
 const createDir = require('./lib/createDir.js')
 
@@ -63,13 +64,13 @@ gulp.task('docs:jsonld', async function () {
   }
 
   // ++++ MAP TO JSON-LD ++++
-  let datatypes = SCHEMATA.DATATYPES.map((jsd) => ({
+  let datatypes = SCHEMATA.filter((jsd) => jsd.$schema === 'http://json-schema.org/draft-07/schema#').map((jsd) => ({
     '@type'           : 'sdo:DataType',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
   }))
-  let classes = SCHEMATA.TYPES.map((jsd) => ({
+  let classes = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#').map((jsd) => ({
     '@type'           : 'sdo:Class',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
@@ -84,7 +85,7 @@ gulp.task('docs:jsonld', async function () {
     }),
     'valueOf': [], // non-normative
   }))
-  let properties = SCHEMATA.MEMBERS.map((jsd) => ({
+  let properties = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#').map((jsd) => ({
     '@type'           : 'sdo:Property',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
