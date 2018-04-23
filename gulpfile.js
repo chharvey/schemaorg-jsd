@@ -10,6 +10,8 @@ const Ajv   = require('ajv')
 const createDir = require('./lib/createDir.js')
 const schematas = require('./lib/schemata.js')
 
+const sdoValidate = require('./index.js')
+
 
 gulp.task('validate', async function () {
   const [META_SCHEMATA, SCHEMATA] = await Promise.all([schematas.getMetaSchemata(), schematas.getSchemata()])
@@ -17,16 +19,16 @@ gulp.task('validate', async function () {
 })
 
 gulp.task('test', async function () {
-  const {sdoValidate, sdoValidateSync} = require('./index.js')
-  let filenames = fs.readdirSync('./test')
-  await Promise.all(filenames.map(async function (file) {
+  return Promise.all((await util.promisify(fs.readdir)('./test')).map(async function (file) {
     let filepath = path.resolve(__dirname, './test/', file)
-      try {
-        let passed = await sdoValidate(filepath)
-        console.log(`The example ${file} is valid.`)
-      } catch (e) {
-        console.error(`The example ${file} failed!`, e.details || e)
-      }
+    let returned;
+    try {
+      returned = await sdoValidate(filepath)
+      console.log(`The example ${file} is valid.`)
+    } catch (e) {
+      console.error(`The example ${file} failed!`, e.details || e)
+    }
+    return returned
   }))
 })
 
