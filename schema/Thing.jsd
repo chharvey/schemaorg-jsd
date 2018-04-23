@@ -4,10 +4,7 @@
   "title": "http://schema.org/Thing",
   "description": "The most generic type of item.",
   "allOf": [
-    {
-      "$comment": "Must first validate against JSON-LD.",
-      "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/json-ld.jsd"
-    },
+    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/json-ld.jsd" },
     {
       "type": "object",
       "properties": {
