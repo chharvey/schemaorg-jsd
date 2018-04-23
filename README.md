@@ -11,10 +11,14 @@ $ npm install schemaorg-jsd
 
 ## Validate Against Schema.org JSON Schema
 
-### Synchronously
-```js
-const {sdoValidate} = require('schemaorg-jsd')
+This module exports an asynchronous validation function.
+It returns a Promise object, so you may use `await` or you may use standard `Promise` prototype methods.
+Read the JSDoc in `./index.js` for further details.
 
+```js
+const sdoValidate = require('schemaorg-jsd')
+
+async function run() {
 // use any javascript object
 let school = {
   '@context': 'http://schema.org/',
@@ -24,7 +28,7 @@ let school = {
 school['@id'] = 'http://www.blacksburg.gov/'
 try {
   let is_valid_place = sdoValidate(school, 'Place') // validate against the Place schema
-  console.log(is_valid_place) // return `true` if the document passes validation
+  console.log(await is_valid_place) // return `true` if the document passes validation
 } catch (e) { // throw an `Error` if the document fails validation
   console.error(e)
   console.error(e.filename) // file where the invalidation occurred
@@ -33,32 +37,14 @@ try {
 
 // require a package
 let me = require('./me.json')
-sdoValidate(me, 'Person')
+await sdoValidate(me, 'Person')
 
 // use a string (relative path) of the filename
 let org = './my-org.jsonld'
-sdoValidate(org, 'Organization')
-```
-
-### Asynchronously
-All of the above is the same, but you may additionally pass a callback for the asynchronous version.
-The callback is the standard `node.js`-style callback.
-```js
-const {sdoValidate} = require('schemaorg-jsd')
-
-let school = {
-  "@context": "http://schema.org/",
-  "@type": "Place",
-  "@id": "http://www.blacksburg.gov/",
-  "name": "Blacksburg, VA"
+await sdoValidate(org, 'Organization')
 }
-sdoValidate(school, 'Place', function (err, is_valid) {
-  if (err) { // `Error` if the document fails
-    console.error(err)
-  }
-  else console.log(is_valid) // `true` (pass) or `false` (fail)
-})
 ```
+
 
 ## Validate Against Your Own JSON Schema
 You can use [ajv](https://www.npmjs.com/package/ajv) to validate any document against any JSON schema.
@@ -71,7 +57,7 @@ This project’s exported `SCHEMATA` object is an array of Schema.org JSON schem
 pre-packaged and ready to add.
 ```js
 const Ajv = require('ajv')
-const {SCHEMATA} = require('schemaorg-jsd')
+const schematas = require('schemaorg-jsd/lib/schemata.js')
 
 let my_schema = {
   "$schema": "http://json-schema.org/draft-07/schema#",
@@ -86,11 +72,14 @@ let my_data = [
   { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
 ]
 
-let ajv = new Ajv().addSchema(SCHEMATA)
+async function run() {
+  const SCHEMATA = schematas.getSchemata()
+let ajv = new Ajv().addSchema(await SCHEMATA)
 ajv.validate(my_schema, my_data)
 // NOTE that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
 // `Ajv#validate(schema, data)`
 // `sdoValidate(data, schemaTitle)`
+}
 ```
 
 ## View the “API”
@@ -99,6 +88,7 @@ They are identical to the specs at [schema.org](https://schema.org/),
 but you can import the source code in your own project for JSDoc compilation.
 ```
 $ cd node_modules/schemaorg-jsd
+$ npm install
 $ npm run build
 $ cd -
 $ # open ./docs/api/index.html in your browser
