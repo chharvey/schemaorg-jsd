@@ -155,7 +155,16 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
     /**
      * @summary ${jsonld['rdfs:comment']}
      * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {*} ${jsonld['rdfs:label']}
+     * @typedef {${({
+       'Boolean'  : 'boolean',
+       'Date'     : 'string',
+       'DateTime' : 'string',
+       'Integer'  : 'number',
+       'Number'   : 'number',
+       'Text'     : 'string',
+       'Time'     : 'string',
+       'URL'      : 'string',
+     })[jsonld['rdfs:label']]}} ${jsonld['rdfs:label']}
      */
   `)
   let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
@@ -187,16 +196,7 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
      *
      * @see http://schema.org/${jsonld['rdfs:label']}
      * @typedef {${(function (propertyld) {
-       const jsd_type = {
-         'Boolean': 'boolean',
-         'Integer': 'integer',
-         'Number' : 'number' ,
-         'Text'   : 'string' ,
-       }
-       let union = `(${propertyld['rdfs:range'].map(function (ld) {
-         let classname = ld['@id'].split(':')[1]
-         return jsd_type[classname] || classname
-       }).join('|')})`
+       let union = `(${propertyld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')})`
        return (propertyld['$rangeArray']) ? `(${union}|Array<${union}>)` : union
      })(jsonld)}} ${jsonld['rdfs:label']}
      */
