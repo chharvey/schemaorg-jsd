@@ -13,8 +13,8 @@
         "performer": { "$ref": "performer.prop.jsd" },
         "sponsor": { "$ref": "sponsor.prop.jsd" },
         "startDate": { "$ref": "startDate.prop.jsd" },
-        "superEvent": { "$ref": "superEvent.prop.jsd" },
-        "subEvent": { "$ref": "subEvent.prop.jsd" }
+        "subEvent": { "$ref": "subEvent.prop.jsd" },
+        "superEvent": { "$ref": "superEvent.prop.jsd" }
       }
     }
   ]

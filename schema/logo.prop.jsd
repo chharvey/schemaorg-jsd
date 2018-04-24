@@ -6,8 +6,8 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "$ref": "URL.jsd" },
-        { "$ref": "ImageObject.jsd" }
+        { "$ref": "ImageObject.jsd" },
+        { "$ref": "URL.jsd" }
       ]
     }
   },
