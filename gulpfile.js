@@ -68,13 +68,13 @@ gulp.task('docs:jsonld', async function () {
 
   // ++++ MAP TO JSON-LD ++++
   let datatypes = SCHEMATA.filter((jsd) => jsd.$schema === 'http://json-schema.org/draft-07/schema#').map((jsd) => ({
-    '@type'           : 'sdo:DataType',
+    '@type'           : 'rdfs:Datatype',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
   }))
   let classes = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#').map((jsd) => ({
-    '@type'           : 'sdo:Class',
+    '@type'           : 'rdfs:Class',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
@@ -89,7 +89,7 @@ gulp.task('docs:jsonld', async function () {
     'valueOf': [], // non-normative
   }))
   let properties = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#').map((jsd) => ({
-    '@type'           : 'sdo:Property',
+    '@type'           : 'rdf:Property',
     '@id'             : `sdo:${label(jsd)}`,
     'sdo:name'        : label(jsd),
     'sdo:description' : comment(jsd),
@@ -139,6 +139,7 @@ gulp.task('docs:jsonld', async function () {
   let contents = JSON.stringify({
     "@context": {
       "sdo" : "http://schema.org/",
+      "rdf" : "https://www.w3.org/1999/02/22-rdf-syntax-ns#",
       "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
       "superClassOf": { "@reverse": "rdfs:subClassOf" },
       "valueOf"     : { "@reverse": "sdo:rangeIncludes" }
@@ -156,7 +157,7 @@ gulp.task('docs:jsonld', async function () {
 })
 
 gulp.task('docs:typedef', ['docs:jsonld'], async function () {
-  let data = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))
+  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))['@graph']
 
   // REVIEW:INDENTATION
     function jsdocTypeDeclaration(member) {
@@ -173,20 +174,14 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
       return (member['$rangeIncludesArray']) ? `(${union}|Array<${union}>)` : union
     }
 
-    const JSONLD = {
-      DATATYPES : data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:DataType'),
-      CLASSES   : data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:Class'   ),
-      PROPERTIES: data['@graph'].filter((jsonld) => jsonld['@type'] === 'sdo:Property'),
-    }
-
-    let datatypes = JSONLD.DATATYPES.map((jsonld) => `
+    let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
       /**
        * @summary ${jsonld['sdo:description']}
        * @see http://schema.org/${jsonld['sdo:name']}
        * @typedef {*} ${jsonld['sdo:name']}
        */
     `)
-    let classes = JSONLD.CLASSES.map((jsonld) => `
+    let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
       /**
        * @summary ${jsonld['sdo:description']}
        * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
@@ -199,14 +194,14 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
        * @see http://schema.org/${jsonld['sdo:name']}
        * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
       ${jsonld['rdfs:member'].map(function (member) {
-        let referenced = JSONLD.PROPERTIES.find((m) => m['@id'] === member['@id']) || null
+        let referenced = JSONLD.find((m) => m['@id'] === member['@id']) || null
         let name        = (referenced || member)['sdo:name']
         let description = (referenced || member)['sdo:description']
         return ` * @property {${(referenced) ? name : jsdocTypeDeclaration(member)}=} ${name} ${description}`
       }).join('\n')}
        */
     `)
-    let properties = JSONLD.PROPERTIES.map((jsonld) => `
+    let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
       /**
        * @summary ${jsonld['sdo:description']}
        * ${(jsonld['sdo:domainIncludes'].length || false) ? '@description' : ''}
