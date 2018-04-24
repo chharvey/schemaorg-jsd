@@ -40,7 +40,7 @@ gulp.task('docs:jsonld', async function () {
   let supertype = (jsd) => (label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null
 
   /**
-   * @summary Calculate the `sdo:rangeIncludes` attribute of a `Property` object.
+   * @summary Calculate the `rdfs:range` attribute of a `rdf:Property` object.
    * @private
    * @param   {!Object} propertyschema a JSON schema validating the Property; must be valid against `member.jsd` or `member-subschema.jsd`
    * @returns {Array<'@id':string>} the Classes in this Property’s range---the possible types this property’s values may take
@@ -93,9 +93,9 @@ gulp.task('docs:jsonld', async function () {
     '@id'             : `sdo:${label(jsd)}`,
     'rdfs:label'   : label(jsd),
     'rdfs:comment' : comment(jsd),
-    'sdo:domainIncludes': [], // non-normative
+    'rdfs:domain'  : [], // non-normative
     '$rangeIncludesArray': jsd.anyOf.length >= 2, // non-standard
-    'sdo:rangeIncludes'  : rangeIncludesCalculator(jsd),
+    'rdfs:range'  : rangeIncludesCalculator(jsd),
   }))
 
   // ++++ PROCESS NON-NORMATIVE SCHEMA DATA ++++
@@ -111,23 +111,23 @@ gulp.task('docs:jsonld', async function () {
     }
   })
   /*
-   * Process non-normative `sdo:domainIncludes`.
-   * A property’s `sdo:domainIncludes` is non-normative because this information can be processed from each type’s members.
+   * Process non-normative `rdfs:domain`.
+   * A property’s `rdfs:domain` is non-normative because this information can be processed from each type’s members.
    */
   classes.forEach(function (jsonld) {
     jsonld['rdfs:member'].forEach(function (property) {
       let referenced = properties.find((m) => m['@id'] === property['@id']) || null
       if (referenced) {
-        referenced['sdo:domainIncludes'].push({ '@id': jsonld['@id'] })
+        referenced['rdfs:domain'].push({ '@id': jsonld['@id'] })
       }
     })
   })
   /*
    * Process non-normative `valueOf`.
-   * A class’s `valueOf` is non-normative because this information can be processed from each property’s `sdo:rangeIncludes`.
+   * A class’s `valueOf` is non-normative because this information can be processed from each property’s `rdfs:range`.
    */
   properties.forEach(function (jsonld) {
-    jsonld['sdo:rangeIncludes'].forEach(function (class_) {
+    jsonld['rdfs:range'].forEach(function (class_) {
       let referenced = classes.find((c) => c['@id'] === class_['@id']) || null
       if (referenced) {
         referenced['valueOf'].push({ '@id': jsonld['@id'] })
@@ -142,7 +142,7 @@ gulp.task('docs:jsonld', async function () {
       "rdf" : "https://www.w3.org/1999/02/22-rdf-syntax-ns#",
       "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
       "superClassOf": { "@reverse": "rdfs:subClassOf" },
-      "valueOf"     : { "@reverse": "sdo:rangeIncludes" }
+      "valueOf"     : { "@reverse": "rdfs:range" }
     },
     '@graph': [
       ...datatypes,
@@ -167,7 +167,7 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
         'Number' : 'number' ,
         'Text'   : 'string' ,
       }
-      let union = `(${member['sdo:rangeIncludes'].map(function (ld) {
+      let union = `(${member['rdfs:range'].map(function (ld) {
         let classname = ld['@id'].split(':')[1]
         return jsd_type[classname] || classname
       }).join('|')})`
@@ -204,10 +204,10 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
     let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
       /**
        * @summary ${jsonld['rdfs:comment']}
-       * ${(jsonld['sdo:domainIncludes'].length || false) ? '@description' : ''}
+       * ${(jsonld['rdfs:domain'].length) ? '@description' : ''}
        *
-       * ${(jsonld['sdo:domainIncludes'].length) ? `*(Non-Normative):* Property of:
-      ${jsonld['sdo:domainIncludes'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+       * ${(jsonld['rdfs:domain'].length) ? `*(Non-Normative):* Property of:
+      ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
        *
        * @see http://schema.org/${jsonld['rdfs:label']}
        * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['rdfs:label']}
