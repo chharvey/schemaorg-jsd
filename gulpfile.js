@@ -39,45 +39,18 @@ gulp.task('docs:jsonld', async function () {
   let comment   = (jsd) => jsd.description
   let supertype = (jsd) => (label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null
 
-  /**
-   * @summary Calculate the `rdfs:range` attribute of a `rdf:Property` object.
-   * @private
-   * @param   {!Object} propertyschema a JSON schema validating the Property; must be valid against `member.jsd` or `member-subschema.jsd`
-   * @returns {Array<'@id':string>} the Classes in this Property’s range---the possible types this property’s values may take
-   */
-  function rangeIncludesCalculator(propertyschema) {
-    const sdo_type = {
-      'boolean': 'Boolean',
-      'integer': 'Integer',
-      'number' : 'Number' ,
-      'string' : 'Text'   ,
-    }
-    // NOTE Cannot use `Array#map` here because there is not a 1-to-1 correspondance
-    // between the schemata in `anyOf` and the pushed jsonld objects.
-    // (Namely, if the jsd `"type"` property is an array, e.g. `["number", "string"]`.)
-    const returned = []
-    propertyschema.definitions['ExpectedType'].anyOf.forEach(function (schema) {
-      if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}` })
-      else {
-        if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdo_type[t]}` })))
-        else returned.push({ '@id': `sdo:${sdo_type[schema.type]}` })
-      }
-    })
-    return returned
-  }
-
   // ++++ MAP TO JSON-LD ++++
   let datatypes = SCHEMATA.filter((jsd) => jsd.$schema === 'http://json-schema.org/draft-07/schema#').map((jsd) => ({
-    '@type'           : 'rdfs:Datatype',
-    '@id'             : `sdo:${label(jsd)}`,
+    '@type'        : 'rdfs:Datatype',
+    '@id'          : `sdo:${label(jsd)}`,
     'rdfs:label'   : label(jsd),
     'rdfs:comment' : comment(jsd),
   }))
   let classes = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#').map((jsd) => ({
     '@type'           : 'rdfs:Class',
     '@id'             : `sdo:${label(jsd)}`,
-    'rdfs:label'   : label(jsd),
-    'rdfs:comment' : comment(jsd),
+    'rdfs:label'      : label(jsd),
+    'rdfs:comment'    : comment(jsd),
     'rdfs:subClassOf' : (supertype(jsd)) ? { '@id': `sdo:${supertype(jsd)}` } : null,
     'superClassOf'    : [], // non-normative
     'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map(function (entry) {
@@ -89,13 +62,32 @@ gulp.task('docs:jsonld', async function () {
     'valueOf': [], // non-normative
   }))
   let properties = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#').map((jsd) => ({
-    '@type'           : 'rdf:Property',
-    '@id'             : `sdo:${label(jsd)}`,
+    '@type'        : 'rdf:Property',
+    '@id'          : `sdo:${label(jsd)}`,
     'rdfs:label'   : label(jsd),
     'rdfs:comment' : comment(jsd),
     'rdfs:domain'  : [], // non-normative
-    '$rangeIncludesArray': jsd.anyOf.length >= 2, // non-standard
-    'rdfs:range'  : rangeIncludesCalculator(jsd),
+    '$rangeArray'  : jsd.anyOf.length >= 2, // non-standard
+    'rdfs:range'   : (function (propertyschema) {
+      const sdo_type = {
+        'boolean': 'Boolean',
+        'integer': 'Integer',
+        'number' : 'Number' ,
+        'string' : 'Text'   ,
+      }
+      // NOTE Cannot use `Array#map` here because there is not a 1-to-1 correspondance
+      // between the schemata in `anyOf` and the pushed jsonld objects.
+      // (Namely, if the jsd `"type"` property is an array, e.g. `["number", "string"]`.)
+      const returned = []
+      propertyschema.definitions['ExpectedType'].anyOf.forEach(function (schema) {
+        if (schema.$ref) returned.push({ '@id': `sdo:${path.parse(schema.$ref).name}` })
+        else {
+          if (Array.isArray(schema.type)) returned.push(...schema.type.map((t) => ({ '@id': `sdo:${sdo_type[t]}` })))
+          else returned.push({ '@id': `sdo:${sdo_type[schema.type]}` })
+        }
+      })
+      return returned
+    })(jsd),
   }))
 
   // ++++ PROCESS NON-NORMATIVE SCHEMA DATA ++++
@@ -160,20 +152,6 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
   const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))['@graph']
 
   // REVIEW:INDENTATION
-    function jsdocTypeDeclaration(member) {
-      const jsd_type = {
-        'Boolean': 'boolean',
-        'Integer': 'integer',
-        'Number' : 'number' ,
-        'Text'   : 'string' ,
-      }
-      let union = `(${member['rdfs:range'].map(function (ld) {
-        let classname = ld['@id'].split(':')[1]
-        return jsd_type[classname] || classname
-      }).join('|')})`
-      return (member['$rangeIncludesArray']) ? `(${union}|Array<${union}>)` : union
-    }
-
     let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
       /**
        * @summary ${jsonld['rdfs:comment']}
@@ -194,7 +172,7 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
        * @see http://schema.org/${jsonld['rdfs:label']}
        * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['rdfs:label']}
     ${jsonld['rdfs:member'].map(function (propertyld) {
-      let referenced = JSONLD.PROPERTIES.find((m) => m['@id'] === propertyld['@id']) || null
+      let referenced = JSONLD.find((m) => m['@id'] === propertyld['@id']) || null
       if (!referenced) throw new ReferenceError(`{ "@id": "${propertyld['@id']}" } not found.`)
       return ` * @property {${referenced['rdfs:label']}=} ${referenced['rdfs:label']} ${referenced['rdfs:comment']}`
     }).join('\n')}
@@ -209,7 +187,19 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
       ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
        *
        * @see http://schema.org/${jsonld['rdfs:label']}
-       * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['rdfs:label']}
+     * @typedef {${(function (propertyld) {
+       const jsd_type = {
+         'Boolean': 'boolean',
+         'Integer': 'integer',
+         'Number' : 'number' ,
+         'Text'   : 'string' ,
+       }
+       let union = `(${propertyld['rdfs:range'].map(function (ld) {
+         let classname = ld['@id'].split(':')[1]
+         return jsd_type[classname] || classname
+       }).join('|')})`
+       return (propertyld['$rangeArray']) ? `(${union}|Array<${union}>)` : union
+     })(jsonld)}} ${jsonld['rdfs:label']}
        */
     `)
 
