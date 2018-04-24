@@ -198,11 +198,10 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
        *
        * @see http://schema.org/${jsonld['sdo:name']}
        * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
-      ${jsonld['rdfs:member'].map(function (member) {
-        let referenced = JSONLD.PROPERTIES.find((m) => m['@id'] === member['@id']) || null
-        let name        = (referenced || member)['sdo:name']
-        let description = (referenced || member)['sdo:description']
-        return ` * @property {${(referenced) ? name : jsdocTypeDeclaration(member)}=} ${name} ${description}`
+      ${jsonld['rdfs:member'].map(function (propertyld) {
+        let referenced = JSONLD.PROPERTIES.find((m) => m['@id'] === propertyld['@id']) || null
+        if (!referenced) throw new ReferenceError(`{ "@id": "${propertyld['@id']}" } not found.`)
+        return ` * @property {${referenced['sdo:name']}=} ${referenced['sdo:name']} ${referenced['sdo:description']}`
       }).join('\n')}
        */
     `)
