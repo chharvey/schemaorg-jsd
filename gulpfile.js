@@ -151,42 +151,41 @@ gulp.task('docs:jsonld', async function () {
 gulp.task('docs:typedef', ['docs:jsonld'], async function () {
   const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))['@graph']
 
-  // REVIEW:INDENTATION
-    let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
-      /**
-       * @summary ${jsonld['rdfs:comment']}
-       * @see http://schema.org/${jsonld['rdfs:label']}
-       * @typedef {*} ${jsonld['rdfs:label']}
-       */
-    `)
-    let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
-      /**
-       * @summary ${jsonld['rdfs:comment']}
-       * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
-       * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:
-      ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-       *
-       * ${(jsonld['valueOf'].length) ? `*(Non-Normative):* May appear as values of:
-      ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-       *
-       * @see http://schema.org/${jsonld['rdfs:label']}
-       * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['rdfs:label']}
+  let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
+    /**
+     * @summary ${jsonld['rdfs:comment']}
+     * @see http://schema.org/${jsonld['rdfs:label']}
+     * @typedef {*} ${jsonld['rdfs:label']}
+     */
+  `)
+  let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
+    /**
+     * @summary ${jsonld['rdfs:comment']}
+     * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
+     * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:
+    ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+     *
+     * ${(jsonld['valueOf'].length) ? `*(Non-Normative):* May appear as values of:
+    ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+     *
+     * @see http://schema.org/${jsonld['rdfs:label']}
+     * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['rdfs:label']}
     ${jsonld['rdfs:member'].map(function (propertyld) {
       let referenced = JSONLD.find((m) => m['@id'] === propertyld['@id']) || null
       if (!referenced) throw new ReferenceError(`{ "@id": "${propertyld['@id']}" } not found.`)
       return ` * @property {${referenced['rdfs:label']}=} ${referenced['rdfs:label']} ${referenced['rdfs:comment']}`
     }).join('\n')}
-       */
-    `)
-    let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
-      /**
-       * @summary ${jsonld['rdfs:comment']}
-       * ${(jsonld['rdfs:domain'].length) ? '@description' : ''}
-       *
-       * ${(jsonld['rdfs:domain'].length) ? `*(Non-Normative):* Property of:
-      ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-       *
-       * @see http://schema.org/${jsonld['rdfs:label']}
+     */
+  `)
+  let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
+    /**
+     * @summary ${jsonld['rdfs:comment']}
+     * ${(jsonld['rdfs:domain'].length) ? '@description' : ''}
+     *
+     * ${(jsonld['rdfs:domain'].length) ? `*(Non-Normative):* Property of:
+    ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
+     *
+     * @see http://schema.org/${jsonld['rdfs:label']}
      * @typedef {${(function (propertyld) {
        const jsd_type = {
          'Boolean': 'boolean',
@@ -200,8 +199,8 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
        }).join('|')})`
        return (propertyld['$rangeArray']) ? `(${union}|Array<${union}>)` : union
      })(jsonld)}} ${jsonld['rdfs:label']}
-       */
-    `)
+     */
+  `)
 
     let contents = [
       ...datatypes,

@@ -76,7 +76,7 @@ async function run() {
   const SCHEMATA = sdo_jsd.getSchemata()
 let ajv = new Ajv().addSchema(await SCHEMATA)
 ajv.validate(my_schema, my_data)
-// NOTE that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
 // `Ajv#validate(schema, data)`
 // `sdoValidate(data, schemaTitle)`
 }
