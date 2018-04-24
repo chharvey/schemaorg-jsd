@@ -70,14 +70,14 @@ gulp.task('docs:jsonld', async function () {
   let datatypes = SCHEMATA.filter((jsd) => jsd.$schema === 'http://json-schema.org/draft-07/schema#').map((jsd) => ({
     '@type'           : 'rdfs:Datatype',
     '@id'             : `sdo:${label(jsd)}`,
-    'sdo:name'        : label(jsd),
-    'sdo:description' : comment(jsd),
+    'rdfs:label'   : label(jsd),
+    'rdfs:comment' : comment(jsd),
   }))
   let classes = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#').map((jsd) => ({
     '@type'           : 'rdfs:Class',
     '@id'             : `sdo:${label(jsd)}`,
-    'sdo:name'        : label(jsd),
-    'sdo:description' : comment(jsd),
+    'rdfs:label'   : label(jsd),
+    'rdfs:comment' : comment(jsd),
     'rdfs:subClassOf' : (supertype(jsd)) ? { '@id': `sdo:${supertype(jsd)}` } : null,
     'superClassOf'    : [], // non-normative
     'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map(function (entry) {
@@ -91,8 +91,8 @@ gulp.task('docs:jsonld', async function () {
   let properties = SCHEMATA.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#').map((jsd) => ({
     '@type'           : 'rdf:Property',
     '@id'             : `sdo:${label(jsd)}`,
-    'sdo:name'        : label(jsd),
-    'sdo:description' : comment(jsd),
+    'rdfs:label'   : label(jsd),
+    'rdfs:comment' : comment(jsd),
     'sdo:domainIncludes': [], // non-normative
     '$rangeIncludesArray': jsd.anyOf.length >= 2, // non-standard
     'sdo:rangeIncludes'  : rangeIncludesCalculator(jsd),
@@ -176,14 +176,14 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
 
     let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
       /**
-       * @summary ${jsonld['sdo:description']}
-       * @see http://schema.org/${jsonld['sdo:name']}
-       * @typedef {*} ${jsonld['sdo:name']}
+       * @summary ${jsonld['rdfs:comment']}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       * @typedef {*} ${jsonld['rdfs:label']}
        */
     `)
     let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
       /**
-       * @summary ${jsonld['sdo:description']}
+       * @summary ${jsonld['rdfs:comment']}
        * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
        * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:
       ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
@@ -191,26 +191,26 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
        * ${(jsonld['valueOf'].length) ? `*(Non-Normative):* May appear as values of:
       ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
        *
-       * @see http://schema.org/${jsonld['sdo:name']}
-       * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['sdo:name']}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['rdfs:label']}
       ${jsonld['rdfs:member'].map(function (member) {
         let referenced = JSONLD.find((m) => m['@id'] === member['@id']) || null
-        let name        = (referenced || member)['sdo:name']
-        let description = (referenced || member)['sdo:description']
+        let name        = (referenced || member)['rdfs:label']
+        let description = (referenced || member)['rdfs:comment']
         return ` * @property {${(referenced) ? name : jsdocTypeDeclaration(member)}=} ${name} ${description}`
       }).join('\n')}
        */
     `)
     let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
       /**
-       * @summary ${jsonld['sdo:description']}
+       * @summary ${jsonld['rdfs:comment']}
        * ${(jsonld['sdo:domainIncludes'].length || false) ? '@description' : ''}
        *
        * ${(jsonld['sdo:domainIncludes'].length) ? `*(Non-Normative):* Property of:
       ${jsonld['sdo:domainIncludes'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
        *
-       * @see http://schema.org/${jsonld['sdo:name']}
-       * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['sdo:name']}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       * @typedef {${jsdocTypeDeclaration(jsonld)}} ${jsonld['rdfs:label']}
        */
     `)
 
