@@ -33,6 +33,7 @@
                 "type": { "const": "object" },
                 "properties": {
                   "additionalProperties": {
+                    "description": "A reference to an external JSON schema for a Schema.org Property.",
                     "required": ["$ref"],
                     "properties": {
                       "$ref": true

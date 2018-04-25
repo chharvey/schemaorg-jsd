@@ -6,9 +6,9 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": "string" },
         { "$ref": "Place.jsd" },
-        { "$ref": "PostalAddress.jsd" }
+        { "$ref": "PostalAddress.jsd" },
+        { "$ref": "Text.jsd" }
       ]
     }
   },
