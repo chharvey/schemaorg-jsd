@@ -6,7 +6,8 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": ["number", "string"] }
+        { "$ref": "Number.jsd" },
+        { "$ref": "Text.jsd" }
       ]
     }
   },
