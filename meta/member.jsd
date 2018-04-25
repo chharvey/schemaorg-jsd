@@ -22,43 +22,12 @@
             "required": ["anyOf"],
             "properties": {
               "anyOf": {
-                "description": "Effectively the `sdo:rangeIncludes` of the Property.",
                 "items": {
-                  "anyOf": [
-                    {
-                      "description": "A reference to an external JSON schema for a Schema.org Class.",
-                      "required": ["$ref"],
-                      "properties": {
-                        "$ref": true
-                      }
-                    },
-                    {
-                      "description": "A primitive type or an array of primitive types.",
-                      "definitions": {
-                        "primitives": {
-                          "$id": "#primitives",
-                          "description": "Further restriction on `http://json-schema.org/draft-07/schema#/definitions/simpleTypes`.",
-                          "enum": [
-                            "boolean",
-                            "integer",
-                            "number",
-                            "string"
-                          ]
-                        }
-                      },
-                      "additionalProperties": false,
-                      "required": ["type"],
-                      "properties": {
-                        "type": {
-                          "anyOf": [
-                            { "$ref": "#primitives" },
-                            { "items": { "$ref": "#primitives" } }
-                          ]
-                        },
-                        "format": true
-                      }
-                    }
-                  ]
+                  "description": "A reference to an external JSON schema for a Schema.org Class.",
+                  "required": ["$ref"],
+                  "properties": {
+                    "$ref": true
+                  }
                 }
               }
             }
@@ -69,10 +38,7 @@
           "items": [
             {
               "$id": "#expected-type",
-              "required": ["$ref"],
-              "properties": {
-                "$ref": { "const": "#/definitions/ExpectedType" }
-              }
+              "const": { "$ref": "#/definitions/ExpectedType" }
             },
             {
               "additionalProperties": false,

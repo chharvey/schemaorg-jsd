@@ -31,7 +31,7 @@ gulp.task('test', async function () {
   }))
 })
 
-gulp.task('docs:jsonld', async function () {
+gulp.task('docs:jsonld', ['validate'], async function () {
   // ++++ LOCAL VARIABLES ++++
   const SCHEMATA = (await sdo_jsd.getSchemata())
     .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
