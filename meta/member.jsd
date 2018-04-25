@@ -24,10 +24,7 @@
               "anyOf": {
                 "items": {
                   "description": "A reference to an external JSON schema for a Schema.org Class.",
-                  "required": ["$ref"],
-                  "properties": {
-                    "$ref": true
-                  }
+                  "$ref": "type.jsd#/definitions/SingleReference"
                 }
               }
             }
