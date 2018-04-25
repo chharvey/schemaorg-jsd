@@ -67,7 +67,7 @@ gulp.task('docs:jsonld', ['validate'], async function () {
     'rdfs:label'   : label(jsd),
     'rdfs:comment' : comment(jsd),
     'rdfs:domain'  : [], // non-normative
-    '$rangeArray'  : (jsd.anyOf) ? jsd.anyOf.length >= 2 : jsd.allOf[1].anyOf.length >= 2, // non-standard
+    '$rangeArray'  : jsd.allOf[1].anyOf.length >= 2, // non-standard
     'rdfs:range'   : (function (propertyschema) {
       const sdo_type = {
         'boolean': 'Boolean',

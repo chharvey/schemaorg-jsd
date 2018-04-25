@@ -8,13 +8,14 @@
     {
       "type": "object",
       "additionalProperties": false,
-      "required": ["$schema", "$id", "title", "description", "definitions"],
+      "required": ["$schema", "$id", "title", "description", "allOf", "definitions"],
       "properties": {
         "$schema"    : true,
         "$id"        : { "type": "string", "format": "uri" },
         "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Property." },
         "description": { "description": "Schema.org’s canonical description of the Property." },
         "allOf"      : {
+          "minItems": 2,
           "maxItems": 2,
           "items": [
             {
@@ -35,7 +36,11 @@
               "required": ["anyOf"],
               "properties": {
                 "anyOf": {
-                  "$ref": "#/allOf/1/properties/anyOf"
+                  "maxItems": 2,
+                  "items": [
+                    { "const": { "$ref": "#/definitions/ExpectedType" } },
+                    { "const": { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } } }
+                  ]
                 }
               }
             }
@@ -56,13 +61,6 @@
               }
             }
           }
-        },
-        "anyOf": {
-          "maxItems": 2,
-          "items": [
-            { "const": { "$ref": "#/definitions/ExpectedType" } },
-            { "const": { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } } }
-          ]
         }
       }
     }
