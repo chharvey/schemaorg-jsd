@@ -17,7 +17,7 @@
         "definitions": {
           "propertyNames": { "const": "ExpectedType" },
           "additionalProperties": {
-            "description": "The expected type(s) of the property.",
+            "description": "The range of this property.",
             "additionalProperties": false,
             "required": ["anyOf"],
             "properties": {
@@ -33,18 +33,8 @@
         "anyOf": {
           "maxItems": 2,
           "items": [
-            {
-              "$id": "#expected-type",
-              "const": { "$ref": "#/definitions/ExpectedType" }
-            },
-            {
-              "additionalProperties": false,
-              "required": ["type", "items"],
-              "properties": {
-                "type": { "const": "array" },
-                "items": { "$ref": "#expected-type" }
-              }
-            }
+            { "const": { "$ref": "#/definitions/ExpectedType" } },
+            { "const": { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } } }
           ]
         }
       }
