@@ -8,12 +8,39 @@
     {
       "type": "object",
       "additionalProperties": false,
-      "required": ["$schema", "$id", "title", "description", "definitions", "anyOf"],
+      "required": ["$schema", "$id", "title", "description", "definitions"],
       "properties": {
         "$schema"    : true,
         "$id"        : { "type": "string", "format": "uri" },
         "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Property." },
         "description": { "description": "Schema.org’s canonical description of the Property." },
+        "allOf"      : {
+          "maxItems": 2,
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "description": "There is no superproperty of this property.",
+                  "const": true
+                },
+                {
+                  "description": "The superproperty of this property.",
+                  "$ref": "type.jsd#/definitions/SingleReference"
+                }
+              ]
+            },
+            {
+              "description": "References to the expected type(s) of this property.",
+              "additionalProperties": false,
+              "required": ["anyOf"],
+              "properties": {
+                "anyOf": {
+                  "$ref": "#/allOf/1/properties/anyOf"
+                }
+              }
+            }
+          ]
+        },
         "definitions": {
           "propertyNames": { "const": "ExpectedType" },
           "additionalProperties": {
