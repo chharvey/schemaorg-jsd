@@ -6,8 +6,8 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": "string" },
         { "$ref": "PropertyValue.jsd" },
+        { "$ref": "Text.jsd" },
         { "$ref": "URL.jsd" }
       ]
     }

@@ -6,7 +6,7 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": "string", "format": "email" }
+        { "$ref": "Text.jsd" }
       ]
     }
   },

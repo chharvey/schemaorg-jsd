@@ -6,7 +6,7 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": "integer" }
+        { "$ref": "Integer.jsd" }
       ]
     }
   },
