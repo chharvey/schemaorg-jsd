@@ -12,7 +12,7 @@
     }
   },
   "allOf": [
-    true,
+    { "$ref": "image.prop.jsd" },
     {
       "anyOf": [
         { "$ref": "#/definitions/ExpectedType" },

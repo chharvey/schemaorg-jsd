@@ -11,7 +11,7 @@
     }
   },
   "allOf": [
-    true,
+    { "$ref": "description.prop.jsd" },
     {
       "anyOf": [
         { "$ref": "#/definitions/ExpectedType" },
