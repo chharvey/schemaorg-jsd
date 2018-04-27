@@ -66,8 +66,10 @@ gulp.task('docs:jsonld', ['validate'], async function () {
     '@id'          : `sdo:${label(jsd)}`,
     'rdfs:label'   : label(jsd),
     'rdfs:comment' : comment(jsd),
+    'rdfs:subPropertyOf': (jsd.allOf[0] !== true) ? { '@id': `sdo:${supertype(jsd).split('.')[0]}` } : null,
+    'superPropertyOf': [], // non-normative
     'rdfs:domain'  : [], // non-normative
-    '$rangeArray'  : jsd.anyOf.length >= 2, // non-standard
+    '$rangeArray'  : jsd.allOf[1].anyOf.length >= 2, // non-standard
     'rdfs:range'   : (function (propertyschema) {
       const sdo_type = {
         'boolean': 'Boolean',
@@ -100,6 +102,17 @@ gulp.task('docs:jsonld', ['validate'], async function () {
     let referenced = (superclass) ? classes.find((c) => c['@id'] === superclass['@id']) || null : null
     if (referenced) {
       referenced['superClassOf'].push({ '@id': jsonld['@id'] })
+    }
+  })
+  /*
+   * Process non-normative subproperties.
+   * Subproperties are non-normative because this information can be processed from each property’s superproperty.
+   */
+  properties.forEach(function (jsonld) {
+    let superproperty = jsonld['rdfs:subPropertyOf']
+    let referenced = (superproperty) ? properties.find((p) => p['@id'] === superproperty['@id']) || null : null
+    if (referenced) {
+      referenced['superPropertyOf'].push({ '@id': jsonld['@id'] })
     }
   })
   /*
@@ -189,7 +202,12 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
   let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
     /**
      * @summary ${jsonld['rdfs:comment']}
-     * ${(jsonld['rdfs:domain'].length) ? '@description' : ''}
+     * ${(jsonld['rdfs:subPropertyOf'] || jsonld['superPropertyOf'].length || jsonld['rdfs:domain'].length) ? '@description' : ''}
+     * ${(jsonld['rdfs:subPropertyOf']) ? `Extends:
+     * - {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
+     *
+     * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:
+     ${jsonld['superPropertyOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
      *
      * ${(jsonld['rdfs:domain'].length) ? `*(Non-Normative):* Property of:
     ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}

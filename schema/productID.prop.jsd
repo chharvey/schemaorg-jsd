@@ -10,7 +10,12 @@
       ]
     }
   },
-  "anyOf": [
-    { "$ref": "#/definitions/ExpectedType" }
+  "allOf": [
+    { "$ref": "identifier.prop.jsd" },
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
   ]
 }
