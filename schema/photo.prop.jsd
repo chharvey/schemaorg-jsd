@@ -1,0 +1,22 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/photo.prop.jsd",
+  "title": "http://schema.org/photo",
+  "description": "A photograph of this place.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "ImageObject.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    { "$ref": "image.prop.jsd" },
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
+  ]
+}

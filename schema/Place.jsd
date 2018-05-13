@@ -12,6 +12,7 @@
         "event": { "$ref": "event.prop.jsd" },
         "geo": { "$ref": "geo.prop.jsd" },
         "logo": { "$ref": "logo.prop.jsd" },
+        "photo": { "$ref": "photo.prop.jsd" },
         "telephone": { "$ref": "telephone.prop.jsd" }
       }
     }
