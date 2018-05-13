@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/previousItem.prop.jsd",
+  "title": "http://schema.org/previousItem",
+  "description": "A link to the ListItem that precedes the current one.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "ListItem.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/itemListElement.prop.jsd",
+  "title": "http://schema.org/itemListElement",
+  "description": "For itemListElement values, you can use simple strings (e.g. \"Peter\", \"Paul\", \"Mary\"), existing entities, or use ListItem.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "ListItem.jsd" },
+        { "$ref": "Text.jsd" },
+        { "$ref": "Thing.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
+  ]
+}

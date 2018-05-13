@@ -7,126 +7,21 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "additionalName": {
-          "$id": "#additionalName",
-          "title": "http://schema.org/additionalName",
-          "description": "An additional name for a Person, can be used for a middle name.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#additionalName-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#additionalName-ExpectedType" }
-          ]
-        },
-        "address": {
-          "$id": "#address",
-          "allOf": [{ "$ref": "address.prop.jsd" }]
-        },
-        "award": {
-          "$id": "#award",
-          "allOf": [{ "$ref": "award.prop.jsd" }]
-        },
-        "brand": {
-          "$id": "#brand",
-          "allOf": [{ "$ref": "brand.prop.jsd" }]
-        },
-        "contactPoint": {
-          "$id": "#contactPoint",
-          "allOf": [{ "$ref": "contactPoint.prop.jsd" }]
-        },
-        "email": {
-          "$id": "#email",
-          "allOf": [{ "$ref": "email.prop.jsd" }]
-        },
-        "familyName": {
-          "$id": "#familyName",
-          "title": "http://schema.org/familyName",
-          "description": "Family name. In the U.S., the last name of an Person. This can be used along with givenName instead of the name property.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#familyName-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#familyName-ExpectedType" }
-          ]
-        },
-        "givenName": {
-          "$id": "#givenName",
-          "title": "http://schema.org/givenName",
-          "description": "Given name. In the U.S., the first name of a Person. This can be used along with familyName instead of the name property.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#givenName-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#givenName-ExpectedType" }
-          ]
-        },
-        "height": {
-          "$id": "#height",
-          "allOf": [{ "$ref": "height.prop.jsd" }]
-        },
-        "honorificPrefix": {
-          "$id": "#honorificPrefix",
-          "title": "http://schema.org/honorificPrefix",
-          "description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#honorificPrefix-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#honorificPrefix-ExpectedType" }
-          ]
-        },
-        "honorificSuffix": {
-          "$id": "#honorificSuffix",
-          "title": "http://schema.org/honorificSuffix",
-          "description": "An honorific suffix preceding a Person’s name such as M.D. /PhD/MSCSW.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#honorificSuffix-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#honorificSuffix-ExpectedType" }
-          ]
-        },
-        "makesOffer": {
-          "$id": "#makesOffer",
-          "allOf": [{ "$ref": "makesOffer.prop.jsd" }]
-        },
-        "sponsor": {
-          "$id": "#sponsor",
-          "allOf": [{ "$ref": "sponsor.prop.jsd" }]
-        },
-        "telephone": {
-          "$id": "#telephone",
-          "allOf": [{ "$ref": "telephone.prop.jsd" }]
-        },
-        "weight": {
-          "$id": "#weight",
-          "allOf": [{ "$ref": "weight.prop.jsd" }]
-        }
+        "additionalName": { "$ref": "additionalName.prop.jsd" },
+        "address": { "$ref": "address.prop.jsd" },
+        "award": { "$ref": "award.prop.jsd" },
+        "brand": { "$ref": "brand.prop.jsd" },
+        "contactPoint": { "$ref": "contactPoint.prop.jsd" },
+        "email": { "$ref": "email.prop.jsd" },
+        "familyName": { "$ref": "familyName.prop.jsd" },
+        "givenName": { "$ref": "givenName.prop.jsd" },
+        "height": { "$ref": "height.prop.jsd" },
+        "honorificPrefix": { "$ref": "honorificPrefix.prop.jsd" },
+        "honorificSuffix": { "$ref": "honorificSuffix.prop.jsd" },
+        "makesOffer": { "$ref": "makesOffer.prop.jsd" },
+        "sponsor": { "$ref": "sponsor.prop.jsd" },
+        "telephone": { "$ref": "telephone.prop.jsd" },
+        "weight": { "$ref": "weight.prop.jsd" }
       }
     }
   ]

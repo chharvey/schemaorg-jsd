@@ -1,0 +1,22 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/endDate.prop.jsd",
+  "title": "http://schema.org/endDate",
+  "description": "The end date and time of the item (in ISO 8601 date format).",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Date.jsd" },
+        { "$ref": "DateTime.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

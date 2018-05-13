@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/sku.prop.jsd",
+  "title": "http://schema.org/sku",
+  "description": "The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Text.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    { "$ref": "identifier.prop.jsd" },
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/maxValue.prop.jsd",
+  "title": "http://schema.org/maxValue",
+  "description": "The upper value of some characteristic or property.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Number.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

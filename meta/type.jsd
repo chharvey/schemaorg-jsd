@@ -3,6 +3,16 @@
   "$id": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd",
   "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Class.",
   "description": "JSON Schema for a Schema.org Class.",
+  "definitions": {
+    "SingleReference": {
+      "description": "A single reference to a JSON schema.",
+      "additionalProperties": false,
+      "required": ["$ref"],
+      "properties": {
+        "$ref": true
+      }
+    }
+  },
   "allOf": [
     { "$ref": "http://json-schema.org/draft-07/schema#" },
     {
@@ -12,25 +22,27 @@
       "properties": {
         "$schema"    : true,
         "$id"        : { "type": "string", "format": "uri" },
-        "title"      : { "type": "string", "format": "uri" },
-        "description": true,
+        "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Class." },
+        "description": { "description": "Schema.org’s canonical description of the Class." },
         "allOf"      : {
           "minItems": 2,
           "maxItems": 2,
           "items": [
             {
-              "required": ["$ref"],
-              "properties": {
-                "$ref": true
-              }
+              "description": "The superclass of this class.",
+              "$ref": "#/definitions/SingleReference"
             },
             {
+              "description": "A list of further properties of this class.",
               "additionalProperties": false,
               "required": ["properties"],
               "properties": {
                 "type": { "const": "object" },
                 "properties": {
-                  "additionalProperties": { "$ref": "https://chharvey.github.io/schemaorg-jsd/meta/member-subschema.jsd" }
+                  "additionalProperties": {
+                    "description": "A reference to an external JSON schema for a Schema.org Property.",
+                    "$ref": "#/definitions/SingleReference"
+                  }
                 }
               }
             }

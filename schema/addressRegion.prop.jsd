@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/addressRegion.prop.jsd",
+  "title": "http://schema.org/addressRegion",
+  "description": "The region.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Text.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

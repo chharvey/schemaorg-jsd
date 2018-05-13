@@ -7,23 +7,7 @@
     { "$ref": "CreativeWork.jsd" },
     {
       "properties": {
-        "significantLink": {
-          "$id": "#significantLink",
-          "title": "http://schema.org/significantLink",
-          "description": "One of the more significant URLs on the page. Typically, these are the non-navigation links that are clicked on the most.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#significantLink-ExpectedType",
-              "anyOf": [
-                { "$ref": "URL.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#significantLink-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#significantLink-ExpectedType" } }
-          ]
-        }
+        "significantLink": { "$ref": "significantLink.prop.jsd" }
       }
     }
   ]

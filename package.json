@@ -1,6 +1,6 @@
 {
   "name": "schemaorg-jsd",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "JSON Schema validation for JSON-LD files using Schema.org vocabulary.",
   "main": "index.js",
   "scripts": {
@@ -28,6 +28,6 @@
   },
   "devDependencies": {
     "gulp": "^3.9.1",
-    "gulp-jsdoc3": "^1.0.1"
+    "gulp-jsdoc3": "^2.0.0"
   }
 }

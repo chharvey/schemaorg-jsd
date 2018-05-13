@@ -1,0 +1,22 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/startDate.prop.jsd",
+  "title": "http://schema.org/startDate",
+  "description": "The start date and time of the item (in ISO 8601 date format).",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Date.jsd" },
+        { "$ref": "DateTime.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

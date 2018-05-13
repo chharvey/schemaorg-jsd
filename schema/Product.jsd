@@ -7,119 +7,19 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
-        "additionalProperty": {
-          "$id": "#additionalProperty",
-          "allOf": [{ "$ref": "additionalProperty.prop.jsd" }]
-        },
-        "award": {
-          "$id": "#award",
-          "allOf": [{ "$ref": "award.prop.jsd" }]
-        },
-        "brand": {
-          "$id": "#brand",
-          "allOf": [{ "$ref": "brand.prop.jsd" }]
-        },
-        "color": {
-          "$id": "#color",
-          "title": "http://schema.org/color",
-          "description": "The color of the product.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#color-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#color-ExpectedType" },
-            { "type": "array", "items": { "$ref": "#color-ExpectedType" } }
-          ]
-        },
-        "depth": {
-          "$id": "#depth",
-          "title": "http://schema.org/depth",
-          "description": "The depth of the item.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#depth-ExpectedType",
-              "anyOf": [
-                { "$ref": "QuantitativeValue.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#depth-ExpectedType" }
-          ]
-        },
-        "height": {
-          "$id": "#height",
-          "allOf": [{ "$ref": "height.prop.jsd" }]
-        },
-        "logo": {
-          "$id": "#logo",
-          "allOf": [{ "$ref": "logo.prop.jsd" }]
-        },
-        "manufacturer": {
-          "$id": "#manufacturer",
-          "title": "http://schema.org/manufacturer",
-          "description": "The manufacturer of the product.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#manufacturer-ExpectedType",
-              "anyOf": [
-                { "$ref": "Organization.jsd" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#manufacturer-ExpectedType" }
-          ]
-        },
-        "offers": {
-          "$id": "#offers",
-          "allOf": [{ "$ref": "offers.prop.jsd" }]
-        },
-        "productID": {
-          "$id": "#productID",
-          "title": "http://schema.org/productID",
-          "description": "The product identifier, such as ISBN.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#productID-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#productID-ExpectedType" }
-          ]
-        },
-        "sku": {
-          "$id": "#sku",
-          "title": "http://schema.org/sku",
-          "description": "The Stock Keeping Unit (SKU), i.e. a merchant-specific identifier for a product or service, or the product to which the offer refers.",
-          "definitions": {
-            "ExpectedType": {
-              "$id": "#sku-ExpectedType",
-              "anyOf": [
-                { "type": "string" }
-              ]
-            }
-          },
-          "anyOf": [
-            { "$ref": "#sku-ExpectedType" }
-          ]
-        },
-        "weight": {
-          "$id": "#weight",
-          "allOf": [{ "$ref": "weight.prop.jsd" }]
-        },
-        "width": {
-          "$id": "#width",
-          "allOf": [{ "$ref": "width.prop.jsd" }]
-        }
+        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+        "award": { "$ref": "award.prop.jsd" },
+        "brand": { "$ref": "brand.prop.jsd" },
+        "color": { "$ref": "color.prop.jsd" },
+        "depth": { "$ref": "depth.prop.jsd" },
+        "height": { "$ref": "height.prop.jsd" },
+        "logo": { "$ref": "logo.prop.jsd" },
+        "manufacturer": { "$ref": "manufacturer.prop.jsd" },
+        "offers": { "$ref": "offers.prop.jsd" },
+        "productID": { "$ref": "productID.prop.jsd" },
+        "sku": { "$ref": "sku.prop.jsd" },
+        "weight": { "$ref": "weight.prop.jsd" },
+        "width": { "$ref": "width.prop.jsd" }
       }
     }
   ]

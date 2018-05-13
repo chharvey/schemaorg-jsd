@@ -6,12 +6,17 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": "string" }
+        { "$ref": "Text.jsd" }
       ]
     }
   },
-  "anyOf": [
-    { "$ref": "#/definitions/ExpectedType" },
-    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
   ]
 }

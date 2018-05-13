@@ -6,13 +6,18 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "$ref": "URL.jsd" },
-        { "$ref": "ImageObject.jsd" }
+        { "$ref": "ImageObject.jsd" },
+        { "$ref": "URL.jsd" }
       ]
     }
   },
-  "anyOf": [
-    { "$ref": "#/definitions/ExpectedType" },
-    { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+  "allOf": [
+    { "$ref": "image.prop.jsd" },
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
   ]
 }

@@ -6,12 +6,19 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": ["boolean", "number", "string"] },
-        { "$ref": "StructuredValue.jsd" }
+        { "$ref": "Boolean.jsd" },
+        { "$ref": "Number.jsd" },
+        { "$ref": "StructuredValue.jsd" },
+        { "$ref": "Text.jsd" }
       ]
     }
   },
-  "anyOf": [
-    { "$ref": "#/definitions/ExpectedType" }
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
   ]
 }

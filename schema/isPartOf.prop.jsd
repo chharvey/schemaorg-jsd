@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/isPartOf.prop.jsd",
+  "title": "http://schema.org/isPartOf",
+  "description": "Indicates a CreativeWork that this CreativeWork is (in some sense) part of.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "CreativeWork.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

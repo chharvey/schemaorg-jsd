@@ -7,14 +7,8 @@
     { "$ref": "CreativeWork.jsd" },
     {
       "properties": {
-        "height": {
-          "$id": "#height",
-          "allOf": [{ "$ref": "height.prop.jsd" }]
-        },
-        "width": {
-          "$id": "#width",
-          "allOf": [{ "$ref": "width.prop.jsd" }]
-        }
+        "height": { "$ref": "height.prop.jsd" },
+        "width": { "$ref": "width.prop.jsd" }
       }
     }
   ]

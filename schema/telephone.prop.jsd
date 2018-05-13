@@ -6,11 +6,16 @@
   "definitions": {
     "ExpectedType": {
       "anyOf": [
-        { "type": "string" }
+        { "$ref": "Text.jsd" }
       ]
     }
   },
-  "anyOf": [
-    { "$ref": "#/definitions/ExpectedType" }
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
   ]
 }

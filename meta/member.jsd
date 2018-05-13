@@ -8,81 +8,59 @@
     {
       "type": "object",
       "additionalProperties": false,
-      "required": ["$schema", "$id", "title", "description", "definitions", "anyOf"],
+      "required": ["$schema", "$id", "title", "description", "allOf", "definitions"],
       "properties": {
         "$schema"    : true,
         "$id"        : { "type": "string", "format": "uri" },
-        "title"      : { "type": "string", "format": "uri" },
-        "description": true,
-        "definitions": {
-          "$id": "#member-definitions",
-          "propertyNames": { "const": "ExpectedType" },
-          "additionalProperties": {
-            "description": "The expected type(s) of the property.",
-            "additionalProperties": false,
-            "required": ["anyOf"],
-            "properties": {
-              "$id": true,
-              "anyOf": {
-                "items": {
-                  "anyOf": [
-                    {
-                      "required": ["$ref"],
-                      "properties": {
-                        "$ref": { "description": "Must point to an existing Schema.org Class jsd file." }
-                      }
-                    },
-                    {
-                      "additionalProperties": false,
-                      "required": ["type"],
-                      "definitions": {
-                        "primitives": {
-                          "$id": "#primitives",
-                          "description": "Further restriction on `http://json-schema.org/draft-07/schema#/definitions/simpleTypes`.",
-                          "enum": [
-                            "boolean",
-                            "integer",
-                            "number",
-                            "string"
-                          ]
-                        }
-                      },
-                      "properties": {
-                        "type": {
-                          "anyOf": [
-                            { "$ref": "#primitives" },
-                            { "items": { "$ref": "#primitives" } }
-                          ]
-                        },
-                        "format": true
-                      }
-                    }
+        "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Property." },
+        "description": { "description": "Schema.org’s canonical description of the Property." },
+        "allOf"      : {
+          "minItems": 2,
+          "maxItems": 2,
+          "items": [
+            {
+              "anyOf": [
+                {
+                  "description": "There is no superproperty of this property.",
+                  "const": true
+                },
+                {
+                  "description": "The superproperty of this property.",
+                  "$ref": "type.jsd#/definitions/SingleReference"
+                }
+              ]
+            },
+            {
+              "description": "References to the expected type(s) of this property.",
+              "additionalProperties": false,
+              "required": ["anyOf"],
+              "properties": {
+                "anyOf": {
+                  "maxItems": 2,
+                  "items": [
+                    { "const": { "$ref": "#/definitions/ExpectedType" } },
+                    { "const": { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } } }
                   ]
                 }
               }
             }
-          }
+          ]
         },
-        "anyOf": {
-          "$id": "#member-anyOf",
-          "maxItems": 2,
-          "items": [
-            {
-              "$id": "#expected-type",
-              "required": ["$ref"],
-              "properties": {
-                "$ref": { "description": "Must point to the “Expected Type” definition." }
-              }
-            },
-            {
-              "additionalProperties": false,
-              "required": ["type", "items"],
-              "properties": {
-                "type": { "const": "array" },
-                "items": { "$ref": "#expected-type" }
+        "definitions": {
+          "propertyNames": { "const": "ExpectedType" },
+          "additionalProperties": {
+            "description": "The range of this property.",
+            "additionalProperties": false,
+            "required": ["anyOf"],
+            "properties": {
+              "anyOf": {
+                "items": {
+                  "description": "A reference to an external JSON schema for a Schema.org Class.",
+                  "$ref": "type.jsd#/definitions/SingleReference"
+                }
               }
             }
-          ]
+          }
         }
       }
     }

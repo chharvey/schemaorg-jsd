@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/startTime.prop.jsd",
+  "title": "http://schema.org/startTime",
+  "description": "The startTime of something.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "DateTime.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

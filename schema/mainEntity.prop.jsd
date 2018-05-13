@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/mainEntity.prop.jsd",
+  "title": "http://schema.org/mainEntity",
+  "description": "Indicates the primary entity described in some page or other CreativeWork.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Thing.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

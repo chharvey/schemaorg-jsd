@@ -1,0 +1,22 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/longitude.prop.jsd",
+  "title": "http://schema.org/longitude",
+  "description": "The longitude of a location (WGS 84).",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Number.jsd" },
+        { "$ref": "Text.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}
