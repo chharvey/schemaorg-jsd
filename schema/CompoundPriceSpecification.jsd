@@ -7,6 +7,7 @@
     { "$ref": "PriceSpecification.jsd" },
     {
       "properties": {
+        "priceComponent": { "$ref": "priceComponent.prop.jsd" }
       }
     }
   ]
