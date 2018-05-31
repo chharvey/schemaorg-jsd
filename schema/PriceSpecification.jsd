@@ -1,0 +1,17 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/PriceSpecification.jsd",
+  "title": "http://schema.org/PriceSpecification",
+  "description": "A structured value representing a price or price range. Typically, only the subclasses of this type are used for markup.",
+  "allOf": [
+    { "$ref": "StructuredValue.jsd" },
+    {
+      "properties": {
+        "maxPrice": { "$ref": "maxPrice.prop.jsd" },
+        "minPrice": { "$ref": "minPrice.prop.jsd" },
+        "price": { "$ref": "price.prop.jsd" },
+        "priceCurrency": { "$ref": "priceCurrency.prop.jsd" }
+      }
+    }
+  ]
+}

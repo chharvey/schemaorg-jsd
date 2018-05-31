@@ -7,7 +7,10 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
-        "offeredBy": { "$ref": "offeredBy.prop.jsd" }
+        "offeredBy": { "$ref": "offeredBy.prop.jsd" },
+        "price": { "$ref": "price.prop.jsd" },
+        "priceCurrency": { "$ref": "priceCurrency.prop.jsd" },
+        "priceSpecification": { "$ref": "priceSpecification.prop.jsd" }
       }
     }
   ]

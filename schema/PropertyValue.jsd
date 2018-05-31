@@ -7,6 +7,10 @@
     { "$ref": "StructuredValue.jsd" },
     {
       "properties": {
+        "maxValue": { "$ref": "maxValue.prop.jsd" },
+        "minValue": { "$ref": "minValue.prop.jsd" },
+        "unitCode": { "$ref": "unitCode.prop.jsd" },
+        "unitText": { "$ref": "unitText.prop.jsd" },
         "value": { "$ref": "value.prop.jsd" }
       }
     }

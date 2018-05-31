@@ -14,6 +14,7 @@
         "contactPoint": { "$ref": "contactPoint.prop.jsd" },
         "email": { "$ref": "email.prop.jsd" },
         "familyName": { "$ref": "familyName.prop.jsd" },
+        "funder": { "$ref": "funder.prop.jsd" },
         "givenName": { "$ref": "givenName.prop.jsd" },
         "height": { "$ref": "height.prop.jsd" },
         "honorificPrefix": { "$ref": "honorificPrefix.prop.jsd" },
