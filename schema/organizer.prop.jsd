@@ -1,0 +1,23 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/organizer.prop.jsd",
+  "title": "http://schema.org/organizer",
+  "description": "An organizer of an Event.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Organization.jsd" },
+        { "$ref": "Person.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
+  ]
+}

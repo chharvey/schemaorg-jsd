@@ -10,6 +10,7 @@
         "dateCreated": { "$ref": "dateCreated.prop.jsd" },
         "dateModified": { "$ref": "dateModified.prop.jsd" },
         "datePublished": { "$ref": "datePublished.prop.jsd" },
+        "funder": { "$ref": "funder.prop.jsd" },
         "hasPart": { "$ref": "hasPart.prop.jsd" },
         "headline": { "$ref": "headline.prop.jsd" },
         "isPartOf": { "$ref": "isPartOf.prop.jsd" },

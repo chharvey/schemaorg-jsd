@@ -8,8 +8,10 @@
     {
       "properties": {
         "endDate": { "$ref": "endDate.prop.jsd" },
+        "funder": { "$ref": "funder.prop.jsd" },
         "location": { "$ref": "location.prop.jsd" },
         "offers": { "$ref": "offers.prop.jsd" },
+        "organizer": { "$ref": "organizer.prop.jsd" },
         "performer": { "$ref": "performer.prop.jsd" },
         "sponsor": { "$ref": "sponsor.prop.jsd" },
         "startDate": { "$ref": "startDate.prop.jsd" },
