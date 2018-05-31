@@ -1,0 +1,13 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/UnitPriceSpecification.jsd",
+  "title": "http://schema.org/UnitPriceSpecification",
+  "description": "The price asked for a given offer by the respective organization or person.",
+  "allOf": [
+    { "$ref": "PriceSpecification.jsd" },
+    {
+      "properties": {
+      }
+    }
+  ]
+}
