@@ -19,6 +19,7 @@
         "offers": { "$ref": "offers.prop.jsd" },
         "position": { "$ref": "position.prop.jsd" },
         "sponsor": { "$ref": "sponsor.prop.jsd" },
+        "text": { "$ref": "text.prop.jsd" },
         "thumbnailUrl": { "$ref": "thumbnailUrl.prop.jsd" }
       }
     }

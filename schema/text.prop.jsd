@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/text.prop.jsd",
+  "title": "http://schema.org/text",
+  "description": "The textual content of this CreativeWork.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Text.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}
