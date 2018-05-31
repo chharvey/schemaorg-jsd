@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/minPrice.prop.jsd",
+  "title": "http://schema.org/minPrice",
+  "description": "The lowest price if the price is a range.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Number.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}
