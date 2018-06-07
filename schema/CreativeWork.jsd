@@ -7,6 +7,7 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
+        "creator": { "$ref": "creator.prop.jsd" },
         "dateCreated": { "$ref": "dateCreated.prop.jsd" },
         "dateModified": { "$ref": "dateModified.prop.jsd" },
         "datePublished": { "$ref": "datePublished.prop.jsd" },
