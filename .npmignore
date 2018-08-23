@@ -1,0 +1,10 @@
+# Output of 'npm pack'
+*.tgz
+
+# Generated documentation & style guides
+docs/api/
+docs/api-typedoc/
+docs/build/
+
+# Generated build files
+!dist/

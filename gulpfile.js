@@ -5,11 +5,18 @@ const util = require('util')
 
 const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
+const typedoc    = require('gulp-typedoc')
+const typescript = require('gulp-typescript')
 const Ajv   = require('ajv')
+// require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
+// require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const createDir = require('./lib/createDir.js')
 
 const sdo_jsd = require('./index.js')
+
+const tsconfig      = require('./config/tsconfig.json')
+const typedocconfig = require('./config/typedoc.json')
 
 
 gulp.task('validate', async function () {
@@ -236,4 +243,19 @@ gulp.task('docs:api', ['docs:typedef'], function () {
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
 
-gulp.task('build', ['validate', 'test', 'docs:api'])
+gulp.task('typescript', ['docs:jsonld'], async function () {
+  await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', '')
+})
+
+gulp.task('compile', ['typescript'], async function () {
+  return gulp.src('./dist/schemaorg.d.ts')
+    .pipe(typescript(tsconfig.compilerOptions))
+    .pipe(gulp.dest('./docs/build/'))
+})
+
+gulp.task('docs-typedoc', ['typescript'], async function () {
+  return gulp.src('./dist/schemaorg.d.ts')
+    .pipe(typedoc(typedocconfig))
+})
+
+gulp.task('build', ['validate', 'test', 'docs:api', 'docs-typedoc'])
