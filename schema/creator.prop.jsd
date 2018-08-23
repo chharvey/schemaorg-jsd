@@ -1,0 +1,22 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/creator.prop.jsd",
+  "title": "http://schema.org/creator",
+  "description": "The creator/author of this CreativeWork.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Organization.jsd" },
+        { "$ref": "Person.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

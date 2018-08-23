@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/priceCurrency.prop.jsd",
+  "title": "http://schema.org/priceCurrency",
+  "description": "The currency (in 3-letter ISO 4217 format) of the price or a price component, when attached to `PriceSpecification` and its subtypes.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Text.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

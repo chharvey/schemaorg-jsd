@@ -1,0 +1,22 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/priceComponent.prop.jsd",
+  "title": "http://schema.org/priceComponent",
+  "description": "This property links to all `UnitPriceSpecification` nodes that apply in parallel for the `CompoundPriceSpecification` node.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "UnitPriceSpecification.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
+  ]
+}

@@ -13,6 +13,7 @@
         "contactPoint": { "$ref": "contactPoint.prop.jsd" },
         "email": { "$ref": "email.prop.jsd" },
         "event": { "$ref": "event.prop.jsd" },
+        "funder": { "$ref": "funder.prop.jsd" },
         "location": { "$ref": "location.prop.jsd" },
         "logo": { "$ref": "logo.prop.jsd" },
         "makesOffer": { "$ref": "makesOffer.prop.jsd" },
