@@ -11,7 +11,7 @@ const Ajv   = require('ajv')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
-const createDir = require('./lib/createDir.js')
+const createDir = require('./lib/createDir.js') // TODO use require('mkdirp')
 
 const sdo_jsd = require('./index.js')
 
@@ -38,7 +38,7 @@ gulp.task('test', async function () {
   }))
 })
 
-gulp.task('docs:jsonld', ['validate'], async function () {
+gulp.task('dist-jsonld', ['validate'], async function () {
   // ++++ LOCAL VARIABLES ++++
   const SCHEMATA = (await sdo_jsd.getSchemata())
     .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
@@ -165,12 +165,12 @@ gulp.task('docs:jsonld', ['validate'], async function () {
   })
 
   // ++++ WRITE TO FILE ++++
-  await createDir('./docs/build/')
-  await util.promisify(fs.writeFile)('./docs/build/schemaorg.jsonld', contents, 'utf8')
+  await createDir('./dist/') // TODO use require('mkdirp')
+  await util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', contents)
 })
 
-gulp.task('docs:typedef', ['docs:jsonld'], async function () {
-  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))['@graph']
+gulp.task('docs:typedef', ['dist-jsonld'], async function () {
+  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
 
   let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
     /**
@@ -234,28 +234,29 @@ gulp.task('docs:typedef', ['docs:jsonld'], async function () {
       ...properties,
     ].join('')
 
-  await util.promisify(fs.writeFile)('./docs/build/typedef.js', contents, 'utf8')
+  await util.promisify(fs.writeFile)('./dist/typedef.js', contents)
 })
 
 // HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
 gulp.task('docs:api', ['docs:typedef'], function () {
-  return gulp.src(['./README.md', './index.js', './docs/build/typedef.js'], {read:false})
+  return gulp.src(['./README.md', './index.js', './dist/typedef.js'], {read:false})
     .pipe(jsdoc(require('./jsdoc.config.json')))
 })
 
-gulp.task('typescript', ['docs:jsonld'], async function () {
+gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
+  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
   await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', '')
 })
 
-gulp.task('compile', ['typescript'], async function () {
+gulp.task('dist', ['dist-ts-build'], async function () {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typescript(tsconfig.compilerOptions))
-    .pipe(gulp.dest('./docs/build/'))
+    .pipe(gulp.dest('./dist/'))
 })
 
-gulp.task('docs-typedoc', ['typescript'], async function () {
+gulp.task('docs', ['docs:api', 'dist-ts-build'], async function () {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typedoc(typedocconfig))
 })
 
-gulp.task('build', ['validate', 'test', 'docs:api', 'docs-typedoc'])
+gulp.task('build', ['validate', 'test', 'docs'])
