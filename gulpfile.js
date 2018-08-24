@@ -245,9 +245,18 @@ gulp.task('docs:api', ['docs:typedef'], function () {
 gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
   const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
   /**
+   * @summary Print a list of links as a in jsdoc comment.
+   * @private
+   * @param   {!Object[]} objs array of JSON-LD objects
+   * @returns {string} a segment of jsdoc/typescript comment
+   */
+  function linklist(objs) {
+    return objs.map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')
+  }
+  /**
    * @summary Convert a Schema.org Datatype to a TypeScript type alias.
    * @private
-   * @param   {!Object} jsonld the Datatype encoded as an object
+   * @param   {!Object} jsonld the JSON-LD object to mark up
    * @returns {string} TypeScript code
    */
   function datatypeTS(jsonld) {
@@ -273,61 +282,50 @@ gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
   /**
    * @summary Convert a Schema.org Class to a TypeScript interface.
    * @private
-   * @param   {!Object} jsonld the Class encoded as an object
+   * @param   {!Object} jsonld the JSON-LD object to mark up
    * @returns {string} TypeScript code
    */
   function classTS(jsonld) {
-    /**
-     * @summary Print a list of links as a in jsdoc comment.
-     * @private
-     * @param   {!Object[]} objs array of JSON-LD objects
-     * @returns {string} a segment of jsdoc/typescript comment
-     */
-    function linklist(objs) {
-      return objs.map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')
-    }
-    /**
-     * @summary Convert a Schema.org Property to a property in a TypeScript interface.
-     * @private
-     * @param   {?Object} id the `@id` of the JSON-LD Property object to mark up
-     * @returns {string} a segment of TypeScript code
-     */
-    function propertyTS(id) {
-      let jsonld = JSONLD.find((m) => m['@id'] === id) || null
-      if (!jsonld) {
-        console.error(`{ "@id": "${id}" } not found.`)
-        return ''
-      }
-      let rangeunion = `${jsonld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')}`
-      return `
-        /**
-         * @summary ${jsonld['rdfs:comment']}
-         * ${(jsonld['rdfs:subPropertyOf'] || jsonld['superPropertyOf'].length || jsonld['rdfs:domain'].length) ? '@description' : ''}
-         * ${(jsonld['rdfs:subPropertyOf']) ? `Extends {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
-         * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:\n${linklist(jsonld['superPropertyOf'])}` : ''}
-         * ${(jsonld['rdfs:domain'    ].length) ? `*(Non-Normative):* Property of:\n${        linklist(jsonld['rdfs:domain'    ])}` : ''}
-         * @see http://schema.org/${jsonld['rdfs:label']}
-         */
-        ${jsonld['rdfs:label']}?: ${rangeunion}${(jsonld['$rangeArray']) ? `|(${rangeunion})[]` : ''}
-      `
-    }
     return `
       /**
        * @summary ${jsonld['rdfs:comment']}
        * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
        * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:\n${         linklist(jsonld['superClassOf'])}` : ''}
-       * ${(jsonld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${linklist(jsonld['valueOf'     ])}` : ''}
+       * ${(jsonld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${linklist(jsonld['valueOf'     ]).replace(/}/g,'_type}')}` : ''}
        * @see http://schema.org/${jsonld['rdfs:label']}
        */
       export interface ${jsonld['rdfs:label']} ${(jsonld['rdfs:subClassOf']) ? `extends ${jsonld['rdfs:subClassOf']['@id'].split(':')[1]} ` : ''}{
-        ${jsonld['rdfs:member'].map((propertyld) => propertyTS(propertyld['@id'])).join('\n')}
+        ${jsonld['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
+          ${name}?: ${name}_type
+        `).join('')}
       }
+    `
+  }
+  /**
+   * @summary Convert a Schema.org Property to a TypeScript type alias.
+   * @private
+   * @param   {!Object} jsonld the JSON-LD object to mark up
+   * @returns {string} TypeScript code
+   */
+  function propertyTS(jsonld) {
+    let rangeunion = `${jsonld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')}`
+    return `
+      /**
+       * @summary ${jsonld['rdfs:comment']}
+       * ${(jsonld['rdfs:subPropertyOf'] || jsonld['superPropertyOf'].length || jsonld['rdfs:domain'].length) ? '@description' : ''}
+       * ${(jsonld['rdfs:subPropertyOf']) ? `Extends {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
+       * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:\n${linklist(jsonld['superPropertyOf'])}` : ''}
+       * ${(jsonld['rdfs:domain'    ].length) ? `*(Non-Normative):* Property of:\n${        linklist(jsonld['rdfs:domain'    ])}` : ''}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       */
+      type ${jsonld['rdfs:label']}_type = ${rangeunion}${(jsonld['$rangeArray']) ? `|(${rangeunion})[]` : ''}
     `
   }
 
   let contents = [
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map(datatypeTS),
-    ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map(classTS),
+    ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map(classTS),
+    ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map(propertyTS),
   ].join('')
 
   await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', contents)

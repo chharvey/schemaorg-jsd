@@ -2,7 +2,9 @@
   "target" : "ES2017",
   "module" : "commonjs",
   "mode"   : "file",
-  "name"   : "extrajs-dom",
+  "name"   : "schemaorg-jsd",
   "out"    : "./docs/api-typedoc/",
+  "includeDeclarations" : true,
+  "excludeExternals"    : true,
   "ignoreCompilerErrors": true
 }
