@@ -3,7 +3,7 @@
   "module" : "commonjs",
   "mode"   : "file",
   "name"   : "schemaorg-jsd",
-  "out"    : "./docs/api-typedoc/",
+  "out"    : "./docs/api/",
   "includeDeclarations" : true,
   "excludeExternals"    : true,
   "ignoreCompilerErrors": true

@@ -4,7 +4,6 @@ const url  = require('url')
 const util = require('util')
 
 const gulp  = require('gulp')
-const jsdoc = require('gulp-jsdoc3')
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
 const mkdirp = require('make-dir')
@@ -168,79 +167,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
   await util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', contents)
 })
 
-gulp.task('docs:typedef', ['dist-jsonld'], async function () {
-  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
 
-  let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
-    /**
-     * @summary ${jsonld['rdfs:comment']}
-     * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {${({
-       'Boolean'  : 'boolean',
-       'Date'     : 'string',
-       'DateTime' : 'string',
-       'Integer'  : 'number',
-       'Number'   : 'number',
-       'Text'     : 'string',
-       'Time'     : 'string',
-       'URL'      : 'string',
-     })[jsonld['rdfs:label']]}} ${jsonld['rdfs:label']}
-     */
-  `)
-  let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
-    /**
-     * @summary ${jsonld['rdfs:comment']}
-     * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
-     * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:
-    ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * ${(jsonld['valueOf'].length) ? `*(Non-Normative):* May appear as values of:
-    ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['rdfs:label']}
-    ${jsonld['rdfs:member'].map(function (propertyld) {
-      let referenced = JSONLD.find((m) => m['@id'] === propertyld['@id']) || null
-      if (!referenced) throw new ReferenceError(`{ "@id": "${propertyld['@id']}" } not found.`)
-      return ` * @property {${referenced['rdfs:label']}=} ${referenced['rdfs:label']} ${referenced['rdfs:comment']}`
-    }).join('\n')}
-     */
-  `)
-  let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
-    /**
-     * @summary ${jsonld['rdfs:comment']}
-     * ${(jsonld['rdfs:subPropertyOf'] || jsonld['superPropertyOf'].length || jsonld['rdfs:domain'].length) ? '@description' : ''}
-     * ${(jsonld['rdfs:subPropertyOf']) ? `Extends:
-     * - {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
-     *
-     * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:
-     ${jsonld['superPropertyOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * ${(jsonld['rdfs:domain'].length) ? `*(Non-Normative):* Property of:
-    ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {${(function (propertyld) {
-       let union = `(${propertyld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')})`
-       return (propertyld['$rangeArray']) ? `(${union}|Array<${union}>)` : union
-     })(jsonld)}} ${jsonld['rdfs:label']}
-     */
-  `)
-
-    let contents = [
-      ...datatypes,
-      ...classes,
-      ...properties,
-    ].join('')
-
-  await util.promisify(fs.writeFile)('./dist/typedef.js', contents)
-})
-
-// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs:api', ['docs:typedef'], function () {
-  return gulp.src(['./README.md', './index.js', './dist/typedef.js'], {read:false})
-    .pipe(jsdoc(require('./jsdoc.config.json')))
-})
 
 gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
   const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
@@ -337,7 +264,7 @@ gulp.task('dist', ['dist-ts-build'], async function () {
     .pipe(gulp.dest('./dist/'))
 })
 
-gulp.task('docs', ['docs:api', 'dist-ts-build'], async function () {
+gulp.task('docs', ['dist-ts-build'], async function () {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typedoc(typedocconfig))
 })

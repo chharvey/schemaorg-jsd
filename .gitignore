@@ -75,7 +75,6 @@ typings/
 
 # Auto-generated documentation & style guides
 docs/api/
-docs/api-typedoc/
 
 # Generated build files
 dist/
