@@ -7,11 +7,10 @@ const gulp  = require('gulp')
 const jsdoc = require('gulp-jsdoc3')
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
+const mkdirp = require('make-dir')
 const Ajv   = require('ajv')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
-
-const createDir = require('./lib/createDir.js') // TODO use require('mkdirp')
 
 const sdo_jsd = require('./index.js')
 
@@ -165,7 +164,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
   })
 
   // ++++ WRITE TO FILE ++++
-  await createDir('./dist/') // TODO use require('mkdirp')
+  await mkdirp('./dist/')
   await util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', contents)
 })
 
@@ -245,7 +244,9 @@ gulp.task('docs:api', ['docs:typedef'], function () {
 
 gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
   const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
-  await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', '')
+  let contents = [
+  ].join('')
+  await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', contents)
 })
 
 gulp.task('dist', ['dist-ts-build'], async function () {
