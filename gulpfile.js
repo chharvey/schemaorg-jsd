@@ -22,20 +22,6 @@ gulp.task('validate', async function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
-gulp.task('test', async function () {
-  return Promise.all((await util.promisify(fs.readdir)('./test')).map(async function (file) {
-    let filepath = path.resolve(__dirname, './test/', file)
-    let returned;
-    try {
-      returned = await sdo_jsd.sdoValidate(filepath)
-      console.log(`The example ${file} is valid.`)
-    } catch (e) {
-      console.error(`The example ${file} failed!`, e.details || e)
-    }
-    return returned
-  }))
-})
-
 gulp.task('dist-jsonld', ['validate'], async function () {
   // ++++ LOCAL VARIABLES ++++
   const SCHEMATA = (await sdo_jsd.getSchemata())
@@ -102,7 +88,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
    * Process non-normative subclasses.
    * Subclasses are non-normative because this information can be processed from each class’s superclass.
    */
-  classes.forEach(function (jsonld) {
+  classes.forEach((jsonld) => {
     let superclass = jsonld['rdfs:subClassOf']
     let referenced = (superclass) ? classes.find((c) => c['@id'] === superclass['@id']) || null : null
     if (referenced) {
@@ -113,7 +99,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
    * Process non-normative subproperties.
    * Subproperties are non-normative because this information can be processed from each property’s superproperty.
    */
-  properties.forEach(function (jsonld) {
+  properties.forEach((jsonld) => {
     let superproperty = jsonld['rdfs:subPropertyOf']
     let referenced = (superproperty) ? properties.find((p) => p['@id'] === superproperty['@id']) || null : null
     if (referenced) {
@@ -124,7 +110,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
    * Process non-normative `rdfs:domain`.
    * A property’s `rdfs:domain` is non-normative because this information can be processed from each type’s members.
    */
-  classes.forEach(function (jsonld) {
+  classes.forEach((jsonld) => {
     jsonld['rdfs:member'].forEach(function (property) {
       let referenced = properties.find((m) => m['@id'] === property['@id']) || null
       if (referenced) {
@@ -136,7 +122,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
    * Process non-normative `valueOf`.
    * A class’s `valueOf` is non-normative because this information can be processed from each property’s `rdfs:range`.
    */
-  properties.forEach(function (jsonld) {
+  properties.forEach((jsonld) => {
     jsonld['rdfs:range'].forEach(function (class_) {
       let referenced = classes.find((c) => c['@id'] === class_['@id']) || null
       if (referenced) {
@@ -155,7 +141,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
       "superPropertyOf": { "@reverse": "rdfs:subPropertyOf" },
       "valueOf"     : { "@reverse": "rdfs:range" }
     },
-    '@graph': [
+    "@graph": [
       ...datatypes,
       ...classes,
       ...properties,
@@ -169,7 +155,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
 
 
 
-gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
+gulp.task('dist-ts', ['dist-jsonld'], async function () {
   const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
   /**
    * @summary Print a list of links as a in jsdoc comment.
@@ -215,10 +201,10 @@ gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
   function classTS(jsonld) {
     return `
       /**
-       * @summary ${jsonld['rdfs:comment']}
-       * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
-       * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:\n${         linklist(jsonld['superClassOf'])}` : ''}
-       * ${(jsonld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${linklist(jsonld['valueOf'     ]).replace(/}/g,'_type}')}` : ''}
+       * ${jsonld['rdfs:comment']}
+       *
+       * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subclasses:\n${       linklist(jsonld['superClassOf'])}\n` : ''}
+       * ${(jsonld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${linklist(jsonld['valueOf'     ]).replace(/}/g,'_type}')}\n` : ''}
        * @see http://schema.org/${jsonld['rdfs:label']}
        */
       export interface ${jsonld['rdfs:label']} ${(jsonld['rdfs:subClassOf']) ? `extends ${jsonld['rdfs:subClassOf']['@id'].split(':')[1]} ` : ''}{
@@ -238,11 +224,11 @@ gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
     let rangeunion = `${jsonld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')}`
     return `
       /**
-       * @summary ${jsonld['rdfs:comment']}
-       * ${(jsonld['rdfs:subPropertyOf'] || jsonld['superPropertyOf'].length || jsonld['rdfs:domain'].length) ? '@description' : ''}
+       * ${jsonld['rdfs:comment']}
+       *
        * ${(jsonld['rdfs:subPropertyOf']) ? `Extends {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
-       * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:\n${linklist(jsonld['superPropertyOf'])}` : ''}
-       * ${(jsonld['rdfs:domain'    ].length) ? `*(Non-Normative):* Property of:\n${        linklist(jsonld['rdfs:domain'    ])}` : ''}
+       * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:\n${linklist(jsonld['superPropertyOf'])}\n` : ''}
+       * ${(jsonld['rdfs:domain'    ].length) ? `*(Non-Normative):* Property of:\n${        linklist(jsonld['rdfs:domain'    ])}\n` : ''}
        * @see http://schema.org/${jsonld['rdfs:label']}
        */
       type ${jsonld['rdfs:label']}_type = ${rangeunion}${(jsonld['$rangeArray']) ? `|(${rangeunion})[]` : ''}
@@ -258,15 +244,30 @@ gulp.task('dist-ts-build', ['dist-jsonld'], async function () {
   await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', contents)
 })
 
-gulp.task('dist', ['dist-ts-build'], async function () {
+gulp.task('dist', ['dist-ts'], async function () {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typescript(tsconfig.compilerOptions))
     .pipe(gulp.dest('./dist/'))
 })
 
-gulp.task('docs', ['dist-ts-build'], async function () {
+gulp.task('test', async function () {
+	return Promise.all((await util.promisify(fs.readdir)('./test')).map(async (file) => {
+		let filepath = path.resolve(__dirname, './test/', file)
+		let returned;
+		try {
+			returned = await sdo_jsd.sdoValidate(filepath)
+			console.log(`The example ${file} is valid.`)
+		} catch (e) {
+			console.error(`The example ${file} failed!`, e.details || e)
+		}
+		return returned
+	}))
+})
+
+
+gulp.task('docs', async function () {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typedoc(typedocconfig))
 })
 
-gulp.task('build', ['validate', 'test', 'docs'])
+gulp.task('build', ['validate', 'dist', 'test', 'docs'])

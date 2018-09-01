@@ -73,8 +73,8 @@ typings/
 .serverless
 
 
-# Auto-generated documentation & style guides
-docs/api/
-
 # Generated build files
 dist/
+
+# Auto-generated documentation & style guides
+docs/api/

@@ -3,6 +3,3 @@
 
 # Generated documentation & style guides
 docs/api/
-
-# Generated build files
-!dist/
