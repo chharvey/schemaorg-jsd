@@ -83,9 +83,11 @@ ajv.validate(my_schema, my_data)
 ```
 
 ## View the “API”
-It’s not really an “API”, but a set of [JSDoc](http://usejsdoc.org/) typedefs describing types and their properties.
+A set of [TypeDoc](http://typedoc.org/) declarations describing types and their properties.
 They are identical to the specs at [schema.org](https://schema.org/),
-but you can import the source code in your own project for JSDoc compilation.
+but you can import the source code in your own project for
+[TypeScript](http://www.typescriptlang.org/) compilation.
+
 ```
 $ cd node_modules/schemaorg-jsd
 $ npm install
@@ -93,15 +95,18 @@ $ npm run build
 $ cd -
 $ # open ./docs/api/index.html in your browser
 ```
-```js
+**(Note: These docs will be published online soon, so you won’t have to build locally.)**
+
+```ts
+import * as sdo from 'schemaorg-jsd' // TEMP: this import might change
 class Person {
+  private _name: string
   /**
    * Construct a new Person object.
-   * @param {sdo.Person} jsondata an object validating against the schemaorg-jsd `Person` schema
-   * @param {string} jsondata.name The name of the item.
+   * @param jsondata an object validating against the schemaorg-jsd `Person` schema
    */
-  constructor(jsondata) {
-    this.name = jsondata.name
+  constructor(jsondata: sdo.Person) {
+    this._name = jsondata.name
   }
 }
 ```
@@ -109,10 +114,17 @@ class Person {
 
 # Background Info
 
+## JSON
+[JSON](http://www.json.org/) (JavaScript Object Notation) is a data interchange format,
+based off of the syntax used to define object literals in JavaScript.
+
 ## JSON Schema
-[JSON Schema](http://json-schema.org/) is a vocabulary, in JSON format, that allows you to validate JSON documents.
-In other words, a particular JSON schema tells you whether your JSON instance file is written correctly, if you choose to validate your instance against that schema.
-JSON schema documents *themselves* must also be valid JSON, *as well as* validate against the [JSON Meta-Schema specification](http://json-schema.org/draft-07/schema).
+[JSON Schema](http://json-schema.org/) is a vocabulary, in JSON format,
+that allows you to validate JSON documents.
+In other words, a particular JSON schema tells you whether your JSON instance file is written correctly,
+if you choose to validate your instance against that schema.
+JSON schema documents *themselves* must also be valid JSON, *as well as* validate against the
+[JSON Meta-Schema specification](http://json-schema.org/draft-07/schema).
 The JSON Meta-Schema tells you whether your JSON schema document, if you have one, is written correctly.
 The official MIME Type of JSON schema documents is `application/schema+json`.
 
@@ -121,18 +133,31 @@ there is no prevailing convention on JSON schema file extensions.*
 
 ## JSON-LD
 [JSON-LD](https://json-ld.org/) (JSON Linked Data) is a syntax used to mark up data in a consistent way.
-Rather than everyone using their own data types, JSON-LD standardizes the markup, making it easy for people and data types to communicate.
+Rather than everyone using their own data types, JSON-LD standardizes the markup, making it easy
+for people and data types to communicate.
 JSON-LD has some rules, for example, an object’s `@id` property must be a string.
-Therefore, to enforce these rules, JSON-LD documents should validate against the [JSON-LD Schema](https://raw.githubusercontent.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json).
+Therefore, to enforce these rules, JSON-LD documents should validate against the
+[JSON-LD Schema](https://raw.githubusercontent.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json).
 The official MIME Type of JSON-LD documents is `application/ld+json`,
 and JSON-LD files typically have file extension `.jsonld`.
 
 ## Schema.org
 [Schema.org](https://schema.org/) Is a vocabulary that you can use to describe data.
 These are semantic descriptions that have well-defined meanings.
-For example, people using different human languages could refer to the unique identifier http://schema.org/givenName and know precisely what others are talking about: a person’s given name.
-The Schema.org vocabulary is syntax-agnostic, meaning you can use whatever format you want to mark up your data. [Microdata](https://www.w3.org/TR/microdata/) is one common syntax, and JSON-LD is another.
+For example, people using different human languages could refer to the unique identifier http://schema.org/givenName
+and know precisely what others are talking about: a person’s given name.
+The Schema.org vocabulary is syntax-agnostic, meaning you can use whatever format you want to mark up your data.
+[Microdata](https://www.w3.org/TR/microdata/) is one common syntax, and JSON-LD is another.
+
+## TypeScript
+[TypeScript](https://www.typescriptlang.org/) is a strongly-typed language that compiles to JavaScript.
+Some of the biggest features of TypeScript include *interfaces* and *type aliases*, which, respectively,
+describe the “shape” (fields and methods) and “structure” (properties) that an object may have.
+This project includes interfaces and type aliases for Schema.org Classes and Properties, respectively,
+so that you can write a well-typed API for your project.
 
 ## Putting It All Together
 You can semantically mark up your data using the Schema.org vocabulary with JSON-LD syntax.
-Then, to prevent runtime errors or SEO mistakes, you can validate your markup against the JSON schemata (multiple “schemas”) in this project.
+If you have a TypeScript API, you can import this project’s TypeScript to catch any type errors before runtime.
+Then, to prevent additional runtime errors or SEO mistakes, you can validate your markup against
+the JSON schemata (multiple “schemas”) in this project.
