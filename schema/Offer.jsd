@@ -7,6 +7,8 @@
     { "$ref": "Intangible.jsd" },
     {
       "properties": {
+        "availabilityStarts": { "$ref": "availabilityStarts.prop.jsd" },
+        "availabilityEnds": { "$ref": "availabilityEnds.prop.jsd" },
         "offeredBy": { "$ref": "offeredBy.prop.jsd" },
         "price": { "$ref": "price.prop.jsd" },
         "priceCurrency": { "$ref": "priceCurrency.prop.jsd" },
