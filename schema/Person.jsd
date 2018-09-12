@@ -9,6 +9,7 @@
       "properties": {
         "additionalName": { "$ref": "additionalName.prop.jsd" },
         "address": { "$ref": "address.prop.jsd" },
+        "affiliation": { "$ref": "affiliation.prop.jsd" },
         "award": { "$ref": "award.prop.jsd" },
         "brand": { "$ref": "brand.prop.jsd" },
         "contactPoint": { "$ref": "contactPoint.prop.jsd" },
