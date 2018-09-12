@@ -21,6 +21,7 @@
         "honorificSuffix": { "$ref": "honorificSuffix.prop.jsd" },
         "jobTitle": { "$ref": "jobTitle.prop.jsd" },
         "makesOffer": { "$ref": "makesOffer.prop.jsd" },
+        "memberOf": { "$ref": "memberOf.prop.jsd" },
         "sponsor": { "$ref": "sponsor.prop.jsd" },
         "telephone": { "$ref": "telephone.prop.jsd" },
         "weight": { "$ref": "weight.prop.jsd" }
