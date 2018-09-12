@@ -17,6 +17,7 @@
         "location": { "$ref": "location.prop.jsd" },
         "logo": { "$ref": "logo.prop.jsd" },
         "makesOffer": { "$ref": "makesOffer.prop.jsd" },
+        "member": { "$ref": "member.prop.jsd" },
         "memberOf": { "$ref": "memberOf.prop.jsd" },
         "sponsor": { "$ref": "sponsor.prop.jsd" },
         "telephone": { "$ref": "telephone.prop.jsd" }

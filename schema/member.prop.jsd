@@ -1,0 +1,23 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/member.prop.jsd",
+  "title": "http://schema.org/member",
+  "description": "A member of an Organization or a ProgramMembership. Organizations can be members of organizations; ProgramMembership is typically for individuals.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Organization.jsd" },
+        { "$ref": "Person.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" },
+        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+      ]
+    }
+  ]
+}
