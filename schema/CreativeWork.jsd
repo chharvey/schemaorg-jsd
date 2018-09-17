@@ -22,7 +22,7 @@
         "sponsor": { "$ref": "sponsor.prop.jsd" },
         "text": { "$ref": "text.prop.jsd" },
         "thumbnailUrl": { "$ref": "thumbnailUrl.prop.jsd" },
-        "publisher":{ "$ref": "publisher.prop.jsd" }
+        "publisher": { "$ref": "publisher.prop.jsd" }
       }
     }
   ]
