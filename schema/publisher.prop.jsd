@@ -1,23 +1,22 @@
 {
-    "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-    "$id": "https://chharvey.github.io/schemaorg-jsd/schema/publisher.prop.jsd",
-    "title": "https://schema.org/publisher",
-    "description": "The publisher of the creative work.",
-    "definitions": {
-      "ExpectedType": {
-        "anyOf": [
-          { "$ref": "Organization.jsd" },
-          { "$ref": "Person.jsd" }
-        ]
-      }
-    },
-    "allOf": [
-      true,
-      {
-        "anyOf": [
-          { "$ref": "#/definitions/ExpectedType" }
-        ]
-      }
-    ]
-  }
-  
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/publisher.prop.jsd",
+  "title": "https://schema.org/publisher",
+  "description": "The publisher of the creative work.",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Organization.jsd" },
+        { "$ref": "Person.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}
