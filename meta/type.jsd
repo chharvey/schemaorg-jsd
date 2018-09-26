@@ -6,6 +6,7 @@
   "definitions": {
     "SingleReference": {
       "description": "A single reference to a JSON schema.",
+      "type": "object",
       "additionalProperties": false,
       "required": ["$ref"],
       "properties": {
@@ -34,11 +35,13 @@
             },
             {
               "description": "A list of further properties of this class.",
+              "type": "object",
               "additionalProperties": false,
               "required": ["properties"],
               "properties": {
                 "type": { "const": "object" },
                 "properties": {
+                  "type": "object",
                   "additionalProperties": {
                     "description": "A reference to an external JSON schema for a Schema.org Property.",
                     "$ref": "#/definitions/SingleReference"

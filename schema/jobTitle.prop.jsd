@@ -1,0 +1,21 @@
+{
+  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/jobTitle.prop.jsd",
+  "title": "http://schema.org/jobTitle",
+  "description": "The job title of the person (for example, Financial Manager).",
+  "definitions": {
+    "ExpectedType": {
+      "anyOf": [
+        { "$ref": "Text.jsd" }
+      ]
+    }
+  },
+  "allOf": [
+    true,
+    {
+      "anyOf": [
+        { "$ref": "#/definitions/ExpectedType" }
+      ]
+    }
+  ]
+}

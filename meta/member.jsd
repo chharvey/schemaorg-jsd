@@ -19,7 +19,7 @@
           "maxItems": 2,
           "items": [
             {
-              "anyOf": [
+              "oneOf": [
                 {
                   "description": "There is no superproperty of this property.",
                   "const": true

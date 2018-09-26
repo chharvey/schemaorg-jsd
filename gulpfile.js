@@ -4,12 +4,17 @@ const url  = require('url')
 const util = require('util')
 
 const gulp  = require('gulp')
-const jsdoc = require('gulp-jsdoc3')
+const typedoc    = require('gulp-typedoc')
+const typescript = require('gulp-typescript')
+const mkdirp = require('make-dir')
 const Ajv   = require('ajv')
-
-const createDir = require('./lib/createDir.js')
+// require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
+// require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const sdo_jsd = require('./index.js')
+
+const tsconfig      = require('./config/tsconfig.json')
+const typedocconfig = require('./config/typedoc.json')
 
 
 gulp.task('validate', async function () {
@@ -17,21 +22,7 @@ gulp.task('validate', async function () {
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
-gulp.task('test', async function () {
-  return Promise.all((await util.promisify(fs.readdir)('./test')).map(async function (file) {
-    let filepath = path.resolve(__dirname, './test/', file)
-    let returned;
-    try {
-      returned = await sdo_jsd.sdoValidate(filepath)
-      console.log(`The example ${file} is valid.`)
-    } catch (e) {
-      console.error(`The example ${file} failed!`, e.details || e)
-    }
-    return returned
-  }))
-})
-
-gulp.task('docs:jsonld', ['validate'], async function () {
+gulp.task('dist-jsonld', ['validate'], async function () {
   // ++++ LOCAL VARIABLES ++++
   const SCHEMATA = (await sdo_jsd.getSchemata())
     .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
@@ -97,7 +88,7 @@ gulp.task('docs:jsonld', ['validate'], async function () {
    * Process non-normative subclasses.
    * Subclasses are non-normative because this information can be processed from each class’s superclass.
    */
-  classes.forEach(function (jsonld) {
+  classes.forEach((jsonld) => {
     let superclass = jsonld['rdfs:subClassOf']
     let referenced = (superclass) ? classes.find((c) => c['@id'] === superclass['@id']) || null : null
     if (referenced) {
@@ -108,7 +99,7 @@ gulp.task('docs:jsonld', ['validate'], async function () {
    * Process non-normative subproperties.
    * Subproperties are non-normative because this information can be processed from each property’s superproperty.
    */
-  properties.forEach(function (jsonld) {
+  properties.forEach((jsonld) => {
     let superproperty = jsonld['rdfs:subPropertyOf']
     let referenced = (superproperty) ? properties.find((p) => p['@id'] === superproperty['@id']) || null : null
     if (referenced) {
@@ -119,7 +110,7 @@ gulp.task('docs:jsonld', ['validate'], async function () {
    * Process non-normative `rdfs:domain`.
    * A property’s `rdfs:domain` is non-normative because this information can be processed from each type’s members.
    */
-  classes.forEach(function (jsonld) {
+  classes.forEach((jsonld) => {
     jsonld['rdfs:member'].forEach(function (property) {
       let referenced = properties.find((m) => m['@id'] === property['@id']) || null
       if (referenced) {
@@ -131,7 +122,7 @@ gulp.task('docs:jsonld', ['validate'], async function () {
    * Process non-normative `valueOf`.
    * A class’s `valueOf` is non-normative because this information can be processed from each property’s `rdfs:range`.
    */
-  properties.forEach(function (jsonld) {
+  properties.forEach((jsonld) => {
     jsonld['rdfs:range'].forEach(function (class_) {
       let referenced = classes.find((c) => c['@id'] === class_['@id']) || null
       if (referenced) {
@@ -150,7 +141,7 @@ gulp.task('docs:jsonld', ['validate'], async function () {
       "superPropertyOf": { "@reverse": "rdfs:subPropertyOf" },
       "valueOf"     : { "@reverse": "rdfs:range" }
     },
-    '@graph': [
+    "@graph": [
       ...datatypes,
       ...classes,
       ...properties,
@@ -158,82 +149,125 @@ gulp.task('docs:jsonld', ['validate'], async function () {
   })
 
   // ++++ WRITE TO FILE ++++
-  await createDir('./docs/build/')
-  await util.promisify(fs.writeFile)('./docs/build/schemaorg.jsonld', contents, 'utf8')
+  await mkdirp('./dist/')
+  await util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', contents)
 })
 
-gulp.task('docs:typedef', ['docs:jsonld'], async function () {
-  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./docs/build/schemaorg.jsonld', 'utf8'))['@graph']
 
-  let datatypes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((jsonld) => `
-    /**
-     * @summary ${jsonld['rdfs:comment']}
-     * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {${({
-       'Boolean'  : 'boolean',
-       'Date'     : 'string',
-       'DateTime' : 'string',
-       'Integer'  : 'number',
-       'Number'   : 'number',
-       'Text'     : 'string',
-       'Time'     : 'string',
-       'URL'      : 'string',
-     })[jsonld['rdfs:label']]}} ${jsonld['rdfs:label']}
-     */
-  `)
-  let classes = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class').map((jsonld) => `
-    /**
-     * @summary ${jsonld['rdfs:comment']}
-     * ${(jsonld['superClassOf'].length || jsonld['valueOf'].length) ? '@description' : ''}
-     * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subtypes:
-    ${jsonld['superClassOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * ${(jsonld['valueOf'].length) ? `*(Non-Normative):* May appear as values of:
-    ${jsonld['valueOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : '!Object'}} ${jsonld['rdfs:label']}
-    ${jsonld['rdfs:member'].map(function (propertyld) {
-      let referenced = JSONLD.find((m) => m['@id'] === propertyld['@id']) || null
-      if (!referenced) throw new ReferenceError(`{ "@id": "${propertyld['@id']}" } not found.`)
-      return ` * @property {${referenced['rdfs:label']}=} ${referenced['rdfs:label']} ${referenced['rdfs:comment']}`
-    }).join('\n')}
-     */
-  `)
-  let properties = JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property').map((jsonld) => `
-    /**
-     * @summary ${jsonld['rdfs:comment']}
-     * ${(jsonld['rdfs:subPropertyOf'] || jsonld['superPropertyOf'].length || jsonld['rdfs:domain'].length) ? '@description' : ''}
-     * ${(jsonld['rdfs:subPropertyOf']) ? `Extends:
-     * - {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
-     *
-     * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:
-     ${jsonld['superPropertyOf'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * ${(jsonld['rdfs:domain'].length) ? `*(Non-Normative):* Property of:
-    ${jsonld['rdfs:domain'].map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')}` : ''}
-     *
-     * @see http://schema.org/${jsonld['rdfs:label']}
-     * @typedef {${(function (propertyld) {
-       let union = `(${propertyld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')})`
-       return (propertyld['$rangeArray']) ? `(${union}|Array<${union}>)` : union
-     })(jsonld)}} ${jsonld['rdfs:label']}
-     */
-  `)
 
-    let contents = [
-      ...datatypes,
-      ...classes,
-      ...properties,
-    ].join('')
+gulp.task('dist-ts', ['dist-jsonld'], async function () {
+  const JSONLD = JSON.parse(await util.promisify(fs.readFile)('./dist/schemaorg.jsonld', 'utf8'))['@graph']
+  /**
+   * @summary Print a list of links as a in jsdoc comment.
+   * @private
+   * @param   {!Object[]} objs array of JSON-LD objects
+   * @returns {string} a segment of jsdoc/typescript comment
+   */
+  function linklist(objs) {
+    return objs.map((obj) => ` * - {@link ${obj['@id'].split(':')[1]}}`).join('\n')
+  }
+  /**
+   * @summary Convert a Schema.org Datatype to a TypeScript type alias.
+   * @private
+   * @param   {!Object} jsonld the JSON-LD object to mark up
+   * @returns {string} TypeScript code
+   */
+  function datatypeTS(jsonld) {
+    let alias = jsonld['rdfs:label']
+    let type = ({
+      'Boolean'  : 'boolean',
+      'Date'     : 'string',
+      'DateTime' : 'string',
+      'Integer'  : 'number',
+      'Number'   : 'number',
+      'Text'     : 'string',
+      'Time'     : 'string',
+      'URL'      : 'string',
+    })[alias]
+    return `
+      /**
+       * @summary ${jsonld['rdfs:comment']}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       */
+      export type ${alias} = ${type}
+    `
+  }
+  /**
+   * @summary Convert a Schema.org Class to a TypeScript interface.
+   * @private
+   * @param   {!Object} jsonld the JSON-LD object to mark up
+   * @returns {string} TypeScript code
+   */
+  function classTS(jsonld) {
+    return `
+      /**
+       * ${jsonld['rdfs:comment']}
+       *
+       * ${(jsonld['superClassOf'].length) ? `*(Non-Normative):* Known subclasses:\n${       linklist(jsonld['superClassOf'])}\n` : ''}
+       * ${(jsonld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${linklist(jsonld['valueOf'     ]).replace(/}/g,'_type}')}\n` : ''}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       */
+      export interface ${jsonld['rdfs:label']} ${(jsonld['rdfs:subClassOf']) ? `extends ${jsonld['rdfs:subClassOf']['@id'].split(':')[1]} ` : ''}{
+        ${jsonld['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
+          ${name}?: ${name}_type
+        `).join('')}
+      }
+    `
+  }
+  /**
+   * @summary Convert a Schema.org Property to a TypeScript type alias.
+   * @private
+   * @param   {!Object} jsonld the JSON-LD object to mark up
+   * @returns {string} TypeScript code
+   */
+  function propertyTS(jsonld) {
+    let rangeunion = `${jsonld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')}`
+    return `
+      /**
+       * ${jsonld['rdfs:comment']}
+       *
+       * ${(jsonld['rdfs:subPropertyOf']) ? `Extends {@link ${jsonld['rdfs:subPropertyOf']['@id'].split(':')[1]}}` : ''}
+       * ${(jsonld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:\n${linklist(jsonld['superPropertyOf'])}\n` : ''}
+       * ${(jsonld['rdfs:domain'    ].length) ? `*(Non-Normative):* Property of:\n${        linklist(jsonld['rdfs:domain'    ])}\n` : ''}
+       * @see http://schema.org/${jsonld['rdfs:label']}
+       */
+      type ${jsonld['rdfs:label']}_type = ${rangeunion}${(jsonld['$rangeArray']) ? `|(${rangeunion})[]` : ''}
+    `
+  }
 
-  await util.promisify(fs.writeFile)('./docs/build/typedef.js', contents, 'utf8')
+  let contents = [
+    ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map(datatypeTS),
+    ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map(classTS),
+    ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map(propertyTS),
+  ].join('')
+
+  await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', contents)
 })
 
-// HOW-TO: https://github.com/mlucool/gulp-jsdoc3#usage
-gulp.task('docs:api', ['docs:typedef'], function () {
-  return gulp.src(['./README.md', './index.js', './docs/build/typedef.js'], {read:false})
-    .pipe(jsdoc(require('./jsdoc.config.json')))
+gulp.task('dist', ['dist-ts'], async function () {
+  return gulp.src('./dist/schemaorg.d.ts')
+    .pipe(typescript(tsconfig.compilerOptions))
+    .pipe(gulp.dest('./dist/'))
 })
 
-gulp.task('build', ['validate', 'test', 'docs:api'])
+gulp.task('test', async function () {
+	return Promise.all((await util.promisify(fs.readdir)('./test')).map(async (file) => {
+		let filepath = path.resolve(__dirname, './test/', file)
+		let returned;
+		try {
+			returned = await sdo_jsd.sdoValidate(filepath)
+			console.log(`The example ${file} is valid.`)
+		} catch (e) {
+			console.error(`The example ${file} failed!`, e.details || e)
+		}
+		return returned
+	}))
+})
+
+
+gulp.task('docs', async function () {
+  return gulp.src('./dist/schemaorg.d.ts')
+    .pipe(typedoc(typedocconfig))
+})
+
+gulp.task('build', ['validate', 'dist', 'test', 'docs'])
