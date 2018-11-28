@@ -11,7 +11,7 @@
     }
   },
   "allOf": [
-    { "$ref": "memberOf.jsd" },
+    { "$ref": "memberOf.prop.jsd" },
     {
       "anyOf": [
         { "$ref": "#/definitions/ExpectedType" },
