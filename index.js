@@ -5,7 +5,7 @@ const util = require('util')
 
 const Ajv = require('ajv')
 
-const {requireOtherAsync} = require('./lib/requireOther.js')
+const { requireJSONLDAsync } = require('./lib/requireJSONLD.js')
 
 
 /**
@@ -21,7 +21,7 @@ async getMetaSchemata() {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, './meta/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireOtherAsync(path.resolve(__dirname, './meta/', filename)))
+      .map((filename) => requireJSONLDAsync(path.join(__dirname, './meta/', filename)))
   )
 },
 
@@ -35,7 +35,7 @@ async getSchemata() {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, './schema/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireOtherAsync(path.resolve(__dirname, './schema/', filename)))
+      .map((filename) => requireJSONLDAsync(path.join(__dirname, './schema/', filename)))
   )
 },
 
@@ -68,7 +68,7 @@ async getSchemata() {
  * @throws  {TypeError} if the document fails validation; has a `.details` property for validation details
  */
 async sdoValidate(document, type = null) {
-  let doc = (typeof document === 'string') ? await requireOtherAsync(document) : document
+  let doc = (typeof document === 'string') ? await requireJSONLDAsync(document) : document
   const [META_SCHEMATA, SCHEMATA] = await Promise.all([module.exports.getMetaSchemata(), module.exports.getSchemata()])
   if (type === null) {
     let doctype = doc['@type']
