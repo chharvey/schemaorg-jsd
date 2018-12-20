@@ -12,18 +12,25 @@ const Ajv   = require('ajv')
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
 const { requireJSONLDAsync } = require('./lib/requireJSONLD.js')
-const sdo_jsd = require('./index.js')
 
 const tsconfig      = require('./tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
 
 
 gulp.task('validate', async function () {
+	const sdo_jsd = require('./index.js')
   const [META_SCHEMATA, SCHEMATA] = await Promise.all([sdo_jsd.getMetaSchemata(), sdo_jsd.getSchemata()])
   new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 })
 
+gulp.task('dist-index', async function() {
+	return gulp.src('./src/index.ts')
+		.pipe(typescript(tsconfig.compilerOptions))
+		.pipe(gulp.dest('./dist/'))
+})
+
 gulp.task('dist-jsonld', ['validate'], async function () {
+	const sdo_jsd = require('./index.js')
   // ++++ LOCAL VARIABLES ++++
   const SCHEMATA = (await sdo_jsd.getSchemata())
     .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
@@ -252,6 +259,7 @@ gulp.task('dist', ['dist-ts'], async function () {
 })
 
 gulp.task('test', async function () {
+	const sdo_jsd = require('./index.js')
 	return Promise.all((await util.promisify(fs.readdir)('./test')).map(async (file) => {
 		let filepath = path.resolve(__dirname, './test/', file)
 		let returned;
