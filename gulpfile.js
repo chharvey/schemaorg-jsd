@@ -13,7 +13,7 @@ const Ajv   = require('ajv')
 
 const sdo_jsd = require('./index.js')
 
-const tsconfig      = require('./config/tsconfig.json')
+const tsconfig      = require('./tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
 
 
