@@ -1,17 +1,16 @@
 import { JSONValue, JSONObject, JSONArray } from './json.d'
-import { JSONSchema } from './json-schema.d'
 
 
 /**
  * A single JSON-LD document.
  */
-export declare interface JSONLDObject extends CommonObject {
+interface JSONLDObject extends CommonObject {
 	'@context'?: JSONObject|JSONArray|string|null;
 	'@graph'?: { [key: string]: CommonObject; }|CommonObject[];
 	[key: string]: any/*JSONValue*/;
 }
 
-declare interface CommonObject {
+interface CommonObject {
 	/**
 	 * @format uri
 	 */
@@ -33,3 +32,5 @@ declare interface CommonObject {
 	'@vocab'?: string|null;
 	[key: string]: any/*CommonObject*/;
 }
+
+export { JSONLDObject }

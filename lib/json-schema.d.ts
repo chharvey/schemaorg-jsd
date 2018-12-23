@@ -3,12 +3,12 @@ import { JSONValue, JSONArray } from './json.d'
 /**
  * A single JSON Schema.
  */
-export declare type JSONSchema = JSONSchemaObject|boolean
+type JSONSchema = JSONSchemaObject|boolean
 
 /**
  * A JSON Schema, if that schema is an object (not a boolean).
  */
-declare interface JSONSchemaObject {
+interface JSONSchemaObject {
 	/**
 	 * @format 'uri-reference'
 	 */
@@ -113,27 +113,29 @@ declare interface JSONSchemaObject {
 /**
  * @minItems 1
  */
-declare type schemaArray = JSONSchema[]
+type schemaArray = JSONSchema[]
 
 
 /**
  * @type integer
  */
-declare type integer = number
+type integer = number
 
 /**
  * @type integer
  * @minimum 0
  */
-declare type nonNegativeInteger = integer
+type nonNegativeInteger = integer
 
 /**
  * @type integer
  * @minimum 0
  * @default 0
  */
-declare type nonNegativeIntegerDefault0 = integer
+type nonNegativeIntegerDefault0 = integer
 
-declare type simpleTypes = 'array'|'boolean'|'integer'|'null'|'number'|'object'|'string'
+type simpleTypes = 'array'|'boolean'|'integer'|'null'|'number'|'object'|'string'
 
-declare type stringArray = string[]
+type stringArray = string[]
+
+export { JSONSchema, JSONSchemaObject }

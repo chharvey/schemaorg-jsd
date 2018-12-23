@@ -1,22 +1,24 @@
 /**
  * Any JSON value.
  */
-export declare type JSONValue = JSONObject|JSONArray|JSONPrimitive
+type JSONValue = JSONObject|JSONArray|JSONPrimitive
 
 /**
  * Any JSON object.
  */
-export declare interface JSONObject {
+interface JSONObject {
 	[key: string]: JSONValue;
 }
 
 /**
  * Any JSON array.
  */
-export declare interface JSONArray extends Array<JSONValue> {
+interface JSONArray extends Array<JSONValue> {
 }
 
 /**
  * Any non-object, non-array JSON value.
  */
-export declare type JSONPrimitive = string|number|boolean|null
+type JSONPrimitive = string|number|boolean|null
+
+export { JSONValue, JSONObject, JSONArray, JSONPrimitive }
