@@ -16,32 +16,32 @@ It returns a Promise object, so you may use `await` or you may use standard `Pro
 Read the JSDoc in `./index.js` for further details.
 
 ```js
-const {sdoValidate} = require('schemaorg-jsd')
+const { sdoValidate } = require('schemaorg-jsd')
 
 async function run() {
-// use any javascript object
-let school = {
-  '@context': 'http://schema.org/',
-  '@type': 'Place',
-  name: `Blacksburg, ${usState('Virginia').code}`,
-}
-school['@id'] = 'http://www.blacksburg.gov/'
-try {
-  let is_valid_place = sdoValidate(school, 'Place') // validate against the Place schema
-  console.log(await is_valid_place) // return `true` if the document passes validation
-} catch (e) { // throw an `Error` if the document fails validation
-  console.error(e)
-  console.error(e.filename) // file where the invalidation occurred
-  console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
-}
+	// example 1: use any javascript object
+	let school = {
+		'@context': 'http://schema.org/',
+		'@type': 'Place',
+		name: `Blacksburg, ${usState('Virginia').code}`,
+	}
+	school['@id'] = 'http://www.blacksburg.gov/'
+	try {
+		let is_valid_place = sdoValidate(school, 'Place') // validate against the 'Place' schema
+		console.log(await is_valid_place) // return `true` if the document passes validation
+	} catch (e) { // throw an `Error` if the document fails validation
+		console.error(e)
+		console.error(e.filename) // file where the invalidation occurred
+		console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
+	}
 
-// require a package
-let me = require('./me.json')
-await sdoValidate(me, 'Person')
+	// example 2: require a package
+	let me = require('./me.json')
+	console.log(await sdoValidate(me, 'Person'))
 
-// use a string (relative path) of the filename
-let org = './my-org.jsonld'
-await sdoValidate(org, 'Organization')
+	// example 3: use a string (relative path) of the filename
+	let org = './my-org.jsonld'
+	console.log(await sdoValidate(org, 'Organization'))
 }
 ```
 
@@ -59,26 +59,28 @@ pre-packaged and ready to add.
 const Ajv = require('ajv')
 const sdo_jsd = require('schemaorg-jsd')
 
+const META_SCHEMATA = sdo_jsd.getMetaSchemata() // a Promise
+const SCHEMATA      = sdo_jsd.getSchemata()     // a Promise
+
 let my_schema = {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://chharvey.github.io/example.jsd",
-  "title": "Array<Thing>",
-  "description": "An array of Schema.org Things.",
-  "type": "array",
-  "items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://chharvey.github.io/example.jsd",
+	"title": "Array<Thing>",
+	"description": "An array of Schema.org Things.",
+	"type": "array",
+	"items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" }
 }
 let my_data = [
-  { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 1" },
-  { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
+	{ "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 1" },
+	{ "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
 ]
 
 async function run() {
-  const SCHEMATA = sdo_jsd.getSchemata()
-let ajv = new Ajv().addSchema(await SCHEMATA)
-ajv.validate(my_schema, my_data)
-// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
-// `Ajv#validate(schema, data)`
-// `sdoValidate(data, schemaTitle)`
+	let ajv = new Ajv().addMetaSchema(await META_SCHEMATA).addSchema(await SCHEMATA)
+	ajv.validate(my_schema, my_data)
+	// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+	// `Ajv#validate(schema, data)`
+	// `sdoValidate(data, schemaTitle)`
 }
 ```
 
@@ -98,16 +100,18 @@ $ # open ./docs/api/index.html in your browser
 **(Note: These docs will be published online soon, so you won’t have to build locally.)**
 
 ```ts
-import * as sdo from 'schemaorg-jsd' // TEMP: this import might change
+import * as sdo from 'schemaorg-jsd/dist/schemaorg.d' // TEMP: this import might change
+
 class Person {
-  private _name: string
-  /**
-   * Construct a new Person object.
-   * @param jsondata an object validating against the schemaorg-jsd `Person` schema
-   */
-  constructor(jsondata: sdo.Person) {
-    this._name = jsondata.name
-  }
+	/** This person’s name. */
+	private _name: string;
+	/**
+	 * Construct a new Person object.
+	 * @param jsondata an object validating against the schemaorg-jsd `Person` schema
+	 */
+	constructor(jsondata: sdo.Person) {
+		this._name = jsondata.name
+	}
 }
 ```
 

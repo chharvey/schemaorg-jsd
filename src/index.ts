@@ -44,34 +44,35 @@ export async function getSchemata(): Promise<JSONSchemaObject[]> {
  * ```js
  * const { sdoValidate } = require('schemaorg-jsd')
  * async function compile(jsdoc) {
- *   let is_valid;
- *   try {
- *     is_valid = await sdoValidate(jsdoc)
- *   } catch (e) {
- *     is_valid = false
- *   }
- *   console.log(is_valid)
+ * 	let is_valid;
+ * 	try {
+ * 		is_valid = await sdoValidate(jsdoc)
+ * 	} catch (e) {
+ * 		is_valid = false
+ * 	}
+ * 	console.log(is_valid)
  * }
  * // or you could use its Promise (if `async` keyword is not supported):
  * function compilePromise(jsdoc) {
- *   sdoValidate(jsdoc)
- *     .catch((e) => false)
- *     .then((result) => { console.log(result) })
+ * 	sdoValidate(jsdoc)
+ * 		.catch((e) => false)
+ * 		.then((result) => { console.log(result) })
  * }
  * ```
  *
  * @param   document the JSON or JSON-LD object to test, or its path pointing to a `.json` or `.jsonld` file
  * @param   type the name of the Type to test against; should be a Class in http://schema.org/
- *                         ; see the API for supported Types
- *                         ; if omitted, will test against the JSON document’s `@type` property (if it has one)
- *                         ; if the `@type` is not supported or cannot be found, defaults to `'Thing'`
- * @returns `true` if the document passes validation
+ *               - see the API for supported Types
+ *               - if omitted, will test against the JSON document’s `'@type'` property (if it has one)
+ *               - if `'@type'` is an array, each value of that array is tested
+ *               - if the `'@type'` is not supported or cannot be found, defaults to `'Thing'`
+ * @returns does the document pass validation?
  * @throws  {TypeError} if the document fails validation; has a `.details` property for validation details
  */
 export async function sdoValidate(document: JSONLDObject|string, type: string|null = null): Promise<boolean> {
 	let doc: JSONLDObject = (typeof document === 'string') ? await requireJSONLDAsync(document) as JSONLDObject : document
 	const [META_SCHEMATA, SCHEMATA]: JSONSchemaObject[][] = await Promise.all([getMetaSchemata(), getSchemata()])
-  if (type === null) {
+	if (type === null) {
 		let doctype: string[]|string|null = doc['@type'] || null
 		if (doctype instanceof Array && doctype.length) {
 			return (await Promise.all(doctype.map((dt) => sdoValidate(doc, dt)))).reduce((a, b) => a && b)
@@ -82,18 +83,18 @@ export async function sdoValidate(document: JSONLDObject|string, type: string|nu
 			console.warn(`JSON-LD \`@type\` property was not found. Validating against \`Thing.jsd\`…`)
 			type = 'Thing'
 		}
-  }
+	}
 
 	let ajv: Ajv.Ajv = new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
 	let is_data_valid: boolean = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, doc) as boolean
-  if (!is_data_valid) {
+	if (!is_data_valid) {
 		let e: TypeError&{
 			filename?: string;
 			details?: Ajv.ErrorObject;
 		} = new TypeError(`Document ${doc['@id'] || doc.identifier || doc.name || doc} does not valiate against schema ${type}.jsd!`)
-    if (typeof document === 'string') e.filename = document
+		if (typeof document === 'string') e.filename = document
 		e.details = ajv.errors ![0]
-    throw e
-  }
-  return true
+		throw e
+	}
+	return true
 }
