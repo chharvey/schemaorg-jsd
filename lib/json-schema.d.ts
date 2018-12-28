@@ -1,4 +1,4 @@
-import { JSONValue, JSONArray } from './json.d'
+import { JSONValue, JSONObject, JSONArray } from './json.d'
 
 /**
  * A single JSON Schema.
@@ -8,7 +8,7 @@ type JSONSchema = JSONSchemaObject|boolean
 /**
  * A JSON Schema, if that schema is an object (not a boolean).
  */
-interface JSONSchemaObject {
+interface JSONSchemaObject extends JSONObject {
 	/**
 	 * @format 'uri-reference'
 	 */
@@ -136,6 +136,10 @@ type nonNegativeIntegerDefault0 = integer
 
 type simpleTypes = 'array'|'boolean'|'integer'|'null'|'number'|'object'|'string'
 
+/**
+ * @uniqueItems true
+ * @default []
+ */
 type stringArray = string[]
 
 export { JSONSchema, JSONSchemaObject }

@@ -5,12 +5,19 @@ import { JSONValue, JSONObject, JSONArray } from './json.d'
  * A single JSON-LD document.
  */
 interface JSONLDObject extends CommonObject {
-	'@context'?: JSONObject|JSONArray|string|null;
+	'@context'?: (ContextObject|string)[]|ContextObject|string|null;
 	'@graph'?: { [key: string]: CommonObject; }|CommonObject[];
-	[key: string]: any/*JSONValue*/;
+	[key: string]: any/*CommonObject*/;
 }
 
-interface CommonObject {
+type ContextObject = {
+	[key: string]: string|{
+		'@id': string;
+		'@type': '@id';
+	}
+}
+
+interface CommonObject extends JSONObject {
 	/**
 	 * @format uri
 	 */
@@ -19,8 +26,8 @@ interface CommonObject {
 	'@language'?: string|null;
 	'@type'?: string[]|string|null;
 	'@container'?: '@language'|'@list'|'@index'|'@set'|null;
-	'@list'?: unknown;
-	'@set'?: unknown;
+	'@list'?: JSONLDObject[];
+	'@set'?: JSONLDObject[];
 	'@reverse'?: { [key: string]: CommonObject; }|string|null;
 	/**
 	 * @format uri

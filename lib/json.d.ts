@@ -7,14 +7,13 @@ type JSONValue = JSONObject|JSONArray|JSONPrimitive
  * Any JSON object.
  */
 interface JSONObject {
-	[key: string]: JSONValue;
+	[key: string]: JSONValue|undefined;
 }
 
 /**
  * Any JSON array.
  */
-interface JSONArray extends Array<JSONValue> {
-}
+interface JSONArray extends Array<JSONValue> {}
 
 /**
  * Any non-object, non-array JSON value.
