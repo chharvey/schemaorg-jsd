@@ -69,15 +69,16 @@ export async function getSchemata(): Promise<JSONSchemaObject[]> {
  * @returns does the document pass validation?
  * @throws  {TypeError} if the document fails validation; has a `.details` property for validation details
  */
-export async function sdoValidate(document: JSONLDObject|string, type: string|null = null): Promise<boolean> {
+export async function sdoValidate(document: JSONLDObject|string, type: string|null = null): Promise<true> {
+	const META_SCHEMATA: Promise<JSONSchemaObject[]> = getMetaSchemata()
+	const SCHEMATA     : Promise<JSONSchemaObject[]> = getSchemata()
 	let doc: JSONLDObject = (typeof document === 'string') ? await requireJSONLDAsync(document) as JSONLDObject : document
-	const [META_SCHEMATA, SCHEMATA]: JSONSchemaObject[][] = await Promise.all([getMetaSchemata(), getSchemata()])
 	if (type === null) {
 		let doctype: string[]|string|null = doc['@type'] || null
 		if (doctype instanceof Array && doctype.length) {
 			return (await Promise.all(doctype.map((dt) => sdoValidate(doc, dt)))).reduce((a, b) => a && b)
 		} else if (typeof doctype === 'string') {
-			type = (SCHEMATA.find((jsd) => jsd.title === `http://schema.org/${doctype}`)) ? doctype :
+			type = ((await SCHEMATA).find((jsd) => jsd.title === `http://schema.org/${doctype}`)) ? doctype :
 				(console.warn(`Class \`${doctype}\` is not yet supported. Validating against \`Thing.jsd\` instead…`), 'Thing')
 		} else {
 			console.warn(`JSON-LD \`@type\` property was not found. Validating against \`Thing.jsd\`…`)
@@ -85,7 +86,7 @@ export async function sdoValidate(document: JSONLDObject|string, type: string|nu
 		}
 	}
 
-	let ajv: Ajv.Ajv = new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
+	let ajv: Ajv.Ajv = new Ajv().addMetaSchema(await META_SCHEMATA).addSchema(await SCHEMATA)
 	let is_data_valid: boolean = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, doc) as boolean
 	if (!is_data_valid) {
 		let e: TypeError&{
