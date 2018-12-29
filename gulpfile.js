@@ -11,7 +11,7 @@ const Ajv   = require('ajv')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
-const { requireJSONLDAsync } = require('./lib/requireJSONLD.js')
+const { requireJSONAsync } = require('./lib/requireJSON.js')
 
 const tsconfig      = require('./tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
@@ -164,7 +164,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
 
 
 gulp.task('dist-ts', ['dist-jsonld'], async function () {
-	const JSONLD = (await requireJSONLDAsync(path.join(__dirname, './dist/schemaorg.jsonld')))['@graph']
+	const JSONLD = (await requireJSONAsync(path.join(__dirname, './dist/schemaorg.jsonld')))['@graph']
   /**
    * @summary Print a list of links as a in jsdoc comment.
    * @private

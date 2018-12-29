@@ -6,11 +6,11 @@ import { JSONValue } from './json.d'
  * @param   filepath the relative path of the file to read
  * @returns a JSON value that is the result of parsing the file contents
  */
-export declare function requireJSONLD(filepath: string): JSONValue;
+export declare function requireJSON(filepath: string): JSONValue;
 
 /**
  * Asynchronous {@link requireJSONLD}.
  * @param   filepath the relative path of the file to read
  * @returns a JSON value that is the result of parsing the file contents
  */
-export declare function requireJSONLDAsync(filepath: string): Promise<JSONValue>;
+export declare function requireJSONAsync(filepath: string): Promise<JSONValue>;

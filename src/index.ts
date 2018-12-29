@@ -6,7 +6,7 @@ import * as Ajv from 'ajv'
 
 import { JSONSchemaObject } from '../lib/json-schema.d'
 import { JSONLDObject } from '../lib/json-ld.d'
-import { requireJSONLDAsync } from '../lib/requireJSONLD'
+import { requireJSONAsync } from '../lib/requireJSON'
 
 
 /**
@@ -19,7 +19,7 @@ export async function getMetaSchemata(): Promise<JSONSchemaObject[]> {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, './meta/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSONLDAsync(path.join(__dirname, './meta/', filename)) as Promise<JSONSchemaObject>)
+      .map((filename) => requireJSONAsync(path.join(__dirname, './meta/', filename)) as Promise<JSONSchemaObject>)
   )
 }
 
@@ -34,7 +34,7 @@ export async function getSchemata(): Promise<JSONSchemaObject[]> {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, './schema/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSONLDAsync(path.join(__dirname, './schema/', filename)) as Promise<JSONSchemaObject>)
+      .map((filename) => requireJSONAsync(path.join(__dirname, './schema/', filename)) as Promise<JSONSchemaObject>)
   )
 }
 
@@ -72,7 +72,7 @@ export async function getSchemata(): Promise<JSONSchemaObject[]> {
 export async function sdoValidate(document: JSONLDObject|string, type: string|null = null): Promise<true> {
 	const META_SCHEMATA: Promise<JSONSchemaObject[]> = getMetaSchemata()
 	const SCHEMATA     : Promise<JSONSchemaObject[]> = getSchemata()
-	let doc: JSONLDObject = (typeof document === 'string') ? await requireJSONLDAsync(document) as JSONLDObject : document
+	let doc: JSONLDObject = (typeof document === 'string') ? await requireJSONAsync(document) as JSONLDObject : document
 	if (type === null) {
 		let doctype: string[]|string|null = doc['@type'] || null
 		if (doctype instanceof Array && doctype.length) {
