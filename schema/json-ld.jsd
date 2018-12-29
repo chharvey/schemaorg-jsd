@@ -1,8 +1,8 @@
 {
     "title": "Schema for JSON-LD",
-    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$schema": "http://json-schema.org/draft-04/schema#",
     "$id": "https://chharvey.github.io/schemaorg-jsd/schema/json-ld.jsd",
-    "$comment": "copied from https://github.com/json-ld/json-ld.org/blob/019de59e296c39d7b5c0298d49d95b99fceb294a/schemas/jsonld-schema.json",
+    "$comment": "copied from https://github.com/json-ld/json-ld.org/blob/1.0/schemas/jsonld-schema.json",
 
     "definitions":{
         "context": {
@@ -51,7 +51,7 @@
                 "@container": {
                     "description": "Used to set the default container type for a term.",
                     "type": ["string", "null"],
-                    "enum": ["@language", "@list", "@index", "@set"]
+                    "enum": ["@list", "@index", "@set"]
                 },
                 "@list": {
                     "description": "Used to express an ordered set of data."

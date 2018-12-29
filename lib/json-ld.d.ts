@@ -21,18 +21,18 @@ interface CommonObject extends JSONObject {
 	/**
 	 * @format uri
 	 */
-	'@id'?: string;
-	'@value'?: string|number|boolean|null;
-	'@language'?: string|null;
-	'@type'?: string[]|string|null;
-	'@container'?: '@language'|'@list'|'@index'|'@set'|null;
-	'@list'?: JSONLDObject[];
-	'@set'?: JSONLDObject[];
-	'@reverse'?: { [key: string]: CommonObject; }|string|null;
+	'@base'?: string|null;
+	'@container'?: '@index'|'@list'|'@set'|null;
 	/**
 	 * @format uri
 	 */
-	'@base'?: string|null;
+	'@id'?: string;
+	'@language'?: string|null;
+	'@list'?: JSONLDObject[];
+	'@reverse'?: { [key: string]: CommonObject; }|string|null;
+	'@set'?: JSONLDObject[];
+	'@type'?: string[]|string|null;
+	'@value'?: string|number|boolean|null;
 	/**
 	 * @format uri
 	 */

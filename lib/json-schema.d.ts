@@ -9,69 +9,71 @@ type JSONSchema = JSONSchemaObject|boolean
  * A JSON Schema, if that schema is an object (not a boolean).
  */
 interface JSONSchemaObject extends JSONObject {
+	$comment?: string;
 	/**
 	 * @format 'uri-reference'
 	 */
 	$id?: string;
 	/**
-	 * @format 'uri'
-	 */
-	$schema?: string;
-	/**
 	 * @format 'uri-reference'
 	 */
 	$ref?: string;
-	$comment?: string;
-	title?: string;
-	description?: string;
-	default?: JSONValue;
 	/**
-	 * @default false
+	 * @format 'uri'
 	 */
-	readOnly?: boolean;
-	examples?: JSONArray;
-	/**
-	 * @exclusiveMinimum 0
-	 */
-	multipleOf?: number;
-	maximum?: number;
-	exclusiveMaximum?: number;
-	minimum?: number;
-	exclusiveMinimum?: number;
-	maxLength?: nonNegativeInteger;
-	minLength?: nonNegativeIntegerDefault0;
-	/**
-	 * @format regex
-	 */
-	pattern?: string;
+	$schema?: string;
 	additionalItems?: JSONSchema;
-	/**
-	 * @default true
-	 */
-	items?: JSONSchema|schemaArray;
-	maxItems?: nonNegativeInteger;
-	minItems?: nonNegativeIntegerDefault0;
-	/**
-	 * @default false
-	 */
-	uniqueItems?: boolean;
-	contains?: JSONSchema;
-	maxProperties?: nonNegativeInteger;
-	minProperties?: nonNegativeIntegerDefault0;
-	required?: stringArray;
 	additionalProperties?: JSONSchema;
+	allOf?: schemaArray;
+	anyOf?: schemaArray;
+	const?: JSONValue;
+	contains?: JSONSchema;
+	contentEncoding?: string;
+	contentMediaType?: string;
+	default?: JSONValue;
 	/**
 	 * @default {}
 	 */
 	definitions?: {
 		[key: string]: JSONSchema;
 	};
+	dependencies?: {
+		[key: string]: JSONSchema|stringArray;
+	},
+	description?: string;
+	else?: JSONSchema;
 	/**
-	 * @default {}
+	 * @minItems 1
+	 * @uniqueItems true
 	 */
-	properties?: {
-		[key: string]: JSONSchema;
-	};
+	enum?: JSONArray;
+	examples?: JSONArray;
+	exclusiveMaximum?: number;
+	exclusiveMinimum?: number;
+	format?: string;
+	if?: JSONSchema;
+	/**
+	 * @default true
+	 */
+	items?: JSONSchema|schemaArray;
+	maximum?: number;
+	maxItems?: nonNegativeInteger;
+	maxLength?: nonNegativeInteger;
+	maxProperties?: nonNegativeInteger;
+	minimum?: number;
+	minItems?: nonNegativeIntegerDefault0;
+	minLength?: nonNegativeIntegerDefault0;
+	minProperties?: nonNegativeIntegerDefault0;
+	/**
+	 * @exclusiveMinimum 0
+	 */
+	multipleOf?: number;
+	not?: JSONSchema;
+	oneOf?: schemaArray;
+	/**
+	 * @format regex
+	 */
+	pattern?: string;
 	/**
 	 * @default {}
 	 */
@@ -83,31 +85,29 @@ interface JSONSchemaObject extends JSONObject {
 			key: string
 		]: JSONSchema;
 	},
-	dependencies?: {
-		[key: string]: JSONSchema|stringArray;
-	},
-	propertyNames?: JSONSchema;
-	const?: JSONValue;
 	/**
-	 * @minItems 1
-	 * @uniqueItems true
+	 * @default {}
 	 */
-	enum?: JSONArray;
+	properties?: {
+		[key: string]: JSONSchema;
+	};
+	propertyNames?: JSONSchema;
+	/**
+	 * @default false
+	 */
+	readOnly?: boolean;
+	required?: stringArray;
+	then?: JSONSchema;
+	title?: string;
 	/**
 	 * @minItems 1
 	 * @uniqueItems true
 	 */
 	type?: simpleTypes[]|simpleTypes;
-	format?: string;
-	contentMediaType?: string;
-	contentEncoding?: string;
-	if?: JSONSchema;
-	then?: JSONSchema;
-	else?: JSONSchema;
-	allOf?: schemaArray;
-	anyOf?: schemaArray;
-	oneOf?: schemaArray;
-	not?: JSONSchema;
+	/**
+	 * @default false
+	 */
+	uniqueItems?: boolean;
 }
 
 /**
