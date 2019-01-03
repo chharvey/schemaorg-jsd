@@ -215,7 +215,7 @@ gulp.task('dist-ts', ['dist-jsonld'], async function () {
        * ${(jsonld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${linklist(jsonld['valueOf'     ]).replace(/}/g,'_type}')}\n` : ''}
        * @see http://schema.org/${jsonld['rdfs:label']}
        */
-      export interface ${jsonld['rdfs:label']} ${(jsonld['rdfs:subClassOf']) ? `extends ${jsonld['rdfs:subClassOf']['@id'].split(':')[1]} ` : ''}{
+      export interface ${jsonld['rdfs:label']} extends ${(jsonld['rdfs:subClassOf']) ? jsonld['rdfs:subClassOf']['@id'].split(':')[1] : 'JSONLDObject'} {
         ${jsonld['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
           ${name}?: ${name}_type
         `).join('')}
@@ -244,6 +244,7 @@ gulp.task('dist-ts', ['dist-jsonld'], async function () {
   }
 
   let contents = [
+		`import { JSONLDObject } from '../lib/json-ld.d'`,
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map(datatypeTS),
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map(classTS),
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map(propertyTS),
