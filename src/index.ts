@@ -17,9 +17,9 @@ import { requireJSONAsync } from '../lib/requireJSON'
  */
 export async function getMetaSchemata(): Promise<JSONSchemaObject[]> {
   return Promise.all(
-    (await util.promisify(fs.readdir)(path.resolve(__dirname, './meta/')))
+    (await util.promisify(fs.readdir)(path.resolve(__dirname, '../meta/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSONAsync(path.join(__dirname, './meta/', filename)) as Promise<JSONSchemaObject>)
+      .map((filename) => requireJSONAsync(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchemaObject>)
   )
 }
 
@@ -32,9 +32,9 @@ export async function getMetaSchemata(): Promise<JSONSchemaObject[]> {
  */
 export async function getSchemata(): Promise<JSONSchemaObject[]> {
   return Promise.all(
-    (await util.promisify(fs.readdir)(path.resolve(__dirname, './schema/')))
+    (await util.promisify(fs.readdir)(path.resolve(__dirname, '../schema/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSONAsync(path.join(__dirname, './schema/', filename)) as Promise<JSONSchemaObject>)
+      .map((filename) => requireJSONAsync(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchemaObject>)
   )
 }
 
