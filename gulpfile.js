@@ -11,7 +11,7 @@ const Ajv   = require('ajv')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
-const { requireJSONAsync } = require('./lib/requireJSON.js')
+const { requireJSON } = require('@chharvey/requirejson')
 
 const tsconfig      = require('./tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
@@ -164,7 +164,7 @@ gulp.task('dist-jsonld', ['validate'], async function () {
 
 
 gulp.task('dist-ts', ['dist-jsonld'], async function () {
-	const JSONLD = (await requireJSONAsync(path.join(__dirname, './dist/schemaorg.jsonld')))['@graph']
+	const JSONLD = (await requireJSON('./dist/schemaorg.jsonld'))['@graph']
   /**
    * @summary Print a list of links as a in jsdoc comment.
    * @private
@@ -244,7 +244,7 @@ gulp.task('dist-ts', ['dist-jsonld'], async function () {
   }
 
   let contents = [
-		`import { JSONLDObject } from '../lib/json-ld.d'`,
+		`import { JSONLDObject } from '@chharvey/requirejson'`,
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map(datatypeTS),
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map(classTS),
     ...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map(propertyTS),
@@ -253,7 +253,7 @@ gulp.task('dist-ts', ['dist-jsonld'], async function () {
   await util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', contents)
 })
 
-gulp.task('dist', ['dist-ts'], async function () {
+gulp.task('dist', ['dist-index', 'dist-ts'], async function () {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typescript(tsconfig.compilerOptions))
     .pipe(gulp.dest('./dist/'))
