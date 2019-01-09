@@ -7,6 +7,7 @@
     { "$ref": "Thing.jsd" },
     {
       "properties": {
+				"agent": { "$ref": "agent.prop.jsd" },
         "endTime": { "$ref": "endTime.prop.jsd" },
         "location": { "$ref": "location.prop.jsd" },
         "startTime": { "$ref": "startTime.prop.jsd" }
