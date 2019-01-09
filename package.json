@@ -24,6 +24,7 @@
   },
   "homepage": "https://github.com/chharvey/schemaorg-jsd#readme",
   "dependencies": {
+    "@types/json-schema": "^7.0.1",
     "ajv": "^6.5.4"
   },
   "devDependencies": {

@@ -3,8 +3,9 @@ import * as  path from 'path'
 import * as  util from 'util'
 
 import * as Ajv from 'ajv'
+import { JSONSchema7 } from 'json-schema'
 
-import { requireJSON, JSONSchemaObject, JSONLDObject } from '@chharvey/requirejson'
+import { requireJSON, JSONLDObject } from '@chharvey/requirejson'
 
 
 /**
@@ -13,11 +14,11 @@ import { requireJSON, JSONSchemaObject, JSONLDObject } from '@chharvey/requirejs
  * This is for internal use only. Users should not be expected to use these meta-schemata.
  * @returns an array of meta-schemata
  */
-export async function getMetaSchemata(): Promise<JSONSchemaObject[]> {
+export async function getMetaSchemata(): Promise<JSONSchema7[]> {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, '../meta/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchemaObject>)
+      .map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>)
   )
 }
 
@@ -28,11 +29,11 @@ export async function getMetaSchemata(): Promise<JSONSchemaObject[]> {
  * That is, schemata against which your JSON-LD documents should validate.
  * @returns an array of schemata
  */
-export async function getSchemata(): Promise<JSONSchemaObject[]> {
+export async function getSchemata(): Promise<JSONSchema7[]> {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, '../schema/')))
       .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchemaObject>)
+      .map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchema7>)
   )
 }
 
@@ -68,8 +69,8 @@ export async function getSchemata(): Promise<JSONSchemaObject[]> {
  * @throws  {TypeError} if the document fails validation; has a `.details` property for validation details
  */
 export async function sdoValidate(document: JSONLDObject|string, type: string|null = null): Promise<true> {
-	const META_SCHEMATA: Promise<JSONSchemaObject[]> = getMetaSchemata()
-	const SCHEMATA     : Promise<JSONSchemaObject[]> = getSchemata()
+	const META_SCHEMATA: Promise<JSONSchema7[]> = getMetaSchemata()
+	const SCHEMATA     : Promise<JSONSchema7[]> = getSchemata()
 	let doc: JSONLDObject = (typeof document === 'string') ? await requireJSON(document) as JSONLDObject : document
 	if (type === null) {
 		let doctype: string[]|string|null = doc['@type'] || null
