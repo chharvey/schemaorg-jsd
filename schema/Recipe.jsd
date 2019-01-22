@@ -1,0 +1,15 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Recipe.jsd",
+	"title": "http://schema.org/Recipe",
+	"description": "A recipe.",
+	"allOf": [
+		{ "$ref": "HowTo.jsd" },
+		{
+			"properties": {
+				"recipeIngredient": { "$ref": "recipeIngredient.prop.jsd" },
+				"recipeYield": { "$ref": "recipeYield.prop.jsd" }
+			}
+		}
+	]
+}
