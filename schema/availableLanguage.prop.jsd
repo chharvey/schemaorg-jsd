@@ -1,0 +1,22 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/availableLanguage.prop.jsd",
+	"title": "http://schema.org/availableLanguage",
+	"description": "A language someone may use with or at the item, service or place. Please use one of the language codes from the [IETF BCP 47 standard](http://tools.ietf.org/html/bcp47).",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
+}

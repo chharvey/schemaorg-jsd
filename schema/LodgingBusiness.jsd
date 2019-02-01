@@ -1,0 +1,18 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/LodgingBusiness.jsd",
+	"title": "http://schema.org/LodgingBusiness",
+	"description": "A lodging business, such as a motel, hotel, or inn.",
+	"allOf": [
+		{ "$ref": "LocalBusiness.jsd" },
+		{
+			"properties": {
+				"availableLanguage": { "$ref": "availableLanguage.prop.jsd" },
+				"checkinTime": { "$ref": "checkinTime.prop.jsd" },
+				"checkoutTime": { "$ref": "checkoutTime.prop.jsd" },
+				"petsAllowed": { "$ref": "petsAllowed.prop.jsd" },
+				"starRating": { "$ref": "starRating.prop.jsd" }
+			}
+		}
+	]
+}
