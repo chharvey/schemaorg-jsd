@@ -1,0 +1,22 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/paymentAccepted.prop.jsd",
+	"title": "http://schema.org/paymentAccepted",
+	"description": "Cash, Credit Card, Cryptocurrency, Local Exchange Tradings System, etc.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
+}

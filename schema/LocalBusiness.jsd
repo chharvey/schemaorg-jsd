@@ -1,0 +1,17 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/LocalBusiness.jsd",
+	"title": "http://schema.org/LocalBusiness",
+	"description": "A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant, a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc.",
+	"allOf": [
+		{ "$ref": "Organization.jsd" },
+		{
+			"properties": {
+				"currenciesAccepted": { "$ref": "currenciesAccepted.prop.jsd" },
+				"openingHours": { "$ref": "openingHours.prop.jsd" },
+				"paymentAccepted": { "$ref": "paymentAccepted.prop.jsd" },
+				"priceRange": { "$ref": "priceRange.prop.jsd" }
+			}
+		}
+	]
+}
