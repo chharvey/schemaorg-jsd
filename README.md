@@ -1,4 +1,4 @@
-# schemaorg-jsd
+# [schemaorg-jsd](https://chharvey.github.io/schemaorg-jsd/docs/api/)
 JSON Schema validation for JSON-LD files using Schema.org vocabulary.
 
 
@@ -90,14 +90,7 @@ They are identical to the specs at [schema.org](https://schema.org/),
 but you can import the source code in your own project for
 [TypeScript](http://www.typescriptlang.org/) compilation.
 
-```
-$ cd node_modules/schemaorg-jsd
-$ npm install
-$ npm run build
-$ cd -
-$ # open ./docs/api/index.html in your browser
-```
-**(Note: These docs will be published online soon, so you won’t have to build locally.)**
+[View the docs.](https://chharvey.github.io/schemaorg-jsd/docs/api/)
 
 ```ts
 import * as sdo from 'schemaorg-jsd'
@@ -141,7 +134,7 @@ Rather than everyone using their own data types, JSON-LD standardizes the markup
 for people and data types to communicate.
 JSON-LD has some rules, for example, an object’s `@id` property must be a string.
 Therefore, to enforce these rules, JSON-LD documents should validate against the
-[JSON-LD Schema](https://raw.githubusercontent.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json).
+[JSON-LD Schema](https://json-ld.org/schemas/jsonld-schema.json).
 The official MIME Type of JSON-LD documents is `application/ld+json`,
 and JSON-LD files typically have file extension `.jsonld`.
 
@@ -164,4 +157,4 @@ so that you can write a well-typed API for your project.
 You can semantically mark up your data using the Schema.org vocabulary with JSON-LD syntax.
 If you have a TypeScript API, you can import this project’s TypeScript to catch any type errors before runtime.
 Then, to prevent additional runtime errors or SEO mistakes, you can validate your markup against
-the JSON schemata (multiple “schemas”) in this project.
+the JSON schemata in this project.
