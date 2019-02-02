@@ -1,11 +1,11 @@
 {
   "name": "schemaorg-jsd",
-  "version": "0.13.1",
+  "version": "0.14.0",
   "description": "JSON Schema validation for JSON-LD files using Schema.org vocabulary.",
   "main": "index.js",
   "scripts": {
     "build": "gulp build",
-    "unbuild": "rm -r docs/api",
+    "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
