@@ -14,30 +14,26 @@ import { SDODatatypeSchema, SDOClassSchema, SDOPropertySchema } from './meta-sch
  * An array of meta-schemata against which the content schemata validate.
  *
  * This is for internal use only. Users should not be expected to use these meta-schemata.
- * @returns an array of meta-schemata
  */
-export async function getMetaSchemata(): Promise<JSONSchema7[]> {
+export const META_SCHEMATA: Promise<JSONSchema7[]> = (async () => {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, '../meta/')))
-      .filter((filename) => path.parse(filename).ext === '.jsd')
       .map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>)
   )
-}
+})()
 
 /**
  * An array of all JSON Schemata validating Schema.org vocabulary.
  *
  * This array contains all Schema.org schemata in this project.
  * That is, schemata against which your JSON-LD documents should validate.
- * @returns an array of schemata
  */
-export async function getSchemata(): Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)[]> {
+export const SCHEMATA: Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)[]> = (async () => {
   return Promise.all(
     (await util.promisify(fs.readdir)(path.resolve(__dirname, '../schema/')))
-      .filter((filename) => path.parse(filename).ext === '.jsd')
-      .map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as unknown as Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)>) // BUG
+      .map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchema7> as Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)>)
   )
-}
+})()
 
 /**
  * Validate a JSON-LD document against a Schema.org JSON schema.
@@ -71,8 +67,6 @@ export async function getSchemata(): Promise<(SDODatatypeSchema|SDOClassSchema|S
  * @throws  {TypeError} if the document fails validation; has a `.details` property for validation details
  */
 export async function sdoValidate(document: JSONLDDocument|string, type: string|null = null): Promise<true> {
-	const META_SCHEMATA: Promise<JSONSchema7[]> = getMetaSchemata()
-	const SCHEMATA     : Promise<JSONSchema7[]> = getSchemata()
 	let doc: JSONLDDocument = (typeof document === 'string') ? await requireJSON(document) as JSONLDDocument : document
 	if (type === null) {
 		let doctype: string[]|string|null = doc['@type'] || null

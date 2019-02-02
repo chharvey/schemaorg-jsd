@@ -59,9 +59,6 @@ pre-packaged and ready to add.
 const Ajv = require('ajv')
 const sdo_jsd = require('schemaorg-jsd')
 
-const META_SCHEMATA = sdo_jsd.getMetaSchemata() // a Promise
-const SCHEMATA      = sdo_jsd.getSchemata()     // a Promise
-
 let my_schema = {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$id": "https://chharvey.github.io/example.jsd",
@@ -76,7 +73,7 @@ let my_data = [
 ]
 
 async function run() {
-	let ajv = new Ajv().addMetaSchema(await META_SCHEMATA).addSchema(await SCHEMATA)
+	let ajv = new Ajv().addMetaSchema(await sdo_jsd.META_SCHEMATA).addSchema(await sdo_jsd.SCHEMATA)
 	ajv.validate(my_schema, my_data)
 	// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
 	// `Ajv#validate(schema, data)`

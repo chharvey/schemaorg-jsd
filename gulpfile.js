@@ -19,8 +19,7 @@ const typedocconfig = require('./config/typedoc.json')
 
 gulp.task('validate', async function () {
 	const sdo_jsd = require('./index.js')
-  const [META_SCHEMATA, SCHEMATA] = await Promise.all([sdo_jsd.getMetaSchemata(), sdo_jsd.getSchemata()])
-  new Ajv().addMetaSchema(META_SCHEMATA).addSchema(SCHEMATA)
+	new Ajv().addMetaSchema(await sdo_jsd.META_SCHEMATA).addSchema(await sdo_jsd.SCHEMATA)
 })
 
 gulp.task('dist-index', async function() {
@@ -32,7 +31,7 @@ gulp.task('dist-index', async function() {
 gulp.task('dist-jsonld', ['validate'], async function () {
 	const sdo_jsd = require('./index.js')
   // ++++ LOCAL VARIABLES ++++
-  const SCHEMATA = (await sdo_jsd.getSchemata())
+  const SCHEMATA = (await sdo_jsd.SCHEMATA)
     .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
   let label     = (jsd) => path.parse(new url.URL(jsd.title).pathname).name
   let comment   = (jsd) => jsd.description
