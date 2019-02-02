@@ -3,3 +3,5 @@
 // See `./index.js` for the manual output.
 
 export { META_SCHEMATA, JSONLD_SCHEMA, SCHEMATA, sdoValidate } from './src/index'
+
+export * from './dist/schemaorg.d'

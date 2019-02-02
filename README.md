@@ -100,7 +100,7 @@ $ # open ./docs/api/index.html in your browser
 **(Note: These docs will be published online soon, so you won’t have to build locally.)**
 
 ```ts
-import * as sdo from 'schemaorg-jsd/dist/schemaorg.d' // TEMP: this import might change
+import * as sdo from 'schemaorg-jsd'
 
 class Person {
 	/** This person’s name. */
