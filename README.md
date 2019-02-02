@@ -73,7 +73,10 @@ let my_data = [
 ]
 
 async function run() {
-	let ajv = new Ajv().addMetaSchema(await sdo_jsd.META_SCHEMATA).addSchema(await sdo_jsd.SCHEMATA)
+	let ajv = new Ajv()
+		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
+		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
+		.addSchema(await sdo_jsd.SCHEMATA)
 	ajv.validate(my_schema, my_data)
 	// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
 	// `Ajv#validate(schema, data)`

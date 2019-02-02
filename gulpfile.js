@@ -19,7 +19,10 @@ const typedocconfig = require('./config/typedoc.json')
 
 gulp.task('validate', async function () {
 	const sdo_jsd = require('./index.js')
-	new Ajv().addMetaSchema(await sdo_jsd.META_SCHEMATA).addSchema(await sdo_jsd.SCHEMATA)
+	new Ajv()
+		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
+		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
+		.addSchema(await sdo_jsd.SCHEMATA)
 })
 
 gulp.task('dist-index', async function() {

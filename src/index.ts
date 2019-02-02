@@ -1,9 +1,10 @@
-import * as  fs   from 'fs'
-import * as  path from 'path'
-import * as  util from 'util'
+import * as fs from 'fs'
+import * as https from 'https'
+import * as path from 'path'
+import * as util from 'util'
 
 import * as Ajv from 'ajv'
-import { JSONSchema7 } from 'json-schema'
+import { JSONSchema7, JSONSchema4 } from 'json-schema'
 
 import { requireJSON, JSONLDDocument } from '@chharvey/requirejson'
 
@@ -21,6 +22,37 @@ export const META_SCHEMATA: Promise<JSONSchema7[]> = (async () => {
       .map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>)
   )
 })()
+
+/**
+ * A single JSON Schema, which validates JSON-LD objects.
+ * @see https://json-ld.org/schemas/jsonld-schema.json
+ */
+export const JSONLD_SCHEMA: Promise<JSONSchema4> = new Promise((resolve, reject) => {
+	https.get('https://cdn.jsdelivr.net/gh/json-ld/json-ld.org@1.0/schemas/jsonld-schema.json', (res) => {
+		if (!res.statusCode || res.statusCode < 200 || 300 <= res.statusCode) {
+			reject(new Error(`
+Failed to load.
+Status Code: ${res.statusCode || 'no status code found'}
+			`))
+			res.resume()
+			return;
+		}
+		res.setEncoding('utf8')
+		const body: string[] = []
+		res.on('data', (chunk) => { body.push(chunk) })
+		res.on('end', () => {
+			let data: JSONSchema4;
+			try {
+				data = JSON.parse(body.join(''))
+			} catch (e) {
+				reject(e)
+				return;
+			}
+			data.id = 'https://json-ld.org/schemas/jsonld-schema.json'
+			resolve(data)
+		})
+	}).on('error', (e) => { reject(e) })
+})
 
 /**
  * An array of all JSON Schemata validating Schema.org vocabulary.
@@ -81,7 +113,10 @@ export async function sdoValidate(document: JSONLDDocument|string, type: string|
 		}
 	}
 
-	let ajv: Ajv.Ajv = new Ajv().addMetaSchema(await META_SCHEMATA).addSchema(await SCHEMATA)
+	let ajv: Ajv.Ajv = new Ajv()
+		.addMetaSchema(await META_SCHEMATA)
+		.addSchema(await JSONLD_SCHEMA)
+		.addSchema(await SCHEMATA)
 	let is_data_valid: boolean = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, doc) as boolean
 	if (!is_data_valid) {
 		let e: TypeError&{
