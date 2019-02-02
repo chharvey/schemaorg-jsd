@@ -35,7 +35,6 @@ gulp.task('dist-jsonld', ['validate'], async function () {
 	const sdo_jsd = require('./index.js')
   // ++++ LOCAL VARIABLES ++++
   const SCHEMATA = (await sdo_jsd.SCHEMATA)
-    .filter((jsd) => path.parse(new url.URL(jsd['$id']).pathname).name !== 'json-ld') // TODO: reference json-ld.jsd externally
   let label     = (jsd) => path.parse(new url.URL(jsd.title).pathname).name
   let comment   = (jsd) => jsd.description
   let supertype = (jsd) => (label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null

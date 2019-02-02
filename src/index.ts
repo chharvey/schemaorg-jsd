@@ -27,7 +27,7 @@ export const META_SCHEMATA: Promise<JSONSchema7[]> = (async () => {
  * A single JSON Schema, which validates JSON-LD objects.
  * @see https://json-ld.org/schemas/jsonld-schema.json
  */
-export const JSONLD_SCHEMA: Promise<JSONSchema4> = new Promise((resolve, reject) => {
+export const JSONLD_SCHEMA: Promise<JSONSchema7> = new Promise((resolve, reject) => {
 	https.get('https://cdn.jsdelivr.net/gh/json-ld/json-ld.org@1.0/schemas/jsonld-schema.json', (res) => {
 		if (!res.statusCode || res.statusCode < 200 || 300 <= res.statusCode) {
 			reject(new Error(`
@@ -48,8 +48,9 @@ Status Code: ${res.statusCode || 'no status code found'}
 				reject(e)
 				return;
 			}
-			data.id = 'https://json-ld.org/schemas/jsonld-schema.json'
-			resolve(data)
+			data.$schema = 'http://json-schema.org/draft-07/schema#'
+			data.$id = 'https://json-ld.org/schemas/jsonld-schema.json'
+			resolve(data as JSONSchema7)
 		})
 	}).on('error', (e) => { reject(e) })
 })

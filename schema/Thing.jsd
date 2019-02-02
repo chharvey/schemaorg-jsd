@@ -4,7 +4,7 @@
   "title": "http://schema.org/Thing",
   "description": "The most generic type of item.",
   "allOf": [
-    { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/json-ld.jsd" },
+		{ "$ref": "https://json-ld.org/schemas/jsonld-schema.json" },
     {
       "type": "object",
       "properties": {
