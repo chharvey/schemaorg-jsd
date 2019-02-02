@@ -17,41 +17,35 @@ const tsconfig      = require('./tsconfig.json')
 const typedocconfig = require('./config/typedoc.json')
 
 
-gulp.task('validate', async function () {
+async function validate() {
 	const sdo_jsd = require('./index.js')
 	new Ajv()
 		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
 		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
 		.addSchema(await sdo_jsd.SCHEMATA)
-})
+}
 
-gulp.task('dist-index', async function() {
+function dist_index() {
 	return gulp.src('./src/{index,build}.ts')
 		.pipe(typescript(tsconfig.compilerOptions))
 		.pipe(gulp.dest('./dist/'))
-})
+}
 
-gulp.task('dist-jsonld', ['validate'], async function () {
-	const { SCHEMATA } = require('./dist/index.js')
-	const { buildLD } = require('./dist/build.js')
-	let contents = JSON.stringify(buildLD(await SCHEMATA), null, '\t')
-  await mkdirp('./dist/')
-	return util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', contents, 'utf8')
-})
+const dist = gulp.series(
+	dist_index,
+	async function dist0() {
+		const { SCHEMATA } = require('./dist/index.js')
+		const { buildLD, buildTS } = require('./dist/build.js')
+		let ld = buildLD(await SCHEMATA)
+		await mkdirp('./dist/')
+		return Promise.all([
+			util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
+			util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
+		])
+	}
+)
 
-gulp.task('dist-ts', ['dist-jsonld'], async function () {
-	const { buildTS } = require('./dist/build.js')
-	let contents = buildTS(await requireJSON('./dist/schemaorg.jsonld'))
-	return util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', contents, 'utf8')
-})
-
-gulp.task('dist', ['dist-index', 'dist-ts'], async function () {
-  return gulp.src('./dist/schemaorg.d.ts')
-    .pipe(typescript(tsconfig.compilerOptions))
-    .pipe(gulp.dest('./dist/'))
-})
-
-gulp.task('test', async function () {
+async function test() {
 	const sdo_jsd = require('./index.js')
 	return Promise.all((await util.promisify(fs.readdir)('./test')).map(async (file) => {
 		let filepath = path.resolve(__dirname, './test/', file)
@@ -64,12 +58,24 @@ gulp.task('test', async function () {
 		}
 		return returned
 	}))
-})
+}
 
-
-gulp.task('docs', async function () {
+function docs() {
   return gulp.src('./dist/schemaorg.d.ts')
     .pipe(typedoc(typedocconfig))
-})
+}
 
-gulp.task('build', ['validate', 'dist', 'test', 'docs'])
+const build = gulp.series(
+	validate,
+	dist,
+	gulp.parallel(test, docs)
+)
+
+module.exports = {
+	validate,
+	dist_index,
+	dist,
+	test,
+	docs,
+	build,
+}
