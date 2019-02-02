@@ -29,7 +29,7 @@ async function run() {
 	try {
 		let is_valid_place = sdoValidate(school, 'Place') // validate against the 'Place' schema
 		console.log(await is_valid_place) // return `true` if the document passes validation
-	} catch (e) { // throw an `Error` if the document fails validation
+	} catch (e) { // throw a `TypeError` if the document fails validation
 		console.error(e)
 		console.error(e.filename) // file where the invalidation occurred
 		console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
@@ -37,11 +37,11 @@ async function run() {
 
 	// example 2: require a package
 	let me = require('./me.json')
-	console.log(await sdoValidate(me, 'Person'))
+	console.log(await sdoValidate(me, 'Person')) // return `true` if the document passes validation
 
 	// example 3: use a string (relative path) of the filename
 	let org = './my-org.jsonld'
-	console.log(await sdoValidate(org, 'Organization'))
+	console.log(await sdoValidate(org, 'Organization')) // return `true` if the document passes validation
 }
 ```
 
