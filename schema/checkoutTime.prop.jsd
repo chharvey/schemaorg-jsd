@@ -1,0 +1,21 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/checkoutTime.prop.jsd",
+	"title": "http://schema.org/checkoutTime",
+	"description": "The latest someone may check out of a lodging establishment.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "DateTime.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
+}

@@ -1,0 +1,14 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/HowTo.jsd",
+	"title": "http://schema.org/HowTo",
+	"description": "Instructions that explain how to achieve a result by performing a sequence of steps.",
+	"allOf": [
+		{ "$ref": "CreativeWork.jsd" },
+		{
+			"properties": {
+				"yield": { "$ref": "yield.prop.jsd" }
+			}
+		}
+	]
+}

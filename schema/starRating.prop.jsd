@@ -1,0 +1,22 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/starRating.prop.jsd",
+	"title": "http://schema.org/starRating",
+	"description": "An official rating for a lodging business or food establishment, e.g. from national associations or standards bodies. Use the author property to indicate the rating organization, e.g. as an Organization with name such as (e.g. HOTREC, DEHOGA, WHR, or Hotelstars).",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Rating.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
+}

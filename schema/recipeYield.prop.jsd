@@ -1,0 +1,22 @@
+{
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/recipeYield.prop.jsd",
+	"title": "http://schema.org/recipeYield",
+	"description": "The quantity produced by the recipe (for example, number of people served, number of servings, etc).",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "QuantitativeValue.jsd" },
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		{ "$ref": "yield.prop.jsd" },
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
+}
