@@ -6,7 +6,6 @@ const util = require('util')
 const gulp  = require('gulp')
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
-const mkdirp = require('make-dir')
 const Ajv   = require('ajv')
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
@@ -37,7 +36,6 @@ const dist = gulp.series(
 		const { SCHEMATA } = require('./dist/index.js')
 		const { buildLD, buildTS } = require('./dist/build.js')
 		let ld = buildLD(await SCHEMATA)
-		await mkdirp('./dist/')
 		return Promise.all([
 			util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
 			util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
