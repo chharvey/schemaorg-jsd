@@ -1,4 +1,4 @@
-# schemaorg-jsd
+# [schemaorg-jsd](https://chharvey.github.io/schemaorg-jsd/docs/api/)
 JSON Schema validation for JSON-LD files using Schema.org vocabulary.
 
 
@@ -16,32 +16,32 @@ It returns a Promise object, so you may use `await` or you may use standard `Pro
 Read the JSDoc in `./index.js` for further details.
 
 ```js
-const {sdoValidate} = require('schemaorg-jsd')
+const { sdoValidate } = require('schemaorg-jsd')
 
 async function run() {
-// use any javascript object
-let school = {
-  '@context': 'http://schema.org/',
-  '@type': 'Place',
-  name: `Blacksburg, ${usState('Virginia').code}`,
-}
-school['@id'] = 'http://www.blacksburg.gov/'
-try {
-  let is_valid_place = sdoValidate(school, 'Place') // validate against the Place schema
-  console.log(await is_valid_place) // return `true` if the document passes validation
-} catch (e) { // throw an `Error` if the document fails validation
-  console.error(e)
-  console.error(e.filename) // file where the invalidation occurred
-  console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
-}
+	// example 1: use any javascript object
+	let school = {
+		'@context': 'http://schema.org/',
+		'@type': 'Place',
+		name: `Blacksburg, ${usState('Virginia').code}`,
+	}
+	school['@id'] = 'http://www.blacksburg.gov/'
+	try {
+		let is_valid_place = sdoValidate(school, 'Place') // validate against the 'Place' schema
+		console.log(await is_valid_place) // return `true` if the document passes validation
+	} catch (e) { // throw a `TypeError` if the document fails validation
+		console.error(e)
+		console.error(e.filename) // file where the invalidation occurred
+		console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
+	}
 
-// require a package
-let me = require('./me.json')
-await sdoValidate(me, 'Person')
+	// example 2: require a package
+	let me = require('./me.json')
+	console.log(await sdoValidate(me, 'Person')) // return `true` if the document passes validation
 
-// use a string (relative path) of the filename
-let org = './my-org.jsonld'
-await sdoValidate(org, 'Organization')
+	// example 3: use a string (relative path) of the filename
+	let org = './my-org.jsonld'
+	console.log(await sdoValidate(org, 'Organization')) // return `true` if the document passes validation
 }
 ```
 
@@ -60,25 +60,27 @@ const Ajv = require('ajv')
 const sdo_jsd = require('schemaorg-jsd')
 
 let my_schema = {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://chharvey.github.io/example.jsd",
-  "title": "Array<Thing>",
-  "description": "An array of Schema.org Things.",
-  "type": "array",
-  "items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" }
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://chharvey.github.io/example.jsd",
+	"title": "Array<Thing>",
+	"description": "An array of Schema.org Things.",
+	"type": "array",
+	"items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" }
 }
 let my_data = [
-  { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 1" },
-  { "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
+	{ "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 1" },
+	{ "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
 ]
 
 async function run() {
-  const SCHEMATA = sdo_jsd.getSchemata()
-let ajv = new Ajv().addSchema(await SCHEMATA)
-ajv.validate(my_schema, my_data)
-// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
-// `Ajv#validate(schema, data)`
-// `sdoValidate(data, schemaTitle)`
+	let ajv = new Ajv()
+		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
+		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
+		.addSchema(await sdo_jsd.SCHEMATA)
+	ajv.validate(my_schema, my_data)
+	// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+	// `Ajv#validate(schema, data)`
+	// `sdoValidate(data, schemaTitle)`
 }
 ```
 
@@ -88,26 +90,21 @@ They are identical to the specs at [schema.org](https://schema.org/),
 but you can import the source code in your own project for
 [TypeScript](http://www.typescriptlang.org/) compilation.
 
-```
-$ cd node_modules/schemaorg-jsd
-$ npm install
-$ npm run build
-$ cd -
-$ # open ./docs/api/index.html in your browser
-```
-**(Note: These docs will be published online soon, so you won’t have to build locally.)**
+[View the docs.](https://chharvey.github.io/schemaorg-jsd/docs/api/)
 
 ```ts
-import * as sdo from 'schemaorg-jsd' // TEMP: this import might change
+import * as sdo from 'schemaorg-jsd'
+
 class Person {
-  private _name: string
-  /**
-   * Construct a new Person object.
-   * @param jsondata an object validating against the schemaorg-jsd `Person` schema
-   */
-  constructor(jsondata: sdo.Person) {
-    this._name = jsondata.name
-  }
+	/** This person’s name. */
+	private _name: string;
+	/**
+	 * Construct a new Person object.
+	 * @param jsondata an object validating against the schemaorg-jsd `Person` schema
+	 */
+	constructor(jsondata: sdo.Person) {
+		this._name = jsondata.name
+	}
 }
 ```
 
@@ -137,7 +134,7 @@ Rather than everyone using their own data types, JSON-LD standardizes the markup
 for people and data types to communicate.
 JSON-LD has some rules, for example, an object’s `@id` property must be a string.
 Therefore, to enforce these rules, JSON-LD documents should validate against the
-[JSON-LD Schema](https://raw.githubusercontent.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json).
+[JSON-LD Schema](https://json-ld.org/schemas/jsonld-schema.json).
 The official MIME Type of JSON-LD documents is `application/ld+json`,
 and JSON-LD files typically have file extension `.jsonld`.
 
@@ -160,4 +157,4 @@ so that you can write a well-typed API for your project.
 You can semantically mark up your data using the Schema.org vocabulary with JSON-LD syntax.
 If you have a TypeScript API, you can import this project’s TypeScript to catch any type errors before runtime.
 Then, to prevent additional runtime errors or SEO mistakes, you can validate your markup against
-the JSON schemata (multiple “schemas”) in this project.
+the JSON schemata in this project.
