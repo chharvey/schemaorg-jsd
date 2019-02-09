@@ -13,7 +13,7 @@ $ npm install schemaorg-jsd
 
 This module exports an asynchronous validation function.
 It returns a Promise object, so you may use `await` or you may use standard `Promise` prototype methods.
-Read the JSDoc in `./index.js` for further details.
+Read the TypeDoc comments in `./src/index.ts` for further details.
 
 ```js
 const { sdoValidate } = require('schemaorg-jsd')
@@ -27,7 +27,7 @@ async function run() {
 	}
 	school['@id'] = 'http://www.blacksburg.gov/'
 	try {
-		let is_valid_place = sdoValidate(school, 'Place') // validate against the 'Place' schema
+		let is_valid_place = sdoValidate(school, 'Place') // validate against the `Place` schema
 		console.log(await is_valid_place) // return `true` if the document passes validation
 	} catch (e) { // throw a `TypeError` if the document fails validation
 		console.error(e)
@@ -42,6 +42,26 @@ async function run() {
 	// example 3: use a string (relative path) of the filename
 	let org = './my-org.jsonld'
 	console.log(await sdoValidate(org, 'Organization')) // return `true` if the document passes validation
+
+	// example 4: infer the schema from the `'@type'` property
+	await sdoValidate(school) // validates against the `Place` schema, since `school['@type'] === 'Place'`
+
+	// example 5: multiple types
+	let business = {
+		'@context': 'http://schema.org/',
+		'@type': ['Place', 'LocalBusiness'],
+	}
+	await sdoValidate(business) // validates against all schemata in the array
+
+	// example 6: default type is `Thing` (http://schema.org/Thing)
+	await sdoValidate({
+		'@context': 'http://schema.org/',
+		'@type': 'foobar' // validates against the `Thing` schema, since value 'foobar' cannot be found
+	})
+	await sdoValidate({
+		'@context': 'http://schema.org/',
+		// validates against the `Thing` schema, since property '@type' is missing
+	})
 }
 ```
 
@@ -78,15 +98,18 @@ async function run() {
 		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
 		.addSchema(await sdo_jsd.SCHEMATA)
 	ajv.validate(my_schema, my_data)
-	// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
-	// `Ajv#validate(schema, data)`
-	// `sdoValidate(data, schemaTitle)`
+	/*
+	Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+
+	Ajv#validate(schema, data)     // schema comes before data
+	sdoValidate(data, schemaTitle) // data comes before schema
+	 */
 }
 ```
 
 ## View the “API”
-A set of [TypeDoc](http://typedoc.org/) declarations describing types and their properties.
-They are identical to the specs at [schema.org](https://schema.org/),
+This project includes a set of [TypeDoc](http://typedoc.org/) declarations describing types and their properties.
+They’re identical to the specs at [schema.org](https://schema.org/),
 but you can import the source code in your own project for
 [TypeScript](http://www.typescriptlang.org/) compilation.
 
@@ -116,7 +139,7 @@ class Person {
 based off of the syntax used to define object literals in JavaScript.
 
 ## JSON Schema
-[JSON Schema](http://json-schema.org/) is a vocabulary, in JSON format,
+[JSON Schema](http://json-schema.org/) is a subset of JSON
 that allows you to validate JSON documents.
 In other words, a particular JSON schema tells you whether your JSON instance file is written correctly,
 if you choose to validate your instance against that schema.
