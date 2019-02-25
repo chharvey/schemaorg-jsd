@@ -120,14 +120,14 @@ export async function sdoValidate(obj: JSONLDObject|string, type: string|null = 
 		.addMetaSchema(await META_SCHEMATA)
 		.addSchema(await JSONLD_SCHEMA)
 		.addSchema(await SCHEMATA)
-	let is_data_valid: boolean = ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
+	let is_data_valid: boolean = await ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
 	if (!is_data_valid) {
 		let err: TypeError&{
 			filename?: string;
-			details?: Ajv.ErrorObject;
+			details?: Ajv.ErrorObject[];
 		} = new TypeError(`Object ${obj['@id'] || obj.identifier || obj.name || JSON.stringify(obj)} does not valiate against schema ${type}.jsd!`)
 		if (filename.length) err.filename = filename
-		err.details = ajv.errors ![0]
+		err.details = ajv.errors !
 		throw err
 	}
 	return true
