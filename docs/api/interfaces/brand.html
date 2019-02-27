@@ -93,6 +93,19 @@
 					</li>
 				</ul>
 			</section>
+			<section class="tsd-panel tsd-kind-interface">
+				<h3 class="tsd-before-signature">Indexable</h3>
+				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">JSONValue</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A brand is a name used by an organization or business person for labeling a product, product group, or similar.</p>
+					</div>
+					<p><em>(Non-Normative):</em> May appear as values of:</p>
+					<ul>
+						<li><a href="../globals.html#brand_type">brand_type</a></li>
+					</ul>
+				</div>
+			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
 				<section class="tsd-panel tsd-index-panel">
@@ -100,6 +113,16 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_base" class="tsd-kind-icon">@base</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_container" class="tsd-kind-icon">@container</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_id" class="tsd-kind-icon">@id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_language" class="tsd-kind-icon">@language</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_list" class="tsd-kind-icon">@list</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_reverse" class="tsd-kind-icon">@reverse</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_set" class="tsd-kind-icon">@set</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_type" class="tsd-kind-icon">@type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_value" class="tsd-kind-icon">@value</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#_vocab" class="tsd-kind-icon">@vocab</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#additionaltype" class="tsd-kind-icon">additional<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#description" class="tsd-kind-icon">description</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="brand.html#disambiguatingdescription" class="tsd-kind-icon">disambiguating<wbr>Description</a></li>
@@ -119,13 +142,144 @@
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_base" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @base</h3>
+					<div class="tsd-signature tsd-kind-icon">@base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@base&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:27</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>format</dt>
+							<dd><p>uri</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_container" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @container</h3>
+					<div class="tsd-signature tsd-kind-icon">@container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"@index"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"@list"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"@set"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@container&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:28</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_id" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @id</h3>
+					<div class="tsd-signature tsd-kind-icon">@id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@id&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:32</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>format</dt>
+							<dd><p>uri</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_language" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @language</h3>
+					<div class="tsd-signature tsd-kind-icon">@language<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@language&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_list" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @list</h3>
+					<div class="tsd-signature tsd-kind-icon">@list<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSONLDObject</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@list&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:34</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_reverse" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @reverse</h3>
+					<div class="tsd-signature tsd-kind-icon">@reverse<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@reverse&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:35</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_set" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @set</h3>
+					<div class="tsd-signature tsd-kind-icon">@set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSONLDObject</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@set&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:36</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_type" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @type</h3>
+					<div class="tsd-signature tsd-kind-icon">@type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@type&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:37</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_value" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @value</h3>
+					<div class="tsd-signature tsd-kind-icon">@value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@value&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:38</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+					<a name="_vocab" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @vocab</h3>
+					<div class="tsd-signature tsd-kind-icon">@vocab<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from JSONLDObject.&#x27;@vocab&#x27;</p>
+						<ul>
+							<li>Defined in /Users/Chris/Repositories/schemaorg-jsd/node_modules/@chharvey/requirejson/json-ld.d.ts:42</li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<dl class="tsd-comment-tags">
+							<dt>format</dt>
+							<dd><p>uri</p>
+							</dd>
+						</dl>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="additionaltype" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> additional<wbr>Type</h3>
 					<div class="tsd-signature tsd-kind-icon">additional<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../globals.html#additionaltype_type" class="tsd-signature-type">additionalType_type</a></div>
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#additionaltype">additionalType</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:880</li>
+							<li>Defined in schemaorg.d.ts:888</li>
 						</ul>
 					</aside>
 				</section>
@@ -136,7 +290,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#description">description</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:882</li>
+							<li>Defined in schemaorg.d.ts:890</li>
 						</ul>
 					</aside>
 				</section>
@@ -147,7 +301,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#disambiguatingdescription">disambiguatingDescription</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:884</li>
+							<li>Defined in schemaorg.d.ts:892</li>
 						</ul>
 					</aside>
 				</section>
@@ -158,7 +312,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#identifier">identifier</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:886</li>
+							<li>Defined in schemaorg.d.ts:894</li>
 						</ul>
 					</aside>
 				</section>
@@ -169,7 +323,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#image">image</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:888</li>
+							<li>Defined in schemaorg.d.ts:896</li>
 						</ul>
 					</aside>
 				</section>
@@ -179,7 +333,7 @@
 					<div class="tsd-signature tsd-kind-icon">logo<span class="tsd-signature-symbol">:</span> <a href="../globals.html#logo_type" class="tsd-signature-type">logo_type</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in schemaorg.d.ts:123</li>
+							<li>Defined in schemaorg.d.ts:131</li>
 						</ul>
 					</aside>
 				</section>
@@ -190,7 +344,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#mainentityofpage">mainEntityOfPage</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:890</li>
+							<li>Defined in schemaorg.d.ts:898</li>
 						</ul>
 					</aside>
 				</section>
@@ -201,7 +355,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#name">name</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:892</li>
+							<li>Defined in schemaorg.d.ts:900</li>
 						</ul>
 					</aside>
 				</section>
@@ -212,7 +366,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#potentialaction">potentialAction</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:894</li>
+							<li>Defined in schemaorg.d.ts:902</li>
 						</ul>
 					</aside>
 				</section>
@@ -223,7 +377,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#sameas">sameAs</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:896</li>
+							<li>Defined in schemaorg.d.ts:904</li>
 						</ul>
 					</aside>
 				</section>
@@ -234,7 +388,7 @@
 					<aside class="tsd-sources">
 						<p>Inherited from <a href="thing.html">Thing</a>.<a href="thing.html#url">url</a></p>
 						<ul>
-							<li>Defined in schemaorg.d.ts:898</li>
+							<li>Defined in schemaorg.d.ts:906</li>
 						</ul>
 					</aside>
 				</section>
@@ -255,6 +409,36 @@
 					<li class="current tsd-kind-interface">
 						<a href="brand.html" class="tsd-kind-icon">Brand</a>
 						<ul>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_base" class="tsd-kind-icon">@base</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_container" class="tsd-kind-icon">@container</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_id" class="tsd-kind-icon">@id</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_language" class="tsd-kind-icon">@language</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_list" class="tsd-kind-icon">@list</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_reverse" class="tsd-kind-icon">@reverse</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_set" class="tsd-kind-icon">@set</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_type" class="tsd-kind-icon">@type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_value" class="tsd-kind-icon">@value</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+								<a href="brand.html#_vocab" class="tsd-kind-icon">@vocab</a>
+							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="brand.html#additionaltype" class="tsd-kind-icon">additional<wbr>Type</a>
 							</li>

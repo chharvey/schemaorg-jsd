@@ -62,40 +62,60 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="schemaorg-jsd">schemaorg-jsd</h1>
+				<h1 id="schemaorg-jsd"><a href="https://chharvey.github.io/schemaorg-jsd/docs/api/">schemaorg-jsd</a></h1>
 				<p>JSON Schema validation for JSON-LD files using Schema.org vocabulary.</p>
 				<h1 id="usage">Usage</h1>
 				<h2 id="install">Install</h2>
-				<pre><code><span class="hljs-meta">$</span><span class="bash"> npm install schemaorg-jsd</span></code></pre><h2 id="validate-against-schema-org-json-schema">Validate Against Schema.org JSON Schema</h2>
+				<pre><code>$ npm <span class="hljs-keyword">install</span> schemaorg-jsd</code></pre><h2 id="validate-against-schema-org-json-schema">Validate Against Schema.org JSON Schema</h2>
 				<p>This module exports an asynchronous validation function.
 					It returns a Promise object, so you may use <code>await</code> or you may use standard <code>Promise</code> prototype methods.
-				Read the JSDoc in <code>./index.js</code> for further details.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> {sdoValidate} = <span class="hljs-built_in">require</span>(<span class="hljs-string">'schemaorg-jsd'</span>)
+				Read the TypeDoc comments in <code>./src/index.ts</code> for further details.</p>
+				<pre><code class="language-js"><span class="hljs-keyword">const</span> { sdoValidate } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'schemaorg-jsd'</span>)
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>) </span>{
-<span class="hljs-comment">// use any javascript object</span>
-<span class="hljs-keyword">let</span> school = {
-  <span class="hljs-string">'@context'</span>: <span class="hljs-string">'http://schema.org/'</span>,
-  <span class="hljs-string">'@type'</span>: <span class="hljs-string">'Place'</span>,
-  <span class="hljs-attr">name</span>: <span class="hljs-string">`Blacksburg, <span class="hljs-subst">${usState(<span class="hljs-string">'Virginia'</span>).code}</span>`</span>,
-}
-school[<span class="hljs-string">'@id'</span>] = <span class="hljs-string">'http://www.blacksburg.gov/'</span>
-<span class="hljs-keyword">try</span> {
-  <span class="hljs-keyword">let</span> is_valid_place = sdoValidate(school, <span class="hljs-string">'Place'</span>) <span class="hljs-comment">// validate against the Place schema</span>
-  <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> is_valid_place) <span class="hljs-comment">// return `true` if the document passes validation</span>
-} <span class="hljs-keyword">catch</span> (e) { <span class="hljs-comment">// throw an `Error` if the document fails validation</span>
-  <span class="hljs-built_in">console</span>.error(e)
-  <span class="hljs-built_in">console</span>.error(e.filename) <span class="hljs-comment">// file where the invalidation occurred</span>
-  <span class="hljs-built_in">console</span>.error(e.details) <span class="hljs-comment">// more json-schema specifics; see &lt;https://github.com/epoberezkin/ajv#validation-errors&gt;</span>
-}
+    <span class="hljs-comment">// example 1: use any javascript object</span>
+    <span class="hljs-keyword">let</span> school = {
+        <span class="hljs-string">'@context'</span>: <span class="hljs-string">'http://schema.org/'</span>,
+        <span class="hljs-string">'@type'</span>: <span class="hljs-string">'Place'</span>,
+        <span class="hljs-attr">name</span>: <span class="hljs-string">`Blacksburg, <span class="hljs-subst">${usState(<span class="hljs-string">'Virginia'</span>).code}</span>`</span>,
+    }
+    school[<span class="hljs-string">'@id'</span>] = <span class="hljs-string">'http://www.blacksburg.gov/'</span>
+    <span class="hljs-keyword">try</span> {
+        <span class="hljs-keyword">let</span> is_valid_place = sdoValidate(school, <span class="hljs-string">'Place'</span>) <span class="hljs-comment">// validate against the `Place` schema</span>
+        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> is_valid_place) <span class="hljs-comment">// return `true` if the document passes validation</span>
+    } <span class="hljs-keyword">catch</span> (e) { <span class="hljs-comment">// throw a `TypeError` if the document fails validation</span>
+        <span class="hljs-built_in">console</span>.error(e)
+        <span class="hljs-built_in">console</span>.error(e.filename) <span class="hljs-comment">// file where the invalidation occurred</span>
+        <span class="hljs-built_in">console</span>.error(e.details) <span class="hljs-comment">// more json-schema specifics; see &lt;https://github.com/epoberezkin/ajv#validation-errors&gt;</span>
+    }
 
-<span class="hljs-comment">// require a package</span>
-<span class="hljs-keyword">let</span> me = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./me.json'</span>)
-<span class="hljs-keyword">await</span> sdoValidate(me, <span class="hljs-string">'Person'</span>)
+    <span class="hljs-comment">// example 2: require a package</span>
+    <span class="hljs-keyword">let</span> me = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./me.json'</span>)
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> sdoValidate(me, <span class="hljs-string">'Person'</span>)) <span class="hljs-comment">// return `true` if the document passes validation</span>
 
-<span class="hljs-comment">// use a string (relative path) of the filename</span>
-<span class="hljs-keyword">let</span> org = <span class="hljs-string">'./my-org.jsonld'</span>
-<span class="hljs-keyword">await</span> sdoValidate(org, <span class="hljs-string">'Organization'</span>)
+    <span class="hljs-comment">// example 3: use a string (relative path) of the filename</span>
+    <span class="hljs-keyword">let</span> org = <span class="hljs-string">'./my-org.jsonld'</span>
+    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> sdoValidate(org, <span class="hljs-string">'Organization'</span>)) <span class="hljs-comment">// return `true` if the document passes validation</span>
+
+    <span class="hljs-comment">// example 4: infer the schema from the `'@type'` property</span>
+    <span class="hljs-keyword">await</span> sdoValidate(school) <span class="hljs-comment">// validates against the `Place` schema, since `school['@type'] === 'Place'`</span>
+
+    <span class="hljs-comment">// example 5: multiple types</span>
+    <span class="hljs-keyword">let</span> business = {
+        <span class="hljs-string">'@context'</span>: <span class="hljs-string">'http://schema.org/'</span>,
+        <span class="hljs-string">'@type'</span>: [<span class="hljs-string">'Place'</span>, <span class="hljs-string">'LocalBusiness'</span>],
+    }
+    <span class="hljs-keyword">await</span> sdoValidate(business) <span class="hljs-comment">// validates against all schemata in the array</span>
+
+    <span class="hljs-comment">// example 6: default type is `Thing` (http://schema.org/Thing)</span>
+    <span class="hljs-keyword">await</span> sdoValidate({
+        <span class="hljs-string">'@context'</span>: <span class="hljs-string">'http://schema.org/'</span>,
+        <span class="hljs-string">'@type'</span>: <span class="hljs-string">'foobar'</span> <span class="hljs-comment">// validates against the `Thing` schema, since value 'foobar' cannot be found</span>
+    })
+    <span class="hljs-keyword">await</span> sdoValidate({
+        <span class="hljs-string">'@context'</span>: <span class="hljs-string">'http://schema.org/'</span>,
+        <span class="hljs-comment">// validates against the `Thing` schema, since property '@type' is missing</span>
+    })
 }</code></pre>
 				<h2 id="validate-against-your-own-json-schema">Validate Against Your Own JSON Schema</h2>
 				<p>You can use <a href="https://www.npmjs.com/package/ajv">ajv</a> to validate any document against any JSON schema.
@@ -109,53 +129,56 @@ school[<span class="hljs-string">'@id'</span>] = <span class="hljs-string">'http
 <span class="hljs-keyword">const</span> sdo_jsd = <span class="hljs-built_in">require</span>(<span class="hljs-string">'schemaorg-jsd'</span>)
 
 <span class="hljs-keyword">let</span> my_schema = {
-  <span class="hljs-string">"$schema"</span>: <span class="hljs-string">"http://json-schema.org/draft-07/schema#"</span>,
-  <span class="hljs-string">"$id"</span>: <span class="hljs-string">"https://chharvey.github.io/example.jsd"</span>,
-  <span class="hljs-string">"title"</span>: <span class="hljs-string">"Array&lt;Thing&gt;"</span>,
-  <span class="hljs-string">"description"</span>: <span class="hljs-string">"An array of Schema.org Things."</span>,
-  <span class="hljs-string">"type"</span>: <span class="hljs-string">"array"</span>,
-  <span class="hljs-string">"items"</span>: { <span class="hljs-string">"$ref"</span>: <span class="hljs-string">"https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd"</span> }
+    <span class="hljs-string">"$schema"</span>: <span class="hljs-string">"http://json-schema.org/draft-07/schema#"</span>,
+    <span class="hljs-string">"$id"</span>: <span class="hljs-string">"https://chharvey.github.io/example.jsd"</span>,
+    <span class="hljs-string">"title"</span>: <span class="hljs-string">"Array&lt;Thing&gt;"</span>,
+    <span class="hljs-string">"description"</span>: <span class="hljs-string">"An array of Schema.org Things."</span>,
+    <span class="hljs-string">"type"</span>: <span class="hljs-string">"array"</span>,
+    <span class="hljs-string">"items"</span>: { <span class="hljs-string">"$ref"</span>: <span class="hljs-string">"https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd"</span> }
 }
 <span class="hljs-keyword">let</span> my_data = [
-  { <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://schema.org/"</span>, <span class="hljs-string">"@type"</span>: <span class="hljs-string">"Thing"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Thing 1"</span> },
-  { <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://schema.org/"</span>, <span class="hljs-string">"@type"</span>: <span class="hljs-string">"Thing"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Thing 2"</span> }
+    { <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://schema.org/"</span>, <span class="hljs-string">"@type"</span>: <span class="hljs-string">"Thing"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Thing 1"</span> },
+    { <span class="hljs-string">"@context"</span>: <span class="hljs-string">"http://schema.org/"</span>, <span class="hljs-string">"@type"</span>: <span class="hljs-string">"Thing"</span>, <span class="hljs-string">"name"</span>: <span class="hljs-string">"Thing 2"</span> }
 ]
 
 <span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>) </span>{
-  <span class="hljs-keyword">const</span> SCHEMATA = sdo_jsd.getSchemata()
-<span class="hljs-keyword">let</span> ajv = <span class="hljs-keyword">new</span> Ajv().addSchema(<span class="hljs-keyword">await</span> SCHEMATA)
-ajv.validate(my_schema, my_data)
-<span class="hljs-comment">// Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:</span>
-<span class="hljs-comment">// `Ajv#validate(schema, data)`</span>
-<span class="hljs-comment">// `sdoValidate(data, schemaTitle)`</span>
+    <span class="hljs-keyword">let</span> ajv = <span class="hljs-keyword">new</span> Ajv()
+        .addMetaSchema(<span class="hljs-keyword">await</span> sdo_jsd.META_SCHEMATA)
+        .addSchema(<span class="hljs-keyword">await</span> sdo_jsd.JSONLD_SCHEMA)
+        .addSchema(<span class="hljs-keyword">await</span> sdo_jsd.SCHEMATA)
+    ajv.validate(my_schema, my_data)
+    <span class="hljs-comment">/*
+    Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+
+    Ajv#validate(schema, data)     // schema comes before data
+    sdoValidate(data, schemaTitle) // data comes before schema
+     */</span>
 }</code></pre>
 				<h2 id="view-the-api-">View the “API”</h2>
-				<p>A set of <a href="http://typedoc.org/">TypeDoc</a> declarations describing types and their properties.
-					They are identical to the specs at <a href="https://schema.org/">schema.org</a>,
+				<p>This project includes a set of <a href="http://typedoc.org/">TypeDoc</a> declarations describing types and their properties.
+					They’re identical to the specs at <a href="https://schema.org/">schema.org</a>,
 					but you can import the source code in your own project for
 				<a href="http://www.typescriptlang.org/">TypeScript</a> compilation.</p>
-				<pre><code><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> node_modules/schemaorg-jsd</span>
-<span class="hljs-meta">$</span><span class="bash"> npm install</span>
-<span class="hljs-meta">$</span><span class="bash"> npm run build</span>
-<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> -</span>
-<span class="hljs-meta">$</span><span class="bash"> <span class="hljs-comment"># open ./docs/api/index.html in your browser</span></span></code></pre><p><strong>(Note: These docs will be published online soon, so you won’t have to build locally.)</strong></p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> sdo <span class="hljs-keyword">from</span> <span class="hljs-string">'schemaorg-jsd'</span> <span class="hljs-comment">// TEMP: this import might change</span>
+				<p><a href="https://chharvey.github.io/schemaorg-jsd/docs/api/">View the docs.</a></p>
+				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> sdo <span class="hljs-keyword">from</span> <span class="hljs-string">'schemaorg-jsd'</span>
+
 <span class="hljs-keyword">class</span> Person {
-  <span class="hljs-keyword">private</span> _name: <span class="hljs-built_in">string</span>
-  <span class="hljs-comment">/**
-   * Construct a new Person object.
-   * @param jsondata an object validating against the schemaorg-jsd `Person` schema
-   */</span>
-  <span class="hljs-keyword">constructor</span>(<span class="hljs-params">jsondata: sdo.Person</span>) {
-    <span class="hljs-keyword">this</span>._name = jsondata.name
-  }
+    <span class="hljs-comment">/** This person’s name. */</span>
+    <span class="hljs-keyword">private</span> _name: <span class="hljs-built_in">string</span>;
+    <span class="hljs-comment">/**
+     * Construct a new Person object.
+     * @param jsondata an object validating against the schemaorg-jsd `Person` schema
+     */</span>
+    <span class="hljs-keyword">constructor</span>(<span class="hljs-params">jsondata: sdo.Person</span>) {
+        <span class="hljs-keyword">this</span>._name = jsondata.name
+    }
 }</code></pre>
 				<h1 id="background-info">Background Info</h1>
 				<h2 id="json">JSON</h2>
 				<p><a href="http://www.json.org/">JSON</a> (JavaScript Object Notation) is a data interchange format,
 				based off of the syntax used to define object literals in JavaScript.</p>
 				<h2 id="json-schema">JSON Schema</h2>
-				<p><a href="http://json-schema.org/">JSON Schema</a> is a vocabulary, in JSON format,
+				<p><a href="http://json-schema.org/">JSON Schema</a> is a subset of JSON
 					that allows you to validate JSON documents.
 					In other words, a particular JSON schema tells you whether your JSON instance file is written correctly,
 					if you choose to validate your instance against that schema.
@@ -171,7 +194,7 @@ ajv.validate(my_schema, my_data)
 					for people and data types to communicate.
 					JSON-LD has some rules, for example, an object’s <code>@id</code> property must be a string.
 					Therefore, to enforce these rules, JSON-LD documents should validate against the
-					<a href="https://raw.githubusercontent.com/json-ld/json-ld.org/master/schemas/jsonld-schema.json">JSON-LD Schema</a>.
+					<a href="https://json-ld.org/schemas/jsonld-schema.json">JSON-LD Schema</a>.
 					The official MIME Type of JSON-LD documents is <code>application/ld+json</code>,
 				and JSON-LD files typically have file extension <code>.jsonld</code>.</p>
 				<h2 id="schema-org">Schema.org</h2>
@@ -191,7 +214,7 @@ ajv.validate(my_schema, my_data)
 				<p>You can semantically mark up your data using the Schema.org vocabulary with JSON-LD syntax.
 					If you have a TypeScript API, you can import this project’s TypeScript to catch any type errors before runtime.
 					Then, to prevent additional runtime errors or SEO mistakes, you can validate your markup against
-				the JSON schemata (multiple “schemas”) in this project.</p>
+				the JSON schemata in this project.</p>
 			</div>
 		</div>
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
