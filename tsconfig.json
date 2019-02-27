@@ -1,0 +1,10 @@
+{
+	"compilerOptions": {
+		"target"            : "ES2017",
+		"module"            : "commonjs",
+		"strict"            : true,
+		"noImplicitReturns" : true,
+		"removeComments"    : true,
+		"noEmitOnError"     : true
+	}
+}

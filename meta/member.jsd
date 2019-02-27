@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd",
   "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Property.",
-  "description": "JSON Schema for a Schema.org Property.",
+  "description": "JSON Schema for a Schema.org Property instance in JSON-LD.",
   "allOf": [
     { "$ref": "http://json-schema.org/draft-07/schema#" },
     {
@@ -32,6 +32,7 @@
             },
             {
               "description": "References to the expected type(s) of this property.",
+							"type": "object",
               "additionalProperties": false,
               "required": ["anyOf"],
               "properties": {
@@ -47,20 +48,24 @@
           ]
         },
         "definitions": {
-          "propertyNames": { "const": "ExpectedType" },
-          "additionalProperties": {
-            "description": "The range of this property.",
-            "additionalProperties": false,
-            "required": ["anyOf"],
-            "properties": {
-              "anyOf": {
-                "items": {
-                  "description": "A reference to an external JSON schema for a Schema.org Class.",
-                  "$ref": "type.jsd#/definitions/SingleReference"
-                }
-              }
-            }
-          }
+					"type": "object",
+					"required": ["ExpectedType"],
+					"properties": {
+						"ExpectedType": {
+							"description": "The range of this property.",
+							"type": "object",
+							"additionalProperties": false,
+							"required": ["anyOf"],
+							"properties": {
+								"anyOf": {
+									"items": {
+										"description": "A reference to an external JSON schema for a Schema.org Class.",
+										"$ref": "type.jsd#/definitions/SingleReference"
+									}
+								}
+							}
+						}
+					}
         }
       }
     }
