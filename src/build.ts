@@ -1,12 +1,12 @@
 import * as path from 'path'
 import * as url from 'url'
 
-import { JSONSchema7 } from 'json-schema'
+import type {JSONSchema7} from 'json-schema'
 
-import { JSONLDDocument, JSONLDObject } from '@chharvey/requirejson'
+import type {JSONLDDocument, JSONLDObject} from '@chharvey/requirejson'
 
-import { SDODatatypeSchema, SDOClassSchema, SDOPropertySchema } from './meta-schemata.d'
-import { SDODatatypeLD, SDOClassLD, SDOPropertyLD, SingleReferenceLD } from './meta-ld.d'
+import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
+import type {SDODatatypeLD, SDOClassLD, SDOPropertyLD, SingleReferenceLD} from './meta-ld.d'
 
 
 /**

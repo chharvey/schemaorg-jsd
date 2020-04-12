@@ -4,11 +4,11 @@ import * as path from 'path'
 import * as util from 'util'
 
 import * as Ajv from 'ajv'
-import { JSONSchema7, JSONSchema4 } from 'json-schema'
+import type {JSONSchema7, JSONSchema4} from 'json-schema'
 
 import { requireJSON, JSONLDObject } from '@chharvey/requirejson'
 
-import { SDODatatypeSchema, SDOClassSchema, SDOPropertySchema } from './meta-schemata.d'
+import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
 
 
 /**
