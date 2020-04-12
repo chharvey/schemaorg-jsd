@@ -13,7 +13,6 @@ const Ajv   = require('ajv')
 const { requireJSON } = require('@chharvey/requirejson')
 
 const tsconfig      = require('./tsconfig.json')
-const typedocconfig = require('./config/typedoc.json')
 
 
 async function validate() {
@@ -60,7 +59,7 @@ async function test() {
 
 function docs() {
   return gulp.src('./dist/schemaorg.d.ts')
-    .pipe(typedoc(typedocconfig))
+    .pipe(typedoc(tsconfig.typedocOptions))
 }
 
 const build = gulp.series(
