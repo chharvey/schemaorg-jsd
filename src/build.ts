@@ -30,10 +30,11 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 * @returns JSON-LD marking up the Schema.org Datatype
 	 */
 	const datatypeLD = (jsd: SDODatatypeSchema): SDODatatypeLD => {
+		const label: string = _label(jsd)
 		return {
 			'@type'        : 'rdfs:Datatype',
-			'@id'          : `sdo:${_label(jsd)}`,
-			'rdfs:label'   : _label(jsd),
+			'@id'          : `sdo:${label}`,
+			'rdfs:label'   : label,
 			'rdfs:comment' : jsd.description,
 		}
 	}
@@ -45,20 +46,17 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 * @returns JSON-LD marking up the Schema.org Class
 	 */
 	const classLD = (jsd: SDOClassSchema, propertybase: ReadonlyArray<SDOPropertySchema>): SDOClassLD => {
-		function superclass(jsd: SDOClassSchema): string|null {
-			return (_label(jsd) !== 'Thing') ? path.parse(jsd.allOf[0].$ref).name : null
-		}
+		const label: string = _label(jsd)
 		return {
 			'@type'           : 'rdfs:Class',
-			'@id'             : `sdo:${_label(jsd)}`,
-			'rdfs:label'      : _label(jsd),
+			'@id'             : `sdo:${label}`,
+			'rdfs:label'      : label,
 			'rdfs:comment'    : jsd.description,
-			'rdfs:subClassOf' : (superclass(jsd)) ? { '@id': `sdo:${superclass(jsd)}` } : null,
+			'rdfs:subClassOf' : (label !== 'Thing') ? { '@id': `sdo:${path.parse(jsd.allOf[0].$ref).name}` } : null,
 			'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map((entry) => {
 				const prop_name: string = entry[0]
-				const memberjsd: SDOPropertySchema|null = propertybase.find((sch) => sch.title === `http://schema.org/${prop_name}`) || null
-				if (memberjsd) return { '@id': `sdo:${prop_name}` }
-				else throw new ReferenceError(`No corresponding jsd file was found for member subschema \`${_label(jsd)}#${prop_name}\`.`)
+				if (propertybase.find((sch) => sch.title === `http://schema.org/${prop_name}`)) return { '@id': `sdo:${prop_name}` }
+				else throw new ReferenceError(`No corresponding jsd file was found for member subschema \`${label}#${prop_name}\`.`)
 			}),
 			superClassOf : [], // non-normative
 			valueOf      : [], // non-normative
@@ -71,15 +69,13 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 * @returns JSON-LD marking up the Schema.org Property
 	 */
 	const propertyLD = (jsd: SDOPropertySchema): SDOPropertyLD => {
-		function superproperty(jsd: SDOPropertySchema): string|null {
-			return (jsd.allOf[0] !== true) ? path.parse(jsd.allOf[0].$ref).name.split('.')[0] : null
-		}
+		const label: string = _label(jsd)
 		return {
 			'@type'              : 'rdf:Property',
-			'@id'                : `sdo:${_label(jsd)}`,
-			'rdfs:label'         : _label(jsd),
+			'@id'                : `sdo:${label}`,
+			'rdfs:label'         : label,
 			'rdfs:comment'       : jsd.description,
-			'rdfs:subPropertyOf' : (jsd.allOf[0] !== true) ? { '@id': `sdo:${superproperty(jsd)}` } : null,
+			'rdfs:subPropertyOf' : (jsd.allOf[0] !== true) ? { '@id': `sdo:${path.parse(jsd.allOf[0].$ref).name.split('.')[0]}` } : null,
 			'rdfs:domain'        : [], // non-normative
 			'rdfs:range'         : jsd.definitions.ExpectedType.anyOf.map((schema) => ({ '@id': `sdo:${path.parse(schema.$ref).name}` })),
 			superPropertyOf      : [], // non-normative
@@ -94,7 +90,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 */
 	const processSubclasses = (jsonld: SDOClassLD, classbase: ReadonlyArray<SDOClassLD>): void => {
 		const superclass: SingleReferenceLD|null = jsonld['rdfs:subClassOf']
-		const referenced: SDOClassLD|null = (superclass) ? classbase.find((c) => c['@id'] === superclass !['@id']) || null : null
+		const referenced: SDOClassLD|null = superclass && classbase.find((c) => c['@id'] === superclass['@id']) || null
 		if (referenced) {
 			referenced.superClassOf.push({ '@id': jsonld['@id'] })
 		}
@@ -107,7 +103,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 */
 	const processSubproperties = (jsonld: SDOPropertyLD, propertybase: ReadonlyArray<SDOPropertyLD>): void => {
 		const superproperty: SingleReferenceLD|null = jsonld['rdfs:subPropertyOf']
-		const referenced: SDOPropertyLD|null = (superproperty) ? propertybase.find((p) => p['@id'] === superproperty !['@id']) || null : null
+		const referenced: SDOPropertyLD|null = superproperty && propertybase.find((p) => p['@id'] === superproperty['@id']) || null
 		if (referenced) {
 			referenced.superPropertyOf.push({ '@id': jsonld['@id'] })
 		}
