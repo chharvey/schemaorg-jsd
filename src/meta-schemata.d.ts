@@ -1,4 +1,4 @@
-import { JSONSchema7, JSONSchema7Version } from 'json-schema'
+import type {JSONSchema7, JSONSchema7Version} from 'json-schema'
 
 
 /**

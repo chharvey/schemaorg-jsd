@@ -1,10 +1,20 @@
 {
 	"compilerOptions": {
-		"target"            : "ES2017",
+		"target"            : "ES2020",
 		"module"            : "commonjs",
 		"strict"            : true,
+		"importsNotUsedAsValues": "error",
 		"noImplicitReturns" : true,
 		"removeComments"    : true,
 		"noEmitOnError"     : true
+	},
+	"typedocOptions": {
+		"tsconfig": "./",
+		"mode"   : "file",
+		"name"   : "schemaorg-jsd",
+		"out"    : "./docs/api/",
+		"includeDeclarations" : true,
+		"excludeExternals"    : true,
+		"ignoreCompilerErrors": true
 	}
 }

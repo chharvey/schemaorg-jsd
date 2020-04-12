@@ -20,34 +20,34 @@ const { sdoValidate } = require('schemaorg-jsd')
 
 async function run() {
 	// example 1: use any javascript object
-	let school = {
+	const school = {
 		'@context': 'http://schema.org/',
 		'@type': 'Place',
 		name: `Blacksburg, ${usState('Virginia').code}`,
 	}
 	school['@id'] = 'http://www.blacksburg.gov/'
 	try {
-		let is_valid_place = sdoValidate(school, 'Place') // validate against the `Place` schema
+		const is_valid_place = sdoValidate(school, 'Place') // validate against the `Place` schema
 		console.log(await is_valid_place) // return `true` if the document passes validation
-	} catch (e) { // throw a `TypeError` if the document fails validation
-		console.error(e)
-		console.error(e.filename) // file where the invalidation occurred
-		console.error(e.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
+	} catch (err) { // throw a `TypeError` if the document fails validation
+		console.error(err)
+		console.error(err.filename) // file where the invalidation occurred
+		console.error(err.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
 	}
 
 	// example 2: require a package
-	let me = require('./me.json')
+	const me = require('./me.json')
 	console.log(await sdoValidate(me, 'Person')) // return `true` if the document passes validation
 
 	// example 3: use a string (relative path) of the filename
-	let org = './my-org.jsonld'
+	const org = './my-org.jsonld'
 	console.log(await sdoValidate(org, 'Organization')) // return `true` if the document passes validation
 
 	// example 4: infer the schema from the `'@type'` property
 	await sdoValidate(school) // validates against the `Place` schema, since `school['@type'] === 'Place'`
 
 	// example 5: multiple types
-	let business = {
+	const business = {
 		'@context': 'http://schema.org/',
 		'@type': ['Place', 'LocalBusiness'],
 	}
@@ -79,7 +79,7 @@ pre-packaged and ready to add.
 const Ajv = require('ajv')
 const sdo_jsd = require('schemaorg-jsd')
 
-let my_schema = {
+const my_schema = {
 	"$schema": "http://json-schema.org/draft-07/schema#",
 	"$id": "https://chharvey.github.io/example.jsd",
 	"title": "Array<Thing>",
@@ -87,13 +87,13 @@ let my_schema = {
 	"type": "array",
 	"items": { "$ref": "https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd" }
 }
-let my_data = [
+const my_data = [
 	{ "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 1" },
 	{ "@context": "http://schema.org/", "@type": "Thing", "name": "Thing 2" }
 ]
 
 async function run() {
-	let ajv = new Ajv()
+	const ajv = new Ajv()
 		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
 		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
 		.addSchema(await sdo_jsd.SCHEMATA)

@@ -2,6 +2,6 @@
 // It is not meant to be compiled automatically.
 // See `./index.js` for the manual output.
 
-export { META_SCHEMATA, JSONLD_SCHEMA, SCHEMATA, sdoValidate } from './src/index'
+export {META_SCHEMATA, JSONLD_SCHEMA, SCHEMATA, sdoValidate} from './src/index'
 
 export * from './dist/schemaorg.d'
