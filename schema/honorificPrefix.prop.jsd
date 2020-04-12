@@ -1,21 +1,21 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/honorificPrefix.prop.jsd",
-  "title": "http://schema.org/honorificPrefix",
-  "description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/honorificPrefix.prop.jsd",
+	"title": "http://schema.org/honorificPrefix",
+	"description": "An honorific prefix preceding a Person’s name such as Dr/Mrs/Mr.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

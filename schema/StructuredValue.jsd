@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/StructuredValue.jsd",
-  "title": "http://schema.org/StructuredValue",
-  "description": "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.",
-  "allOf": [
-    { "$ref": "Intangible.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/StructuredValue.jsd",
+	"title": "http://schema.org/StructuredValue",
+	"description": "Structured values are used when the value of a property has a more complex structure than simply being a textual value or a reference to another thing.",
+	"allOf": [
+		{ "$ref": "Intangible.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

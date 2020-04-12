@@ -1,15 +1,15 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd",
-  "title": "http://schema.org/ContactPoint",
-  "description": "A contact point—for example, a Customer Complaints department.",
-  "allOf": [
-    { "$ref": "StructuredValue.jsd" },
-    {
-      "properties": {
-        "email": { "$ref": "email.prop.jsd" },
-        "telephone": { "$ref": "telephone.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/ContactPoint.jsd",
+	"title": "http://schema.org/ContactPoint",
+	"description": "A contact point—for example, a Customer Complaints department.",
+	"allOf": [
+		{ "$ref": "StructuredValue.jsd" },
+		{
+			"properties": {
+				"email": { "$ref": "email.prop.jsd" },
+				"telephone": { "$ref": "telephone.prop.jsd" }
+			}
+		}
+	]
 }

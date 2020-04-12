@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/address.prop.jsd",
-  "title": "http://schema.org/address",
-  "description": "Physical address of the item.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "PostalAddress.jsd" },
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/address.prop.jsd",
+	"title": "http://schema.org/address",
+	"description": "Physical address of the item.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "PostalAddress.jsd" },
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

@@ -1,7 +1,7 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Number.jsd",
-  "title": "http://schema.org/Number",
-  "description": "Data type: Number.",
-  "type": "number"
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Number.jsd",
+	"title": "http://schema.org/Number",
+	"description": "Data type: Number.",
+	"type": "number"
 }

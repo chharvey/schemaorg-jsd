@@ -1,23 +1,23 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Event.jsd",
-  "title": "http://schema.org/Event",
-  "description": "An event happening at a certain time and location, such as a concert, lecture, or festival.",
-  "allOf": [
-    { "$ref": "Thing.jsd" },
-    {
-      "properties": {
-        "endDate": { "$ref": "endDate.prop.jsd" },
-        "funder": { "$ref": "funder.prop.jsd" },
-        "location": { "$ref": "location.prop.jsd" },
-        "offers": { "$ref": "offers.prop.jsd" },
-        "organizer": { "$ref": "organizer.prop.jsd" },
-        "performer": { "$ref": "performer.prop.jsd" },
-        "sponsor": { "$ref": "sponsor.prop.jsd" },
-        "startDate": { "$ref": "startDate.prop.jsd" },
-        "subEvent": { "$ref": "subEvent.prop.jsd" },
-        "superEvent": { "$ref": "superEvent.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Event.jsd",
+	"title": "http://schema.org/Event",
+	"description": "An event happening at a certain time and location, such as a concert, lecture, or festival.",
+	"allOf": [
+		{ "$ref": "Thing.jsd" },
+		{
+			"properties": {
+				"endDate": { "$ref": "endDate.prop.jsd" },
+				"funder": { "$ref": "funder.prop.jsd" },
+				"location": { "$ref": "location.prop.jsd" },
+				"offers": { "$ref": "offers.prop.jsd" },
+				"organizer": { "$ref": "organizer.prop.jsd" },
+				"performer": { "$ref": "performer.prop.jsd" },
+				"sponsor": { "$ref": "sponsor.prop.jsd" },
+				"startDate": { "$ref": "startDate.prop.jsd" },
+				"subEvent": { "$ref": "subEvent.prop.jsd" },
+				"superEvent": { "$ref": "superEvent.prop.jsd" }
+			}
+		}
+	]
 }

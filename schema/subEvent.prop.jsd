@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/subEvent.prop.jsd",
-  "title": "http://schema.org/subEvent",
-  "description": "An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Event.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/subEvent.prop.jsd",
+	"title": "http://schema.org/subEvent",
+	"description": "An Event that is part of this event. For example, a conference event includes many presentations, each of which is a subEvent of the conference.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Event.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

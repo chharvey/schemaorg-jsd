@@ -1,19 +1,19 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd",
-  "title": "http://schema.org/PostalAddress",
-  "description": "The mailing address.",
-  "allOf": [
-    { "$ref": "ContactPoint.jsd" },
-    {
-      "properties": {
-        "addressCountry": { "$ref": "addressCountry.prop.jsd" },
-        "addressLocality": { "$ref": "addressLocality.prop.jsd" },
-        "addressRegion": { "$ref": "addressRegion.prop.jsd" },
-        "postOfficeBoxNumber": { "$ref": "postOfficeBoxNumber.prop.jsd" },
-        "postalCode": { "$ref": "postalCode.prop.jsd" },
-        "streetAddress": { "$ref": "streetAddress.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/PostalAddress.jsd",
+	"title": "http://schema.org/PostalAddress",
+	"description": "The mailing address.",
+	"allOf": [
+		{ "$ref": "ContactPoint.jsd" },
+		{
+			"properties": {
+				"addressCountry": { "$ref": "addressCountry.prop.jsd" },
+				"addressLocality": { "$ref": "addressLocality.prop.jsd" },
+				"addressRegion": { "$ref": "addressRegion.prop.jsd" },
+				"postOfficeBoxNumber": { "$ref": "postOfficeBoxNumber.prop.jsd" },
+				"postalCode": { "$ref": "postalCode.prop.jsd" },
+				"streetAddress": { "$ref": "streetAddress.prop.jsd" }
+			}
+		}
+	]
 }
