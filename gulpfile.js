@@ -1,7 +1,6 @@
 const fs   = require('fs')
 const path = require('path')
 const url  = require('url')
-const util = require('util')
 
 const gulp  = require('gulp')
 const typedoc    = require('gulp-typedoc')
@@ -36,15 +35,15 @@ const dist = gulp.series(
 		const { buildLD, buildTS } = require('./dist/build.js')
 		let ld = buildLD(await SCHEMATA)
 		return Promise.all([
-			util.promisify(fs.writeFile)('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
-			util.promisify(fs.writeFile)('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
+			fs.promises.writeFile('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
+			fs.promises.writeFile('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
 		])
 	}
 )
 
 async function test() {
 	const sdo_jsd = require('./index.js')
-	return Promise.all((await util.promisify(fs.readdir)('./test')).map(async (file) => {
+	return Promise.all((await fs.promises.readdir('./test')).map(async (file) => {
 		let filepath = path.resolve(__dirname, './test/', file)
 		let returned;
 		try {

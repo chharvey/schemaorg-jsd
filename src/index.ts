@@ -1,7 +1,6 @@
 import * as fs from 'fs'
 import * as https from 'https'
 import * as path from 'path'
-import * as util from 'util'
 
 import * as Ajv from 'ajv'
 import type {JSONSchema7, JSONSchema4} from 'json-schema'
@@ -17,7 +16,7 @@ import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-
  * This is for internal use only. Users should not be expected to use these meta-schemata.
  */
 export const META_SCHEMATA: Promise<JSONSchema7[]> = (async () => Promise.all(
-	(await util.promisify(fs.readdir)(path.resolve(__dirname, '../meta/')))
+	(await fs.promises.readdir(path.resolve(__dirname, '../meta/')))
 		.map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>)
 ))()
 
@@ -62,7 +61,7 @@ Status Code: ${res.statusCode || 'no status code found'}
  * That is, schemata against which your JSON-LD documents should validate.
  */
 export const SCHEMATA: Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)[]> = (async () => Promise.all(
-	(await util.promisify(fs.readdir)(path.resolve(__dirname, '../schema/')))
+	(await fs.promises.readdir(path.resolve(__dirname, '../schema/')))
 		.map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchema7> as Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)>)
 ))()
 
