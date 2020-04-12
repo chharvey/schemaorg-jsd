@@ -103,7 +103,7 @@ export async function sdoValidate(obj: JSONLDObject|string, type: string|null = 
 		obj = await requireJSON(obj) as JSONLDObject
 	}
 	if (type === null) {
-		let objtype: string[]|string|null = obj['@type'] || null
+		const objtype: string[]|string|null = obj['@type'] || null
 		if (objtype instanceof Array && objtype.length) {
 			return (await Promise.all(objtype.map((tp) => sdoValidate(obj, tp)))).every((a) => !!a) as true
 		} else if (typeof objtype === 'string') {
@@ -115,13 +115,13 @@ export async function sdoValidate(obj: JSONLDObject|string, type: string|null = 
 		}
 	}
 
-	let ajv: Ajv.Ajv = new Ajv()
+	const ajv: Ajv.Ajv = new Ajv()
 		.addMetaSchema(await META_SCHEMATA)
 		.addSchema(await JSONLD_SCHEMA)
 		.addSchema(await SCHEMATA)
-	let is_data_valid: boolean = await ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
+	const is_data_valid: boolean = await ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
 	if (!is_data_valid) {
-		let err: TypeError&{
+		const err: TypeError&{
 			filename?: string;
 			details?: Ajv.ErrorObject[];
 		} = new TypeError(`Object ${obj['@id'] || obj.identifier || obj.name || JSON.stringify(obj)} does not valiate against schema ${type}.jsd!`)

@@ -33,7 +33,7 @@ const dist = gulp.series(
 	async function dist0() {
 		const { SCHEMATA } = require('./dist/index.js')
 		const { buildLD, buildTS } = require('./dist/build.js')
-		let ld = buildLD(await SCHEMATA)
+		const ld = buildLD(await SCHEMATA)
 		return Promise.all([
 			fs.promises.writeFile('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
 			fs.promises.writeFile('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
@@ -44,7 +44,7 @@ const dist = gulp.series(
 async function test() {
 	const sdo_jsd = require('./index.js')
 	return Promise.all((await fs.promises.readdir('./test')).map(async (file) => {
-		let filepath = path.resolve(__dirname, './test/', file)
+		const filepath = path.resolve(__dirname, './test/', file)
 		let returned;
 		try {
 			returned = await sdo_jsd.sdoValidate(filepath)
