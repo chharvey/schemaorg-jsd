@@ -5,7 +5,7 @@ import * as path from 'path'
 import * as Ajv from 'ajv'
 import type {JSONSchema7, JSONSchema4} from 'json-schema'
 
-import { requireJSON, JSONLDObject } from '@chharvey/requirejson'
+import {requireJSON, JSONLDObject} from '@chharvey/requirejson'
 
 import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
 
@@ -29,9 +29,9 @@ export const JSONLD_SCHEMA: Promise<JSONSchema7> = new Promise((resolve, reject)
 		// if failing to load page, reject
 		if (!res.statusCode || res.statusCode < 200 || 300 <= res.statusCode) {
 			reject(new Error(`
-Failed to load.
-Status Code: ${res.statusCode || 'no status code found'}
-			`))
+				Failed to load.
+				Status Code: ${res.statusCode || 'no status code found'}
+			`.replace(/\n\t\t\t\t/g, '\n')))
 			res.resume()
 			return;
 		}
@@ -48,7 +48,7 @@ Status Code: ${res.statusCode || 'no status code found'}
 				return;
 			}
 			data.$schema = 'http://json-schema.org/draft-07/schema#'
-			data.$id = 'https://json-ld.org/schemas/jsonld-schema.json'
+			data.$id     = 'https://json-ld.org/schemas/jsonld-schema.json'
 			resolve(data as JSONSchema7)
 		})
 	}).on('error', (err) => { reject(err) }) // if failing to get url, reject
@@ -122,8 +122,8 @@ export async function sdoValidate(obj: JSONLDObject|string, type: string|null = 
 	const is_data_valid: boolean = await ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
 	if (!is_data_valid) {
 		const err: TypeError&{
-			filename?: string;
-			details?: Ajv.ErrorObject[];
+			filename? : string;
+			details?  : Ajv.ErrorObject[];
 		} = new TypeError(`Object ${obj['@id'] || obj.identifier || obj.name || JSON.stringify(obj)} does not valiate against schema ${type}.jsd!`)
 		if (filename.length) err.filename = filename
 		err.details = ajv.errors !
