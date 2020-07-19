@@ -1,21 +1,21 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/availabilityEnds.prop.jsd",
-  "title": "http://schema.org/availabilityEnds",
-  "description": "The end of the availability of the product or service included in the offer.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "DateTime.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/availabilityEnds.prop.jsd",
+	"title": "http://schema.org/availabilityEnds",
+	"description": "The end of the availability of the product or service included in the offer.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "DateTime.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

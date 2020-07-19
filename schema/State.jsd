@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/State.jsd",
-  "title": "http://schema.org/State",
-  "description": "A state or province of a country.",
-  "allOf": [
-    { "$ref": "AdministrativeArea.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/State.jsd",
+	"title": "http://schema.org/State",
+	"description": "A state or province of a country.",
+	"allOf": [
+		{ "$ref": "AdministrativeArea.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

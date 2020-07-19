@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/hasPart.prop.jsd",
-  "title": "http://schema.org/hasPart",
-  "description": "Indicates a CreativeWork that is (in some sense) a part of this CreativeWork.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "CreativeWork.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/hasPart.prop.jsd",
+	"title": "http://schema.org/hasPart",
+	"description": "Indicates a CreativeWork that is (in some sense) a part of this CreativeWork.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "CreativeWork.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

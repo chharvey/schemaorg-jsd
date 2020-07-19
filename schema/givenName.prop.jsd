@@ -1,21 +1,21 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/givenName.prop.jsd",
-  "title": "http://schema.org/givenName",
-  "description": "Given name. In the U.S., the first name of a Person. This can be used along with `familyName` instead of the `name` property.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/givenName.prop.jsd",
+	"title": "http://schema.org/givenName",
+	"description": "Given name. In the U.S., the first name of a Person. This can be used along with `familyName` instead of the `name` property.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

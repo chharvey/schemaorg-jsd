@@ -1,20 +1,20 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd",
-  "title": "http://schema.org/Place",
-  "description": "Entities that have a somewhat fixed, physical extension.",
-  "allOf": [
-    { "$ref": "Thing.jsd" },
-    {
-      "properties": {
-        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
-        "address": { "$ref": "address.prop.jsd" },
-        "event": { "$ref": "event.prop.jsd" },
-        "geo": { "$ref": "geo.prop.jsd" },
-        "logo": { "$ref": "logo.prop.jsd" },
-        "photo": { "$ref": "photo.prop.jsd" },
-        "telephone": { "$ref": "telephone.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Place.jsd",
+	"title": "http://schema.org/Place",
+	"description": "Entities that have a somewhat fixed, physical extension.",
+	"allOf": [
+		{ "$ref": "Thing.jsd" },
+		{
+			"properties": {
+				"additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+				"address": { "$ref": "address.prop.jsd" },
+				"event": { "$ref": "event.prop.jsd" },
+				"geo": { "$ref": "geo.prop.jsd" },
+				"logo": { "$ref": "logo.prop.jsd" },
+				"photo": { "$ref": "photo.prop.jsd" },
+				"telephone": { "$ref": "telephone.prop.jsd" }
+			}
+		}
+	]
 }

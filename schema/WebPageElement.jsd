@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/WebPageElement.jsd",
-  "title": "http://schema.org/WebPageElement",
-  "description": "A web page element, like a table or an image.",
-  "allOf": [
-    { "$ref": "CreativeWork.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/WebPageElement.jsd",
+	"title": "http://schema.org/WebPageElement",
+	"description": "A web page element, like a table or an image.",
+	"allOf": [
+		{ "$ref": "CreativeWork.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

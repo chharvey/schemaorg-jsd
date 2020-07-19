@@ -1,23 +1,23 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/logo.prop.jsd",
-  "title": "http://schema.org/logo",
-  "description": "An associated logo.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "ImageObject.jsd" },
-        { "$ref": "URL.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    { "$ref": "image.prop.jsd" },
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/logo.prop.jsd",
+	"title": "http://schema.org/logo",
+	"description": "An associated logo.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "ImageObject.jsd" },
+				{ "$ref": "URL.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		{ "$ref": "image.prop.jsd" },
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

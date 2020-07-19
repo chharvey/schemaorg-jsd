@@ -1,24 +1,24 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/value.prop.jsd",
-  "title": "http://schema.org/value",
-  "description": "The value of the quantitative value or property value node.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Boolean.jsd" },
-        { "$ref": "Number.jsd" },
-        { "$ref": "StructuredValue.jsd" },
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/value.prop.jsd",
+	"title": "http://schema.org/value",
+	"description": "The value of the quantitative value or property value node.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Boolean.jsd" },
+				{ "$ref": "Number.jsd" },
+				{ "$ref": "StructuredValue.jsd" },
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

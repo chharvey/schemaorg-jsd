@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/NewsArticle.jsd",
-  "title": "http://schema.org/NewsArticle",
-  "description": "A NewsArticle is an article whose content reports news, or provides background context and supporting materials for understanding the news.",
-  "allOf": [
-    { "$ref": "CreativeWork.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/NewsArticle.jsd",
+	"title": "http://schema.org/NewsArticle",
+	"description": "A NewsArticle is an article whose content reports news, or provides background context and supporting materials for understanding the news.",
+	"allOf": [
+		{ "$ref": "CreativeWork.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

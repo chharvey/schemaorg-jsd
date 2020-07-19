@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/dateCreated.prop.jsd",
-  "title": "http://schema.org/dateCreated",
-  "description": "The date on which the CreativeWork was created or the item was added to a DataFeed.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Date.jsd" },
-        { "$ref": "DateTime.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/dateCreated.prop.jsd",
+	"title": "http://schema.org/dateCreated",
+	"description": "The date on which the CreativeWork was created or the item was added to a DataFeed.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Date.jsd" },
+				{ "$ref": "DateTime.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

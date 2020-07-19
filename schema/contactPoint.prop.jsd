@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/contactPoint.prop.jsd",
-  "title": "http://schema.org/contactPoint",
-  "description": "A contact point for a person or organization.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "ContactPoint.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/contactPoint.prop.jsd",
+	"title": "http://schema.org/contactPoint",
+	"description": "A contact point for a person or organization.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "ContactPoint.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

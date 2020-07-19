@@ -1,14 +1,13 @@
 import * as fs from 'fs'
 import * as https from 'https'
 import * as path from 'path'
-import * as util from 'util'
 
 import * as Ajv from 'ajv'
-import { JSONSchema7, JSONSchema4 } from 'json-schema'
+import type {JSONSchema7, JSONSchema4} from 'json-schema'
 
-import { requireJSON, JSONLDObject } from '@chharvey/requirejson'
+import {requireJSON, JSONLDObject} from '@chharvey/requirejson'
 
-import { SDODatatypeSchema, SDOClassSchema, SDOPropertySchema } from './meta-schemata.d'
+import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
 
 
 /**
@@ -17,7 +16,7 @@ import { SDODatatypeSchema, SDOClassSchema, SDOPropertySchema } from './meta-sch
  * This is for internal use only. Users should not be expected to use these meta-schemata.
  */
 export const META_SCHEMATA: Promise<JSONSchema7[]> = (async () => Promise.all(
-	(await util.promisify(fs.readdir)(path.resolve(__dirname, '../meta/')))
+	(await fs.promises.readdir(path.resolve(__dirname, '../meta/')))
 		.map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>)
 ))()
 
@@ -30,9 +29,9 @@ export const JSONLD_SCHEMA: Promise<JSONSchema7> = new Promise((resolve, reject)
 		// if failing to load page, reject
 		if (!res.statusCode || res.statusCode < 200 || 300 <= res.statusCode) {
 			reject(new Error(`
-Failed to load.
-Status Code: ${res.statusCode || 'no status code found'}
-			`))
+				Failed to load.
+				Status Code: ${res.statusCode || 'no status code found'}
+			`.replace(/\n\t\t\t\t/g, '\n')))
 			res.resume()
 			return;
 		}
@@ -49,7 +48,7 @@ Status Code: ${res.statusCode || 'no status code found'}
 				return;
 			}
 			data.$schema = 'http://json-schema.org/draft-07/schema#'
-			data.$id = 'https://json-ld.org/schemas/jsonld-schema.json'
+			data.$id     = 'https://json-ld.org/schemas/jsonld-schema.json'
 			resolve(data as JSONSchema7)
 		})
 	}).on('error', (err) => { reject(err) }) // if failing to get url, reject
@@ -62,7 +61,7 @@ Status Code: ${res.statusCode || 'no status code found'}
  * That is, schemata against which your JSON-LD documents should validate.
  */
 export const SCHEMATA: Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)[]> = (async () => Promise.all(
-	(await util.promisify(fs.readdir)(path.resolve(__dirname, '../schema/')))
+	(await fs.promises.readdir(path.resolve(__dirname, '../schema/')))
 		.map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchema7> as Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)>)
 ))()
 
@@ -104,7 +103,7 @@ export async function sdoValidate(obj: JSONLDObject|string, type: string|null = 
 		obj = await requireJSON(obj) as JSONLDObject
 	}
 	if (type === null) {
-		let objtype: string[]|string|null = obj['@type'] || null
+		const objtype: string[]|string|null = obj['@type'] || null
 		if (objtype instanceof Array && objtype.length) {
 			return (await Promise.all(objtype.map((tp) => sdoValidate(obj, tp)))).every((a) => !!a) as true
 		} else if (typeof objtype === 'string') {
@@ -116,15 +115,15 @@ export async function sdoValidate(obj: JSONLDObject|string, type: string|null = 
 		}
 	}
 
-	let ajv: Ajv.Ajv = new Ajv()
+	const ajv: Ajv.Ajv = new Ajv()
 		.addMetaSchema(await META_SCHEMATA)
 		.addSchema(await JSONLD_SCHEMA)
 		.addSchema(await SCHEMATA)
-	let is_data_valid: boolean = await ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
+	const is_data_valid: boolean = await ajv.validate(`https://chharvey.github.io/schemaorg-jsd/schema/${type}.jsd`, obj) as boolean
 	if (!is_data_valid) {
-		let err: TypeError&{
-			filename?: string;
-			details?: Ajv.ErrorObject[];
+		const err: TypeError&{
+			filename? : string;
+			details?  : Ajv.ErrorObject[];
 		} = new TypeError(`Object ${obj['@id'] || obj.identifier || obj.name || JSON.stringify(obj)} does not valiate against schema ${type}.jsd!`)
 		if (filename.length) err.filename = filename
 		err.details = ajv.errors !

@@ -1,16 +1,16 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Rating.jsd",
-  "title": "http://schema.org/Rating",
-  "description": "A rating is an evaluation on a numeric scale, such as 1 to 5 stars.",
-  "allOf": [
-    { "$ref": "Intangible.jsd" },
-    {
-      "properties": {
-        "bestRating": { "$ref": "bestRating.prop.jsd" },
-        "ratingValue": { "$ref": "ratingValue.prop.jsd" },
-        "worstRating": { "$ref": "worstRating.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Rating.jsd",
+	"title": "http://schema.org/Rating",
+	"description": "A rating is an evaluation on a numeric scale, such as 1 to 5 stars.",
+	"allOf": [
+		{ "$ref": "Intangible.jsd" },
+		{
+			"properties": {
+				"bestRating": { "$ref": "bestRating.prop.jsd" },
+				"ratingValue": { "$ref": "ratingValue.prop.jsd" },
+				"worstRating": { "$ref": "worstRating.prop.jsd" }
+			}
+		}
+	]
 }
