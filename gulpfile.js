@@ -12,6 +12,12 @@ const Ajv        = require('ajv')
 const tsconfig = require('./tsconfig.json')
 
 
+function dist_index() {
+	return gulp.src('./src/{index,build}.ts')
+		.pipe(typescript(tsconfig.compilerOptions))
+		.pipe(gulp.dest('./dist/'))
+}
+
 async function validate() {
 	const sdo_jsd = require('./index.js')
 	new Ajv()
@@ -20,24 +26,15 @@ async function validate() {
 		.addSchema(await sdo_jsd.SCHEMATA)
 }
 
-function dist_index() {
-	return gulp.src('./src/{index,build}.ts')
-		.pipe(typescript(tsconfig.compilerOptions))
-		.pipe(gulp.dest('./dist/'))
+async function dist() {
+	const { SCHEMATA } = require('./dist/index.js')
+	const { buildLD, buildTS } = require('./dist/build.js')
+	const ld = buildLD(await SCHEMATA)
+	return Promise.all([
+		fs.promises.writeFile('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
+		fs.promises.writeFile('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
+	])
 }
-
-const dist = gulp.series(
-	dist_index,
-	async function dist0() {
-		const { SCHEMATA } = require('./dist/index.js')
-		const { buildLD, buildTS } = require('./dist/build.js')
-		const ld = buildLD(await SCHEMATA)
-		return Promise.all([
-			fs.promises.writeFile('./dist/schemaorg.jsonld', JSON.stringify(ld, null, '\t'), 'utf8'),
-			fs.promises.writeFile('./dist/schemaorg.d.ts', buildTS(ld), 'utf8'),
-		])
-	}
-)
 
 async function test() {
 	const sdo_jsd = require('./index.js')
@@ -60,14 +57,15 @@ function docs() {
 }
 
 const build = gulp.series(
+	dist_index,
 	validate,
 	dist,
 	gulp.parallel(test, docs)
 )
 
 module.exports = {
-	validate,
 	dist_index,
+	validate,
 	dist,
 	test,
 	docs,

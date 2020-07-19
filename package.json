@@ -4,7 +4,7 @@
   "description": "JSON Schema validation for JSON-LD files using Schema.org vocabulary.",
   "main": "index.js",
   "scripts": {
-    "build": "gulp build",
+    "build": "rm -rf ./dist/ && gulp build",
     "prepublishOnly": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
