@@ -1,18 +1,18 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/PropertyValue.jsd",
-  "title": "http://schema.org/PropertyValue",
-  "description": "A property-value pair, e.g. representing a feature of a product or place. Use the `name` property for the name of the property. If there is an additional human-readable version of the value, put that into the `description` property.",
-  "allOf": [
-    { "$ref": "StructuredValue.jsd" },
-    {
-      "properties": {
-        "maxValue": { "$ref": "maxValue.prop.jsd" },
-        "minValue": { "$ref": "minValue.prop.jsd" },
-        "unitCode": { "$ref": "unitCode.prop.jsd" },
-        "unitText": { "$ref": "unitText.prop.jsd" },
-        "value": { "$ref": "value.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/PropertyValue.jsd",
+	"title": "http://schema.org/PropertyValue",
+	"description": "A property-value pair, e.g. representing a feature of a product or place. Use the `name` property for the name of the property. If there is an additional human-readable version of the value, put that into the `description` property.",
+	"allOf": [
+		{ "$ref": "StructuredValue.jsd" },
+		{
+			"properties": {
+				"maxValue": { "$ref": "maxValue.prop.jsd" },
+				"minValue": { "$ref": "minValue.prop.jsd" },
+				"unitCode": { "$ref": "unitCode.prop.jsd" },
+				"unitText": { "$ref": "unitText.prop.jsd" },
+				"value": { "$ref": "value.prop.jsd" }
+			}
+		}
+	]
 }

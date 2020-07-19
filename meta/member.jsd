@@ -1,53 +1,53 @@
 {
-  "$schema": "http://json-schema.org/draft-07/schema#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd",
-  "$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Property.",
-  "description": "JSON Schema for a Schema.org Property instance in JSON-LD.",
-  "allOf": [
-    { "$ref": "http://json-schema.org/draft-07/schema#" },
-    {
-      "type": "object",
-      "additionalProperties": false,
-      "required": ["$schema", "$id", "title", "description", "allOf", "definitions"],
-      "properties": {
-        "$schema"    : true,
-        "$id"        : { "type": "string", "format": "uri" },
-        "title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Property." },
-        "description": { "description": "Schema.org’s canonical description of the Property." },
-        "allOf"      : {
-          "minItems": 2,
-          "maxItems": 2,
-          "items": [
-            {
-              "oneOf": [
-                {
-                  "description": "There is no superproperty of this property.",
-                  "const": true
-                },
-                {
-                  "description": "The superproperty of this property.",
-                  "$ref": "type.jsd#/definitions/SingleReference"
-                }
-              ]
-            },
-            {
-              "description": "References to the expected type(s) of this property.",
+	"$schema": "http://json-schema.org/draft-07/schema#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd",
+	"$comment": "This file is a meta-schema for validating the JSON Schema of a Schema.org Property.",
+	"description": "JSON Schema for a Schema.org Property instance in JSON-LD.",
+	"allOf": [
+		{ "$ref": "http://json-schema.org/draft-07/schema#" },
+		{
+			"type": "object",
+			"additionalProperties": false,
+			"required": ["$schema", "$id", "title", "description", "allOf", "definitions"],
+			"properties": {
+				"$schema"    : true,
+				"$id"        : { "type": "string", "format": "uri" },
+				"title"      : { "type": "string", "format": "uri", "description": "The canonical URL of the Schema.org Property." },
+				"description": { "description": "Schema.org’s canonical description of the Property." },
+				"allOf"      : {
+					"minItems": 2,
+					"maxItems": 2,
+					"items": [
+						{
+							"oneOf": [
+								{
+									"description": "There is no superproperty of this property.",
+									"const": true
+								},
+								{
+									"description": "The superproperty of this property.",
+									"$ref": "type.jsd#/definitions/SingleReference"
+								}
+							]
+						},
+						{
+							"description": "References to the expected type(s) of this property.",
 							"type": "object",
-              "additionalProperties": false,
-              "required": ["anyOf"],
-              "properties": {
-                "anyOf": {
-                  "maxItems": 2,
-                  "items": [
-                    { "const": { "$ref": "#/definitions/ExpectedType" } },
-                    { "const": { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } } }
-                  ]
-                }
-              }
-            }
-          ]
-        },
-        "definitions": {
+							"additionalProperties": false,
+							"required": ["anyOf"],
+							"properties": {
+								"anyOf": {
+									"maxItems": 2,
+									"items": [
+										{ "const": { "$ref": "#/definitions/ExpectedType" } },
+										{ "const": { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } } }
+									]
+								}
+							}
+						}
+					]
+				},
+				"definitions": {
 					"type": "object",
 					"required": ["ExpectedType"],
 					"properties": {
@@ -66,8 +66,8 @@
 							}
 						}
 					}
-        }
-      }
-    }
-  ]
+				}
+			}
+		}
+	]
 }

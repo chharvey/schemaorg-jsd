@@ -1,27 +1,27 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Organization.jsd",
-  "title": "http://schema.org/Organization",
-  "description": "An organization such as a school, NGO, corporation, club, etc.",
-  "allOf": [
-    { "$ref": "Thing.jsd" },
-    {
-      "properties": {
-        "address": { "$ref": "address.prop.jsd" },
-        "award": { "$ref": "award.prop.jsd" },
-        "brand": { "$ref": "brand.prop.jsd" },
-        "contactPoint": { "$ref": "contactPoint.prop.jsd" },
-        "email": { "$ref": "email.prop.jsd" },
-        "event": { "$ref": "event.prop.jsd" },
-        "funder": { "$ref": "funder.prop.jsd" },
-        "location": { "$ref": "location.prop.jsd" },
-        "logo": { "$ref": "logo.prop.jsd" },
-        "makesOffer": { "$ref": "makesOffer.prop.jsd" },
-        "member": { "$ref": "member.prop.jsd" },
-        "memberOf": { "$ref": "memberOf.prop.jsd" },
-        "sponsor": { "$ref": "sponsor.prop.jsd" },
-        "telephone": { "$ref": "telephone.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Organization.jsd",
+	"title": "http://schema.org/Organization",
+	"description": "An organization such as a school, NGO, corporation, club, etc.",
+	"allOf": [
+		{ "$ref": "Thing.jsd" },
+		{
+			"properties": {
+				"address": { "$ref": "address.prop.jsd" },
+				"award": { "$ref": "award.prop.jsd" },
+				"brand": { "$ref": "brand.prop.jsd" },
+				"contactPoint": { "$ref": "contactPoint.prop.jsd" },
+				"email": { "$ref": "email.prop.jsd" },
+				"event": { "$ref": "event.prop.jsd" },
+				"funder": { "$ref": "funder.prop.jsd" },
+				"location": { "$ref": "location.prop.jsd" },
+				"logo": { "$ref": "logo.prop.jsd" },
+				"makesOffer": { "$ref": "makesOffer.prop.jsd" },
+				"member": { "$ref": "member.prop.jsd" },
+				"memberOf": { "$ref": "memberOf.prop.jsd" },
+				"sponsor": { "$ref": "sponsor.prop.jsd" },
+				"telephone": { "$ref": "telephone.prop.jsd" }
+			}
+		}
+	]
 }

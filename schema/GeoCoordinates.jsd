@@ -1,17 +1,17 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/GeoCoordinates.jsd",
-  "title": "http://schema.org/GeoCoordinates",
-  "description": "The geographic coordinates of a place or event.",
-  "allOf": [
-    { "$ref": "StructuredValue.jsd" },
-    {
-      "properties": {
-        "address": { "$ref": "address.prop.jsd" },
-        "elevation": { "$ref": "elevation.prop.jsd" },
-        "latitude": { "$ref": "latitude.prop.jsd" },
-        "longitude": { "$ref": "longitude.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/GeoCoordinates.jsd",
+	"title": "http://schema.org/GeoCoordinates",
+	"description": "The geographic coordinates of a place or event.",
+	"allOf": [
+		{ "$ref": "StructuredValue.jsd" },
+		{
+			"properties": {
+				"address": { "$ref": "address.prop.jsd" },
+				"elevation": { "$ref": "elevation.prop.jsd" },
+				"latitude": { "$ref": "latitude.prop.jsd" },
+				"longitude": { "$ref": "longitude.prop.jsd" }
+			}
+		}
+	]
 }

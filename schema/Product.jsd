@@ -1,26 +1,26 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Product.jsd",
-  "title": "http://schema.org/Product",
-  "description": "Any offered product or service.",
-  "allOf": [
-    { "$ref": "Thing.jsd" },
-    {
-      "properties": {
-        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
-        "award": { "$ref": "award.prop.jsd" },
-        "brand": { "$ref": "brand.prop.jsd" },
-        "color": { "$ref": "color.prop.jsd" },
-        "depth": { "$ref": "depth.prop.jsd" },
-        "height": { "$ref": "height.prop.jsd" },
-        "logo": { "$ref": "logo.prop.jsd" },
-        "manufacturer": { "$ref": "manufacturer.prop.jsd" },
-        "offers": { "$ref": "offers.prop.jsd" },
-        "productID": { "$ref": "productID.prop.jsd" },
-        "sku": { "$ref": "sku.prop.jsd" },
-        "weight": { "$ref": "weight.prop.jsd" },
-        "width": { "$ref": "width.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Product.jsd",
+	"title": "http://schema.org/Product",
+	"description": "Any offered product or service.",
+	"allOf": [
+		{ "$ref": "Thing.jsd" },
+		{
+			"properties": {
+				"additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+				"award": { "$ref": "award.prop.jsd" },
+				"brand": { "$ref": "brand.prop.jsd" },
+				"color": { "$ref": "color.prop.jsd" },
+				"depth": { "$ref": "depth.prop.jsd" },
+				"height": { "$ref": "height.prop.jsd" },
+				"logo": { "$ref": "logo.prop.jsd" },
+				"manufacturer": { "$ref": "manufacturer.prop.jsd" },
+				"offers": { "$ref": "offers.prop.jsd" },
+				"productID": { "$ref": "productID.prop.jsd" },
+				"sku": { "$ref": "sku.prop.jsd" },
+				"weight": { "$ref": "weight.prop.jsd" },
+				"width": { "$ref": "width.prop.jsd" }
+			}
+		}
+	]
 }

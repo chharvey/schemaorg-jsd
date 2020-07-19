@@ -1,19 +1,19 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/QuantitativeValue.jsd",
-  "title": "http://schema.org/QuantitativeValue",
-  "description": "A point value or interval for product characteristics and other purposes.",
-  "allOf": [
-    { "$ref": "StructuredValue.jsd" },
-    {
-      "properties": {
-        "additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
-        "maxValue": { "$ref": "maxValue.prop.jsd" },
-        "minValue": { "$ref": "minValue.prop.jsd" },
-        "unitCode": { "$ref": "unitCode.prop.jsd" },
-        "unitText": { "$ref": "unitText.prop.jsd" },
-        "value": { "$ref": "value.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/QuantitativeValue.jsd",
+	"title": "http://schema.org/QuantitativeValue",
+	"description": "A point value or interval for product characteristics and other purposes.",
+	"allOf": [
+		{ "$ref": "StructuredValue.jsd" },
+		{
+			"properties": {
+				"additionalProperty": { "$ref": "additionalProperty.prop.jsd" },
+				"maxValue": { "$ref": "maxValue.prop.jsd" },
+				"minValue": { "$ref": "minValue.prop.jsd" },
+				"unitCode": { "$ref": "unitCode.prop.jsd" },
+				"unitText": { "$ref": "unitText.prop.jsd" },
+				"value": { "$ref": "value.prop.jsd" }
+			}
+		}
+	]
 }

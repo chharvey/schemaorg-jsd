@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/affiliation.prop.jsd",
-  "title": "http://schema.org/affiliation",
-  "description": "An organization that this person is affiliated with. For example, a school/university, a club, or a team.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Organization.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    { "$ref": "memberOf.prop.jsd" },
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/affiliation.prop.jsd",
+	"title": "http://schema.org/affiliation",
+	"description": "An organization that this person is affiliated with. For example, a school/university, a club, or a team.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Organization.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		{ "$ref": "memberOf.prop.jsd" },
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }
