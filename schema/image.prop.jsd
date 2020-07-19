@@ -1,23 +1,23 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/image.prop.jsd",
-  "title": "http://schema.org/image",
-  "description": "An image of the item. This can be a URL or a fully described ImageObject.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "ImageObject.jsd" },
-        { "$ref": "URL.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/image.prop.jsd",
+	"title": "http://schema.org/image",
+	"description": "An image of the item. This can be a URL or a fully described ImageObject.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "ImageObject.jsd" },
+				{ "$ref": "URL.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

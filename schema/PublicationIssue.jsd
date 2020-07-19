@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/PublicationIssue.jsd",
-  "title": "http://schema.org/PublicationIssue",
-  "description": "A part of a successively published publication such as a periodical or publication volume, often numbered, usually containing a grouping of works such as articles.",
-  "allOf": [
-    { "$ref": "CreativeWork.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/PublicationIssue.jsd",
+	"title": "http://schema.org/PublicationIssue",
+	"description": "A part of a successively published publication such as a periodical or publication volume, often numbered, usually containing a grouping of works such as articles.",
+	"allOf": [
+		{ "$ref": "CreativeWork.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

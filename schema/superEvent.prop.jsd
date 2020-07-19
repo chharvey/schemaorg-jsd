@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/superEvent.prop.jsd",
-  "title": "http://schema.org/superEvent",
-  "description": "An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Event.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/superEvent.prop.jsd",
+	"title": "http://schema.org/superEvent",
+	"description": "An event that this event is a part of. For example, a collection of individual music performances might each have a music festival as their superEvent.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Event.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

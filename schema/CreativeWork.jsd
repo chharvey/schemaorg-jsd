@@ -1,29 +1,29 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/CreativeWork.jsd",
-  "title": "http://schema.org/CreativeWork",
-  "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
-  "allOf": [
-    { "$ref": "Thing.jsd" },
-    {
-      "properties": {
-        "creator": { "$ref": "creator.prop.jsd" },
-        "dateCreated": { "$ref": "dateCreated.prop.jsd" },
-        "dateModified": { "$ref": "dateModified.prop.jsd" },
-        "datePublished": { "$ref": "datePublished.prop.jsd" },
-        "funder": { "$ref": "funder.prop.jsd" },
-        "hasPart": { "$ref": "hasPart.prop.jsd" },
-        "headline": { "$ref": "headline.prop.jsd" },
-        "isPartOf": { "$ref": "isPartOf.prop.jsd" },
-        "keywords": { "$ref": "keywords.prop.jsd" },
-        "mainEntity": { "$ref": "mainEntity.prop.jsd" },
-        "offers": { "$ref": "offers.prop.jsd" },
-        "position": { "$ref": "position.prop.jsd" },
-        "sponsor": { "$ref": "sponsor.prop.jsd" },
-        "text": { "$ref": "text.prop.jsd" },
-        "thumbnailUrl": { "$ref": "thumbnailUrl.prop.jsd" },
-        "publisher": { "$ref": "publisher.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/CreativeWork.jsd",
+	"title": "http://schema.org/CreativeWork",
+	"description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
+	"allOf": [
+		{ "$ref": "Thing.jsd" },
+		{
+			"properties": {
+				"creator": { "$ref": "creator.prop.jsd" },
+				"dateCreated": { "$ref": "dateCreated.prop.jsd" },
+				"dateModified": { "$ref": "dateModified.prop.jsd" },
+				"datePublished": { "$ref": "datePublished.prop.jsd" },
+				"funder": { "$ref": "funder.prop.jsd" },
+				"hasPart": { "$ref": "hasPart.prop.jsd" },
+				"headline": { "$ref": "headline.prop.jsd" },
+				"isPartOf": { "$ref": "isPartOf.prop.jsd" },
+				"keywords": { "$ref": "keywords.prop.jsd" },
+				"mainEntity": { "$ref": "mainEntity.prop.jsd" },
+				"offers": { "$ref": "offers.prop.jsd" },
+				"position": { "$ref": "position.prop.jsd" },
+				"sponsor": { "$ref": "sponsor.prop.jsd" },
+				"text": { "$ref": "text.prop.jsd" },
+				"thumbnailUrl": { "$ref": "thumbnailUrl.prop.jsd" },
+				"publisher": { "$ref": "publisher.prop.jsd" }
+			}
+		}
+	]
 }

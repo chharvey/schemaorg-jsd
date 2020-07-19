@@ -1,15 +1,15 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ItemList.jsd",
-  "title": "http://schema.org/ItemList",
-  "description": "A list of items of any sort.",
-  "allOf": [
-    { "$ref": "Intangible.jsd" },
-    {
-      "properties": {
-        "itemListElement": { "$ref": "itemListElement.prop.jsd" },
-        "numberOfItems": { "$ref": "numberOfItems.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/ItemList.jsd",
+	"title": "http://schema.org/ItemList",
+	"description": "A list of items of any sort.",
+	"allOf": [
+		{ "$ref": "Intangible.jsd" },
+		{
+			"properties": {
+				"itemListElement": { "$ref": "itemListElement.prop.jsd" },
+				"numberOfItems": { "$ref": "numberOfItems.prop.jsd" }
+			}
+		}
+	]
 }

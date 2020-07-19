@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/priceSpecification.prop.jsd",
-  "title": "http://schema.org/priceSpecification",
-  "description": "One or more detailed price specifications, indicating the unit price and delivery or payment charges.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "PriceSpecification.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/priceSpecification.prop.jsd",
+	"title": "http://schema.org/priceSpecification",
+	"description": "One or more detailed price specifications, indicating the unit price and delivery or payment charges.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "PriceSpecification.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

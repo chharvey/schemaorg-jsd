@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Intangible.jsd",
-  "title": "http://schema.org/Intangible",
-  "description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
-  "allOf": [
-    { "$ref": "Thing.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Intangible.jsd",
+	"title": "http://schema.org/Intangible",
+	"description": "A utility class that serves as the umbrella for a number of 'intangible' things such as quantities, structured values, etc.",
+	"allOf": [
+		{ "$ref": "Thing.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

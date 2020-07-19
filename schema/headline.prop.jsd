@@ -1,21 +1,21 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/headline.prop.jsd",
-  "title": "http://schema.org/headline",
-  "description": "Headline of the article.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/headline.prop.jsd",
+	"title": "http://schema.org/headline",
+	"description": "Headline of the article.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

@@ -1,17 +1,17 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ListItem.jsd",
-  "title": "http://schema.org/ListItem",
-  "description": "A list item.",
-  "allOf": [
-    { "$ref": "Intangible.jsd" },
-    {
-      "properties": {
-        "item": { "$ref": "item.prop.jsd" },
-        "nextItem": { "$ref": "nextItem.prop.jsd" },
-        "position": { "$ref": "position.prop.jsd" },
-        "previousItem": { "$ref": "previousItem.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/ListItem.jsd",
+	"title": "http://schema.org/ListItem",
+	"description": "A list item.",
+	"allOf": [
+		{ "$ref": "Intangible.jsd" },
+		{
+			"properties": {
+				"item": { "$ref": "item.prop.jsd" },
+				"nextItem": { "$ref": "nextItem.prop.jsd" },
+				"position": { "$ref": "position.prop.jsd" },
+				"previousItem": { "$ref": "previousItem.prop.jsd" }
+			}
+		}
+	]
 }

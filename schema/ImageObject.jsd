@@ -1,13 +1,13 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/ImageObject.jsd",
-  "title": "http://schema.org/ImageObject",
-  "description": "An image file.",
-  "allOf": [
-    { "$ref": "MediaObject.jsd" },
-    {
-      "properties": {
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/ImageObject.jsd",
+	"title": "http://schema.org/ImageObject",
+	"description": "An image file.",
+	"allOf": [
+		{ "$ref": "MediaObject.jsd" },
+		{
+			"properties": {
+			}
+		}
+	]
 }

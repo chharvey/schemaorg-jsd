@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/disambiguatingDescription.prop.jsd",
-  "title": "http://schema.org/disambiguatingDescription",
-  "description": "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    { "$ref": "description.prop.jsd" },
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/disambiguatingDescription.prop.jsd",
+	"title": "http://schema.org/disambiguatingDescription",
+	"description": "A short description of the item used to disambiguate from other, similar items. Information from other properties (in particular, name) may be necessary for the description to be useful for disambiguation.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		{ "$ref": "description.prop.jsd" },
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

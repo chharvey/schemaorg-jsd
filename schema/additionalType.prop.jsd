@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/additionalType.prop.jsd",
-  "title": "http://schema.org/additionalType",
-  "description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "URL.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/additionalType.prop.jsd",
+	"title": "http://schema.org/additionalType",
+	"description": "An additional type for the item, typically used for adding more specific types from external vocabularies in microdata syntax. This is a relationship between something and a class that the thing is in.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "URL.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

@@ -1,24 +1,24 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/location.prop.jsd",
-  "title": "http://schema.org/location",
-  "description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Place.jsd" },
-        { "$ref": "PostalAddress.jsd" },
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/location.prop.jsd",
+	"title": "http://schema.org/location",
+	"description": "The location of for example where the event is happening, an organization is located, or where an action takes place.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Place.jsd" },
+				{ "$ref": "PostalAddress.jsd" },
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

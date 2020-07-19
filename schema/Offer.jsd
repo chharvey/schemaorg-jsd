@@ -1,19 +1,19 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/Offer.jsd",
-  "title": "http://schema.org/Offer",
-  "description": "An offer to transfer some rights to an item or to provide a service—for example, an offer to sell tickets to an event, to rent the DVD of a movie, to stream a TV show over the internet, to repair a motorcycle, or to loan a book.",
-  "allOf": [
-    { "$ref": "Intangible.jsd" },
-    {
-      "properties": {
-        "availabilityStarts": { "$ref": "availabilityStarts.prop.jsd" },
-        "availabilityEnds": { "$ref": "availabilityEnds.prop.jsd" },
-        "offeredBy": { "$ref": "offeredBy.prop.jsd" },
-        "price": { "$ref": "price.prop.jsd" },
-        "priceCurrency": { "$ref": "priceCurrency.prop.jsd" },
-        "priceSpecification": { "$ref": "priceSpecification.prop.jsd" }
-      }
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/Offer.jsd",
+	"title": "http://schema.org/Offer",
+	"description": "An offer to transfer some rights to an item or to provide a service—for example, an offer to sell tickets to an event, to rent the DVD of a movie, to stream a TV show over the internet, to repair a motorcycle, or to loan a book.",
+	"allOf": [
+		{ "$ref": "Intangible.jsd" },
+		{
+			"properties": {
+				"availabilityStarts": { "$ref": "availabilityStarts.prop.jsd" },
+				"availabilityEnds": { "$ref": "availabilityEnds.prop.jsd" },
+				"offeredBy": { "$ref": "offeredBy.prop.jsd" },
+				"price": { "$ref": "price.prop.jsd" },
+				"priceCurrency": { "$ref": "priceCurrency.prop.jsd" },
+				"priceSpecification": { "$ref": "priceSpecification.prop.jsd" }
+			}
+		}
+	]
 }

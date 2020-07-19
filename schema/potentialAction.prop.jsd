@@ -1,22 +1,22 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/potentialAction.prop.jsd",
-  "title": "http://schema.org/potentialAction",
-  "description": "Indicates a potential Action, which describes an idealized action in which this thing would play an ‘object’ role.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Action.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" },
-        { "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/potentialAction.prop.jsd",
+	"title": "http://schema.org/potentialAction",
+	"description": "Indicates a potential Action, which describes an idealized action in which this thing would play an ‘object’ role.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Action.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" },
+				{ "type": "array", "items": { "$ref": "#/definitions/ExpectedType" } }
+			]
+		}
+	]
 }

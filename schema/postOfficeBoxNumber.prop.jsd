@@ -1,21 +1,21 @@
 {
-  "$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
-  "$id": "https://chharvey.github.io/schemaorg-jsd/schema/postOfficeBoxNumber.prop.jsd",
-  "title": "http://schema.org/postOfficeBoxNumber",
-  "description": "The post office box number for PO box addresses.",
-  "definitions": {
-    "ExpectedType": {
-      "anyOf": [
-        { "$ref": "Text.jsd" }
-      ]
-    }
-  },
-  "allOf": [
-    true,
-    {
-      "anyOf": [
-        { "$ref": "#/definitions/ExpectedType" }
-      ]
-    }
-  ]
+	"$schema": "https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#",
+	"$id": "https://chharvey.github.io/schemaorg-jsd/schema/postOfficeBoxNumber.prop.jsd",
+	"title": "http://schema.org/postOfficeBoxNumber",
+	"description": "The post office box number for PO box addresses.",
+	"definitions": {
+		"ExpectedType": {
+			"anyOf": [
+				{ "$ref": "Text.jsd" }
+			]
+		}
+	},
+	"allOf": [
+		true,
+		{
+			"anyOf": [
+				{ "$ref": "#/definitions/ExpectedType" }
+			]
+		}
+	]
 }

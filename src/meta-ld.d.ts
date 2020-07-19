@@ -1,6 +1,4 @@
-import { JSONSchema7, JSONSchema7Version } from 'json-schema'
-
-import { JSONLDObject } from '@chharvey/requirejson'
+import type {JSONLDObject} from '@chharvey/requirejson'
 
 
 interface SDO_LD extends JSONLDObject {
