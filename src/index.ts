@@ -15,10 +15,12 @@ import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-
  *
  * This is for internal use only. Users should not be expected to use these meta-schemata.
  */
-export const META_SCHEMATA: Promise<JSONSchema7[]> = (async () => Promise.all(
-	(await fs.promises.readdir(path.resolve(__dirname, '../meta/')))
-		.map((filename) => requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>)
-))()
+export const META_SCHEMATA: Promise<JSONSchema7[]> =
+	fs.promises.readdir(path.resolve(__dirname, '../meta/')).then((filenames) =>
+		Promise.all(filenames.map((filename) =>
+			requireJSON(path.join(__dirname, '../meta/', filename)) as Promise<JSONSchema7>
+		))
+	)
 
 /**
  * A single JSON Schema, which validates JSON-LD objects.
@@ -60,10 +62,12 @@ export const JSONLD_SCHEMA: Promise<JSONSchema7> = new Promise((resolve, reject)
  * This array contains all Schema.org schemata in this project.
  * That is, schemata against which your JSON-LD documents should validate.
  */
-export const SCHEMATA: Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)[]> = (async () => Promise.all(
-	(await fs.promises.readdir(path.resolve(__dirname, '../schema/')))
-		.map((filename) => requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchema7> as Promise<(SDODatatypeSchema|SDOClassSchema|SDOPropertySchema)>)
-))()
+export const SCHEMATA: Promise<(SDODatatypeSchema | SDOClassSchema | SDOPropertySchema)[]> =
+	fs.promises.readdir(path.resolve(__dirname, '../schema/')).then((filenames) =>
+		Promise.all(filenames.map((filename) =>
+			requireJSON(path.join(__dirname, '../schema/', filename)) as Promise<JSONSchema7> as Promise<SDODatatypeSchema | SDOClassSchema | SDOPropertySchema>
+		))
+	)
 
 /**
  * Validate a JSON-LD object against a Schema.org JSON schema.
