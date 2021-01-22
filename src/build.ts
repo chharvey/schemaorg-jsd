@@ -1,6 +1,3 @@
-import * as path from 'path'
-import * as url from 'url'
-
 import type {JSONSchema7} from 'json-schema'
 import type {
 	JsonLdDocument,
@@ -8,7 +5,12 @@ import type {
 } from 'jsonld';
 
 import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
-import type {SDODatatypeLD, SDOClassLD, SDOPropertyLD, SingleReferenceLD} from './meta-ld.d'
+import {
+	SDODatatypeLD,
+	SDOClassLD,
+	SDOPropertyLD,
+	SingleReferenceLD,
+} from './sdo-ld';
 
 
 /**
@@ -17,75 +19,6 @@ import type {SDODatatypeLD, SDOClassLD, SDOPropertyLD, SingleReferenceLD} from '
  * @returns a JSON-LD document for the all supported Schema.org vocabulary
  */
 export function buildLD(schemabase: JSONSchema7[]): JsonLdDocument {
-	/**
-	 * Return the canonical name of the Schema.org item.
-	 * @private
-	 * @param   jsd A JSON Schema for a Schema.org Datatype, Class, or Property
-	 * @returns the name of the datatype, class, or property
-	 */
-	function _label(jsd: SDODatatypeSchema | SDOClassSchema | SDOPropertySchema): string {
-		return path.parse(new url.URL(jsd.title).pathname).name;
-	}
-
-	/**
-	 * Transform a Schema.org Datatype JSON Schema into a JSON-LD object.
-	 * @param   jsd JSON Schema for a Schema.org Datatype
-	 * @returns JSON-LD marking up the Schema.org Datatype
-	 */
-	function datatypeLD(jsd: SDODatatypeSchema): SDODatatypeLD {
-		const label: string = _label(jsd)
-		return {
-			'@type'        : 'rdfs:Datatype',
-			'@id'          : `sdo:${label}`,
-			'rdfs:label'   : label,
-			'rdfs:comment' : jsd.description,
-		}
-	}
-
-	/**
-	 * Transform a Schema.org Class JSON Schema into a JSON-LD object.
-	 * @param   jsd JSON Schema for a Schema.org Class
-	 * @param   propertybase a base of Schema.org Properties to look up
-	 * @returns JSON-LD marking up the Schema.org Class
-	 */
-	function classLD(jsd: SDOClassSchema, propertybase: ReadonlyArray<SDOPropertySchema>): SDOClassLD {
-		const label: string = _label(jsd)
-		return {
-			'@type'           : 'rdfs:Class',
-			'@id'             : `sdo:${label}`,
-			'rdfs:label'      : label,
-			'rdfs:comment'    : jsd.description,
-			'rdfs:subClassOf' : (label !== 'Thing') ? { '@id': `sdo:${path.parse(jsd.allOf[0].$ref).name}` } : null,
-			'rdfs:member'     : Object.entries(jsd.allOf[1].properties).map((entry) => {
-				const prop_name: string = entry[0]
-				if (propertybase.find((sch) => sch.title === `http://schema.org/${prop_name}`)) return { '@id': `sdo:${prop_name}` }
-				else throw new ReferenceError(`No corresponding jsd file was found for member subschema \`${label}#${prop_name}\`.`)
-			}),
-			superClassOf : [], // non-normative
-			valueOf      : [], // non-normative
-		}
-	}
-
-	/**
-	 * Transform a Schema.org Property JSON Schema into a JSON-LD object.
-	 * @param   jsd JSON Schema for a Schema.org Property
-	 * @returns JSON-LD marking up the Schema.org Property
-	 */
-	function propertyLD(jsd: SDOPropertySchema): SDOPropertyLD {
-		const label: string = _label(jsd)
-		return {
-			'@type'              : 'rdf:Property',
-			'@id'                : `sdo:${label}`,
-			'rdfs:label'         : label,
-			'rdfs:comment'       : jsd.description,
-			'rdfs:subPropertyOf' : (jsd.allOf[0] !== true) ? {'@id': `sdo:${path.parse(jsd.allOf[0].$ref).name.split('.')[0]}`} : null,
-			'rdfs:domain'        : [], // non-normative
-			'rdfs:range'         : jsd.definitions.ExpectedType.anyOf.map((schema) => ({'@id': `sdo:${path.parse(schema.$ref).name}`})),
-			superPropertyOf      : [], // non-normative
-			$rangeArray          : jsd.allOf[1].anyOf.length === 2, // non-standard
-		}
-	}
-
 	/**
 	 * Process non-normative subclasses.
 	 *
@@ -141,14 +74,14 @@ export function buildLD(schemabase: JSONSchema7[]): JsonLdDocument {
 	}
 
 	// All JSON schemata validating JSON-LD values marking up Schema.org Datatype, Class, and Property instances.
-	const datatypeJSDs : ReadonlyArray<SDODatatypeSchema> = schemabase.filter((jsd) => jsd.$schema === 'http://json-schema.org/draft-07/schema#'                  ) as SDODatatypeSchema[]
-	const classJSDs    : ReadonlyArray<SDOClassSchema>    = schemabase.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#'  ) as SDOClassSchema[]
-	const propertyJSDs : ReadonlyArray<SDOPropertySchema> = schemabase.filter((jsd) => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#') as SDOPropertySchema[]
+	const datatypeJSDs: ReadonlyArray<SDODatatypeSchema> = schemabase.filter((jsd): jsd is SDODatatypeSchema => jsd.$schema === 'http://json-schema.org/draft-07/schema#');
+	const classJSDs:    ReadonlyArray<SDOClassSchema>    = schemabase.filter((jsd): jsd is SDOClassSchema    => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#');
+	const propertyJSDs: ReadonlyArray<SDOPropertySchema> = schemabase.filter((jsd): jsd is SDOPropertySchema => jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#');
 
 	// JSON-LD objects marking up the Schema.org Datatypes, Classes, and Properties themselves
-	const datatypeLDs : ReadonlyArray<SDODatatypeLD> = datatypeJSDs.map((jsd) => datatypeLD(jsd              ))
-	const classLDs    : ReadonlyArray<SDOClassLD>    = classJSDs   .map((jsd) => classLD   (jsd, propertyJSDs))
-	const propertyLDs : ReadonlyArray<SDOPropertyLD> = propertyJSDs.map((jsd) => propertyLD(jsd              ))
+	const datatypeLDs: ReadonlyArray<SDODatatypeLD> = datatypeJSDs.map((jsd) => new SDODatatypeLD(jsd));
+	const classLDs:    ReadonlyArray<SDOClassLD>    = classJSDs   .map((jsd) => new SDOClassLD   (jsd, propertyJSDs));
+	const propertyLDs: ReadonlyArray<SDOPropertyLD> = propertyJSDs.map((jsd) => new SDOPropertyLD(jsd));
 
 	classLDs.forEach((jsonld) => {
 		processSubclasses(jsonld, classLDs)
