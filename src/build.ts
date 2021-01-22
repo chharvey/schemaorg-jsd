@@ -6,6 +6,7 @@ import type {
 
 import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
 import {
+	SDO_LD,
 	SDODatatypeLD,
 	SDOClassLD,
 	SDOPropertyLD,
@@ -113,9 +114,11 @@ export function buildTS(jsonlddocument: JsonLdDocument): string {
 	const JSONLD: ReadonlyArray<NodeObject> = '@graph' in jsonlddocument ? jsonlddocument['@graph'] as NodeObject[] : [];
 	return [
 		`import {NodeObject} from 'jsonld';`,
-		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((ld) => (ld as SDODatatypeLD).toTS()),
-		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map((ld) => (ld as SDOClassLD   ).toTS()),
-		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map((ld) => (ld as SDOPropertyLD).toTS()),
+		...JSONLD.filter((jsonld): jsonld is SDO_LD => typeof jsonld['@type'] === 'string' && [
+			'rdfs:Datatype',
+			'rdfs:Class',
+			'rdf:Property',
+		].includes(jsonld['@type'])).map((jsonld) => jsonld.toTS()),
 	].join('')
 }
 

@@ -35,7 +35,7 @@ function linklist(lds: ReadonlyArray<NodeObject>): string {
 
 
 
-abstract class SDO_LD implements NodeObject {
+export abstract class SDO_LD implements NodeObject {
 	readonly '@id':          NonNullable<NodeObject['@id']>;
 	readonly 'rdfs:label':   string;
 	readonly 'rdfs:comment': string;
@@ -45,6 +45,11 @@ abstract class SDO_LD implements NodeObject {
 		this['rdfs:label']   = label(jsd);
 		this['rdfs:comment'] = jsd.description;
 	}
+	/**
+	 * Transform this Schema.org JSON-LD object into a string in TypeScript.
+	 * @returns a TypeScript type alias marking up the Schema.org object
+	 */
+	abstract toTS(): string;
 }
 
 /**
