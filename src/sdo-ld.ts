@@ -23,6 +23,17 @@ function label(jsd: SDODatatypeSchema | SDOClassSchema | SDOPropertySchema): str
 	return path.parse(new url.URL(jsd.title).pathname).name;
 }
 
+/**
+ * Print a list of links as a in jsdoc comment.
+ * @private
+ * @param   lds array of JSON-LD objects
+ * @returns a segment of jsdoc/typescript comment
+ */
+function linklist(lds: ReadonlyArray<NodeObject>): string {
+	return lds.map((obj) => ` * - {@link ${ obj['@id']!.split(':')[1] }}`).join('\n'); // we know it will have an `'@id'` property
+}
+
+
 
 abstract class SDO_LD implements NodeObject {
 	readonly '@id':          NonNullable<NodeObject['@id']>;
@@ -48,6 +59,41 @@ export class SDODatatypeLD extends SDO_LD {
 	 */
 	constructor (jsd: SDODatatypeSchema) {
 		super(jsd);
+	}
+	/**
+	 * Transform this Schema.org Datatype JSON-LD object into a string in TypeScript.
+	 * @returns a TypeScript type alias marking up the Schema.org Datatype
+	 */
+	toTS(): string {
+		enum SDODatatypeNames {
+			Boolean,
+			Date,
+			DateTime,
+			Integer,
+			Number,
+			Text,
+			Time,
+			URL,
+		}
+		const alias: keyof typeof SDODatatypeNames = this['rdfs:label'] as keyof typeof SDODatatypeNames;
+		const type: string = ({
+			Boolean  : 'boolean',
+			Date     : 'string',
+			DateTime : 'string',
+			Integer  : 'number',
+			Number   : 'number',
+			Text     : 'string',
+			Time     : 'string',
+			URL      : 'string',
+		})[alias]
+		return `
+			/**
+			 * ${ this['rdfs:comment'] }
+			 *
+			 * @see http://schema.org/${ this['rdfs:label'] }
+			 */
+			export type ${alias} = ${type}
+		`.replace(/\n\t\t\t/g, '\n')
 	}
 }
 
@@ -87,6 +133,26 @@ export class SDOClassLD extends SDO_LD {
 			;
 		});
 	}
+	/**
+	 * Transform this Schema.org Class JSON-LD object into a string in TypeScript.
+	 * @returns a TypeScript interface marking up the Schema.org Class
+	 */
+	toTS(): string {
+		return `
+			/**
+			 * ${ this['rdfs:comment'] }
+			 *
+			 * ${ (this['superClassOf'].length) ? `*(Non-Normative):* Known subclasses:\n${        linklist(this['superClassOf'])                         }\n` : '' }
+			 * ${ (this['valueOf']     .length) ? `*(Non-Normative):* May appear as values of:\n${ linklist(this['valueOf'])     .replace(/}/g, '_type}') }\n` : '' }
+			 * @see http://schema.org/${ this['rdfs:label'] }
+			 */
+			export interface ${ this['rdfs:label'] } extends ${ (this['rdfs:subClassOf']) ? this['rdfs:subClassOf']['@id'].split(':')[1] : 'NodeObject' } {
+				${ this['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
+					${ name }?: ${ name }_type;
+				`).join('') }
+			}
+		`.replace(/\n\t\t\t/g, '\n');
+	}
 }
 
 /**
@@ -122,6 +188,24 @@ export class SDOPropertyLD extends SDO_LD {
 		this['rdfs:subPropertyOf'] = (jsd.allOf[0] !== true) ? {'@id': `sdo:${ path.parse(jsd.allOf[0].$ref).name.split('.')[0] }`} : null;
 		this['rdfs:range']         = jsd.definitions.ExpectedType.anyOf.map((schema) => ({'@id': `sdo:${ path.parse(schema.$ref).name }`}));
 		this.$rangeArray           = jsd.allOf[1].anyOf.length === 2;
+	}
+	/**
+	 * Transform this Schema.org Property JSON-LD object into a string in TypeScript.
+	 * @returns a TypeScript type alias marking up the Schema.org Property
+	 */
+	toTS(): string {
+		const rangeunion: string = `${ this['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join(' | ') }`
+		return `
+			/**
+			 * ${ this['rdfs:comment'] }
+			 *
+			 * ${ (this['rdfs:subPropertyOf']       ) ? `Extends {@link ${ this['rdfs:subPropertyOf']['@id'].split(':')[1] }}`              : '' }
+			 * ${ (this['superPropertyOf']   .length) ? `*(Non-Normative):* Known subproperties:\n${ linklist(this['superPropertyOf']) }\n` : '' }
+			 * ${ (this['rdfs:domain']       .length) ? `*(Non-Normative):* Property of:\n${         linklist(this['rdfs:domain'    ]) }\n` : '' }
+			 * @see http://schema.org/${ this['rdfs:label'] }
+			 */
+			type ${ this['rdfs:label'] }_type = ${ rangeunion }${ (this['$rangeArray']) ? ` | (${ rangeunion })[]` : '' };
+		`.replace(/\n\t\t\t/g, '\n')
 	}
 }
 

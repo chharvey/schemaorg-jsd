@@ -110,100 +110,12 @@ export function buildLD(schemabase: JSONSchema7[]): JsonLdDocument {
 }
 
 export function buildTS(jsonlddocument: JsonLdDocument): string {
-	/**
-	 * Print a list of links as a in jsdoc comment.
-	 * @private
-	 * @param   lds array of JSON-LD objects
-	 * @returns a segment of jsdoc/typescript comment
-	 */
-	function _linklist(lds: ReadonlyArray<NodeObject>): string {
-		return lds.map((obj) => ` * - {@link ${ obj['@id']!.split(':')[1] }}`).join('\n'); // we know it will have an `'@id'` property
-	}
-
-	/**
-	 * Transform a Schema.org Datatype JSON-LD object into a string in TypeScript.
-	 * @param   ld JSON-LD for a Schema.org Datatype
-	 * @returns a TypeScript type alias marking up the Schema.org Datatype
-	 */
-	function datatypeTS(ld: SDODatatypeLD): string {
-		enum SDODatatypeNames {
-			Boolean,
-			Date,
-			DateTime,
-			Integer,
-			Number,
-			Text,
-			Time,
-			URL,
-		}
-		const alias: keyof typeof SDODatatypeNames = ld['rdfs:label'] as keyof typeof SDODatatypeNames
-		const type: string = ({
-			Boolean  : 'boolean',
-			Date     : 'string',
-			DateTime : 'string',
-			Integer  : 'number',
-			Number   : 'number',
-			Text     : 'string',
-			Time     : 'string',
-			URL      : 'string',
-		})[alias]
-		return `
-			/**
-			 * ${ld['rdfs:comment']}
-			 *
-			 * @see http://schema.org/${ld['rdfs:label']}
-			 */
-			export type ${alias} = ${type}
-		`.replace(/\n\t\t\t/g, '\n')
-	}
-
-	/**
-	 * Transform a Schema.org Class JSON-LD object into a string in TypeScript.
-	 * @param   ld JSON-LD for a Schema.org Class
-	 * @returns a TypeScript interface marking up the Schema.org Class
-	 */
-	function classTS(ld: SDOClassLD): string { return `
-		/**
-		 * ${ld['rdfs:comment']}
-		 *
-		 * ${(ld['superClassOf'].length) ? `*(Non-Normative):* Known subclasses:\n${       _linklist(ld['superClassOf'])}\n`                         : ''}
-		 * ${(ld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${_linklist(ld['valueOf'     ]).replace(/}/g, '_type}')}\n` : ''}
-		 * @see http://schema.org/${ld['rdfs:label']}
-		 */
-		export interface ${ ld['rdfs:label'] } extends ${ (ld['rdfs:subClassOf']) ? ld['rdfs:subClassOf']['@id'].split(':')[1] : 'NodeObject' } {
-			${ld['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
-				${name}?: ${name}_type
-			`).join('')}
-		}
-	`.replace(/\n\t\t/g, '\n')
-	}
-
-	/**
-	 * Transform a Schema.org Property JSON-LD object into a string in TypeScript.
-	 * @param   ld JSON-LD for a Schema.org Property
-	 * @returns a TypeScript type alias marking up the Schema.org Property
-	 */
-	function propertyTS(ld: SDOPropertyLD): string {
-		const rangeunion: string = `${ld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')}`
-		return `
-			/**
-			 * ${ld['rdfs:comment']}
-			 *
-			 * ${(ld['rdfs:subPropertyOf']    ) ? `Extends {@link ${ld['rdfs:subPropertyOf']['@id'].split(':')[1]}}`               : ''}
-			 * ${(ld['superPropertyOf'].length) ? `*(Non-Normative):* Known subproperties:\n${_linklist(ld['superPropertyOf'])}\n` : ''}
-			 * ${(ld['rdfs:domain'    ].length) ? `*(Non-Normative):* Property of:\n${        _linklist(ld['rdfs:domain'    ])}\n` : ''}
-			 * @see http://schema.org/${ld['rdfs:label']}
-			 */
-			type ${ld['rdfs:label']}_type = ${rangeunion}${(ld['$rangeArray']) ? `|(${rangeunion})[]` : ''}
-		`.replace(/\n\t\t\t/g, '\n')
-	}
-
 	const JSONLD: ReadonlyArray<NodeObject> = '@graph' in jsonlddocument ? jsonlddocument['@graph'] as NodeObject[] : [];
 	return [
 		`import {NodeObject} from 'jsonld';`,
-		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((ld) => datatypeTS(ld as SDODatatypeLD)),
-		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map((ld) => classTS   (ld as SDOClassLD   )),
-		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map((ld) => propertyTS(ld as SDOPropertyLD)),
+		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((ld) => (ld as SDODatatypeLD).toTS()),
+		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map((ld) => (ld as SDOClassLD   ).toTS()),
+		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map((ld) => (ld as SDOPropertyLD).toTS()),
 	].join('')
 }
 
