@@ -26,6 +26,7 @@
   "dependencies": {
     "@chharvey/requirejson": "^1.2.0",
     "@types/json-schema": "^7.0.2",
+    "@types/jsonld": "^1.5.2",
     "@types/node": "^14.0.23",
     "ajv": "^6.5.4"
   },
