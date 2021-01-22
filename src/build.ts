@@ -21,15 +21,16 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 * @param   jsd A JSON Schema for a Schema.org Datatype, Class, or Property
 	 * @returns the name of the datatype, class, or property
 	 */
-	const _label = (jsd: SDODatatypeSchema|SDOClassSchema|SDOPropertySchema): string =>
-		path.parse(new url.URL(jsd.title).pathname).name
+	function _label(jsd: SDODatatypeSchema | SDOClassSchema | SDOPropertySchema): string {
+		return path.parse(new url.URL(jsd.title).pathname).name;
+	}
 
 	/**
 	 * Transform a Schema.org Datatype JSON Schema into a JSON-LD object.
 	 * @param   jsd JSON Schema for a Schema.org Datatype
 	 * @returns JSON-LD marking up the Schema.org Datatype
 	 */
-	const datatypeLD = (jsd: SDODatatypeSchema): SDODatatypeLD => {
+	function datatypeLD(jsd: SDODatatypeSchema): SDODatatypeLD {
 		const label: string = _label(jsd)
 		return {
 			'@type'        : 'rdfs:Datatype',
@@ -45,7 +46,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 * @param   propertybase a base of Schema.org Properties to look up
 	 * @returns JSON-LD marking up the Schema.org Class
 	 */
-	const classLD = (jsd: SDOClassSchema, propertybase: ReadonlyArray<SDOPropertySchema>): SDOClassLD => {
+	function classLD(jsd: SDOClassSchema, propertybase: ReadonlyArray<SDOPropertySchema>): SDOClassLD {
 		const label: string = _label(jsd)
 		return {
 			'@type'           : 'rdfs:Class',
@@ -68,7 +69,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 * @param   jsd JSON Schema for a Schema.org Property
 	 * @returns JSON-LD marking up the Schema.org Property
 	 */
-	const propertyLD = (jsd: SDOPropertySchema): SDOPropertyLD => {
+	function propertyLD(jsd: SDOPropertySchema): SDOPropertyLD {
 		const label: string = _label(jsd)
 		return {
 			'@type'              : 'rdf:Property',
@@ -88,7 +89,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 *
 	 * Subclasses are non-normative because this information can be processed from each class’s normative superclass.
 	 */
-	const processSubclasses = (jsonld: SDOClassLD, classbase: ReadonlyArray<SDOClassLD>): void => {
+	function processSubclasses(jsonld: SDOClassLD, classbase: ReadonlyArray<SDOClassLD>): void {
 		const superclass: SingleReferenceLD|null = jsonld['rdfs:subClassOf']
 		const referenced: SDOClassLD|null = superclass && classbase.find((c) => c['@id'] === superclass['@id']) || null
 		if (referenced) {
@@ -101,7 +102,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 *
 	 * Subproperties are non-normative because this information can be processed from each property’s normative superproperty.
 	 */
-	const processSubproperties = (jsonld: SDOPropertyLD, propertybase: ReadonlyArray<SDOPropertyLD>): void => {
+	function processSubproperties(jsonld: SDOPropertyLD, propertybase: ReadonlyArray<SDOPropertyLD>): void {
 		const superproperty: SingleReferenceLD|null = jsonld['rdfs:subPropertyOf']
 		const referenced: SDOPropertyLD|null = superproperty && propertybase.find((p) => p['@id'] === superproperty['@id']) || null
 		if (referenced) {
@@ -114,7 +115,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 *
 	 * A property’s `rdfs:domain` is non-normative because this information can be processed from each class’s normative properties.
 	 */
-	const processDomains = (jsonld: SDOClassLD, propertybase: ReadonlyArray<SDOPropertyLD>): void => {
+	function processDomains(jsonld: SDOClassLD, propertybase: ReadonlyArray<SDOPropertyLD>): void {
 		jsonld['rdfs:member'].forEach((property_ref) => {
 			const referenced: SDOPropertyLD|null = propertybase.find((p) => p['@id'] === property_ref['@id']) || null
 			if (referenced) {
@@ -128,7 +129,7 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	 *
 	 * A class’s `valueOf` is non-normative because this information can be processed from each property’s normative `rdfs:range`.
 	 */
-	const processValueOf = (jsonld: SDOPropertyLD, classbase: ReadonlyArray<SDOClassLD>): void => {
+	function processValueOf(jsonld: SDOPropertyLD, classbase: ReadonlyArray<SDOClassLD>): void {
 		jsonld['rdfs:range'].forEach((class_ref) => {
 			const referenced: SDOClassLD|null = classbase.find((c) => c['@id'] === class_ref['@id']) || null
 			if (referenced) {
@@ -173,22 +174,23 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	}
 }
 
-export const buildTS = (jsonlddocument: JSONLDDocument): string => {
+export function buildTS(jsonlddocument: JSONLDDocument): string {
 	/**
 	 * Print a list of links as a in jsdoc comment.
 	 * @private
 	 * @param   lds array of JSON-LD objects
 	 * @returns a segment of jsdoc/typescript comment
 	 */
-	const _linklist = (lds: ReadonlyArray<JSONLDObject>): string =>
-		lds.map((obj) => ` * - {@link ${obj['@id'] !.split(':')[1]}}`).join('\n') // we know it will have an `'@id'` property
+	function _linklist(lds: ReadonlyArray<JSONLDObject>): string {
+		return lds.map((obj) => ` * - {@link ${ obj['@id']!.split(':')[1] }}`).join('\n'); // we know it will have an `'@id'` property
+	}
 
 	/**
 	 * Transform a Schema.org Datatype JSON-LD object into a string in TypeScript.
 	 * @param   ld JSON-LD for a Schema.org Datatype
 	 * @returns a TypeScript type alias marking up the Schema.org Datatype
 	 */
-	const datatypeTS = (ld: SDODatatypeLD): string => {
+	function datatypeTS(ld: SDODatatypeLD): string {
 		enum SDODatatypeNames {
 			Boolean,
 			Date,
@@ -225,7 +227,7 @@ export const buildTS = (jsonlddocument: JSONLDDocument): string => {
 	 * @param   ld JSON-LD for a Schema.org Class
 	 * @returns a TypeScript interface marking up the Schema.org Class
 	 */
-	const classTS = (ld: SDOClassLD): string => `
+	function classTS(ld: SDOClassLD): string { return `
 		/**
 		 * ${ld['rdfs:comment']}
 		 *
@@ -239,13 +241,14 @@ export const buildTS = (jsonlddocument: JSONLDDocument): string => {
 			`).join('')}
 		}
 	`.replace(/\n\t\t/g, '\n')
+	}
 
 	/**
 	 * Transform a Schema.org Property JSON-LD object into a string in TypeScript.
 	 * @param   ld JSON-LD for a Schema.org Property
 	 * @returns a TypeScript type alias marking up the Schema.org Property
 	 */
-	const propertyTS = (ld: SDOPropertyLD): string => {
+	function propertyTS(ld: SDOPropertyLD): string {
 		const rangeunion: string = `${ld['rdfs:range'].map((cls) => cls['@id'].split(':')[1]).join('|')}`
 		return `
 			/**
@@ -270,9 +273,12 @@ export const buildTS = (jsonlddocument: JSONLDDocument): string => {
 }
 
 
-// const isSDODatatypeSchema = (jsd: JSONSchema7): jsd is SDODatatypeSchema =>
-// 	jsd.$schema === 'http://json-schema.org/draft-07/schema#'
-// const isSDOClassSchema = (jsd: JSONSchema7): jsd is SDOClassSchema =>
-// 	jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#'
-// const isSDOPropertySchema = (jsd: JSONSchema7): jsd is SDOPropertySchema =>
-// 	jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#'
+// function isSDODatatypeSchema(jsd: JSONSchema7): jsd is SDODatatypeSchema {
+// 	return jsd.$schema === 'http://json-schema.org/draft-07/schema#'
+// }
+// function isSDOClassSchema(jsd: JSONSchema7): jsd is SDOClassSchema {
+// 	return jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/type.jsd#'
+// }
+// function isSDOPropertySchema(jsd: JSONSchema7): jsd is SDOPropertySchema {
+// 	return jsd.$schema === 'https://chharvey.github.io/schemaorg-jsd/meta/member.jsd#'
+// }
