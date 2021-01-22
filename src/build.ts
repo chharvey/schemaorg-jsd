@@ -2,8 +2,10 @@ import * as path from 'path'
 import * as url from 'url'
 
 import type {JSONSchema7} from 'json-schema'
-
-import type {JSONLDDocument, JSONLDObject} from '@chharvey/requirejson'
+import type {
+	JsonLdDocument,
+	NodeObject,
+} from 'jsonld';
 
 import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
 import type {SDODatatypeLD, SDOClassLD, SDOPropertyLD, SingleReferenceLD} from './meta-ld.d'
@@ -14,7 +16,7 @@ import type {SDODatatypeLD, SDOClassLD, SDOPropertyLD, SingleReferenceLD} from '
  * @param   schemabase the codebase of all schemata to transform (all JSON Schemata for Schema.org vocab)
  * @returns a JSON-LD document for the all supported Schema.org vocabulary
  */
-export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
+export function buildLD(schemabase: JSONSchema7[]): JsonLdDocument {
 	/**
 	 * Return the canonical name of the Schema.org item.
 	 * @private
@@ -174,14 +176,14 @@ export function buildLD(schemabase: JSONSchema7[]): JSONLDDocument {
 	}
 }
 
-export function buildTS(jsonlddocument: JSONLDDocument): string {
+export function buildTS(jsonlddocument: JsonLdDocument): string {
 	/**
 	 * Print a list of links as a in jsdoc comment.
 	 * @private
 	 * @param   lds array of JSON-LD objects
 	 * @returns a segment of jsdoc/typescript comment
 	 */
-	function _linklist(lds: ReadonlyArray<JSONLDObject>): string {
+	function _linklist(lds: ReadonlyArray<NodeObject>): string {
 		return lds.map((obj) => ` * - {@link ${ obj['@id']!.split(':')[1] }}`).join('\n'); // we know it will have an `'@id'` property
 	}
 
@@ -235,7 +237,7 @@ export function buildTS(jsonlddocument: JSONLDDocument): string {
 		 * ${(ld['valueOf'     ].length) ? `*(Non-Normative):* May appear as values of:\n${_linklist(ld['valueOf'     ]).replace(/}/g, '_type}')}\n` : ''}
 		 * @see http://schema.org/${ld['rdfs:label']}
 		 */
-		export interface ${ld['rdfs:label']} extends ${(ld['rdfs:subClassOf']) ? ld['rdfs:subClassOf']['@id'].split(':')[1] : 'JSONLDObject'} {
+		export interface ${ ld['rdfs:label'] } extends ${ (ld['rdfs:subClassOf']) ? ld['rdfs:subClassOf']['@id'].split(':')[1] : 'NodeObject' } {
 			${ld['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
 				${name}?: ${name}_type
 			`).join('')}
@@ -263,9 +265,9 @@ export function buildTS(jsonlddocument: JSONLDDocument): string {
 		`.replace(/\n\t\t\t/g, '\n')
 	}
 
-	const JSONLD: ReadonlyArray<JSONLDObject> = jsonlddocument['@graph'] as JSONLDObject[]
+	const JSONLD: ReadonlyArray<NodeObject> = '@graph' in jsonlddocument ? jsonlddocument['@graph'] as NodeObject[] : [];
 	return [
-		`import { JSONLDObject } from '@chharvey/requirejson'`,
+		`import {NodeObject} from 'jsonld';`,
 		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Datatype').map((ld) => datatypeTS(ld as SDODatatypeLD)),
 		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdfs:Class'   ).map((ld) => classTS   (ld as SDOClassLD   )),
 		...JSONLD.filter((jsonld) => jsonld['@type'] === 'rdf:Property' ).map((ld) => propertyTS(ld as SDOPropertyLD)),

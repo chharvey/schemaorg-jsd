@@ -4,8 +4,9 @@ import * as path from 'path'
 
 import * as Ajv from 'ajv'
 import type {JSONSchema7, JSONSchema4} from 'json-schema'
+import type {NodeObject} from 'jsonld';
 
-import {requireJSON, JSONLDObject} from '@chharvey/requirejson'
+import {requireJSON} from '@chharvey/requirejson';
 
 import type {SDODatatypeSchema, SDOClassSchema, SDOPropertySchema} from './meta-schemata.d'
 
@@ -100,11 +101,11 @@ export const SCHEMATA: Promise<(SDODatatypeSchema | SDOClassSchema | SDOProperty
  * @returns does the object pass validation?
  * @throws  {TypeError} if the object fails validation; has a `.details` property for validation details
  */
-export async function sdoValidate(obj: JSONLDObject|string, type: string|null = null): Promise<true> {
+export async function sdoValidate(obj: NodeObject | string, type: string | null = null): Promise<true> {
 	let filename: string = ''
 	if (typeof obj === 'string') {
 		filename = obj
-		obj = await requireJSON(obj) as JSONLDObject
+		obj = await requireJSON(obj) as NodeObject;
 	}
 	if (type === null) {
 		const objtype: string[]|string|null = obj['@type'] || null

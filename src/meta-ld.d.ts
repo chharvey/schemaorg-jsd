@@ -1,7 +1,7 @@
-import type {JSONLDObject} from '@chharvey/requirejson'
+import type {NodeObject} from 'jsonld';
 
 
-interface SDO_LD extends JSONLDObject {
+interface SDO_LD extends NodeObject {
 	'@id'          : string;
 	'rdfs:label'   : string;
 	'rdfs:comment' : string;
