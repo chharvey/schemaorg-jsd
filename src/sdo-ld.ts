@@ -70,34 +70,22 @@ export class SDODatatypeLD extends SDO_LD {
 	 * @returns a TypeScript type alias marking up the Schema.org Datatype
 	 */
 	toTS(): string {
-		enum SDODatatypeNames {
-			Boolean,
-			Date,
-			DateTime,
-			Integer,
-			Number,
-			Text,
-			Time,
-			URL,
-		}
-		const alias: keyof typeof SDODatatypeNames = this['rdfs:label'] as keyof typeof SDODatatypeNames;
-		const type: string = ({
-			Boolean  : 'boolean',
-			Date     : 'string',
-			DateTime : 'string',
-			Integer  : 'number',
-			Number   : 'number',
-			Text     : 'string',
-			Time     : 'string',
-			URL      : 'string',
-		})[alias]
 		return `
 			/**
 			 * ${ this['rdfs:comment'] }
 			 *
 			 * @see http://schema.org/${ this['rdfs:label'] }
 			 */
-			export type ${alias} = ${type}
+			export type ${ this['rdfs:label'] } = ${ new Map<string, string>([
+				['Boolean',  'boolean'],
+				['Date',     'string'],
+				['DateTime', 'string'],
+				['Integer',  'number'],
+				['Number',   'number'],
+				['Text',     'string'],
+				['Time',     'string'],
+				['URL',      'string'],
+			]).get(this['rdfs:label'])! };
 		`.replace(/\n\t\t\t/g, '\n')
 	}
 }
@@ -154,7 +142,7 @@ export class SDOClassLD extends SDO_LD {
 			export interface ${ this['rdfs:label'] } extends ${ (this['rdfs:subClassOf']) ? this['rdfs:subClassOf']['@id'].split(':')[1] : 'NodeObject' } {
 				${ this['rdfs:member'].map((member) => member['@id'].split(':')[1]).map((name) => `
 					${ name }?: ${ name }_type;
-				`).join('') }
+				`.trim()).join('\n\t') }
 			}
 		`.replace(/\n\t\t\t/g, '\n');
 	}
