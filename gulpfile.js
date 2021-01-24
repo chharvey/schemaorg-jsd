@@ -1,11 +1,10 @@
 const fs   = require('fs')
 const path = require('path')
-const url  = require('url')
 
 const gulp       = require('gulp')
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
-const Ajv        = require('ajv')
+const {default: Ajv} = require('ajv');
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 

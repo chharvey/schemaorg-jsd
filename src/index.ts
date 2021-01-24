@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as https from 'https'
 import * as path from 'path'
 
-import * as Ajv from 'ajv'
+import Ajv, * as AJV from 'ajv';
 import type {JSONSchema7, JSONSchema4} from 'json-schema'
 import type {NodeObject} from 'jsonld';
 
@@ -120,7 +120,7 @@ export async function sdoValidate(obj: NodeObject | string, type: string | null 
 		}
 	}
 
-	const ajv: Ajv.Ajv = new Ajv()
+	const ajv: Ajv = new Ajv()
 		.addMetaSchema(await META_SCHEMATA)
 		.addSchema(await JSONLD_SCHEMA)
 		.addSchema(await SCHEMATA)
@@ -128,7 +128,7 @@ export async function sdoValidate(obj: NodeObject | string, type: string | null 
 	if (!is_data_valid) {
 		const err: TypeError&{
 			filename? : string;
-			details?  : Ajv.ErrorObject[];
+			details?  : AJV.ErrorObject[];
 		} = new TypeError(`Object ${obj['@id'] || obj.identifier || obj.name || JSON.stringify(obj)} does not valiate against schema ${type}.jsd!`)
 		if (filename.length) err.filename = filename
 		err.details = ajv.errors !
