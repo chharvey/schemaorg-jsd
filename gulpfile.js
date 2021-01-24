@@ -2,9 +2,11 @@ const fs   = require('fs')
 const path = require('path')
 
 const gulp       = require('gulp')
+const mocha      = require('gulp-mocha');
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
 const {default: Ajv} = require('ajv');
+// require('ts-node')    // DO NOT REMOVE … peerDependency of `gulp-mocha`
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
@@ -37,21 +39,12 @@ async function dist() {
 	])
 }
 
-async function test() {
-	const sdo_jsd = require('./index.js')
-	return Promise.all((await fs.promises.readdir('./test')).map(async (file) => {
-		const filepath = path.resolve(__dirname, './test/', file)
-		let returned;
-		try {
-			returned = await sdo_jsd.sdoValidate(filepath, null, {
-				strict: false,
-			});
-			console.log(`The example ${file} is valid.`)
-		} catch (e) {
-			console.error(`The example ${file} failed!`, e.details || e)
-		}
-		return returned
-	}))
+function test() {
+	return gulp.src('./test/**/*.ts')
+		.pipe(mocha({
+			require: 'ts-node/register',
+		}))
+	;
 }
 
 function docs() {
@@ -62,15 +55,20 @@ function docs() {
 const build = gulp.series(
 	dist_index,
 	validate,
-	dist,
-	gulp.parallel(test, docs)
-)
+	gulp.parallel(
+		test,
+		gulp.series(
+			dist,
+			docs,
+		),
+	),
+);
 
 module.exports = {
-	dist_index,
-	validate,
-	dist,
-	test,
-	docs,
 	build,
+		dist_index,
+		validate,
+		test,
+		dist,
+		docs,
 }
