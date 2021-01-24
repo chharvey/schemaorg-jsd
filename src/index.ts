@@ -2,7 +2,7 @@ import * as fs from 'fs'
 import * as https from 'https'
 import * as path from 'path'
 
-import * as Ajv from 'ajv'
+import Ajv, * as AJV from 'ajv';
 import type {JSONSchema7, JSONSchema4} from 'json-schema'
 import type {NodeObject} from 'jsonld';
 
@@ -98,10 +98,11 @@ export const SCHEMATA: Promise<(SDODatatypeSchema | SDOClassSchema | SDOProperty
  *               - if omitted, will test against the JSON document’s `'@type'` property (if it has one)
  *               - if `'@type'` is an array, each value of that array is tested
  *               - if the `'@type'` is not supported or cannot be found, defaults to `'Thing'`
+ * @param   opts options object to pass to the `new Ajv()` constructor
  * @returns does the object pass validation?
  * @throws  {TypeError} if the object fails validation; has a `.details` property for validation details
  */
-export async function sdoValidate(obj: NodeObject | string, type: string | null = null): Promise<true> {
+export async function sdoValidate(obj: NodeObject | string, type: string | null = null, opts: AJV.Options = {}): Promise<true> {
 	let filename: string = ''
 	if (typeof obj === 'string') {
 		filename = obj
@@ -120,7 +121,7 @@ export async function sdoValidate(obj: NodeObject | string, type: string | null 
 		}
 	}
 
-	const ajv: Ajv.Ajv = new Ajv()
+	const ajv: Ajv = new Ajv(opts)
 		.addMetaSchema(await META_SCHEMATA)
 		.addSchema(await JSONLD_SCHEMA)
 		.addSchema(await SCHEMATA)
@@ -128,7 +129,7 @@ export async function sdoValidate(obj: NodeObject | string, type: string | null 
 	if (!is_data_valid) {
 		const err: TypeError&{
 			filename? : string;
-			details?  : Ajv.ErrorObject[];
+			details?  : AJV.ErrorObject[];
 		} = new TypeError(`Object ${obj['@id'] || obj.identifier || obj.name || JSON.stringify(obj)} does not valiate against schema ${type}.jsd!`)
 		if (filename.length) err.filename = filename
 		err.details = ajv.errors !

@@ -1,11 +1,10 @@
 const fs   = require('fs')
 const path = require('path')
-const url  = require('url')
 
 const gulp       = require('gulp')
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
-const Ajv        = require('ajv')
+const {default: Ajv} = require('ajv');
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
@@ -20,7 +19,9 @@ function dist_index() {
 
 async function validate() {
 	const sdo_jsd = require('./index.js')
-	new Ajv()
+	new Ajv({
+		strictTuples: false,
+	})
 		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
 		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
 		.addSchema(await sdo_jsd.SCHEMATA)
@@ -42,7 +43,9 @@ async function test() {
 		const filepath = path.resolve(__dirname, './test/', file)
 		let returned;
 		try {
-			returned = await sdo_jsd.sdoValidate(filepath)
+			returned = await sdo_jsd.sdoValidate(filepath, null, {
+				strict: false,
+			});
 			console.log(`The example ${file} is valid.`)
 		} catch (e) {
 			console.error(`The example ${file} failed!`, e.details || e)
