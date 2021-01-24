@@ -13,7 +13,7 @@ const tsconfig = require('./tsconfig.json')
 
 
 function dist_index() {
-	return gulp.src('./src/{index,build}.ts')
+	return gulp.src('./src/{index,build,sdo-ld}.ts')
 		.pipe(typescript(tsconfig.compilerOptions))
 		.pipe(gulp.dest('./dist/'))
 }
