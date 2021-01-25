@@ -9,12 +9,8 @@
 		"noEmitOnError"     : true
 	},
 	"typedocOptions": {
-		"tsconfig": "./",
-		"mode"   : "file",
-		"name"   : "schemaorg-jsd",
-		"out"    : "./docs/api/",
-		"includeDeclarations" : true,
-		"excludeExternals"    : true,
-		"ignoreCompilerErrors": true
+		"name":        "schemaorg-jsd",
+		"entryPoints": "./dist/schemaorg.d.ts",
+		"out":         "./docs/api/"
 	}
 }

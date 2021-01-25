@@ -35,16 +35,20 @@ async function run() {
 		console.error(err.details) // more json-schema specifics; see <https://github.com/epoberezkin/ajv#validation-errors>
 	}
 
+
 	// example 2: require a package
 	const me = require('./me.json')
 	console.log(await sdoValidate(me, 'Person')) // return `true` if the document passes validation
+
 
 	// example 3: use a string (relative path) of the filename
 	const org = './my-org.jsonld'
 	console.log(await sdoValidate(org, 'Organization')) // return `true` if the document passes validation
 
+
 	// example 4: infer the schema from the `'@type'` property
 	await sdoValidate(school) // validates against the `Place` schema, since `school['@type'] === 'Place'`
+
 
 	// example 5: multiple types
 	const business = {
@@ -52,6 +56,7 @@ async function run() {
 		'@type': ['Place', 'LocalBusiness'],
 	}
 	await sdoValidate(business) // validates against all schemata in the array
+
 
 	// example 6: default type is `Thing` (http://schema.org/Thing)
 	await sdoValidate({
@@ -62,6 +67,13 @@ async function run() {
 		'@context': 'http://schema.org/',
 		// validates against the `Thing` schema, since property '@type' is missing
 	})
+
+
+	// example 7: pass options object to Ajv constructor
+	// (see https://github.com/ajv-validator/ajv/blob/master/docs/api.md#options)
+	await sdoValiate(data, type, {
+		strict: true,
+	});
 }
 ```
 
