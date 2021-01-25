@@ -1,11 +1,12 @@
 const fs   = require('fs')
 const path = require('path')
-const url  = require('url')
 
 const gulp       = require('gulp')
+const mocha      = require('gulp-mocha');
 const typedoc    = require('gulp-typedoc')
 const typescript = require('gulp-typescript')
-const Ajv        = require('ajv')
+const {default: Ajv} = require('ajv');
+// require('ts-node')    // DO NOT REMOVE … peerDependency of `gulp-mocha`
 // require('typedoc')    // DO NOT REMOVE … peerDependency of `gulp-typedoc`
 // require('typescript') // DO NOT REMOVE … peerDependency of `gulp-typescript`
 
@@ -13,14 +14,16 @@ const tsconfig = require('./tsconfig.json')
 
 
 function dist_index() {
-	return gulp.src('./src/{index,build}.ts')
+	return gulp.src('./src/{index,build,sdo-ld}.ts')
 		.pipe(typescript(tsconfig.compilerOptions))
 		.pipe(gulp.dest('./dist/'))
 }
 
 async function validate() {
 	const sdo_jsd = require('./index.js')
-	new Ajv()
+	new Ajv({
+		strictTuples: false,
+	})
 		.addMetaSchema(await sdo_jsd.META_SCHEMATA)
 		.addSchema(await sdo_jsd.JSONLD_SCHEMA)
 		.addSchema(await sdo_jsd.SCHEMATA)
@@ -36,19 +39,12 @@ async function dist() {
 	])
 }
 
-async function test() {
-	const sdo_jsd = require('./index.js')
-	return Promise.all((await fs.promises.readdir('./test')).map(async (file) => {
-		const filepath = path.resolve(__dirname, './test/', file)
-		let returned;
-		try {
-			returned = await sdo_jsd.sdoValidate(filepath)
-			console.log(`The example ${file} is valid.`)
-		} catch (e) {
-			console.error(`The example ${file} failed!`, e.details || e)
-		}
-		return returned
-	}))
+function test() {
+	return gulp.src('./test/**/*.ts')
+		.pipe(mocha({
+			require: 'ts-node/register',
+		}))
+	;
 }
 
 function docs() {
@@ -59,15 +55,20 @@ function docs() {
 const build = gulp.series(
 	dist_index,
 	validate,
-	dist,
-	gulp.parallel(test, docs)
-)
+	gulp.parallel(
+		test,
+		gulp.series(
+			dist,
+			docs,
+		),
+	),
+);
 
 module.exports = {
-	dist_index,
-	validate,
-	dist,
-	test,
-	docs,
 	build,
+		dist_index,
+		validate,
+		test,
+		dist,
+		docs,
 }
