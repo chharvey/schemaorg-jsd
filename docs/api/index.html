@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for schemaorg-jsd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
+	<script async src="assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -38,8 +39,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -49,12 +50,7 @@
 	</div>
 	<div class="tsd-page-title">
 		<div class="container">
-			<ul class="tsd-breadcrumb">
-				<li>
-					<a href="globals.html">Globals</a>
-				</li>
-			</ul>
-			<h1>schemaorg-jsd</h1>
+			<h1>Project schemaorg-jsd</h1>
 		</div>
 	</div>
 </header>
@@ -72,60 +68,74 @@
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
 				</a>
-				<pre><code>$ npm <span class="hljs-keyword">install</span> schemaorg-jsd</code></pre>
+				<pre><code><span style="color: #001080">$</span><span style="color: #000000"> </span><span style="color: #001080">npm</span><span style="color: #000000"> </span><span style="color: #001080">install</span><span style="color: #000000"> </span><span style="color: #001080">schemaorg</span><span style="color: #000000">-</span><span style="color: #001080">jsd</span>
+</code></pre>
 				<a href="#validate-against-schemaorg-json-schema" id="validate-against-schemaorg-json-schema" style="color: inherit; text-decoration: none;">
 					<h2>Validate Against Schema.org JSON Schema</h2>
 				</a>
 				<p>This module exports an asynchronous validation function.
 					It returns a Promise object, so you may use <code>await</code> or you may use standard <code>Promise</code> prototype methods.
 				Read the TypeDoc comments in <code>./src/index.ts</code> for further details.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> { sdoValidate } = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;schemaorg-jsd&#x27;</span>)
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> { </span><span style="color: #0070C1">sdoValidate</span><span style="color: #000000"> } = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;schemaorg-jsd&#039;</span><span style="color: #000000">)</span>
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-comment">// example 1: use any javascript object</span>
-    <span class="hljs-keyword">const</span> school = {
-        <span class="hljs-string">&#x27;@context&#x27;</span>: <span class="hljs-string">&#x27;http://schema.org/&#x27;</span>,
-        <span class="hljs-string">&#x27;@type&#x27;</span>: <span class="hljs-string">&#x27;Place&#x27;</span>,
-        <span class="hljs-attr">name</span>: <span class="hljs-string">`Blacksburg, <span class="hljs-subst">${usState(<span class="hljs-string">&#x27;Virginia&#x27;</span>).code}</span>`</span>,
-    }
-    school[<span class="hljs-string">&#x27;@id&#x27;</span>] = <span class="hljs-string">&#x27;http://www.blacksburg.gov/&#x27;</span>
-    <span class="hljs-keyword">try</span> {
-        <span class="hljs-keyword">const</span> is_valid_place = sdoValidate(school, <span class="hljs-string">&#x27;Place&#x27;</span>) <span class="hljs-comment">// validate against the `Place` schema</span>
-        <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> is_valid_place) <span class="hljs-comment">// return `true` if the document passes validation</span>
-    } <span class="hljs-keyword">catch</span> (err) { <span class="hljs-comment">// throw a `TypeError` if the document fails validation</span>
-        <span class="hljs-built_in">console</span>.error(err)
-        <span class="hljs-built_in">console</span>.error(err.filename) <span class="hljs-comment">// file where the invalidation occurred</span>
-        <span class="hljs-built_in">console</span>.error(err.details) <span class="hljs-comment">// more json-schema specifics; see &lt;https://github.com/epoberezkin/ajv#validation-errors&gt;</span>
-    }
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">run</span><span style="color: #000000">() {</span>
+<span style="color: #000000">    </span><span style="color: #008000">// example 1: use any javascript object</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">school</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@context&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http://schema.org/&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@type&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;Place&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #001080">name:</span><span style="color: #000000"> </span><span style="color: #A31515">`Blacksburg, </span><span style="color: #0000FF">${</span><span style="color: #795E26">usState</span><span style="color: #000000FF">(</span><span style="color: #A31515">&#039;Virginia&#039;</span><span style="color: #000000FF">).</span><span style="color: #001080">code</span><span style="color: #0000FF">}</span><span style="color: #A31515">`</span><span style="color: #000000">,</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">    </span><span style="color: #001080">school</span><span style="color: #000000">[</span><span style="color: #A31515">&#039;@id&#039;</span><span style="color: #000000">] = </span><span style="color: #A31515">&#039;http://www.blacksburg.gov/&#039;</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">try</span><span style="color: #000000"> {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">is_valid_place</span><span style="color: #000000"> = </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">(</span><span style="color: #001080">school</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Place&#039;</span><span style="color: #000000">) </span><span style="color: #008000">// validate against the `Place` schema</span>
+<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">is_valid_place</span><span style="color: #000000">) </span><span style="color: #008000">// return `true` if the document passes validation</span>
+<span style="color: #000000">    } </span><span style="color: #AF00DB">catch</span><span style="color: #000000"> (</span><span style="color: #001080">err</span><span style="color: #000000">) { </span><span style="color: #008000">// throw a `TypeError` if the document fails validation</span>
+<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">err</span><span style="color: #000000">)</span>
+<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">err</span><span style="color: #000000">.</span><span style="color: #001080">filename</span><span style="color: #000000">) </span><span style="color: #008000">// file where the invalidation occurred</span>
+<span style="color: #000000">        </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">error</span><span style="color: #000000">(</span><span style="color: #001080">err</span><span style="color: #000000">.</span><span style="color: #001080">details</span><span style="color: #000000">) </span><span style="color: #008000">// more json-schema specifics; see &lt;https://github.com/epoberezkin/ajv#validation-errors&gt;</span>
+<span style="color: #000000">    }</span>
 
-    <span class="hljs-comment">// example 2: require a package</span>
-    <span class="hljs-keyword">const</span> me = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;./me.json&#x27;</span>)
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> sdoValidate(me, <span class="hljs-string">&#x27;Person&#x27;</span>)) <span class="hljs-comment">// return `true` if the document passes validation</span>
 
-    <span class="hljs-comment">// example 3: use a string (relative path) of the filename</span>
-    <span class="hljs-keyword">const</span> org = <span class="hljs-string">&#x27;./my-org.jsonld&#x27;</span>
-    <span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">await</span> sdoValidate(org, <span class="hljs-string">&#x27;Organization&#x27;</span>)) <span class="hljs-comment">// return `true` if the document passes validation</span>
+<span style="color: #000000">    </span><span style="color: #008000">// example 2: require a package</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">me</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;./me.json&#039;</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">(</span><span style="color: #001080">me</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Person&#039;</span><span style="color: #000000">)) </span><span style="color: #008000">// return `true` if the document passes validation</span>
 
-    <span class="hljs-comment">// example 4: infer the schema from the `&#x27;@type&#x27;` property</span>
-    <span class="hljs-keyword">await</span> sdoValidate(school) <span class="hljs-comment">// validates against the `Place` schema, since `school[&#x27;@type&#x27;] === &#x27;Place&#x27;`</span>
 
-    <span class="hljs-comment">// example 5: multiple types</span>
-    <span class="hljs-keyword">const</span> business = {
-        <span class="hljs-string">&#x27;@context&#x27;</span>: <span class="hljs-string">&#x27;http://schema.org/&#x27;</span>,
-        <span class="hljs-string">&#x27;@type&#x27;</span>: [<span class="hljs-string">&#x27;Place&#x27;</span>, <span class="hljs-string">&#x27;LocalBusiness&#x27;</span>],
-    }
-    <span class="hljs-keyword">await</span> sdoValidate(business) <span class="hljs-comment">// validates against all schemata in the array</span>
+<span style="color: #000000">    </span><span style="color: #008000">// example 3: use a string (relative path) of the filename</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">org</span><span style="color: #000000"> = </span><span style="color: #A31515">&#039;./my-org.jsonld&#039;</span>
+<span style="color: #000000">    </span><span style="color: #001080">console</span><span style="color: #000000">.</span><span style="color: #795E26">log</span><span style="color: #000000">(</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">(</span><span style="color: #001080">org</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;Organization&#039;</span><span style="color: #000000">)) </span><span style="color: #008000">// return `true` if the document passes validation</span>
 
-    <span class="hljs-comment">// example 6: default type is `Thing` (http://schema.org/Thing)</span>
-    <span class="hljs-keyword">await</span> sdoValidate({
-        <span class="hljs-string">&#x27;@context&#x27;</span>: <span class="hljs-string">&#x27;http://schema.org/&#x27;</span>,
-        <span class="hljs-string">&#x27;@type&#x27;</span>: <span class="hljs-string">&#x27;foobar&#x27;</span> <span class="hljs-comment">// validates against the `Thing` schema, since value &#x27;foobar&#x27; cannot be found</span>
-    })
-    <span class="hljs-keyword">await</span> sdoValidate({
-        <span class="hljs-string">&#x27;@context&#x27;</span>: <span class="hljs-string">&#x27;http://schema.org/&#x27;</span>,
-        <span class="hljs-comment">// validates against the `Thing` schema, since property &#x27;@type&#x27; is missing</span>
-    })
-}</code></pre>
+
+<span style="color: #000000">    </span><span style="color: #008000">// example 4: infer the schema from the `&#039;@type&#039;` property</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">(</span><span style="color: #001080">school</span><span style="color: #000000">) </span><span style="color: #008000">// validates against the `Place` schema, since `school[&#039;@type&#039;] === &#039;Place&#039;`</span>
+
+
+<span style="color: #000000">    </span><span style="color: #008000">// example 5: multiple types</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">business</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@context&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http://schema.org/&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@type&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> [</span><span style="color: #A31515">&#039;Place&#039;</span><span style="color: #000000">, </span><span style="color: #A31515">&#039;LocalBusiness&#039;</span><span style="color: #000000">],</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">(</span><span style="color: #001080">business</span><span style="color: #000000">) </span><span style="color: #008000">// validates against all schemata in the array</span>
+
+
+<span style="color: #000000">    </span><span style="color: #008000">// example 6: default type is `Thing` (http://schema.org/Thing)</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">({</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@context&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http://schema.org/&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@type&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;foobar&#039;</span><span style="color: #000000"> </span><span style="color: #008000">// validates against the `Thing` schema, since value &#039;foobar&#039; cannot be found</span>
+<span style="color: #000000">    })</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValidate</span><span style="color: #000000">({</span>
+<span style="color: #000000">        </span><span style="color: #A31515">&#039;@context&#039;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;http://schema.org/&#039;</span><span style="color: #000000">,</span>
+<span style="color: #000000">        </span><span style="color: #008000">// validates against the `Thing` schema, since property &#039;@type&#039; is missing</span>
+<span style="color: #000000">    })</span>
+
+
+<span style="color: #000000">    </span><span style="color: #008000">// example 7: pass options object to Ajv constructor</span>
+<span style="color: #000000">    </span><span style="color: #008000">// (see https://github.com/ajv-validator/ajv/blob/master/docs/api.md#options)</span>
+<span style="color: #000000">    </span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #795E26">sdoValiate</span><span style="color: #000000">(</span><span style="color: #001080">data</span><span style="color: #000000">, </span><span style="color: #001080">type</span><span style="color: #000000">, {</span>
+<span style="color: #000000">        </span><span style="color: #001080">strict:</span><span style="color: #000000"> </span><span style="color: #0000FF">true</span><span style="color: #000000">,</span>
+<span style="color: #000000">    });</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#validate-against-your-own-json-schema" id="validate-against-your-own-json-schema" style="color: inherit; text-decoration: none;">
 					<h2>Validate Against Your Own JSON Schema</h2>
 				</a>
@@ -136,35 +146,36 @@
 				<p>Due to the interconnectedness of all Schema.org schemata, it’s faster to add them all at once.
 					This project’s exported <code>SCHEMATA</code> object is an array of Schema.org JSON schema,
 				pre-packaged and ready to add.</p>
-				<pre><code class="language-js"><span class="hljs-keyword">const</span> Ajv = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;ajv&#x27;</span>)
-<span class="hljs-keyword">const</span> sdo_jsd = <span class="hljs-built_in">require</span>(<span class="hljs-string">&#x27;schemaorg-jsd&#x27;</span>)
+				<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">Ajv</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;ajv&#039;</span><span style="color: #000000">)</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">sdo_jsd</span><span style="color: #000000"> = </span><span style="color: #795E26">require</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;schemaorg-jsd&#039;</span><span style="color: #000000">)</span>
 
-<span class="hljs-keyword">const</span> my_schema = {
-    <span class="hljs-string">&quot;$schema&quot;</span>: <span class="hljs-string">&quot;http://json-schema.org/draft-07/schema#&quot;</span>,
-    <span class="hljs-string">&quot;$id&quot;</span>: <span class="hljs-string">&quot;https://chharvey.github.io/example.jsd&quot;</span>,
-    <span class="hljs-string">&quot;title&quot;</span>: <span class="hljs-string">&quot;Array&lt;Thing&gt;&quot;</span>,
-    <span class="hljs-string">&quot;description&quot;</span>: <span class="hljs-string">&quot;An array of Schema.org Things.&quot;</span>,
-    <span class="hljs-string">&quot;type&quot;</span>: <span class="hljs-string">&quot;array&quot;</span>,
-    <span class="hljs-string">&quot;items&quot;</span>: { <span class="hljs-string">&quot;$ref&quot;</span>: <span class="hljs-string">&quot;https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd&quot;</span> }
-}
-<span class="hljs-keyword">const</span> my_data = [
-    { <span class="hljs-string">&quot;@context&quot;</span>: <span class="hljs-string">&quot;http://schema.org/&quot;</span>, <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Thing&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Thing 1&quot;</span> },
-    { <span class="hljs-string">&quot;@context&quot;</span>: <span class="hljs-string">&quot;http://schema.org/&quot;</span>, <span class="hljs-string">&quot;@type&quot;</span>: <span class="hljs-string">&quot;Thing&quot;</span>, <span class="hljs-string">&quot;name&quot;</span>: <span class="hljs-string">&quot;Thing 2&quot;</span> }
-]
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">my_schema</span><span style="color: #000000"> = {</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;$schema&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;http://json-schema.org/draft-07/schema#&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;$id&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://chharvey.github.io/example.jsd&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;title&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Array&lt;Thing&gt;&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;description&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;An array of Schema.org Things.&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;type&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;array&quot;</span><span style="color: #000000">,</span>
+<span style="color: #000000">    </span><span style="color: #A31515">&quot;items&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> { </span><span style="color: #A31515">&quot;$ref&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;https://chharvey.github.io/schemaorg-jsd/schema/Thing.jsd&quot;</span><span style="color: #000000"> }</span>
+<span style="color: #000000">}</span>
+<span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">my_data</span><span style="color: #000000"> = [</span>
+<span style="color: #000000">    { </span><span style="color: #A31515">&quot;@context&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;http://schema.org/&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;@type&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Thing&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;name&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Thing 1&quot;</span><span style="color: #000000"> },</span>
+<span style="color: #000000">    { </span><span style="color: #A31515">&quot;@context&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;http://schema.org/&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;@type&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Thing&quot;</span><span style="color: #000000">, </span><span style="color: #A31515">&quot;name&quot;</span><span style="color: #001080">:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;Thing 2&quot;</span><span style="color: #000000"> }</span>
+<span style="color: #000000">]</span>
 
-<span class="hljs-keyword">async</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">run</span>(<span class="hljs-params"></span>) </span>{
-    <span class="hljs-keyword">const</span> ajv = <span class="hljs-keyword">new</span> Ajv()
-        .addMetaSchema(<span class="hljs-keyword">await</span> sdo_jsd.META_SCHEMATA)
-        .addSchema(<span class="hljs-keyword">await</span> sdo_jsd.JSONLD_SCHEMA)
-        .addSchema(<span class="hljs-keyword">await</span> sdo_jsd.SCHEMATA)
-    ajv.validate(my_schema, my_data)
-    <span class="hljs-comment">/*
-    Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:
+<span style="color: #0000FF">async</span><span style="color: #000000"> </span><span style="color: #0000FF">function</span><span style="color: #000000"> </span><span style="color: #795E26">run</span><span style="color: #000000">() {</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">ajv</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #267F99">Ajv</span><span style="color: #000000">()</span>
+<span style="color: #000000">        .</span><span style="color: #795E26">addMetaSchema</span><span style="color: #000000">(</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdo_jsd</span><span style="color: #000000">.</span><span style="color: #0070C1">META_SCHEMATA</span><span style="color: #000000">)</span>
+<span style="color: #000000">        .</span><span style="color: #795E26">addSchema</span><span style="color: #000000">(</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdo_jsd</span><span style="color: #000000">.</span><span style="color: #0070C1">JSONLD_SCHEMA</span><span style="color: #000000">)</span>
+<span style="color: #000000">        .</span><span style="color: #795E26">addSchema</span><span style="color: #000000">(</span><span style="color: #AF00DB">await</span><span style="color: #000000"> </span><span style="color: #001080">sdo_jsd</span><span style="color: #000000">.</span><span style="color: #0070C1">SCHEMATA</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #001080">ajv</span><span style="color: #000000">.</span><span style="color: #795E26">validate</span><span style="color: #000000">(</span><span style="color: #001080">my_schema</span><span style="color: #000000">, </span><span style="color: #001080">my_data</span><span style="color: #000000">)</span>
+<span style="color: #000000">    </span><span style="color: #008000">/*</span>
+<span style="color: #008000">    Note that the `Ajv#validate()` method’s parameters are reversed from this package’s `sdoValidate()`:</span>
 
-    Ajv#validate(schema, data)     // schema comes before data
-    sdoValidate(data, schemaTitle) // data comes before schema
-     */</span>
-}</code></pre>
+<span style="color: #008000">    Ajv#validate(schema, data)     // schema comes before data</span>
+<span style="color: #008000">    sdoValidate(data, schemaTitle) // data comes before schema</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#view-the-api" id="view-the-api" style="color: inherit; text-decoration: none;">
 					<h2>View the “API”</h2>
 				</a>
@@ -173,19 +184,20 @@
 					but you can import the source code in your own project for
 				<a href="http://www.typescriptlang.org/">TypeScript</a> compilation.</p>
 				<p><a href="https://chharvey.github.io/schemaorg-jsd/docs/api/">View the docs.</a></p>
-				<pre><code class="language-ts"><span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> sdo <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;schemaorg-jsd&#x27;</span>
+				<pre><code class="language-ts"><span style="color: #AF00DB">import</span><span style="color: #000000"> </span><span style="color: #0000FF">*</span><span style="color: #000000"> </span><span style="color: #AF00DB">as</span><span style="color: #000000"> </span><span style="color: #001080">sdo</span><span style="color: #000000"> </span><span style="color: #AF00DB">from</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;schemaorg-jsd&#039;</span>
 
-<span class="hljs-keyword">class</span> Person {
-    <span class="hljs-comment">/** This person’s name. */</span>
-    <span class="hljs-keyword">private</span> _name: <span class="hljs-built_in">string</span>;
-    <span class="hljs-comment">/**
-     * Construct a new Person object.
-     * @param jsondata an object validating against the schemaorg-jsd `Person` schema
-     */</span>
-    <span class="hljs-keyword">constructor</span>(<span class="hljs-params">jsondata: sdo.Person</span>) {
-        <span class="hljs-built_in">this</span>._name = jsondata.name
-    }
-}</code></pre>
+<span style="color: #0000FF">class</span><span style="color: #000000"> </span><span style="color: #267F99">Person</span><span style="color: #000000"> {</span>
+<span style="color: #000000">    </span><span style="color: #008000">/** This person’s name. */</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">private</span><span style="color: #000000"> </span><span style="color: #001080">_name</span><span style="color: #000000">: </span><span style="color: #267F99">string</span><span style="color: #000000">;</span>
+<span style="color: #000000">    </span><span style="color: #008000">/**</span>
+<span style="color: #008000">     * Construct a new Person object.</span>
+<span style="color: #008000">     * </span><span style="color: #0000FF">@param</span><span style="color: #008000"> </span><span style="color: #001080">jsondata</span><span style="color: #008000"> an object validating against the schemaorg-jsd `Person` schema</span>
+<span style="color: #008000">     */</span>
+<span style="color: #000000">    </span><span style="color: #0000FF">constructor</span><span style="color: #000000">(</span><span style="color: #001080">jsondata</span><span style="color: #000000">: </span><span style="color: #267F99">sdo</span><span style="color: #000000">.</span><span style="color: #267F99">Person</span><span style="color: #000000">) {</span>
+<span style="color: #000000">        </span><span style="color: #0000FF">this</span><span style="color: #000000">.</span><span style="color: #001080">_name</span><span style="color: #000000"> = </span><span style="color: #001080">jsondata</span><span style="color: #000000">.</span><span style="color: #001080">name</span>
+<span style="color: #000000">    }</span>
+<span style="color: #000000">}</span>
+</code></pre>
 				<a href="#background-info" id="background-info" style="color: inherit; text-decoration: none;">
 					<h1>Background Info</h1>
 				</a>
@@ -247,8 +259,8 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -378,370 +390,370 @@
 						<a href="interfaces/website.html" class="tsd-kind-icon">Web<wbr>Site</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#boolean" class="tsd-kind-icon">Boolean</a>
+						<a href="modules.html#boolean" class="tsd-kind-icon">Boolean</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#date" class="tsd-kind-icon">Date</a>
+						<a href="modules.html#date" class="tsd-kind-icon">Date</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#datetime" class="tsd-kind-icon">Date<wbr>Time</a>
+						<a href="modules.html#datetime" class="tsd-kind-icon">Date<wbr>Time</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#integer" class="tsd-kind-icon">Integer</a>
+						<a href="modules.html#integer" class="tsd-kind-icon">Integer</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#number" class="tsd-kind-icon">Number</a>
+						<a href="modules.html#number" class="tsd-kind-icon">Number</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#text" class="tsd-kind-icon">Text</a>
+						<a href="modules.html#text" class="tsd-kind-icon">Text</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#time" class="tsd-kind-icon">Time</a>
+						<a href="modules.html#time" class="tsd-kind-icon">Time</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#url" class="tsd-kind-icon">URL</a>
+						<a href="modules.html#url" class="tsd-kind-icon">URL</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#additionalname_type" class="tsd-kind-icon">additional<wbr>Name_<wbr>type</a>
+						<a href="modules.html#additionalname_type" class="tsd-kind-icon">additional<wbr>Name_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#additionalproperty_type" class="tsd-kind-icon">additional<wbr>Property_<wbr>type</a>
+						<a href="modules.html#additionalproperty_type" class="tsd-kind-icon">additional<wbr>Property_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#additionaltype_type" class="tsd-kind-icon">additional<wbr>Type_<wbr>type</a>
+						<a href="modules.html#additionaltype_type" class="tsd-kind-icon">additional<wbr>Type_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#addresscountry_type" class="tsd-kind-icon">address<wbr>Country_<wbr>type</a>
+						<a href="modules.html#addresscountry_type" class="tsd-kind-icon">address<wbr>Country_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#addresslocality_type" class="tsd-kind-icon">address<wbr>Locality_<wbr>type</a>
+						<a href="modules.html#addresslocality_type" class="tsd-kind-icon">address<wbr>Locality_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#addressregion_type" class="tsd-kind-icon">address<wbr>Region_<wbr>type</a>
+						<a href="modules.html#addressregion_type" class="tsd-kind-icon">address<wbr>Region_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#address_type" class="tsd-kind-icon">address_<wbr>type</a>
+						<a href="modules.html#address_type" class="tsd-kind-icon">address_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#affiliation_type" class="tsd-kind-icon">affiliation_<wbr>type</a>
+						<a href="modules.html#affiliation_type" class="tsd-kind-icon">affiliation_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#agent_type" class="tsd-kind-icon">agent_<wbr>type</a>
+						<a href="modules.html#agent_type" class="tsd-kind-icon">agent_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#availabilityends_type" class="tsd-kind-icon">availability<wbr>Ends_<wbr>type</a>
+						<a href="modules.html#availabilityends_type" class="tsd-kind-icon">availability<wbr>Ends_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#availabilitystarts_type" class="tsd-kind-icon">availability<wbr>Starts_<wbr>type</a>
+						<a href="modules.html#availabilitystarts_type" class="tsd-kind-icon">availability<wbr>Starts_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#availablelanguage_type" class="tsd-kind-icon">available<wbr>Language_<wbr>type</a>
+						<a href="modules.html#availablelanguage_type" class="tsd-kind-icon">available<wbr>Language_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#award_type" class="tsd-kind-icon">award_<wbr>type</a>
+						<a href="modules.html#award_type" class="tsd-kind-icon">award_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#bestrating_type" class="tsd-kind-icon">best<wbr>Rating_<wbr>type</a>
+						<a href="modules.html#bestrating_type" class="tsd-kind-icon">best<wbr>Rating_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#brand_type" class="tsd-kind-icon">brand_<wbr>type</a>
+						<a href="modules.html#brand_type" class="tsd-kind-icon">brand_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#checkintime_type" class="tsd-kind-icon">checkin<wbr>Time_<wbr>type</a>
+						<a href="modules.html#checkintime_type" class="tsd-kind-icon">checkin<wbr>Time_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#checkouttime_type" class="tsd-kind-icon">checkout<wbr>Time_<wbr>type</a>
+						<a href="modules.html#checkouttime_type" class="tsd-kind-icon">checkout<wbr>Time_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#color_type" class="tsd-kind-icon">color_<wbr>type</a>
+						<a href="modules.html#color_type" class="tsd-kind-icon">color_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#contactpoint_type" class="tsd-kind-icon">contact<wbr>Point_<wbr>type</a>
+						<a href="modules.html#contactpoint_type" class="tsd-kind-icon">contact<wbr>Point_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#creator_type" class="tsd-kind-icon">creator_<wbr>type</a>
+						<a href="modules.html#creator_type" class="tsd-kind-icon">creator_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#currenciesaccepted_type" class="tsd-kind-icon">currencies<wbr>Accepted_<wbr>type</a>
+						<a href="modules.html#currenciesaccepted_type" class="tsd-kind-icon">currencies<wbr>Accepted_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#datecreated_type" class="tsd-kind-icon">date<wbr>Created_<wbr>type</a>
+						<a href="modules.html#datecreated_type" class="tsd-kind-icon">date<wbr>Created_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#datemodified_type" class="tsd-kind-icon">date<wbr>Modified_<wbr>type</a>
+						<a href="modules.html#datemodified_type" class="tsd-kind-icon">date<wbr>Modified_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#datepublished_type" class="tsd-kind-icon">date<wbr>Published_<wbr>type</a>
+						<a href="modules.html#datepublished_type" class="tsd-kind-icon">date<wbr>Published_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#depth_type" class="tsd-kind-icon">depth_<wbr>type</a>
+						<a href="modules.html#depth_type" class="tsd-kind-icon">depth_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#description_type" class="tsd-kind-icon">description_<wbr>type</a>
+						<a href="modules.html#description_type" class="tsd-kind-icon">description_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#disambiguatingdescription_type" class="tsd-kind-icon">disambiguating<wbr>Description_<wbr>type</a>
+						<a href="modules.html#disambiguatingdescription_type" class="tsd-kind-icon">disambiguating<wbr>Description_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#elevation_type" class="tsd-kind-icon">elevation_<wbr>type</a>
+						<a href="modules.html#elevation_type" class="tsd-kind-icon">elevation_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#email_type" class="tsd-kind-icon">email_<wbr>type</a>
+						<a href="modules.html#email_type" class="tsd-kind-icon">email_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#enddate_type" class="tsd-kind-icon">end<wbr>Date_<wbr>type</a>
+						<a href="modules.html#enddate_type" class="tsd-kind-icon">end<wbr>Date_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#endtime_type" class="tsd-kind-icon">end<wbr>Time_<wbr>type</a>
+						<a href="modules.html#endtime_type" class="tsd-kind-icon">end<wbr>Time_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#event_type" class="tsd-kind-icon">event_<wbr>type</a>
+						<a href="modules.html#event_type" class="tsd-kind-icon">event_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#familyname_type" class="tsd-kind-icon">family<wbr>Name_<wbr>type</a>
+						<a href="modules.html#familyname_type" class="tsd-kind-icon">family<wbr>Name_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#funder_type" class="tsd-kind-icon">funder_<wbr>type</a>
+						<a href="modules.html#funder_type" class="tsd-kind-icon">funder_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#geo_type" class="tsd-kind-icon">geo_<wbr>type</a>
+						<a href="modules.html#geo_type" class="tsd-kind-icon">geo_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#givenname_type" class="tsd-kind-icon">given<wbr>Name_<wbr>type</a>
+						<a href="modules.html#givenname_type" class="tsd-kind-icon">given<wbr>Name_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#haspart_type" class="tsd-kind-icon">has<wbr>Part_<wbr>type</a>
+						<a href="modules.html#haspart_type" class="tsd-kind-icon">has<wbr>Part_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#headline_type" class="tsd-kind-icon">headline_<wbr>type</a>
+						<a href="modules.html#headline_type" class="tsd-kind-icon">headline_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#height_type" class="tsd-kind-icon">height_<wbr>type</a>
+						<a href="modules.html#height_type" class="tsd-kind-icon">height_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#hiringorganization_type" class="tsd-kind-icon">hiring<wbr>Organization_<wbr>type</a>
+						<a href="modules.html#hiringorganization_type" class="tsd-kind-icon">hiring<wbr>Organization_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#honorificprefix_type" class="tsd-kind-icon">honorific<wbr>Prefix_<wbr>type</a>
+						<a href="modules.html#honorificprefix_type" class="tsd-kind-icon">honorific<wbr>Prefix_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#honorificsuffix_type" class="tsd-kind-icon">honorific<wbr>Suffix_<wbr>type</a>
+						<a href="modules.html#honorificsuffix_type" class="tsd-kind-icon">honorific<wbr>Suffix_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#identifier_type" class="tsd-kind-icon">identifier_<wbr>type</a>
+						<a href="modules.html#identifier_type" class="tsd-kind-icon">identifier_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#image_type" class="tsd-kind-icon">image_<wbr>type</a>
+						<a href="modules.html#image_type" class="tsd-kind-icon">image_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#ispartof_type" class="tsd-kind-icon">is<wbr>Part<wbr>Of_<wbr>type</a>
+						<a href="modules.html#ispartof_type" class="tsd-kind-icon">is<wbr>Part<wbr>Of_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#itemlistelement_type" class="tsd-kind-icon">item<wbr>List<wbr>Element_<wbr>type</a>
+						<a href="modules.html#itemlistelement_type" class="tsd-kind-icon">item<wbr>List<wbr>Element_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#item_type" class="tsd-kind-icon">item_<wbr>type</a>
+						<a href="modules.html#item_type" class="tsd-kind-icon">item_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#joblocation_type" class="tsd-kind-icon">job<wbr>Location_<wbr>type</a>
+						<a href="modules.html#joblocation_type" class="tsd-kind-icon">job<wbr>Location_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#jobtitle_type" class="tsd-kind-icon">job<wbr>Title_<wbr>type</a>
+						<a href="modules.html#jobtitle_type" class="tsd-kind-icon">job<wbr>Title_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#keywords_type" class="tsd-kind-icon">keywords_<wbr>type</a>
+						<a href="modules.html#keywords_type" class="tsd-kind-icon">keywords_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#latitude_type" class="tsd-kind-icon">latitude_<wbr>type</a>
+						<a href="modules.html#latitude_type" class="tsd-kind-icon">latitude_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#location_type" class="tsd-kind-icon">location_<wbr>type</a>
+						<a href="modules.html#location_type" class="tsd-kind-icon">location_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#logo_type" class="tsd-kind-icon">logo_<wbr>type</a>
+						<a href="modules.html#logo_type" class="tsd-kind-icon">logo_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#longitude_type" class="tsd-kind-icon">longitude_<wbr>type</a>
+						<a href="modules.html#longitude_type" class="tsd-kind-icon">longitude_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#mainentityofpage_type" class="tsd-kind-icon">main<wbr>Entity<wbr>OfPage_<wbr>type</a>
+						<a href="modules.html#mainentityofpage_type" class="tsd-kind-icon">main<wbr>Entity<wbr>OfPage_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#mainentity_type" class="tsd-kind-icon">main<wbr>Entity_<wbr>type</a>
+						<a href="modules.html#mainentity_type" class="tsd-kind-icon">main<wbr>Entity_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#makesoffer_type" class="tsd-kind-icon">makes<wbr>Offer_<wbr>type</a>
+						<a href="modules.html#makesoffer_type" class="tsd-kind-icon">makes<wbr>Offer_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#manufacturer_type" class="tsd-kind-icon">manufacturer_<wbr>type</a>
+						<a href="modules.html#manufacturer_type" class="tsd-kind-icon">manufacturer_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#maxprice_type" class="tsd-kind-icon">max<wbr>Price_<wbr>type</a>
+						<a href="modules.html#maxprice_type" class="tsd-kind-icon">max<wbr>Price_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#maxvalue_type" class="tsd-kind-icon">max<wbr>Value_<wbr>type</a>
+						<a href="modules.html#maxvalue_type" class="tsd-kind-icon">max<wbr>Value_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#memberof_type" class="tsd-kind-icon">member<wbr>Of_<wbr>type</a>
+						<a href="modules.html#memberof_type" class="tsd-kind-icon">member<wbr>Of_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#member_type" class="tsd-kind-icon">member_<wbr>type</a>
+						<a href="modules.html#member_type" class="tsd-kind-icon">member_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#minprice_type" class="tsd-kind-icon">min<wbr>Price_<wbr>type</a>
+						<a href="modules.html#minprice_type" class="tsd-kind-icon">min<wbr>Price_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#minvalue_type" class="tsd-kind-icon">min<wbr>Value_<wbr>type</a>
+						<a href="modules.html#minvalue_type" class="tsd-kind-icon">min<wbr>Value_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#name_type" class="tsd-kind-icon">name_<wbr>type</a>
+						<a href="modules.html#name_type" class="tsd-kind-icon">name_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#nextitem_type" class="tsd-kind-icon">next<wbr>Item_<wbr>type</a>
+						<a href="modules.html#nextitem_type" class="tsd-kind-icon">next<wbr>Item_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#numberofitems_type" class="tsd-kind-icon">number<wbr>OfItems_<wbr>type</a>
+						<a href="modules.html#numberofitems_type" class="tsd-kind-icon">number<wbr>OfItems_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#offercount_type" class="tsd-kind-icon">offer<wbr>Count_<wbr>type</a>
+						<a href="modules.html#offercount_type" class="tsd-kind-icon">offer<wbr>Count_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#offeredby_type" class="tsd-kind-icon">offered<wbr>By_<wbr>type</a>
+						<a href="modules.html#offeredby_type" class="tsd-kind-icon">offered<wbr>By_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#offers_type" class="tsd-kind-icon">offers_<wbr>type</a>
+						<a href="modules.html#offers_type" class="tsd-kind-icon">offers_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#openinghours_type" class="tsd-kind-icon">opening<wbr>Hours_<wbr>type</a>
+						<a href="modules.html#openinghours_type" class="tsd-kind-icon">opening<wbr>Hours_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#organizer_type" class="tsd-kind-icon">organizer_<wbr>type</a>
+						<a href="modules.html#organizer_type" class="tsd-kind-icon">organizer_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#paymentaccepted_type" class="tsd-kind-icon">payment<wbr>Accepted_<wbr>type</a>
+						<a href="modules.html#paymentaccepted_type" class="tsd-kind-icon">payment<wbr>Accepted_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#performer_type" class="tsd-kind-icon">performer_<wbr>type</a>
+						<a href="modules.html#performer_type" class="tsd-kind-icon">performer_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#petsallowed_type" class="tsd-kind-icon">pets<wbr>Allowed_<wbr>type</a>
+						<a href="modules.html#petsallowed_type" class="tsd-kind-icon">pets<wbr>Allowed_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#photo_type" class="tsd-kind-icon">photo_<wbr>type</a>
+						<a href="modules.html#photo_type" class="tsd-kind-icon">photo_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#position_type" class="tsd-kind-icon">position_<wbr>type</a>
+						<a href="modules.html#position_type" class="tsd-kind-icon">position_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#postofficeboxnumber_type" class="tsd-kind-icon">post<wbr>Office<wbr>Box<wbr>Number_<wbr>type</a>
+						<a href="modules.html#postofficeboxnumber_type" class="tsd-kind-icon">post<wbr>Office<wbr>Box<wbr>Number_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#postalcode_type" class="tsd-kind-icon">postal<wbr>Code_<wbr>type</a>
+						<a href="modules.html#postalcode_type" class="tsd-kind-icon">postal<wbr>Code_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#potentialaction_type" class="tsd-kind-icon">potential<wbr>Action_<wbr>type</a>
+						<a href="modules.html#potentialaction_type" class="tsd-kind-icon">potential<wbr>Action_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#previousitem_type" class="tsd-kind-icon">previous<wbr>Item_<wbr>type</a>
+						<a href="modules.html#previousitem_type" class="tsd-kind-icon">previous<wbr>Item_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#pricecomponent_type" class="tsd-kind-icon">price<wbr>Component_<wbr>type</a>
+						<a href="modules.html#pricecomponent_type" class="tsd-kind-icon">price<wbr>Component_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#pricecurrency_type" class="tsd-kind-icon">price<wbr>Currency_<wbr>type</a>
+						<a href="modules.html#pricecurrency_type" class="tsd-kind-icon">price<wbr>Currency_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#pricerange_type" class="tsd-kind-icon">price<wbr>Range_<wbr>type</a>
+						<a href="modules.html#pricerange_type" class="tsd-kind-icon">price<wbr>Range_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#pricespecification_type" class="tsd-kind-icon">price<wbr>Specification_<wbr>type</a>
+						<a href="modules.html#pricespecification_type" class="tsd-kind-icon">price<wbr>Specification_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#price_type" class="tsd-kind-icon">price_<wbr>type</a>
+						<a href="modules.html#price_type" class="tsd-kind-icon">price_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#productid_type" class="tsd-kind-icon">productID_<wbr>type</a>
+						<a href="modules.html#productid_type" class="tsd-kind-icon">productID_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#publisher_type" class="tsd-kind-icon">publisher_<wbr>type</a>
+						<a href="modules.html#publisher_type" class="tsd-kind-icon">publisher_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#ratingvalue_type" class="tsd-kind-icon">rating<wbr>Value_<wbr>type</a>
+						<a href="modules.html#ratingvalue_type" class="tsd-kind-icon">rating<wbr>Value_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#recipeingredient_type" class="tsd-kind-icon">recipe<wbr>Ingredient_<wbr>type</a>
+						<a href="modules.html#recipeingredient_type" class="tsd-kind-icon">recipe<wbr>Ingredient_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#recipeyield_type" class="tsd-kind-icon">recipe<wbr>Yield_<wbr>type</a>
+						<a href="modules.html#recipeyield_type" class="tsd-kind-icon">recipe<wbr>Yield_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#responsibilities_type" class="tsd-kind-icon">responsibilities_<wbr>type</a>
+						<a href="modules.html#responsibilities_type" class="tsd-kind-icon">responsibilities_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#sameas_type" class="tsd-kind-icon">same<wbr>As_<wbr>type</a>
+						<a href="modules.html#sameas_type" class="tsd-kind-icon">same<wbr>As_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#significantlink_type" class="tsd-kind-icon">significant<wbr>Link_<wbr>type</a>
+						<a href="modules.html#significantlink_type" class="tsd-kind-icon">significant<wbr>Link_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#sku_type" class="tsd-kind-icon">sku_<wbr>type</a>
+						<a href="modules.html#sku_type" class="tsd-kind-icon">sku_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#sponsor_type" class="tsd-kind-icon">sponsor_<wbr>type</a>
+						<a href="modules.html#sponsor_type" class="tsd-kind-icon">sponsor_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#starrating_type" class="tsd-kind-icon">star<wbr>Rating_<wbr>type</a>
+						<a href="modules.html#starrating_type" class="tsd-kind-icon">star<wbr>Rating_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#startdate_type" class="tsd-kind-icon">start<wbr>Date_<wbr>type</a>
+						<a href="modules.html#startdate_type" class="tsd-kind-icon">start<wbr>Date_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#starttime_type" class="tsd-kind-icon">start<wbr>Time_<wbr>type</a>
+						<a href="modules.html#starttime_type" class="tsd-kind-icon">start<wbr>Time_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#streetaddress_type" class="tsd-kind-icon">street<wbr>Address_<wbr>type</a>
+						<a href="modules.html#streetaddress_type" class="tsd-kind-icon">street<wbr>Address_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#subevent_type" class="tsd-kind-icon">sub<wbr>Event_<wbr>type</a>
+						<a href="modules.html#subevent_type" class="tsd-kind-icon">sub<wbr>Event_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#superevent_type" class="tsd-kind-icon">super<wbr>Event_<wbr>type</a>
+						<a href="modules.html#superevent_type" class="tsd-kind-icon">super<wbr>Event_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#telephone_type" class="tsd-kind-icon">telephone_<wbr>type</a>
+						<a href="modules.html#telephone_type" class="tsd-kind-icon">telephone_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#text_type" class="tsd-kind-icon">text_<wbr>type</a>
+						<a href="modules.html#text_type" class="tsd-kind-icon">text_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#thumbnailurl_type" class="tsd-kind-icon">thumbnail<wbr>Url_<wbr>type</a>
+						<a href="modules.html#thumbnailurl_type" class="tsd-kind-icon">thumbnail<wbr>Url_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#title_type" class="tsd-kind-icon">title_<wbr>type</a>
+						<a href="modules.html#title_type" class="tsd-kind-icon">title_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#unitcode_type" class="tsd-kind-icon">unit<wbr>Code_<wbr>type</a>
+						<a href="modules.html#unitcode_type" class="tsd-kind-icon">unit<wbr>Code_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#unittext_type" class="tsd-kind-icon">unit<wbr>Text_<wbr>type</a>
+						<a href="modules.html#unittext_type" class="tsd-kind-icon">unit<wbr>Text_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#url_type" class="tsd-kind-icon">url_<wbr>type</a>
+						<a href="modules.html#url_type" class="tsd-kind-icon">url_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#value_type" class="tsd-kind-icon">value_<wbr>type</a>
+						<a href="modules.html#value_type" class="tsd-kind-icon">value_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#weight_type" class="tsd-kind-icon">weight_<wbr>type</a>
+						<a href="modules.html#weight_type" class="tsd-kind-icon">weight_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#width_type" class="tsd-kind-icon">width_<wbr>type</a>
+						<a href="modules.html#width_type" class="tsd-kind-icon">width_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#worstrating_type" class="tsd-kind-icon">worst<wbr>Rating_<wbr>type</a>
+						<a href="modules.html#worstrating_type" class="tsd-kind-icon">worst<wbr>Rating_<wbr>type</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
-						<a href="globals.html#yield_type" class="tsd-kind-icon">yield_<wbr>type</a>
+						<a href="modules.html#yield_type" class="tsd-kind-icon">yield_<wbr>type</a>
 					</li>
 				</ul>
 			</nav>

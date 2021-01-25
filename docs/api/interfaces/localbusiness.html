@@ -7,6 +7,7 @@
 	<meta name="description" content="Documentation for schemaorg-jsd">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
 </head>
 <body>
 <header>
@@ -38,8 +39,8 @@
 							</div>
 							<input type="checkbox" id="tsd-filter-inherited" checked />
 							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-only-exported" />
-							<label class="tsd-widget" for="tsd-filter-only-exported">Only exported</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
 						</div>
 					</div>
 					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
@@ -51,7 +52,7 @@
 		<div class="container">
 			<ul class="tsd-breadcrumb">
 				<li>
-					<a href="../globals.html">Globals</a>
+					<a href="../modules.html">schemaorg-jsd</a>
 				</li>
 				<li>
 					<a href="localbusiness.html">LocalBusiness</a>
@@ -84,37 +85,19 @@
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
 					<li>
-						<a href="organization.html" class="tsd-signature-type">Organization</a>
+						<a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a>
 						<ul class="tsd-hierarchy">
 							<li>
 								<span class="target">LocalBusiness</span>
 								<ul class="tsd-hierarchy">
 									<li>
-										<a href="lodgingbusiness.html" class="tsd-signature-type">LodgingBusiness</a>
+										<a href="lodgingbusiness.html" class="tsd-signature-type" data-tsd-kind="Interface">LodgingBusiness</a>
 									</li>
 								</ul>
 							</li>
 						</ul>
 					</li>
 				</ul>
-			</section>
-			<section class="tsd-panel tsd-kind-interface">
-				<h3 class="tsd-before-signature">Indexable</h3>
-				<div class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">[</span>key: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">]: </span><span class="tsd-signature-type">JSONValue</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">undefined</span></div>
-				<div class="tsd-comment tsd-typography">
-					<div class="lead">
-						<p>A particular physical business or branch of an organization. Examples of LocalBusiness include a restaurant, a particular branch of a restaurant chain, a branch of a bank, a medical practice, a club, a bowling alley, etc.</p>
-					</div>
-					<p><em>(Non-Normative):</em> Known subclasses:</p>
-					<ul>
-						<li><a href="lodgingbusiness.html">LodgingBusiness</a></li>
-					</ul>
-					<dl class="tsd-comment-tags">
-						<dt>see</dt>
-						<dd><p><a href="http://schema.org/LocalBusiness">http://schema.org/LocalBusiness</a></p>
-						</dd>
-					</dl>
-				</div>
 			</section>
 			<section class="tsd-panel-group tsd-index-group">
 				<h2>Index</h2>
@@ -123,16 +106,14 @@
 						<section class="tsd-index-section ">
 							<h3>Properties</h3>
 							<ul class="tsd-index-list">
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_base" class="tsd-kind-icon">@base</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_container" class="tsd-kind-icon">@container</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_id" class="tsd-kind-icon">@id</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_language" class="tsd-kind-icon">@language</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_list" class="tsd-kind-icon">@list</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_reverse" class="tsd-kind-icon">@reverse</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_set" class="tsd-kind-icon">@set</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_type" class="tsd-kind-icon">@type</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_value" class="tsd-kind-icon">@value</a></li>
-								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#_vocab" class="tsd-kind-icon">@vocab</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_context" class="tsd-kind-icon">@context</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_graph" class="tsd-kind-icon">@graph</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_id" class="tsd-kind-icon">@id</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_included" class="tsd-kind-icon">@included</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_index" class="tsd-kind-icon">@index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_nest" class="tsd-kind-icon">@nest</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_reverse" class="tsd-kind-icon">@reverse</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external"><a href="localbusiness.html#_type" class="tsd-kind-icon">@type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#additionaltype" class="tsd-kind-icon">additional<wbr>Type</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#address" class="tsd-kind-icon">address</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-interface tsd-is-inherited"><a href="localbusiness.html#award" class="tsd-kind-icon">award</a></li>
@@ -168,438 +149,395 @@
 			</section>
 			<section class="tsd-panel-group tsd-member-group ">
 				<h2>Properties</h2>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_base" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @base</h3>
-					<div class="tsd-signature tsd-kind-icon">@base<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="_context" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @context</h3>
+					<div class="tsd-signature tsd-kind-icon">@context<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ContextDefinition</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">null</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">ContextDefinition</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_base">@base</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_context">@context</a></p>
 						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:27</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>format</dt>
-							<dd><p>uri</p>
-							</dd>
-						</dl>
-					</div>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_container" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @container</h3>
-					<div class="tsd-signature tsd-kind-icon">@container<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">"@index"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"@list"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">"@set"</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_container">@container</a></p>
-						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:28</li>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:29</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="_graph" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @graph</h3>
+					<div class="tsd-signature tsd-kind-icon">@graph<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">NodeObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">NodeObject</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_graph">@graph</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:32</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="_id" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @id</h3>
 					<div class="tsd-signature tsd-kind-icon">@id<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_id">@id</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_id">@id</a></p>
 						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:32</li>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:30</li>
 						</ul>
 					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>format</dt>
-							<dd><p>uri</p>
-							</dd>
-						</dl>
-					</div>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_language" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @language</h3>
-					<div class="tsd-signature tsd-kind-icon">@language<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="_included" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @included</h3>
+					<div class="tsd-signature tsd-kind-icon">@included<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">NodeObject</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">NodeObject</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_language">@language</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_included">@included</a></p>
 						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:33</li>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:31</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_list" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @list</h3>
-					<div class="tsd-signature tsd-kind-icon">@list<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSONLDObject</span><span class="tsd-signature-symbol">[]</span></div>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="_index" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @index</h3>
+					<div class="tsd-signature tsd-kind-icon">@index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_list">@list</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_index">@index</a></p>
 						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:34</li>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:36</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+					<a name="_nest" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @nest</h3>
+					<div class="tsd-signature tsd-kind-icon">@nest<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">object</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_nest">@nest</a></p>
+						<ul>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:33</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="_reverse" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @reverse</h3>
-					<div class="tsd-signature tsd-kind-icon">@reverse<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">{}</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<div class="tsd-signature tsd-kind-icon">@reverse<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">{}</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_reverse">@reverse</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_reverse">@reverse</a></p>
 						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:35</li>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:35</li>
 						</ul>
 					</aside>
 				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_set" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @set</h3>
-					<div class="tsd-signature tsd-kind-icon">@set<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">JSONLDObject</span><span class="tsd-signature-symbol">[]</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_set">@set</a></p>
-						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:36</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 					<a name="_type" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @type</h3>
-					<div class="tsd-signature tsd-kind-icon">@type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
+					<div class="tsd-signature tsd-kind-icon">@type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_type">@type</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#_type">@type</a></p>
 						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:37</li>
+							<li>Defined in node_modules/@types/jsonld/jsonld.d.ts:34</li>
 						</ul>
 					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_value" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @value</h3>
-					<div class="tsd-signature tsd-kind-icon">@value<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_value">@value</a></p>
-						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:38</li>
-						</ul>
-					</aside>
-				</section>
-				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-					<a name="_vocab" class="tsd-anchor"></a>
-					<h3><span class="tsd-flag ts-flagOptional">Optional</span> @vocab</h3>
-					<div class="tsd-signature tsd-kind-icon">@vocab<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">null</span></div>
-					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#_vocab">@vocab</a></p>
-						<ul>
-							<li>Defined in node_modules/@chharvey/requirejson/json-ld.d.ts:42</li>
-						</ul>
-					</aside>
-					<div class="tsd-comment tsd-typography">
-						<dl class="tsd-comment-tags">
-							<dt>format</dt>
-							<dd><p>uri</p>
-							</dd>
-						</dl>
-					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="additionaltype" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> additional<wbr>Type</h3>
-					<div class="tsd-signature tsd-kind-icon">additional<wbr>Type<span class="tsd-signature-symbol">:</span> <a href="../globals.html#additionaltype_type" class="tsd-signature-type">additionalType_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">additional<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#additionaltype">additionalType</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#additionaltype">additionalType</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:888</li>
+							<li>Defined in dist/schemaorg.d.ts:714</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="address" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> address</h3>
-					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <a href="../globals.html#address_type" class="tsd-signature-type">address_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">address<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="postaladdress.html" class="tsd-signature-type" data-tsd-kind="Interface">PostalAddress</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#address">address</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#address">address</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:530</li>
+							<li>Defined in dist/schemaorg.d.ts:445</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="award" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> award</h3>
-					<div class="tsd-signature tsd-kind-icon">award<span class="tsd-signature-symbol">:</span> <a href="../globals.html#award_type" class="tsd-signature-type">award_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">award<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#award">award</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#award">award</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:532</li>
+							<li>Defined in dist/schemaorg.d.ts:446</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="brand" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> brand</h3>
-					<div class="tsd-signature tsd-kind-icon">brand<span class="tsd-signature-symbol">:</span> <a href="../globals.html#brand_type" class="tsd-signature-type">brand_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">brand<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol"> | </span><a href="brand.html" class="tsd-signature-type" data-tsd-kind="Interface">Brand</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol"> | </span><a href="brand.html" class="tsd-signature-type" data-tsd-kind="Interface">Brand</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#brand">brand</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#brand">brand</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:534</li>
+							<li>Defined in dist/schemaorg.d.ts:447</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="contactpoint" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> contact<wbr>Point</h3>
-					<div class="tsd-signature tsd-kind-icon">contact<wbr>Point<span class="tsd-signature-symbol">:</span> <a href="../globals.html#contactpoint_type" class="tsd-signature-type">contactPoint_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">contact<wbr>Point<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="contactpoint.html" class="tsd-signature-type" data-tsd-kind="Interface">ContactPoint</a><span class="tsd-signature-symbol"> | </span><a href="contactpoint.html" class="tsd-signature-type" data-tsd-kind="Interface">ContactPoint</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#contactpoint">contactPoint</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#contactpoint">contactPoint</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:536</li>
+							<li>Defined in dist/schemaorg.d.ts:448</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="currenciesaccepted" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> currencies<wbr>Accepted</h3>
-					<div class="tsd-signature tsd-kind-icon">currencies<wbr>Accepted<span class="tsd-signature-symbol">:</span> <a href="../globals.html#currenciesaccepted_type" class="tsd-signature-type">currenciesAccepted_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">currencies<wbr>Accepted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:417</li>
+							<li>Defined in dist/schemaorg.d.ts:353</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="description" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> description</h3>
-					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <a href="../globals.html#description_type" class="tsd-signature-type">description_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#description">description</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#description">description</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:890</li>
+							<li>Defined in dist/schemaorg.d.ts:715</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="disambiguatingdescription" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> disambiguating<wbr>Description</h3>
-					<div class="tsd-signature tsd-kind-icon">disambiguating<wbr>Description<span class="tsd-signature-symbol">:</span> <a href="../globals.html#disambiguatingdescription_type" class="tsd-signature-type">disambiguatingDescription_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">disambiguating<wbr>Description<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#disambiguatingdescription">disambiguatingDescription</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#disambiguatingdescription">disambiguatingDescription</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:892</li>
+							<li>Defined in dist/schemaorg.d.ts:716</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="email" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> email</h3>
-					<div class="tsd-signature tsd-kind-icon">email<span class="tsd-signature-symbol">:</span> <a href="../globals.html#email_type" class="tsd-signature-type">email_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">email<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#email">email</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#email">email</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:538</li>
+							<li>Defined in dist/schemaorg.d.ts:449</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="event" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> event</h3>
-					<div class="tsd-signature tsd-kind-icon">event<span class="tsd-signature-symbol">:</span> <a href="../globals.html#event_type" class="tsd-signature-type">event_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">event<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="event.html" class="tsd-signature-type" data-tsd-kind="Interface">Event</a><span class="tsd-signature-symbol"> | </span><a href="event.html" class="tsd-signature-type" data-tsd-kind="Interface">Event</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#event">event</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#event">event</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:540</li>
+							<li>Defined in dist/schemaorg.d.ts:450</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="funder" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> funder</h3>
-					<div class="tsd-signature tsd-kind-icon">funder<span class="tsd-signature-symbol">:</span> <a href="../globals.html#funder_type" class="tsd-signature-type">funder_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">funder<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol"> | </span><a href="person.html" class="tsd-signature-type" data-tsd-kind="Interface">Person</a><span class="tsd-signature-symbol"> | </span><a href="../modules.html#agent_type" class="tsd-signature-type" data-tsd-kind="Type alias">agent_type</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#funder">funder</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#funder">funder</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:542</li>
+							<li>Defined in dist/schemaorg.d.ts:451</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="identifier" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> identifier</h3>
-					<div class="tsd-signature tsd-kind-icon">identifier<span class="tsd-signature-symbol">:</span> <a href="../globals.html#identifier_type" class="tsd-signature-type">identifier_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">identifier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="propertyvalue.html" class="tsd-signature-type" data-tsd-kind="Interface">PropertyValue</a></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#identifier">identifier</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#identifier">identifier</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:894</li>
+							<li>Defined in dist/schemaorg.d.ts:717</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="image" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> image</h3>
-					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <a href="../globals.html#image_type" class="tsd-signature-type">image_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">image<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="imageobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="imageobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#image">image</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#image">image</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:896</li>
+							<li>Defined in dist/schemaorg.d.ts:718</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="location" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> location</h3>
-					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <a href="../globals.html#location_type" class="tsd-signature-type">location_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">location<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="place.html" class="tsd-signature-type" data-tsd-kind="Interface">Place</a><span class="tsd-signature-symbol"> | </span><a href="postaladdress.html" class="tsd-signature-type" data-tsd-kind="Interface">PostalAddress</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="place.html" class="tsd-signature-type" data-tsd-kind="Interface">Place</a><span class="tsd-signature-symbol"> | </span><a href="postaladdress.html" class="tsd-signature-type" data-tsd-kind="Interface">PostalAddress</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#location">location</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#location">location</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:544</li>
+							<li>Defined in dist/schemaorg.d.ts:452</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="logo" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> logo</h3>
-					<div class="tsd-signature tsd-kind-icon">logo<span class="tsd-signature-symbol">:</span> <a href="../globals.html#logo_type" class="tsd-signature-type">logo_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">logo<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="imageobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageObject</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="imageobject.html" class="tsd-signature-type" data-tsd-kind="Interface">ImageObject</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#logo">logo</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#logo">logo</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:546</li>
+							<li>Defined in dist/schemaorg.d.ts:453</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="mainentityofpage" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> main<wbr>Entity<wbr>OfPage</h3>
-					<div class="tsd-signature tsd-kind-icon">main<wbr>Entity<wbr>OfPage<span class="tsd-signature-symbol">:</span> <a href="../globals.html#mainentityofpage_type" class="tsd-signature-type">mainEntityOfPage_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">main<wbr>Entity<wbr>OfPage<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="creativework.html" class="tsd-signature-type" data-tsd-kind="Interface">CreativeWork</a><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><a href="creativework.html" class="tsd-signature-type" data-tsd-kind="Interface">CreativeWork</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#mainentityofpage">mainEntityOfPage</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#mainentityofpage">mainEntityOfPage</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:898</li>
+							<li>Defined in dist/schemaorg.d.ts:719</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="makesoffer" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> makes<wbr>Offer</h3>
-					<div class="tsd-signature tsd-kind-icon">makes<wbr>Offer<span class="tsd-signature-symbol">:</span> <a href="../globals.html#makesoffer_type" class="tsd-signature-type">makesOffer_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">makes<wbr>Offer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="offer.html" class="tsd-signature-type" data-tsd-kind="Interface">Offer</a><span class="tsd-signature-symbol"> | </span><a href="offer.html" class="tsd-signature-type" data-tsd-kind="Interface">Offer</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#makesoffer">makesOffer</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#makesoffer">makesOffer</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:548</li>
+							<li>Defined in dist/schemaorg.d.ts:454</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="member" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> member</h3>
-					<div class="tsd-signature tsd-kind-icon">member<span class="tsd-signature-symbol">:</span> <a href="../globals.html#member_type" class="tsd-signature-type">member_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">member<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol"> | </span><a href="person.html" class="tsd-signature-type" data-tsd-kind="Interface">Person</a><span class="tsd-signature-symbol"> | </span><a href="../modules.html#agent_type" class="tsd-signature-type" data-tsd-kind="Type alias">agent_type</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#member">member</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#member">member</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:550</li>
+							<li>Defined in dist/schemaorg.d.ts:455</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="memberof" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> member<wbr>Of</h3>
-					<div class="tsd-signature tsd-kind-icon">member<wbr>Of<span class="tsd-signature-symbol">:</span> <a href="../globals.html#memberof_type" class="tsd-signature-type">memberOf_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">member<wbr>Of<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol"> | </span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#memberof">memberOf</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#memberof">memberOf</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:552</li>
+							<li>Defined in dist/schemaorg.d.ts:456</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="name" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> name</h3>
-					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <a href="../globals.html#name_type" class="tsd-signature-type">name_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">name<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#name">name</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#name">name</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:900</li>
+							<li>Defined in dist/schemaorg.d.ts:720</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="openinghours" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> opening<wbr>Hours</h3>
-					<div class="tsd-signature tsd-kind-icon">opening<wbr>Hours<span class="tsd-signature-symbol">:</span> <a href="../globals.html#openinghours_type" class="tsd-signature-type">openingHours_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">opening<wbr>Hours<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:419</li>
+							<li>Defined in dist/schemaorg.d.ts:354</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="paymentaccepted" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> payment<wbr>Accepted</h3>
-					<div class="tsd-signature tsd-kind-icon">payment<wbr>Accepted<span class="tsd-signature-symbol">:</span> <a href="../globals.html#paymentaccepted_type" class="tsd-signature-type">paymentAccepted_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">payment<wbr>Accepted<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:421</li>
+							<li>Defined in dist/schemaorg.d.ts:355</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="potentialaction" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> potential<wbr>Action</h3>
-					<div class="tsd-signature tsd-kind-icon">potential<wbr>Action<span class="tsd-signature-symbol">:</span> <a href="../globals.html#potentialaction_type" class="tsd-signature-type">potentialAction_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">potential<wbr>Action<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="action.html" class="tsd-signature-type" data-tsd-kind="Interface">Action</a><span class="tsd-signature-symbol"> | </span><a href="action.html" class="tsd-signature-type" data-tsd-kind="Interface">Action</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#potentialaction">potentialAction</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#potentialaction">potentialAction</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:902</li>
+							<li>Defined in dist/schemaorg.d.ts:721</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="pricerange" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> price<wbr>Range</h3>
-					<div class="tsd-signature tsd-kind-icon">price<wbr>Range<span class="tsd-signature-symbol">:</span> <a href="../globals.html#pricerange_type" class="tsd-signature-type">priceRange_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">price<wbr>Range<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:423</li>
+							<li>Defined in dist/schemaorg.d.ts:356</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="sameas" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> same<wbr>As</h3>
-					<div class="tsd-signature tsd-kind-icon">same<wbr>As<span class="tsd-signature-symbol">:</span> <a href="../globals.html#sameas_type" class="tsd-signature-type">sameAs_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">same<wbr>As<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#sameas">sameAs</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#sameas">sameAs</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:904</li>
+							<li>Defined in dist/schemaorg.d.ts:722</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="sponsor" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> sponsor</h3>
-					<div class="tsd-signature tsd-kind-icon">sponsor<span class="tsd-signature-symbol">:</span> <a href="../globals.html#sponsor_type" class="tsd-signature-type">sponsor_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">sponsor<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><a href="organization.html" class="tsd-signature-type" data-tsd-kind="Interface">Organization</a><span class="tsd-signature-symbol"> | </span><a href="person.html" class="tsd-signature-type" data-tsd-kind="Interface">Person</a><span class="tsd-signature-symbol"> | </span><a href="../modules.html#agent_type" class="tsd-signature-type" data-tsd-kind="Type alias">agent_type</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#sponsor">sponsor</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#sponsor">sponsor</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:554</li>
+							<li>Defined in dist/schemaorg.d.ts:457</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="telephone" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> telephone</h3>
-					<div class="tsd-signature tsd-kind-icon">telephone<span class="tsd-signature-symbol">:</span> <a href="../globals.html#telephone_type" class="tsd-signature-type">telephone_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">telephone<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="localbusiness.html">LocalBusiness</a>.<a href="localbusiness.html#telephone">telephone</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#telephone">telephone</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:556</li>
+							<li>Defined in dist/schemaorg.d.ts:458</li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 					<a name="url" class="tsd-anchor"></a>
 					<h3><span class="tsd-flag ts-flagOptional">Optional</span> url</h3>
-					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <a href="../globals.html#url_type" class="tsd-signature-type">url_type</a></div>
+					<div class="tsd-signature tsd-kind-icon">url<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">undefined</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
-						<p>Inherited from <a href="accommodation.html">Accommodation</a>.<a href="accommodation.html#url">url</a></p>
+						<p>Inherited from <a href="organization.html">Organization</a>.<a href="organization.html#url">url</a></p>
 						<ul>
-							<li>Defined in dist/schemaorg.d.ts:906</li>
+							<li>Defined in dist/schemaorg.d.ts:723</li>
 						</ul>
 					</aside>
 				</section>
@@ -608,8 +546,8 @@
 		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
 			<nav class="tsd-navigation primary">
 				<ul>
-					<li class="globals  ">
-						<a href="../globals.html"><em>Globals</em></a>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
 					</li>
 				</ul>
 			</nav>
@@ -620,35 +558,29 @@
 					<li class="current tsd-kind-interface">
 						<a href="localbusiness.html" class="tsd-kind-icon">Local<wbr>Business</a>
 						<ul>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_base" class="tsd-kind-icon">@base</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="localbusiness.html#_context" class="tsd-kind-icon">@context</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_container" class="tsd-kind-icon">@container</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="localbusiness.html#_graph" class="tsd-kind-icon">@graph</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="localbusiness.html#_id" class="tsd-kind-icon">@id</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_language" class="tsd-kind-icon">@language</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="localbusiness.html#_included" class="tsd-kind-icon">@included</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_list" class="tsd-kind-icon">@list</a>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="localbusiness.html#_index" class="tsd-kind-icon">@index</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
+								<a href="localbusiness.html#_nest" class="tsd-kind-icon">@nest</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="localbusiness.html#_reverse" class="tsd-kind-icon">@reverse</a>
 							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_set" class="tsd-kind-icon">@set</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
+							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited tsd-is-external">
 								<a href="localbusiness.html#_type" class="tsd-kind-icon">@type</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_value" class="tsd-kind-icon">@value</a>
-							</li>
-							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
-								<a href="localbusiness.html#_vocab" class="tsd-kind-icon">@vocab</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-interface tsd-is-inherited">
 								<a href="localbusiness.html#additionaltype" class="tsd-kind-icon">additional<wbr>Type</a>
