@@ -114,11 +114,9 @@ export function buildTS(jsonlddocument: JsonLdDocument): string {
 	const JSONLD: ReadonlyArray<NodeObject> = '@graph' in jsonlddocument ? jsonlddocument['@graph'] as NodeObject[] : [];
 	return [
 		`import {NodeObject} from 'jsonld';`,
-		...JSONLD.filter((jsonld): jsonld is SDO_LD => typeof jsonld['@type'] === 'string' && [
-			'rdfs:Datatype',
-			'rdfs:Class',
-			'rdf:Property',
-		].includes(jsonld['@type'])).map((jsonld) => jsonld.toTS()),
+		...JSONLD.filter((jsonld): jsonld is SDODatatypeLD => jsonld['@type'] === 'rdfs:Datatype') .map((jsonld) => SDODatatypeLD .toTS(jsonld)),
+		...JSONLD.filter((jsonld): jsonld is SDOClassLD    => jsonld['@type'] === 'rdfs:Class')    .map((jsonld) => SDOClassLD    .toTS(jsonld)),
+		...JSONLD.filter((jsonld): jsonld is SDOPropertyLD => jsonld['@type'] === 'rdf:Property')  .map((jsonld) => SDOPropertyLD .toTS(jsonld)),
 	].join('')
 }
 

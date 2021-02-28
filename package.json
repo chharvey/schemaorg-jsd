@@ -1,6 +1,6 @@
 {
   "name": "schemaorg-jsd",
-  "version": "0.17.0",
+  "version": "0.17.1",
   "description": "JSON Schema validation for JSON-LD files using Schema.org vocabulary.",
   "main": "index.js",
   "scripts": {
@@ -26,18 +26,18 @@
   "dependencies": {
     "@chharvey/requirejson": "^2.0.0",
     "@types/json-schema": "^7.0.2",
-    "@types/jsonld": "^1.5.2",
+    "@types/jsonld": "^1.5.4",
     "@types/node": "^14.0.23",
     "ajv": "^7.0.0"
   },
   "devDependencies": {
     "@types/mocha": "^8.2.0",
     "gulp": "^4.0.0",
-    "gulp-mocha": "^7.0.2",
+    "gulp-mocha": "^8.0.0",
     "gulp-typedoc": "^2.2.1",
     "gulp-typescript": "^5.0.0",
     "ts-node": "^9.1.1",
     "typedoc": "^0.20.0",
-    "typescript": "~4.1.0"
+    "typescript": "~4.2.0"
   }
 }
