@@ -109,7 +109,7 @@ export async function sdoValidate(obj: NodeObject | string, type: string | null 
 		obj = await requireJSON(obj) as NodeObject;
 	}
 	if (type === null) {
-		const objtype: string[] | string = obj['@type'] || []; // TODO: upgrade `@types/jsonld` to `^7.0.3`
+		const objtype: string[]|string|null = obj['@type'] || null
 		if (objtype instanceof Array && objtype.length) {
 			return (await Promise.all(objtype.map((tp) => sdoValidate(obj, tp)))).every((a) => !!a) as true
 		} else if (typeof objtype === 'string') {
